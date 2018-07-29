@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:layout_margin="4dp">
+
+    <ImageView
+        android:id="@+id/image_small"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/i_unknow"/>
+
+    <TextView
+        android:id="@+id/title_small"
+        android:layout_below="@+id/image_small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="8dp"
+        android:text="Image 1"/>
+
+    <com.varunest.sparkbutton.SparkButton
+        android:id="@+id/button_fav_small"
+        android:layout_below="@+id/title_small"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/blue"
+        app:sparkbutton_activeImage="@drawable/ic_action_fav_pressed"
+        app:sparkbutton_inActiveImage="@drawable/ic_action_fav"
+        app:sparkbutton_iconSize="40dp"
+        app:sparkbutton_primaryColor="@color/yellow"
+        app:sparkbutton_secondaryColor="@color/white" />
+
+    <com.varunest.sparkbutton.SparkButton
+        android:id="@+id/button_hide_small"
+        android:layout_below="@+id/title_small"
+        android:layout_alignParentRight="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@color/blue"
+        app:sparkbutton_activeImage="@drawable/ic_action_hide"
+        app:sparkbutton_inActiveImage="@drawable/ic_action_hide"
+        app:sparkbutton_iconSize="40dp"
+        app:sparkbutton_primaryColor="@color/red"
+        app:sparkbutton_secondaryColor="@color/white" />
+
+
+
+    <Button
+        android:id="@+id/button_small"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@color/transparent"/>
+
+
+
+
+</RelativeLayout>

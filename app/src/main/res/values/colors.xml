@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#057a8c</color>
+    <color name="colorPrimaryDark">#076e7e</color>
+    <color name="colorPrimary2">#3f78b5</color>
+    <color name="colorPrimaryDark2">#30649f</color>
+    <color name="colorAccent">#40e9ff</color>
+    <color name="colorSteps">#8de3ff</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#9b9b9b</color>
+    <color name="black">#000000</color>
+
+    <color name="red">#d12d2d</color>
+    <color name="blue">#3187d2</color>
+    <color name="green">#4bd743</color>
+    <color name="yellow">#d2cd2e</color>
+    <color name="orange">#f99727</color>
+    <color name="pink">#c448c0</color>
+    <color name="cyan">#4ec2b6</color>
+    <color name="purple">#7a54bc</color>
+    <color name="turquoise">#03c1ae</color>
+    <color name="turquoise_light">#49dacc</color>
+
+    <color name="black_semi">#B2000000</color>
+    <color name="transparent">#00ffffff</color>
+
+
+    <color name="colorChipBackground">#e0e0e0</color>
+    <color name="colorChipBackgroundClicked">#424242</color>
+    <color name="colorChipText">#424242</color>
+    <color name="colorChipTextClicked">#F5F5F5</color>
+    <color name="colorChipCloseInactive">#757575</color>
+    <color name="colorChipCloseClicked">#F5F5F5</color>
+
+</resources>

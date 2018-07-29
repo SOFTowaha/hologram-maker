@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".Viewers.ShowLoadedImage">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <TextView
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:keepScreenOn="true"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="5">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_picture1"
+                    android:adjustViewBounds="true"
+                    android:layout_marginTop="30dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_picture2"
+                    android:adjustViewBounds="true"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:rotation="-90"/>
+                <Button
+                    android:id="@+id/buttonX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X"
+                    android:textColor="#FFFFFF"
+                    android:background="#000000"
+                    android:textSize="30dp"/>
+                <ImageView
+                    android:id="@+id/iv_picture3"
+                    android:adjustViewBounds="true"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:rotation="90"/>
+
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_picture4"
+                    android:adjustViewBounds="true"
+                    android:layout_marginBottom="30dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:rotation="180"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+    </TableLayout>
+
+</FrameLayout>

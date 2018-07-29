@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.chauthai.swipereveallayout.SwipeRevealLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_layout_big_fav"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    app:dragEdge="right"
+    app:mode="same_level">
+
+
+
+    <RelativeLayout
+        android:id="@+id/delete_layout"
+        android:layout_width="60dp"
+        android:layout_height="60dp">
+
+        <TextView
+            android:id="@+id/text_fav_big_2"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/holo_blue_light"/>
+
+        <com.varunest.sparkbutton.SparkButton
+            android:id="@+id/button_fav_big_2"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            app:sparkbutton_activeImage="@drawable/ic_action_fav_pressed"
+            app:sparkbutton_inActiveImage="@drawable/ic_action_fav"
+            app:sparkbutton_iconSize="40dp"
+            app:sparkbutton_primaryColor="@color/yellow"
+            app:sparkbutton_secondaryColor="@color/white" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:id="@+id/image_big_fav"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/i_unknow"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/title_big_fav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:gravity="center"
+            android:text="Birds"
+            android:textColor="#FFFFFF"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        <com.vpaliy.chips_lover.ChipView
+            android:id="@+id/chip_big_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            app:chip_text="Tag"
+            app:chip_backgroundColor="@color/white"
+            android:clickable="true"
+            app:chipTextColor="@color/black"
+            app:chip_elevation="2dp"
+            app:chipSelectable="false"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"/>
+
+        <Button
+            android:id="@+id/button_big_fav"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="@color/transparent"/>
+    </RelativeLayout>
+
+</com.chauthai.swipereveallayout.SwipeRevealLayout>
