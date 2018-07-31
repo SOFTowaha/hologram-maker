@@ -1,21 +1,24 @@
 package com.sergioloc.hologram.Adapter;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.sergioloc.hologram.Dialogs.ImageDetailDialog;
 import com.sergioloc.hologram.R;
 import java.util.ArrayList;
 
 /**
- * Created by Sergio López on 14/09/2017.
+ * Created by Sergio López on 31/07/2018.
  */
 
 public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterImage.MyViewHolder> {
@@ -23,10 +26,11 @@ public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterIm
 
     private ArrayList<String> array;
     private Context context;
-    private Dialog dialog;
-    private ImageView play, close, image;
+    private ImageDetailDialog dialog;
     //Firebase
+    private FirebaseUser user;
     private StorageReference mStorage;
+    private String path;
 
 
     public RecyclerAdapterImage(ArrayList<String> array){
@@ -40,58 +44,31 @@ public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterIm
         View view;
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_image, parent, false);
         context = view.getContext();
-        dialog = new Dialog(context);
-        //mStorage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://hologram-2.appspot.com/imagenes/user1/Brofist.jpg");
-        mStorage = FirebaseStorage.getInstance().getReference();
-
-        return new MyViewHolder(view, viewType);
+        dialog = new ImageDetailDialog(context);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        return new MyViewHolder(view);
 
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        if (position%2 == 0)
-            holder.image.setImageResource(R.drawable.circle_green);
-        else
-            holder.image.setImageResource(R.drawable.circle_blue);
+        path = "gs://hologram-2.appspot.com/images/users/"+user.getUid()+"/"+array.get(position);
+        mStorage = FirebaseStorage.getInstance().getReferenceFromUrl(path);
+        mStorage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context)
+                        .load(uri)
+                        .into(holder.image);
+            }
+        });
 
 
-        final Drawable im = holder.image.getDrawable();
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                dialog.setContentView(R.layout.dialog_image_details);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                image = dialog.findViewById(R.id.ivImage);
-                image.setImageDrawable(im);
-                play = dialog.findViewById(R.id.ivPlay);
-                close = dialog.findViewById(R.id.ivCose);
-                close.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-                play.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        /*mStorage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-
-                                Intent i = new Intent(context,ShowLoadedImage.class);
-                                i.putExtra("imageUri",uri.toString());
-                                context.startActivity(i);
-                                Glide.with(view)
-                                .load(uri)
-                                .into(iv_image);
-                            }
-                        });*/
-                    }
-                });
-                dialog.show();
+                dialog.setImage();
             }
         });
 
@@ -110,7 +87,7 @@ public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterIm
 
         ImageView image;
 
-        public MyViewHolder(final View itemView, int viewType) {
+        public MyViewHolder(final View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.ivImage);
         }

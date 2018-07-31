@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context="com.sergioloc.hologram.Fragments.GalleryFragment">
 
     <android.support.v7.widget.RecyclerView
@@ -33,55 +34,5 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rlUploadImage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorWhiteT"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/ivUploadBack"
-            android:layout_width="250dp"
-            android:layout_height="330dp"
-            android:background="@drawable/card_white"
-            android:layout_centerInParent="true"/>
-
-        <ImageView
-            android:id="@+id/ivImageLoaded"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignTop="@id/ivUploadBack"
-            android:layout_marginTop="20dp" />
-
-        <EditText
-            android:id="@+id/etImageName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@id/ivImageLoaded"
-            android:layout_alignEnd="@id/ivImageLoaded"
-            android:layout_below="@id/ivImageLoaded"
-            android:hint="Nombre" />
-
-        <Button
-            android:id="@+id/bUploadImage"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/etImageName"
-            android:layout_alignStart="@id/etImageName"
-            android:text="Guardar"/>
-
-        <Button
-            android:id="@+id/bCloseDialog"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/etImageName"
-            android:layout_centerHorizontal="true"
-            android:text="Cancelar"
-            android:layout_toEndOf="@id/bUploadImage"/>
-
-
-    </RelativeLayout>
 
 </RelativeLayout>

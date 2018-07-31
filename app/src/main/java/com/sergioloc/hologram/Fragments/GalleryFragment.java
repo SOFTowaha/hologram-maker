@@ -24,17 +24,22 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.sergioloc.hologram.Adapter.RecyclerAdapterImage;
+import com.sergioloc.hologram.Dialogs.ImageUploadDialog;
 import com.sergioloc.hologram.R;
 
 import java.io.IOException;
@@ -52,20 +57,18 @@ public class GalleryFragment extends Fragment {
     private RecyclerView rvImages;
     private GridLayoutManager gridLayoutManager;
     private RecyclerAdapterImage adapter;
-    private ArrayList listImages;
     private Context context;
-    private RelativeLayout rlUploadImage;
-    private Button bUploadImage, bCloseDialog;
-    private EditText etNameImage;
+    private ImageUploadDialog dialog;
     //Firebase
     private FirebaseDatabase database;
     private FirebaseUser user;
     private DatabaseReference images;
-    private StorageReference mStorage;
+    private StorageReference mStorage, imRef;
     //Image from gallery
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
     private ImageView ivImageLoaded;
+    private String path;
 
 
     @SuppressLint("ValidFragment")
@@ -108,7 +111,6 @@ public class GalleryFragment extends Fragment {
         context = activity.getApplicationContext();
         activity.setTitle("My holograms");
         button = view.findViewById(R.id.bAddImage);
-
     }
 
     private void initForUsers(){
@@ -120,22 +122,9 @@ public class GalleryFragment extends Fragment {
         //Recyclerview
         rvImages = view.findViewById(R.id.rvImages);
         rvImages.setHasFixedSize(true);
-        listImages = new ArrayList();
-        for (int i=0; i<12;i++){
-            listImages.add("");
-
-        }
+        initImageList();
         gridLayoutManager = new GridLayoutManager(context, 3);
-        adapter = new RecyclerAdapterImage(listImages);
-        rvImages.setAdapter(adapter);
         rvImages.setLayoutManager(gridLayoutManager);
-
-        //Upload image
-        rlUploadImage = view.findViewById(R.id.rlUploadImage);
-        ivImageLoaded = view.findViewById(R.id.ivImageLoaded);
-        bUploadImage = view.findViewById(R.id.bUploadImage);
-        bCloseDialog = view.findViewById(R.id.bCloseDialog);
-        etNameImage = view.findViewById(R.id.etImageName);
     }
 
     private void initForGuest(){
@@ -151,6 +140,25 @@ public class GalleryFragment extends Fragment {
         });
     }
 
+    private void initImageList(){
+        images.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList listImages = new ArrayList();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    listImages.add(snapshot.getValue().toString());
+                }
+                adapter = new RecyclerAdapterImage(listImages);
+                rvImages.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void chooseImage(){
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -162,41 +170,36 @@ public class GalleryFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null )
-        {
+                && data != null && data.getData() != null ) {
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), filePath);
-                ivImageLoaded.setImageBitmap(bitmap);
-                rlUploadImage.setVisibility(View.VISIBLE);
-                bCloseDialog.setOnClickListener(new View.OnClickListener() {
+                dialog = new ImageUploadDialog(getActivity());
+                dialog.show();
+                dialog.ivImageLoaded.setImageBitmap(bitmap);
+                dialog.bUploadImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        rlUploadImage.setVisibility(View.GONE);
-                        etNameImage.getText().clear();
-                    }
-                });
-                bUploadImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (etNameImage.getText().length() > 0){
-                            uploadImage(etNameImage.getText().toString());
-                            etNameImage.getText().clear();
-                            rlUploadImage.setVisibility(View.GONE);
+                        if (dialog.getImageName().length() > 0){
+                            uploadImageToDatabase(dialog.getImageName());
+                            uploadImageToStorage(dialog.getImageName());
+                            dialog.close();
                         }else {
                             Toast.makeText(context, "Debes escribir un nombre", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
-            catch (IOException e)
-            {
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+    private void uploadImageToDatabase(String name){
+        images.push().setValue(name);
+    }
 
-    private void uploadImage(String name) {
+    private void uploadImageToStorage(String name) {
 
         if(filePath != null)
         {
