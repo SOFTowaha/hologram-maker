@@ -141,7 +141,6 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
         divider = new DividerItemDecoration(context);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         layoutManager = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(divider);
 
@@ -698,42 +697,42 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
         switch (i) {
             case 0:
                 chip0IsChecked = false;
-                chip0.setBackgroundColor(context.getResources().getColor(R.color.white));
+                chip0.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
                 chip0.setTextColor(context.getResources().getColor(R.color.black));
                 break;
             case 1:
                 chip1IsChecked = false;
-                chip1.setBackgroundColor(context.getResources().getColor(R.color.white));
+                chip1.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
                 chip1.setTextColor(context.getResources().getColor(R.color.black));
                 break;
             case 2:
                 chip2IsChecked = false;
-                chip2.setBackgroundColor(context.getResources().getColor(R.color.white));
+                chip2.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
                 chip2.setTextColor(context.getResources().getColor(R.color.black));
                 break;
             case 3:
                 chip3IsChecked = false;
-                chip3.setBackgroundColor(context.getResources().getColor(R.color.white));
+                chip3.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
                 chip3.setTextColor(context.getResources().getColor(R.color.black));
                 break;
             case 4:
                 chip4IsChecked = false;
-                chip4.setBackgroundColor(context.getResources().getColor(R.color.white));
+                chip4.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
                 chip4.setTextColor(context.getResources().getColor(R.color.black));
                 break;
             case 5:
                 chip5IsChecked = false;
-                chip5.setBackgroundColor(context.getResources().getColor(R.color.white));
+                chip5.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
                 chip5.setTextColor(context.getResources().getColor(R.color.black));
                 break;
             case 6:
                 chip6IsChecked = false;
-                chip6.setBackgroundColor(context.getResources().getColor(R.color.white));
+                chip6.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
                 chip6.setTextColor(context.getResources().getColor(R.color.black));
                 break;
             case 7:
                 chip7IsChecked = false;
-                chip7.setBackgroundColor(context.getResources().getColor(R.color.white));
+                chip7.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
                 chip7.setTextColor(context.getResources().getColor(R.color.black));
                 break;
 
@@ -746,42 +745,42 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
             case 0:
                 chip0IsChecked = true;
                 chip0.setBackgroundColor(context.getResources().getColor(R.color.red));
-                chip0.setTextColor(context.getResources().getColor(R.color.white));
+                chip0.setTextColor(context.getResources().getColor(R.color.colorWhite));
                 break;
             case 1:
                 chip1IsChecked = true;
                 chip1.setBackgroundColor(context.getResources().getColor(R.color.orange));
-                chip1.setTextColor(context.getResources().getColor(R.color.white));
+                chip1.setTextColor(context.getResources().getColor(R.color.colorWhite));
                 break;
             case 2:
                 chip2IsChecked = true;
                 chip2.setBackgroundColor(context.getResources().getColor(R.color.blue));
-                chip2.setTextColor(context.getResources().getColor(R.color.white));
+                chip2.setTextColor(context.getResources().getColor(R.color.colorWhite));
                 break;
             case 3:
                 chip3IsChecked = true;
                 chip3.setBackgroundColor(context.getResources().getColor(R.color.pink));
-                chip3.setTextColor(context.getResources().getColor(R.color.white));
+                chip3.setTextColor(context.getResources().getColor(R.color.colorWhite));
                 break;
             case 4:
                 chip4IsChecked = true;
                 chip4.setBackgroundColor(context.getResources().getColor(R.color.green));
-                chip4.setTextColor(context.getResources().getColor(R.color.white));
+                chip4.setTextColor(context.getResources().getColor(R.color.colorWhite));
                 break;
             case 5:
                 chip5IsChecked = true;
                 chip5.setBackgroundColor(context.getResources().getColor(R.color.cyan));
-                chip5.setTextColor(context.getResources().getColor(R.color.white));
+                chip5.setTextColor(context.getResources().getColor(R.color.colorWhite));
                 break;
             case 6:
                 chip6IsChecked = true;
                 chip6.setBackgroundColor(context.getResources().getColor(R.color.yellow));
-                chip6.setTextColor(context.getResources().getColor(R.color.white));
+                chip6.setTextColor(context.getResources().getColor(R.color.colorWhite));
                 break;
             case 7:
                 chip7IsChecked = true;
                 chip7.setBackgroundColor(context.getResources().getColor(R.color.purple));
-                chip7.setTextColor(context.getResources().getColor(R.color.white));
+                chip7.setTextColor(context.getResources().getColor(R.color.colorWhite));
                 break;
 
 

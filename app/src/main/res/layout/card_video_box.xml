@@ -33,7 +33,7 @@
         app:sparkbutton_inActiveImage="@drawable/ic_action_fav"
         app:sparkbutton_iconSize="40dp"
         app:sparkbutton_primaryColor="@color/yellow"
-        app:sparkbutton_secondaryColor="@color/white" />
+        app:sparkbutton_secondaryColor="@color/colorWhite" />
 
     <com.varunest.sparkbutton.SparkButton
         android:id="@+id/button_hide_small"
@@ -46,7 +46,7 @@
         app:sparkbutton_inActiveImage="@drawable/ic_action_hide"
         app:sparkbutton_iconSize="40dp"
         app:sparkbutton_primaryColor="@color/red"
-        app:sparkbutton_secondaryColor="@color/white" />
+        app:sparkbutton_secondaryColor="@color/colorWhite" />
 
 
 

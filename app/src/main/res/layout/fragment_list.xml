@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.sergioloc.hologram.Fragments.ListFragment"
-    android:background="@color/white">
+    android:background="@color/colorWhite">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:id="@+id/control_panel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/colorWhite"
             app:flexWrap="wrap"
             app:alignItems="baseline"
             app:alignContent="flex_start">
@@ -34,10 +34,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chip_text="Todas"
-                app:chip_backgroundColor="@color/white"
+                app:chip_backgroundColor="@color/colorWhite"
                 android:clickable="true"
                 app:chip_selectedBackgroundColor="@color/red"
-                app:chip_selectedTextColor="@color/white"
+                app:chip_selectedTextColor="@color/colorWhite"
                 app:chipTextColor="@color/black"
                 app:chip_elevation="2dp"
                 app:chipSelectable="false"
@@ -49,10 +49,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chip_text="Animales"
-                app:chip_backgroundColor="@color/white"
+                app:chip_backgroundColor="@color/colorWhite"
                 android:clickable="true"
                 app:chip_selectedBackgroundColor="@color/orange"
-                app:chip_selectedTextColor="@color/white"
+                app:chip_selectedTextColor="@color/colorWhite"
                 app:chipTextColor="@color/black"
                 app:chip_elevation="2dp"
                 app:chipSelectable="false"
@@ -65,10 +65,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chip_text="Peliculas"
-                app:chip_backgroundColor="@color/white"
+                app:chip_backgroundColor="@color/colorWhite"
                 android:clickable="true"
                 app:chip_selectedBackgroundColor="@color/blue"
-                app:chip_selectedTextColor="@color/white"
+                app:chip_selectedTextColor="@color/colorWhite"
                 app:chipTextColor="@color/black"
                 app:chip_elevation="2dp"
                 app:chipSelectable="false"
@@ -80,10 +80,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chip_text="Espacio"
-                app:chip_backgroundColor="@color/white"
+                app:chip_backgroundColor="@color/colorWhite"
                 android:clickable="true"
                 app:chip_selectedBackgroundColor="@color/pink"
-                app:chip_selectedTextColor="@color/white"
+                app:chip_selectedTextColor="@color/colorWhite"
                 app:chipTextColor="@color/black"
                 app:chip_elevation="2dp"
                 app:chipSelectable="false"
@@ -95,10 +95,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chip_text="Naturaleza"
-                app:chip_backgroundColor="@color/white"
+                app:chip_backgroundColor="@color/colorWhite"
                 android:clickable="true"
                 app:chip_selectedBackgroundColor="@color/green"
-                app:chip_selectedTextColor="@color/white"
+                app:chip_selectedTextColor="@color/colorWhite"
                 app:chipTextColor="@color/black"
                 app:chip_elevation="2dp"
                 app:chipSelectable="false"
@@ -111,10 +111,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chip_text="Musica"
-                app:chip_backgroundColor="@color/white"
+                app:chip_backgroundColor="@color/colorWhite"
                 android:clickable="true"
                 app:chip_selectedBackgroundColor="@color/cyan"
-                app:chip_selectedTextColor="@color/white"
+                app:chip_selectedTextColor="@color/colorWhite"
                 app:chipTextColor="@color/black"
                 app:chip_elevation="2dp"
                 app:chipSelectable="false"
@@ -126,10 +126,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chip_text="Figuras"
-                app:chip_backgroundColor="@color/white"
+                app:chip_backgroundColor="@color/colorWhite"
                 android:clickable="true"
                 app:chip_selectedBackgroundColor="@color/yellow"
-                app:chip_selectedTextColor="@color/white"
+                app:chip_selectedTextColor="@color/colorWhite"
                 app:chipTextColor="@color/black"
                 app:chip_elevation="2dp"
                 app:chipSelectable="false"
@@ -141,15 +141,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chip_text="Otros"
-                app:chip_backgroundColor="@color/white"
+                app:chip_backgroundColor="@color/colorWhite"
                 android:clickable="true"
                 app:chip_selectedBackgroundColor="@color/purple"
-                app:chip_selectedTextColor="@color/white"
+                app:chip_selectedTextColor="@color/colorWhite"
                 app:chipTextColor="@color/black"
                 app:chip_elevation="2dp"
                 app:chipSelectable="false"
                 android:layout_marginTop="15dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginStart="10dp"/>
 
             <TextView
                 android:layout_marginTop="5dp"
@@ -162,7 +162,7 @@
             android:id="@+id/black_space"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/white"
+            android:background="@color/colorWhite"
             android:layout_marginTop="50dp"/>
 
         <TextView
@@ -173,7 +173,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:clickable="true"
-            android:background="@color/white"
+            android:background="@color/colorWhite"
             android:text="      Caterories"
             android:textSize="15dp"/>
 
@@ -184,13 +184,13 @@
             android:textSize="15dp"
             android:text="videos"
             android:gravity="right|center"
-            android:paddingRight="10dp" />
+            android:paddingEnd="10dp" />
 
         <ImageView
             android:id="@+id/arrowTag"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:src="@drawable/ic_action_arrow_down"/>
 
 
@@ -218,7 +218,7 @@
                 app:chip_text="Subir"
                 app:chip_backgroundColor="@color/colorPrimary"
                 android:clickable="true"
-                app:chipTextColor="@color/white"
+                app:chipTextColor="@color/colorWhite"
                 app:chip_elevation="2dp"
                 app:chipSelectable="false"
                 android:visibility="invisible"

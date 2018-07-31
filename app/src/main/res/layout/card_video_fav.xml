@@ -30,7 +30,7 @@
             app:sparkbutton_inActiveImage="@drawable/ic_action_fav"
             app:sparkbutton_iconSize="40dp"
             app:sparkbutton_primaryColor="@color/yellow"
-            app:sparkbutton_secondaryColor="@color/white" />
+            app:sparkbutton_secondaryColor="@color/colorWhite" />
 
     </RelativeLayout>
 
@@ -71,7 +71,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             app:chip_text="Tag"
-            app:chip_backgroundColor="@color/white"
+            app:chip_backgroundColor="@color/colorWhite"
             android:clickable="true"
             app:chipTextColor="@color/black"
             app:chip_elevation="2dp"
