@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sergioloc.hologram.Fragments.ListFragment;
-import com.sergioloc.hologram.Objects.VideoModel;
+import com.sergioloc.hologram.Models.VideoModel;
 import com.sergioloc.hologram.R;
 import com.sergioloc.hologram.Viewers.Player;
 import com.varunest.sparkbutton.SparkButton;

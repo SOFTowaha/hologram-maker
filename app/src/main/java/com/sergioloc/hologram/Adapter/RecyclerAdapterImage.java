@@ -3,6 +3,7 @@ package com.sergioloc.hologram.Adapter;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sergioloc.hologram.Dialogs.ImageDetailDialog;
+import com.sergioloc.hologram.Models.FirebaseImage;
 import com.sergioloc.hologram.R;
 import java.util.ArrayList;
 
@@ -24,17 +26,18 @@ import java.util.ArrayList;
 public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterImage.MyViewHolder> {
 
 
-    private ArrayList<String> array;
+    private ArrayList<String> imageList;
     private Context context;
     private ImageDetailDialog dialog;
     //Firebase
     private FirebaseUser user;
     private StorageReference mStorage;
     private String path;
+    private ArrayList<FirebaseImage> firebaseImageList;
 
 
     public RecyclerAdapterImage(ArrayList<String> array){
-        this.array=array;
+        this.imageList=array;
     }
 
 
@@ -46,6 +49,7 @@ public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterIm
         context = view.getContext();
         dialog = new ImageDetailDialog(context);
         user = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseImageList = new ArrayList<>();
         return new MyViewHolder(view);
 
     }
@@ -53,11 +57,14 @@ public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterIm
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        path = "gs://hologram-2.appspot.com/images/users/"+user.getUid()+"/"+array.get(position);
+        path = "gs://hologram-2.appspot.com/images/users/"+user.getUid()+"/"+imageList.get(position);
         mStorage = FirebaseStorage.getInstance().getReferenceFromUrl(path);
         mStorage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+                firebaseImageList.add(new FirebaseImage(position,uri));
+                Log.i("IMG","Posicion -> "+position+" | Imagen: "+imageList.get(position));
+
                 Glide.with(context)
                         .load(uri)
                         .into(holder.image);
@@ -68,7 +75,11 @@ public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterIm
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.setImage();
+                Log.i("IMG","Buscando -> "+position);
+                for (int i = 0; i < firebaseImageList.size(); i++){
+                    if (position == firebaseImageList.get(i).getPosition())
+                        dialog.startDialog(firebaseImageList.get(i).getImage());
+                }
             }
         });
 
@@ -77,7 +88,7 @@ public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterIm
 
     @Override
     public int getItemCount() {
-        return array.size();
+        return imageList.size();
     }
 
 

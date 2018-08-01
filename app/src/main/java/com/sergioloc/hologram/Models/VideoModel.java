@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Objects;
+package com.sergioloc.hologram.Models;
 
 
 

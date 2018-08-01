@@ -1,6 +1,4 @@
-package com.sergioloc.hologram.Objects;
-
-import java.util.ArrayList;
+package com.sergioloc.hologram.Models;
 
 /**
  * Created by Sergio López on 16/09/2017.

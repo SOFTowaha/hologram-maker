@@ -2,15 +2,20 @@ package com.sergioloc.hologram.Dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.sergioloc.hologram.R;
+import com.sergioloc.hologram.Viewers.ShowLoadedImage;
 
 public class ImageDetailDialog extends Dialog {
 
-    ImageView ivDetail, ivPlay, ivClose;
+    private ImageView ivDetail, ivPlay, ivClose;
+    private Uri image;
 
 
     public ImageDetailDialog(Context context) {
@@ -25,8 +30,11 @@ public class ImageDetailDialog extends Dialog {
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
     }
 
-    public void setImage(){
-        //ivDetail.setImageDrawable(drawable);
+    public void startDialog(Uri uri){
+        image = uri;
+        Glide.with(getContext())
+                .load(uri)
+                .into(ivDetail);
         show();
     }
 
@@ -41,7 +49,10 @@ public class ImageDetailDialog extends Dialog {
         ivPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(getContext(), ShowLoadedImage.class);
+                i.putExtra("imageUri",image.toString());
+                getContext().startActivity(i);
+                dismiss();
             }
         });
     }

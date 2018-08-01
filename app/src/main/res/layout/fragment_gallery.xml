@@ -2,17 +2,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/fondo7"
     tools:context="com.sergioloc.hologram.Fragments.GalleryFragment">
+
+    <TextView
+        android:id="@+id/tvCloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Nube"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:layout_alignStart="@id/rvImages"/>
+
+    <TextView
+        android:id="@+id/tvLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Local"
+        android:textSize="20dp"
+        android:textColor="@color/colorWhite"
+        android:layout_alignEnd="@id/rvImages"/>
+
+    <Switch
+        android:id="@+id/swType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/tvCloud"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvImages"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/rlBottom"
-        android:layout_marginTop="20dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:layout_below="@id/tvCloud"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/card_white"
         android:layout_gravity="center_horizontal"
         tools:listitem="@layout/card_image" />
 
@@ -24,12 +53,13 @@
 
         <ImageButton
             android:id="@+id/bAddImage"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:elevation="4dp"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/hologram_shadow"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/circle_primary"
             android:src="@drawable/ic_action_plus" />
 
     </RelativeLayout>

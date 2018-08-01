@@ -32,9 +32,6 @@
             android:name=".Navigation"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Viewers.ImageViewer"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".Viewers.Player"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ScreenSlidePage" />

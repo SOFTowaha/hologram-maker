@@ -5,9 +5,12 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -18,10 +21,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -51,24 +57,30 @@ import static android.app.Activity.RESULT_OK;
 
 public class GalleryFragment extends Fragment {
 
-    private ImageButton button;
+    //Basics
     private View view;
-    private boolean guest;
+    private Context context;
+    //Recycler
     private RecyclerView rvImages;
     private GridLayoutManager gridLayoutManager;
     private RecyclerAdapterImage adapter;
-    private Context context;
-    private ImageUploadDialog dialog;
+    //View
+    private TextView tvCloud, tvLocal;
+    private ImageButton button;
+    private Switch swType;
     //Firebase
     private FirebaseDatabase database;
     private FirebaseUser user;
     private DatabaseReference images;
-    private StorageReference mStorage, imRef;
-    //Image from gallery
+    private StorageReference mStorage;
+    //Variables
+    private boolean guest;
     private Uri filePath;
+    private Boolean cloudView;
+    private ImageUploadDialog dialog;
     private final int PICK_IMAGE_REQUEST = 71;
-    private ImageView ivImageLoaded;
-    private String path;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
 
     @SuppressLint("ValidFragment")
@@ -76,14 +88,7 @@ public class GalleryFragment extends Fragment {
         this.guest = guest;
     }
 
-    public GalleryFragment() {
-    }
-
-
-    public static GalleryFragment newInstance() {
-        GalleryFragment fragment = new GalleryFragment();
-        return fragment;
-    }
+    public GalleryFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,48 +101,91 @@ public class GalleryFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_gallery, container, false);
 
         init();
-        buttons();
-        if(guest){
-            initForGuest();
-        }else{
-            initForUsers();
-        }
+        initButtons();
+        initView();
 
         return view;
     }
+
+    /** Init **/
 
     private void init(){
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         context = activity.getApplicationContext();
         activity.setTitle("My holograms");
-        button = view.findViewById(R.id.bAddImage);
-    }
-
-    private void initForUsers(){
-        //Firebase
-        database = FirebaseDatabase.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        images = database.getReference("users").child(user.getUid()).child("images");
-        mStorage = FirebaseStorage.getInstance().getReference("images");
-        //Recyclerview
         rvImages = view.findViewById(R.id.rvImages);
-        rvImages.setHasFixedSize(true);
-        initImageList();
-        gridLayoutManager = new GridLayoutManager(context, 3);
-        rvImages.setLayoutManager(gridLayoutManager);
+        button = view.findViewById(R.id.bAddImage);
+        tvCloud = view.findViewById(R.id.tvCloud);
+        tvLocal = view.findViewById(R.id.tvLocal);
+        swType = view.findViewById(R.id.swType);
+        prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        editor = prefs.edit();
+        cloudView = prefs.getBoolean("cloudView", true);
+        if (cloudView){
+            swType.setChecked(false);
+            tvCloud.setTypeface(null, Typeface.BOLD);
+            tvLocal.setTypeface(null, Typeface.NORMAL);
+            tvCloud.setTextColor(getResources().getColor(R.color.colorWhite));
+            tvLocal.setTextColor(getResources().getColor(R.color.colorGrayT));
+        }else {
+            swType.setChecked(true);
+            tvLocal.setTypeface(null, Typeface.BOLD);
+            tvCloud.setTypeface(null, Typeface.NORMAL);
+            tvLocal.setTextColor(getResources().getColor(R.color.colorWhite));
+            tvCloud.setTextColor(getResources().getColor(R.color.colorGrayT));
+        }
     }
 
-    private void initForGuest(){
-        rvImages.setVisibility(View.GONE);
-    }
-
-    private void buttons(){
+    private void initButtons(){
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
                 chooseImage();
             }
         });
+        swType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    tvLocal.setTypeface(null, Typeface.BOLD);
+                    tvCloud.setTypeface(null, Typeface.NORMAL);
+                    tvLocal.setTextColor(getResources().getColor(R.color.colorWhite));
+                    tvCloud.setTextColor(getResources().getColor(R.color.colorGrayT));
+                }else {
+                    tvCloud.setTypeface(null, Typeface.BOLD);
+                    tvLocal.setTypeface(null, Typeface.NORMAL);
+                    tvCloud.setTextColor(getResources().getColor(R.color.colorWhite));
+                    tvLocal.setTextColor(getResources().getColor(R.color.colorGrayT));
+                }
+                cloudView = !cloudView;
+                editor.putBoolean("cloudView",cloudView);
+                editor.apply();
+                initView();
+            }
+        });
+    }
+
+    private void initView(){
+        if(guest || !cloudView){
+            initForLocal();
+        }else{
+            initForFirebase();
+        }
+    }
+
+
+    /** Cloud **/
+
+    private void initForFirebase(){
+        //Firebase
+        database = FirebaseDatabase.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        images = database.getReference("users").child(user.getUid()).child("images");
+        mStorage = FirebaseStorage.getInstance().getReference("images");
+        //Recyclerview
+        rvImages.setHasFixedSize(true);
+        initImageList();
+        gridLayoutManager = new GridLayoutManager(context, 3);
+        rvImages.setLayoutManager(gridLayoutManager);
     }
 
     private void initImageList(){
@@ -159,11 +207,47 @@ public class GalleryFragment extends Fragment {
         });
     }
 
+
+    /** Local **/
+
+    private void initForLocal(){
+        rvImages.setAdapter(new RecyclerAdapterImage(new ArrayList<String>()));
+
+    }
+
+
+    /** Functions **/
+
     private void chooseImage(){
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    private void uploadImageToDatabase(String name){
+        images.push().setValue(name);
+    }
+
+    private void uploadImageToStorage(String name) {
+
+        if(filePath != null)
+        {
+            StorageReference ref = mStorage.child("users/"+user.getUid()+"/"+name);
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(context, "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 
     @Override
@@ -195,28 +279,6 @@ public class GalleryFragment extends Fragment {
             }
         }
     }
-    private void uploadImageToDatabase(String name){
-        images.push().setValue(name);
-    }
 
-    private void uploadImageToStorage(String name) {
 
-        if(filePath != null)
-        {
-            StorageReference ref = mStorage.child("users/"+user.getUid()+"/"+name);
-            ref.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(context, "Uploaded", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(context, "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
-    }
 }
