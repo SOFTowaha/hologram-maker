@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.sergioloc.hologram"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -19,34 +19,61 @@ android {
 }
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    /**
+    Android
+     */
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:support-v4:27.1.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.google.android:flexbox:0.3.1'
 
-    implementation files('libs/YouTubeAndroidPlayerApi.jar')
-
+    /**
+     * Firebase
+     */
     implementation 'com.google.firebase:firebase-core:12.0.1'
     implementation 'com.google.firebase:firebase-auth:12.0.1'
     implementation 'com.google.firebase:firebase-database:12.0.1'
     implementation 'com.google.firebase:firebase-storage:12.0.1'
 
+    /**
+     * Buttons
+     */
     implementation 'com.getbase:floatingactionbutton:1.10.1'
     implementation 'com.github.Hitomis:CircleMenu:v1.1.0'
-    implementation 'jp.wasabeef:recyclerview-animators:2.0.0'
     implementation 'com.github.vpaliyX:ChipsLover:v1.2'
-    implementation 'com.google.android:flexbox:0.3.1'
+
+    /**
+     * Loader
+     */
+    implementation 'br.com.simplepass:loading-button-android:1.14.0'
+    implementation 'com.tuyenmonkey:mkloader:1.4.0'
+
+    /**
+     * Animations
+     */
+    implementation 'jp.wasabeef:recyclerview-animators:2.0.0'
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
     implementation 'com.github.varunest:sparkbutton:1.0.5'
-    implementation 'com.github.florent37:materialtextfield:1.0.7'
-    implementation 'com.romandanylyk:pageindicatorview:1.0.1'
-    implementation 'br.com.simplepass:loading-button-android:1.14.0'
 
+    /**
+     * Tools
+     */
     implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'com.romandanylyk:pageindicatorview:1.0.1'
+    implementation 'com.github.florent37:materialtextfield:1.0.7'
+
+    /**
+     * YouTube
+     */
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
 }

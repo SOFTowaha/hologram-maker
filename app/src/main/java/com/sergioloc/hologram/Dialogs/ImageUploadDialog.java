@@ -11,7 +11,7 @@ import com.sergioloc.hologram.R;
 public class ImageUploadDialog extends Dialog {
 
     public ImageView ivImageLoaded;
-    private EditText etImageName;
+    public EditText etImageName;
     public Button bUploadImage, bCloseDialog;
 
     public ImageUploadDialog(Context context) {

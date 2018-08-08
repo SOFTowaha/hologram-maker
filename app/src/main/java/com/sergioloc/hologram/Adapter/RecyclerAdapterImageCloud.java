@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Created by Sergio López on 31/07/2018.
  */
 
-public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterImage.MyViewHolder> {
+public class RecyclerAdapterImageCloud extends RecyclerView.Adapter<RecyclerAdapterImageCloud.MyViewHolder> {
 
 
     private ArrayList<String> imageList;
@@ -36,7 +36,7 @@ public class RecyclerAdapterImage extends RecyclerView.Adapter<RecyclerAdapterIm
     private ArrayList<FirebaseImage> firebaseImageList;
 
 
-    public RecyclerAdapterImage(ArrayList<String> array){
+    public RecyclerAdapterImageCloud(ArrayList<String> array){
         this.imageList=array;
     }
 

@@ -1,15 +1,17 @@
 package com.sergioloc.hologram.Fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -17,20 +19,17 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,16 +40,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.sergioloc.hologram.Adapter.RecyclerAdapterImage;
+import com.sergioloc.hologram.Adapter.RecyclerAdapterImageCloud;
+import com.sergioloc.hologram.Adapter.RecyclerAdapterImageLocal;
 import com.sergioloc.hologram.Dialogs.ImageUploadDialog;
 import com.sergioloc.hologram.R;
+import com.sergioloc.hologram.Utils.ImageSaver;
+import com.tuyenmonkey.mkloader.MKLoader;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -63,24 +69,28 @@ public class GalleryFragment extends Fragment {
     //Recycler
     private RecyclerView rvImages;
     private GridLayoutManager gridLayoutManager;
-    private RecyclerAdapterImage adapter;
+    private RecyclerAdapterImageCloud adapterCloud;
+    private RecyclerAdapterImageLocal adapterLocal;
     //View
     private TextView tvCloud, tvLocal;
     private ImageButton button;
     private Switch swType;
+    private MKLoader loader;
     //Firebase
     private FirebaseDatabase database;
     private FirebaseUser user;
     private DatabaseReference images;
     private StorageReference mStorage;
     //Variables
-    private boolean guest;
+    private boolean guest, firstLoad;
     private Uri filePath;
     private Boolean cloudView;
     private ImageUploadDialog dialog;
     private final int PICK_IMAGE_REQUEST = 71;
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
+    private ArrayList<Bitmap> localList;
+    private int localListSize;
 
 
     @SuppressLint("ValidFragment")
@@ -113,6 +123,9 @@ public class GalleryFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         context = activity.getApplicationContext();
         activity.setTitle("My holograms");
+        firstLoad = true;
+        loader = view.findViewById(R.id.loader);
+        localList = new ArrayList();
         rvImages = view.findViewById(R.id.rvImages);
         button = view.findViewById(R.id.bAddImage);
         tvCloud = view.findViewById(R.id.tvCloud);
@@ -120,6 +133,7 @@ public class GalleryFragment extends Fragment {
         swType = view.findViewById(R.id.swType);
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
         editor = prefs.edit();
+        localListSize = prefs.getInt("localListSize",0);
         cloudView = prefs.getBoolean("cloudView", true);
         if (cloudView){
             swType.setChecked(false);
@@ -145,29 +159,32 @@ public class GalleryFragment extends Fragment {
         });
         swType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    tvLocal.setTypeface(null, Typeface.BOLD);
-                    tvCloud.setTypeface(null, Typeface.NORMAL);
-                    tvLocal.setTextColor(getResources().getColor(R.color.colorWhite));
-                    tvCloud.setTextColor(getResources().getColor(R.color.colorGrayT));
-                }else {
-                    tvCloud.setTypeface(null, Typeface.BOLD);
-                    tvLocal.setTypeface(null, Typeface.NORMAL);
-                    tvCloud.setTextColor(getResources().getColor(R.color.colorWhite));
-                    tvLocal.setTextColor(getResources().getColor(R.color.colorGrayT));
-                }
-                cloudView = !cloudView;
-                editor.putBoolean("cloudView",cloudView);
-                editor.apply();
-                initView();
+                    if (guest){
+                        if (!firstLoad)
+                            Toast.makeText(context,"Debes iniciar sesión para subir fotos a la nube", Toast.LENGTH_SHORT).show();
+                        swType.setChecked(true);
+                    }else {
+                        if (cloudView){
+                            switchLocal();
+                        }else {
+                            switchCloud();
+                        }
+                        cloudView = !cloudView;
+                        editor.putBoolean("cloudView",cloudView);
+                        editor.apply();
+                        initView();
+                    }
             }
         });
+        firstLoad = false;
     }
 
     private void initView(){
-        if(guest || !cloudView){
+        if(guest || (!guest && !cloudView)){
             initForLocal();
-        }else{
+            switchLocal();
+            swType.setChecked(true);
+        }else {
             initForFirebase();
         }
     }
@@ -196,8 +213,8 @@ public class GalleryFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     listImages.add(snapshot.getValue().toString());
                 }
-                adapter = new RecyclerAdapterImage(listImages);
-                rvImages.setAdapter(adapter);
+                adapterCloud = new RecyclerAdapterImageCloud(listImages);
+                rvImages.setAdapter(adapterCloud);
             }
 
             @Override
@@ -205,18 +222,58 @@ public class GalleryFragment extends Fragment {
 
             }
         });
+        loader.setVisibility(View.INVISIBLE);
     }
 
 
     /** Local **/
 
     private void initForLocal(){
-        rvImages.setAdapter(new RecyclerAdapterImage(new ArrayList<String>()));
+        loadFromInteralStorage();
+        adapterLocal = new RecyclerAdapterImageLocal(localList);
+        rvImages.setHasFixedSize(true);
+        gridLayoutManager = new GridLayoutManager(context, 3);
+        rvImages.setLayoutManager(gridLayoutManager);
+        rvImages.setAdapter(adapterLocal);
+    }
 
+    private void saveToInternalStorage(Bitmap bitmap){
+        ImageSaver imageSaver = new ImageSaver(context)
+                                    .setFileName(""+localListSize+".png")
+                                    .setDirectoryName("images").save(bitmap);
+        localListSize++;
+        editor.putInt("localListSize",localListSize);
+        editor.apply();
+    }
+
+    private void loadFromInteralStorage(){
+        localList = new ArrayList<>();
+        for (int i = 0; i < localListSize; i++){
+            Bitmap bitmap = new ImageSaver(context).
+                    setFileName(""+i+".png").
+                    setDirectoryName("images").
+                    load();
+            localList.add(bitmap);
+        }
     }
 
 
+
     /** Functions **/
+
+    private void switchLocal(){
+        tvLocal.setTypeface(null, Typeface.BOLD);
+        tvCloud.setTypeface(null, Typeface.NORMAL);
+        tvLocal.setTextColor(getResources().getColor(R.color.colorWhite));
+        tvCloud.setTextColor(getResources().getColor(R.color.colorGrayT));
+    }
+
+    private void switchCloud(){
+        tvCloud.setTypeface(null, Typeface.BOLD);
+        tvLocal.setTypeface(null, Typeface.NORMAL);
+        tvCloud.setTextColor(getResources().getColor(R.color.colorWhite));
+        tvLocal.setTextColor(getResources().getColor(R.color.colorGrayT));
+    }
 
     private void chooseImage(){
         Intent intent = new Intent();
@@ -257,22 +314,30 @@ public class GalleryFragment extends Fragment {
                 && data != null && data.getData() != null ) {
             filePath = data.getData();
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), filePath);
-                dialog = new ImageUploadDialog(getActivity());
-                dialog.show();
-                dialog.ivImageLoaded.setImageBitmap(bitmap);
-                dialog.bUploadImage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (dialog.getImageName().length() > 0){
-                            uploadImageToDatabase(dialog.getImageName());
-                            uploadImageToStorage(dialog.getImageName());
+                final Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), filePath);
+                    dialog = new ImageUploadDialog(getActivity());
+                    dialog.show();
+                    dialog.ivImageLoaded.setImageBitmap(bitmap);
+                    if (!cloudView)
+                        dialog.etImageName.setVisibility(View.INVISIBLE);
+                    dialog.bUploadImage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (cloudView){
+                                if (dialog.getImageName().length() > 0){
+                                    uploadImageToDatabase(dialog.getImageName());
+                                    uploadImageToStorage(dialog.getImageName());
+                                }else {
+                                    Toast.makeText(context, "Debes escribir un nombre", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                saveToInternalStorage(bitmap);
+                                loadFromInteralStorage();
+                                rvImages.setAdapter(adapterLocal);
+                            }
                             dialog.close();
-                        }else {
-                            Toast.makeText(context, "Debes escribir un nombre", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                });
+                    });
             }
             catch (IOException e) {
                 e.printStackTrace();

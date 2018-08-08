@@ -214,9 +214,12 @@ public class Auth extends AppCompatActivity {
             int startRadius = 0;
             int endRadius = (int) Math.hypot(signInLayout.getWidth(),signInLayout.getHeight());
 
-            Animator anim = ViewAnimationUtils.createCircularReveal(signUpLayout,x,y,startRadius,endRadius);
             signUpLayout.setVisibility(View.VISIBLE);
-            anim.start();
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                Animator anim = ViewAnimationUtils.createCircularReveal(signUpLayout,x,y,startRadius,endRadius);
+                anim.start();
+            }
+
             title.setText("SIGN UP");
 
             viewBox=2;
@@ -227,32 +230,35 @@ public class Auth extends AppCompatActivity {
             int startRadius = (int) Math.hypot(signInLayout.getWidth(),signInLayout.getHeight());
             int endRadius = 0;
 
-            Animator anim = ViewAnimationUtils.createCircularReveal(signUpLayout, x, y, startRadius, endRadius);
-            anim.addListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animator) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                Animator anim = ViewAnimationUtils.createCircularReveal(signUpLayout, x, y, startRadius, endRadius);
+                anim.addListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animator) {
 
-                }
+                    }
 
-                @Override
-                public void onAnimationEnd(Animator animator) {
-                    signUpLayout.setVisibility(View.GONE);
-                }
+                    @Override
+                    public void onAnimationEnd(Animator animator) {
+                        signUpLayout.setVisibility(View.GONE);
+                    }
 
-                @Override
-                public void onAnimationCancel(Animator animator) {
+                    @Override
+                    public void onAnimationCancel(Animator animator) {
 
-                }
+                    }
 
-                @Override
-                public void onAnimationRepeat(Animator animator) {
+                    @Override
+                    public void onAnimationRepeat(Animator animator) {
 
-                }
-            });
-            anim.start();
+                    }
+                });
+                anim.start();
+            }else {
+                signUpLayout.setVisibility(View.GONE);
+            }
             title.setText("SIGN IN");
             viewBox=1;
-
         }
     }
 
