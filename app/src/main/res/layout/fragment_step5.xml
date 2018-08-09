@@ -2,30 +2,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sergioloc.hologram.Fragments.Step3Fragment"
+    tools:context="com.sergioloc.hologram.Fragments.Step2Fragment"
     android:background="@color/colorWhite">
 
     <TextView
-        android:id="@+id/titleStep2"
+        android:id="@+id/titleStep4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:textStyle="italic"
         android:textSize="30dp"
+        android:gravity="center"
         android:textColor="#000000"
-        android:text="@string/step2" />
+        android:text="@string/step4"/>
 
     <ImageView
-        android:id="@+id/imgStep2"
+        android:id="@+id/imgStep4"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:padding="10dp"
-        android:src="@drawable/cd" />
+        android:src="@drawable/step4" />
 
     <TextView
-        android:id="@+id/desStep2"
+        android:id="@+id/desStep4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -37,6 +38,6 @@
         android:textStyle="italic"
         android:textSize="20dp"
         android:textColor="#000000"
-        android:text="@string/step2Des"/>
+        android:text="@string/step4Des"/>
 
 </RelativeLayout>

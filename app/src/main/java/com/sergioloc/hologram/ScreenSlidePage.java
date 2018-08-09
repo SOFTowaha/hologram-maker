@@ -10,13 +10,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 
-import com.rd.PageIndicatorView;
-import com.sergioloc.hologram.Fragments.PyramidFragment;
 import com.sergioloc.hologram.Fragments.Step0Fragment;
 import com.sergioloc.hologram.Fragments.Step1Fragment;
 import com.sergioloc.hologram.Fragments.Step2Fragment;
 import com.sergioloc.hologram.Fragments.Step3Fragment;
 import com.sergioloc.hologram.Fragments.Step4Fragment;
+import com.sergioloc.hologram.Fragments.Step5Fragment;
 
 public class ScreenSlidePage extends AppCompatActivity {
 
@@ -37,18 +36,18 @@ public class ScreenSlidePage extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 0: // Fragment # I
-                    return PyramidFragment.newInstance();
-                case 1: // Fragment # 0
+                case 0: // Fragment # 0
                     return Step0Fragment.newInstance();
-                case 2: // Fragment # 1
+                case 1: // Fragment # 1
                     return Step1Fragment.newInstance();
-                case 3: // Fragment # 2
+                case 2: // Fragment # 2
                     return Step2Fragment.newInstance();
-                case 4: // Fragment # 3
+                case 3: // Fragment # 3
                     return Step3Fragment.newInstance();
-                case 5: // Fragment # 4
+                case 4: // Fragment # 4
                     return Step4Fragment.newInstance();
+                case 5: // Fragment # 5
+                    return Step5Fragment.newInstance();
                 default:
                     return null;
             }
@@ -66,7 +65,7 @@ public class ScreenSlidePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_screen_slide_page);
+        setContentView(R.layout.fragment_how);
         ViewPager vpPager = (ViewPager) findViewById(R.id.pager);
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);

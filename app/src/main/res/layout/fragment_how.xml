@@ -10,10 +10,19 @@
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_above="@+id/pageIndicatorView">
     </android.support.v4.view.ViewPager>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/pageIndicatorView"
+        android:layout_alignBottom="@id/pageIndicatorView"
+        android:layout_alignStart="@id/pager"
+        android:layout_alignEnd="@id/pager"
+        android:background="@color/colorWhite"/>
 
     <com.rd.PageIndicatorView
         android:id="@+id/pageIndicatorView"
@@ -30,7 +39,7 @@
         attrs:piv_padding="12dp"
         attrs:piv_radius="8dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"/>
+        android:paddingBottom="10dp"/>
 
 
 

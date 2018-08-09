@@ -7,10 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.sergioloc.hologram.R;
 
-public class Step0Fragment extends Fragment {
 
-    public static Step0Fragment newInstance() {
-        Step0Fragment fragmentFirst = new Step0Fragment();
+public class Step5Fragment extends Fragment {
+
+    public static Step5Fragment newInstance() {
+        Step5Fragment fragmentFirst = new Step5Fragment();
         return fragmentFirst;
     }
 
@@ -23,7 +24,7 @@ public class Step0Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_step0, container, false);
+        return inflater.inflate(R.layout.fragment_step5, container, false);
     }
 }
 

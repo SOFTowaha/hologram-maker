@@ -2,79 +2,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sergioloc.hologram.Fragments.Step1Fragment"
-    android:background="#FFFFFF">
+    tools:context="com.sergioloc.hologram.Fragments.Step4Fragment"
+    android:background="@color/colorWhite">
 
+    <TextView
+        android:id="@+id/titleStep3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textStyle="italic"
+        android:textSize="30dp"
+        android:textColor="#000000"
+        android:text="@string/step3" />
 
-    <TableLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/imgStep3"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:weightSum="6"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:padding="10dp"
+        android:src="@drawable/step3" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
+    <TextView
+        android:id="@+id/desStep3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textStyle="italic"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        android:text="@string/step3Des"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textStyle="italic"
-                android:textSize="30dp"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:text="@string/step4"
-                android:id="@+id/titleStep4"/>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/imgStep4"
-                    android:adjustViewBounds="true"
-                    android:padding="10dp"
-                    android:src="@drawable/step4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-
-            </LinearLayout>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/desStep4"
-                android:padding="10dp"
-                android:gravity="center"
-                android:textStyle="italic"
-                android:textSize="20dp"
-                android:textColor="#000000"
-                android:text="@string/step4Des"/>
-
-        </TableRow>
-
-    </TableLayout>
 </RelativeLayout>

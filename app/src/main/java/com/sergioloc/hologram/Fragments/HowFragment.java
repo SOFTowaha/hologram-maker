@@ -14,7 +14,30 @@ import com.sergioloc.hologram.ScreenSlidePage;
 
 public class HowFragment extends Fragment {
 
+    FragmentPagerAdapter adapterViewPager;
 
+    public HowFragment() { }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_how, container, false);
+
+        ViewPager vpPager = (ViewPager) view.findViewById(R.id.pager);
+        adapterViewPager = new ScreenSlidePage.MyPagerAdapter(getFragmentManager());
+        vpPager.setAdapter(adapterViewPager);
+
+        return view;
+    }
+
+
+
+    /** Internal class **/
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 6;
@@ -34,17 +57,17 @@ public class HowFragment extends Fragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0: // Fragment # I
-                    return PyramidFragment.newInstance();
-                case 1: // Fragment # 0
                     return Step0Fragment.newInstance();
-                case 2: // Fragment # 1
+                case 1: // Fragment # 0
                     return Step1Fragment.newInstance();
-                case 3: // Fragment # 2
+                case 2: // Fragment # 1
                     return Step2Fragment.newInstance();
-                case 4: // Fragment # 3
+                case 3: // Fragment # 2
                     return Step3Fragment.newInstance();
-                case 5: // Fragment # 4
+                case 4: // Fragment # 3
                     return Step4Fragment.newInstance();
+                case 5: // Fragment # 4
+                    return Step5Fragment.newInstance();
                 default:
                     return null;
             }
@@ -57,28 +80,4 @@ public class HowFragment extends Fragment {
         }
 
     }
-    FragmentPagerAdapter adapterViewPager;
-
-    public HowFragment() {
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_screen_slide_page, container, false);
-
-        ViewPager vpPager = (ViewPager) view.findViewById(R.id.pager);
-        adapterViewPager = new ScreenSlidePage.MyPagerAdapter(getFragmentManager());
-        vpPager.setAdapter(adapterViewPager);
-
-        return view;
-    }
-
-
 }
