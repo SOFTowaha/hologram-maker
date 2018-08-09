@@ -592,7 +592,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
 
             //Cambiar vista
             fab_fav.setIcon(R.drawable.ic_action_fav);
-            RecyclerAdapter.FAV_BIG=false;
+            RecyclerAdapter.FAV_LIST = false;
             getActivity().setTitle("Catalog");
             text.setText(videosList.size() + " videos");
         }
@@ -618,7 +618,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
 
                     //Cambiar vista
                     fab_fav.setIcon(R.drawable.ic_action_search);
-                    RecyclerAdapter.FAV_BIG=true;
+                    RecyclerAdapter.FAV_LIST = true;
                     try{
                         getActivity().setTitle("Favourites");
                     }catch (Exception e){

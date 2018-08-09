@@ -38,11 +38,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public static final int SPAN_COUNT_ONE = 1;
     public static final int SPAN_COUNT_THREE = 3;
 
-    private static final int VIEW_TYPE_SMALL = 1;
-    private static final int VIEW_TYPE_BIG = 2;
-    private static final int VIEW_TYPE_BIG_FAV = 3;
+    private static final int VIEW_TYPE_BOX = 1;
+    private static final int VIEW_TYPE_LIST = 2;
+    private static final int VIEW_TYPE_LIST_FAV = 3;
 
-    public static boolean FAV_BIG = false;
+    public static boolean FAV_LIST = false;
 
     public static ArrayList<VideoModel> fav_list;
     public static ArrayList<Integer> fav_id;
@@ -68,13 +68,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public int getItemViewType(int position) {
         int spanCount = mLayoutManager.getSpanCount();
         if (spanCount == SPAN_COUNT_ONE) {
-            if(FAV_BIG){
-                return VIEW_TYPE_BIG_FAV;
+            if(FAV_LIST){
+                return VIEW_TYPE_LIST_FAV;
             }else{
-                return VIEW_TYPE_BIG;
+                return VIEW_TYPE_LIST;
             }
         } else {
-            return VIEW_TYPE_SMALL;
+            return VIEW_TYPE_BOX;
         }
     }
 
@@ -83,9 +83,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         View view;
 
-        if (viewType == VIEW_TYPE_BIG) {
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video, parent, false);
-        } else if(viewType == VIEW_TYPE_BIG_FAV){
+        if (viewType == VIEW_TYPE_LIST) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video, parent, false);
+        } else if(viewType == VIEW_TYPE_LIST_FAV){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video_fav, parent, false);
         } else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video_box, parent, false);
@@ -131,11 +131,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
             initFav();
 
-            if (holder.type == 1){ // Vista grande
-                loadBig(holder,position);
+            if (holder.type == 1){ // Lista general
+                loadList(holder,position);
             }
-            if(holder.type==2){ // Vista grande favoritos
-                loadBigFav(holder,position);
+            if(holder.type==2){ // Lista favoritos favoritos
+                loadListFav(holder,position);
             }
 
             if(holder.type!=3)
@@ -214,7 +214,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     /**Views**/
 
-    private void loadBig(final MyViewHolder holder, final int position){
+    private void loadList(final MyViewHolder holder, final int position){
 
         userFav.addValueEventListener(new ValueEventListener() {
 
@@ -225,7 +225,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
                     int name = context.getResources().getIdentifier(video.getName(), "string", context.getPackageName());
                     if(holder.text.getText().toString().equals(context.getResources().getString(name))){
-                        holder.fav_big.setChecked(true);
+                        holder.bFavList.setChecked(true);
                     }
 
                 }
@@ -237,7 +237,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         });
 
         // Favorito
-        holder.fav_big.setEventListener(new SparkEventListener() {
+        holder.bFavList.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
                 if(buttonState){ //active
@@ -261,7 +261,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         });
 
         // Ocultar
-        holder.hide_big.setEventListener(new SparkEventListener() {
+        holder.bHideList.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
                 if(buttonState){ //active
@@ -285,9 +285,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         });
 
     }
-    private void loadBigFav(final MyViewHolder holder, final int position){
-        holder.fav_big2.setChecked(true);
-        holder.fav_big2.setEventListener(new SparkEventListener() {
+    private void loadListFav(final MyViewHolder holder, final int position){
+        holder.bFavList2.setChecked(true);
+        holder.bFavList2.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
                 if(buttonState){ //active
@@ -380,30 +380,30 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         ChipView chip;
         int type;
         SwipeRevealLayout swipe_layout;
-        SparkButton fav_big,fav_big2,hide_big,fav_small,hide_small;
+        SparkButton bFavList,bFavList2,bHideList,fav_small,hide_small;
 
         public MyViewHolder(final View itemView, int viewType) {
             super(itemView);
             fav_list = new ArrayList();
             fav_id = new ArrayList<>();
-            if (viewType == VIEW_TYPE_BIG) {
+            if (viewType == VIEW_TYPE_LIST) {
                 image = (ImageView) itemView.findViewById(R.id.image_big);
                 text = (TextView) itemView.findViewById(R.id.title_big);
                 button = (Button) itemView.findViewById(R.id.button_big);
                 tag = (ImageView) itemView.findViewById(R.id.iv_tag);
-                fav_big = itemView.findViewById(R.id.button_fav_big);
-                hide_big = itemView.findViewById(R.id.button_hide_big);
+                bFavList = itemView.findViewById(R.id.button_fav_big);
+                bHideList = itemView.findViewById(R.id.button_hide_big);
                 swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout_big);
                 shieldFav = (ImageView) itemView.findViewById(R.id.button_fav_big_copy);
                 shieldHide = (ImageView) itemView.findViewById(R.id.button_hide_big_copy);
                 type=1;
-            }else if (viewType == VIEW_TYPE_BIG_FAV){
-                image = (ImageView) itemView.findViewById(R.id.image_big_fav);
-                text = (TextView) itemView.findViewById(R.id.title_big_fav);
-                button = (Button) itemView.findViewById(R.id.button_big_fav);
-                chip = (ChipView) itemView.findViewById(R.id.chip_big_fav);
-                fav_big2 = itemView.findViewById(R.id.button_fav_big_2);
-                swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout_big_fav);
+            }else if (viewType == VIEW_TYPE_LIST_FAV){
+                image = (ImageView) itemView.findViewById(R.id.image_list_fav);
+                text = (TextView) itemView.findViewById(R.id.title_list_fav);
+                button = (Button) itemView.findViewById(R.id.button_list_fav);
+                tag = (ImageView) itemView.findViewById(R.id.iv_tag_fav);
+                bFavList2 = itemView.findViewById(R.id.button_fav_list);
+                swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout_list_fav);
                 type=2;
             }else{
                 image = (ImageView) itemView.findViewById(R.id.image_small);
