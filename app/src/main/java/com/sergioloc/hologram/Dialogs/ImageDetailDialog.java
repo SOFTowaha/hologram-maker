@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.sergioloc.hologram.R;
-import com.sergioloc.hologram.Viewers.ShowLoadedImage;
+import com.sergioloc.hologram.Activities.ImageActivity;
 
 public class ImageDetailDialog extends Dialog {
 
@@ -49,7 +49,7 @@ public class ImageDetailDialog extends Dialog {
         ivPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), ShowLoadedImage.class);
+                Intent i = new Intent(getContext(), ImageActivity.class);
                 i.putExtra("imageUri",image.toString());
                 getContext().startActivity(i);
                 dismiss();

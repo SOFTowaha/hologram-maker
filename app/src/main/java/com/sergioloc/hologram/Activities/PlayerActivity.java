@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Viewers;
+package com.sergioloc.hologram.Activities;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -13,7 +13,7 @@ import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.sergioloc.hologram.R;
 
-public class Player extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
+public class PlayerActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     public static final String API_KEY = "AIzaSyAqvVJKQOfLavz-wKTT-vkkG7e1GykFn7c";
     public static String VIDEO_ID = "";
@@ -25,7 +25,7 @@ public class Player extends YouTubeBaseActivity implements YouTubePlayer.OnIniti
 
         VIDEO_ID = getIntent().getExtras().getString("id");
 
-        /** Initializing YouTube Player View **/
+        /** Initializing YouTube PlayerActivity View **/
         YouTubePlayerView youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player);
         youTubePlayerView.initialize(API_KEY, this);
     }

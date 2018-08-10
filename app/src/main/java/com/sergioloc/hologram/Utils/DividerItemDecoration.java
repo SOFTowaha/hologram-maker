@@ -1,10 +1,12 @@
-package com.sergioloc.hologram;
+package com.sergioloc.hologram.Utils;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import com.sergioloc.hologram.R;
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;

@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sergioloc.hologram.Auth"
+    tools:context="com.sergioloc.hologram.Activities.AuthActivity"
     android:background="@drawable/fondo7">
 
 
@@ -236,7 +236,7 @@
 
 
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageView
         android:id="@+id/change"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -246,7 +246,7 @@
         android:layout_marginBottom="370dp"
         android:layout_marginLeft="270dp"
         android:scaleType="center"
-        android:backgroundTint="@color/turquoise"/>
+        android:background="@drawable/circle_primary"/>
 
 
 

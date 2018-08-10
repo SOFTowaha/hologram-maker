@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Viewers;
+package com.sergioloc.hologram.Activities;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class ShowLoadedImage extends AppCompatActivity {
+public class ImageActivity extends AppCompatActivity {
 
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();

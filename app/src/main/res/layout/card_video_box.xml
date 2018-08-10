@@ -52,10 +52,32 @@
         app:sparkbutton_primaryColor="@color/red"
         app:sparkbutton_secondaryColor="@color/colorWhite" />
 
+    <ImageView
+        android:id="@+id/ivShieldFavBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/button_fav_small"
+        android:layout_alignBottom="@id/button_fav_small"
+        android:layout_alignStart="@id/button_fav_small"
+        android:layout_alignEnd="@id/button_fav_small"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/ivShieldHideBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/button_hide_small"
+        android:layout_alignBottom="@id/button_hide_small"
+        android:layout_alignStart="@id/button_hide_small"
+        android:layout_alignEnd="@id/button_hide_small"
+        android:visibility="invisible"/>
+
     <Button
         android:id="@+id/button_small"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/image_small"
+        android:layout_alignBottom="@id/title_small"
         android:background="@color/transparent"/>
 
 </RelativeLayout>

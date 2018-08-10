@@ -23,10 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.sergioloc.hologram.Fragments.ListFragment;
 import com.sergioloc.hologram.Models.VideoModel;
 import com.sergioloc.hologram.R;
-import com.sergioloc.hologram.Viewers.Player;
+import com.sergioloc.hologram.Activities.PlayerActivity;
 import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
-import com.vpaliy.chips_lover.ChipView;
+
 import java.util.ArrayList;
 
 /**
@@ -104,25 +104,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         if(guest){
 
-            if(holder.type!=3){
-                colorTags(holder,position);
+            holder.shieldFav.setVisibility(View.VISIBLE);
+            holder.shieldHide.setVisibility(View.VISIBLE);
+
+            holder.shieldFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(context, "Debes estar registrado para añadir a favoritos",Toast.LENGTH_SHORT).show();
+                }
+            });
+            holder.shieldHide.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(context, "Debes estar registrado para ocultar",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            if (holder.type != 3){
                 holder.swipe_layout.close(true);
-
-                holder.shieldFav.setVisibility(View.VISIBLE);
-                holder.shieldHide.setVisibility(View.VISIBLE);
-
-                holder.shieldFav.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(context, "Debes estar registrado para añadir a favoritos",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                holder.shieldHide.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(context, "Debes estar registrado para ocultar",Toast.LENGTH_SHORT).show();
-                    }
-                });
+                colorTags(holder,position);
             }
 
         }else{
@@ -131,22 +131,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
             initFav();
 
-            if (holder.type == 1){ // Lista general
-                loadList(holder,position);
-            }
-            if(holder.type==2){ // Lista favoritos favoritos
-                loadListFav(holder,position);
+            if (holder.type == 1 || holder.type == 3){ // Lista general
+                loadInfo(holder,position);
+            }else { // Lista favoritos
+                loadInfoFav(holder,position);
             }
 
             if(holder.type!=3)
                 holder.swipe_layout.close(true);
+
 
         }
 
         holder.button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(),Player.class);
+                Intent i = new Intent(v.getContext(),PlayerActivity.class);
                 i.putExtra("id",ListFragment.actualList.get(position).getCode());
                 context.startActivity(i);
             }
@@ -214,7 +214,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     /**Views**/
 
-    private void loadList(final MyViewHolder holder, final int position){
+    private void loadInfo(final MyViewHolder holder, final int position){
 
         userFav.addValueEventListener(new ValueEventListener() {
 
@@ -225,7 +225,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
                     int name = context.getResources().getIdentifier(video.getName(), "string", context.getPackageName());
                     if(holder.text.getText().toString().equals(context.getResources().getString(name))){
-                        holder.bFavList.setChecked(true);
+                        holder.bFav.setChecked(true);
                     }
 
                 }
@@ -237,7 +237,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         });
 
         // Favorito
-        holder.bFavList.setEventListener(new SparkEventListener() {
+        holder.bFav.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
                 if(buttonState){ //active
@@ -261,7 +261,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         });
 
         // Ocultar
-        holder.bHideList.setEventListener(new SparkEventListener() {
+        holder.bHide.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
                 if(buttonState){ //active
@@ -285,9 +285,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         });
 
     }
-    private void loadListFav(final MyViewHolder holder, final int position){
-        holder.bFavList2.setChecked(true);
-        holder.bFavList2.setEventListener(new SparkEventListener() {
+    private void loadInfoFav(final MyViewHolder holder, final int position){
+        holder.bFav.setChecked(true);
+        holder.bFav.setEventListener(new SparkEventListener() {
             @Override
             public void onEvent(ImageView button, boolean buttonState) {
                 if(buttonState){ //active
@@ -309,6 +309,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             }
         });
     }
+
 
 
     /**Functions**/
@@ -364,23 +365,29 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
 
+    public void setFilter(ArrayList<VideoModel> newList){
+        array= new ArrayList<>();
+        array.addAll(newList);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return array.size();
     }
 
 
-    //----------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    // Internal class
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         ImageView image, tag, shieldFav, shieldHide;
         TextView text;
         Button button;
-        ChipView chip;
         int type;
         SwipeRevealLayout swipe_layout;
-        SparkButton bFavList,bFavList2,bHideList,fav_small,hide_small;
+        SparkButton bFav,bHide;
 
         public MyViewHolder(final View itemView, int viewType) {
             super(itemView);
@@ -390,36 +397,33 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 image = (ImageView) itemView.findViewById(R.id.image_big);
                 text = (TextView) itemView.findViewById(R.id.title_big);
                 button = (Button) itemView.findViewById(R.id.button_big);
-                tag = (ImageView) itemView.findViewById(R.id.iv_tag);
-                bFavList = itemView.findViewById(R.id.button_fav_big);
-                bHideList = itemView.findViewById(R.id.button_hide_big);
-                swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout_big);
+                bFav = itemView.findViewById(R.id.button_fav_big);
+                bHide = itemView.findViewById(R.id.button_hide_big);
                 shieldFav = (ImageView) itemView.findViewById(R.id.button_fav_big_copy);
                 shieldHide = (ImageView) itemView.findViewById(R.id.button_hide_big_copy);
+                tag = (ImageView) itemView.findViewById(R.id.iv_tag);
+                swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout_big);
                 type=1;
             }else if (viewType == VIEW_TYPE_LIST_FAV){
                 image = (ImageView) itemView.findViewById(R.id.image_list_fav);
                 text = (TextView) itemView.findViewById(R.id.title_list_fav);
                 button = (Button) itemView.findViewById(R.id.button_list_fav);
+                bFav = itemView.findViewById(R.id.button_fav_list);
                 tag = (ImageView) itemView.findViewById(R.id.iv_tag_fav);
-                bFavList2 = itemView.findViewById(R.id.button_fav_list);
                 swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout_list_fav);
                 type=2;
             }else{
                 image = (ImageView) itemView.findViewById(R.id.image_small);
                 text = (TextView) itemView.findViewById(R.id.title_small);
                 button = (Button) itemView.findViewById(R.id.button_small);
-                fav_small = itemView.findViewById(R.id.button_fav_small);
-                hide_small = itemView.findViewById(R.id.button_hide_small);
+                bFav = itemView.findViewById(R.id.button_fav_small);
+                bHide = itemView.findViewById(R.id.button_hide_small);
+                shieldFav = (ImageView) itemView.findViewById(R.id.ivShieldFavBox);
+                shieldHide = (ImageView) itemView.findViewById(R.id.ivShieldHideBox);
                 type=3;
             }
         }
     }
 
-    public void setFilter(ArrayList<VideoModel> newList){
-        array= new ArrayList<>();
-        array.addAll(newList);
-        notifyDataSetChanged();
-    }
 }
 

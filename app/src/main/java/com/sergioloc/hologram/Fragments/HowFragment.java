@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.sergioloc.hologram.R;
-import com.sergioloc.hologram.ScreenSlidePage;
+import com.sergioloc.hologram.Activities.SlidePageActivity;
 
 
 public class HowFragment extends Fragment {
@@ -29,7 +29,7 @@ public class HowFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_how, container, false);
 
         ViewPager vpPager = (ViewPager) view.findViewById(R.id.pager);
-        adapterViewPager = new ScreenSlidePage.MyPagerAdapter(getFragmentManager());
+        adapterViewPager = new SlidePageActivity.MyPagerAdapter(getFragmentManager());
         vpPager.setAdapter(adapterViewPager);
 
         return view;

@@ -1,4 +1,4 @@
-package com.sergioloc.hologram;
+package com.sergioloc.hologram.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,8 +22,9 @@ import com.sergioloc.hologram.Fragments.GalleryFragment;
 import com.sergioloc.hologram.Fragments.HomeFragment;
 import com.sergioloc.hologram.Fragments.HowFragment;
 import com.sergioloc.hologram.Fragments.ListFragment;
+import com.sergioloc.hologram.R;
 
-public class Navigation extends AppCompatActivity
+public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ImageView image;
@@ -73,7 +74,7 @@ public class Navigation extends AppCompatActivity
             sesion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(Navigation.this,Auth.class));
+                    startActivity(new Intent(NavigationActivity.this,AuthActivity.class));
                 }
             });
         }
@@ -130,7 +131,7 @@ public class Navigation extends AppCompatActivity
             fragment = new HowFragment();
         }else if (id == R.id.nav_close) {
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(Navigation.this,Auth.class));
+            startActivity(new Intent(NavigationActivity.this,AuthActivity.class));
         }else if (id == R.id.nav_share) {
 
         }

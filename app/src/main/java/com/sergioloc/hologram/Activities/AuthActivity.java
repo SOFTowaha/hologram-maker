@@ -1,4 +1,4 @@
-package com.sergioloc.hologram;
+package com.sergioloc.hologram.Activities;
 
 import android.animation.Animator;
 import android.content.Intent;
@@ -7,13 +7,13 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.sergioloc.hologram.R;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 
@@ -31,7 +32,7 @@ import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
  * Created by Sergio López Ceballos on 17/01/2018.
  */
 
-public class Auth extends AppCompatActivity {
+public class AuthActivity extends AppCompatActivity {
 
     private TextView guest, title;
     private EditText signIn_email,signIn_password,signUp_email,signUp_password,signUp_password2;
@@ -39,7 +40,7 @@ public class Auth extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private int viewBox;
-    private FloatingActionButton change;
+    private ImageView change;
     private MaterialTextField signIn_fieldEmail,signIn_fieldPass, signUp_fieldEmail, signUp_fieldPass, signUp_fieldPass2;
     private RelativeLayout signInLayout, signUpLayout;
     private View view;
@@ -61,7 +62,7 @@ public class Auth extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d("SESION", "onAuthStateChanged:signed_in:" + user.getUid());
-                    Intent i = new Intent(Auth.this,Navigation.class);
+                    Intent i = new Intent(AuthActivity.this,NavigationActivity.class);
                     i.putExtra("guest",false);
                     startActivity(i);
                 } else {
@@ -80,7 +81,7 @@ public class Auth extends AppCompatActivity {
         viewBox = 1;
         mAuth = FirebaseAuth.getInstance();
         title = (TextView) findViewById(R.id.title);
-        change = (FloatingActionButton) findViewById(R.id.change);
+        change = (ImageView) findViewById(R.id.change);
 
         // Sign In
         signIn_email = (EditText) findViewById(R.id.email);
@@ -110,7 +111,7 @@ public class Auth extends AppCompatActivity {
         guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Auth.this,Navigation.class);
+                Intent i = new Intent(AuthActivity.this,NavigationActivity.class);
                 i.putExtra("guest",true);
                 startActivity(i);
             }
@@ -271,7 +272,7 @@ public class Auth extends AppCompatActivity {
 
                         if (!task.isSuccessful()) {
                             Log.w("SESION", "signInWithEmail:failed", task.getException());
-                            Toast.makeText(Auth.this, task.getException().getMessage(),
+                            Toast.makeText(AuthActivity.this, task.getException().getMessage(),
                                     Toast.LENGTH_SHORT).show();
                             Bitmap icon2 = BitmapFactory.decodeResource(getResources(),R.drawable.ic_action_error);
                             signIn_button.doneLoadingAnimation(getResources().getColor(R.color.turquoise),icon2);
@@ -300,7 +301,7 @@ public class Auth extends AppCompatActivity {
                         Log.d("SESION", "createUserWithEmail:onComplete:" + task.isSuccessful());
 
                         if (!task.isSuccessful()) {
-                            Toast.makeText(Auth.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AuthActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             Bitmap icon2 = BitmapFactory.decodeResource(getResources(),R.drawable.ic_action_error);
                             signUp_button.doneLoadingAnimation(getResources().getColor(R.color.turquoise),icon2);
                             Handler handler = new Handler();

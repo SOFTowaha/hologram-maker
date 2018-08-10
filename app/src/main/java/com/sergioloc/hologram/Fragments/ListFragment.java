@@ -42,10 +42,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sergioloc.hologram.Adapter.RecyclerAdapter;
-import com.sergioloc.hologram.DividerItemDecoration;
+import com.sergioloc.hologram.Utils.DividerItemDecoration;
 import com.sergioloc.hologram.Models.VideoModel;
 import com.sergioloc.hologram.R;
-import com.sergioloc.hologram.SettingsActivity;
+import com.sergioloc.hologram.Activities.SettingsActivity;
 import com.vpaliy.chips_lover.ChipView;
 
 import java.util.ArrayList;
@@ -919,7 +919,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            //startActivity(new Intent(ListFragment.this, Navigation.class));
+            //startActivity(new Intent(ListFragment.this, NavigationActivity.class));
         } else if (item.getItemId() == R.id.action_search) {
             fab_menu.setVisibility(View.INVISIBLE);
             SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);

@@ -1,4 +1,4 @@
-package com.sergioloc.hologram;
+package com.sergioloc.hologram.Activities;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -16,8 +16,9 @@ import com.sergioloc.hologram.Fragments.Step2Fragment;
 import com.sergioloc.hologram.Fragments.Step3Fragment;
 import com.sergioloc.hologram.Fragments.Step4Fragment;
 import com.sergioloc.hologram.Fragments.Step5Fragment;
+import com.sergioloc.hologram.R;
 
-public class ScreenSlidePage extends AppCompatActivity {
+public class SlidePageActivity extends AppCompatActivity {
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private static int NUM_ITEMS = 6;
@@ -77,13 +78,13 @@ public class ScreenSlidePage extends AppCompatActivity {
     }
     /**Back Button**/
     public void onBackPressed(){
-        startActivity(new Intent(ScreenSlidePage.this, Navigation.class));
+        startActivity(new Intent(SlidePageActivity.this, NavigationActivity.class));
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==android.R.id.home){
-            startActivity(new Intent(ScreenSlidePage.this, Navigation.class));
+            startActivity(new Intent(SlidePageActivity.this, NavigationActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
