@@ -48,6 +48,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public static ArrayList<VideoModel> fav_list;
     public static ArrayList<Integer> fav_id;
+    private SwipeRevealLayout lastSwipeLayout;
 
     //Firebase
     private FirebaseDatabase database;
@@ -147,6 +148,27 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
             if(holder.type == 1 || holder.type == 2)
                 holder.swipe_layout.close(true);
+
+            holder.swipe_layout.setSwipeListener(new SwipeRevealLayout.SwipeListener() {
+                @Override
+                public void onClosed(SwipeRevealLayout view) {
+
+                }
+
+                @Override
+                public void onOpened(SwipeRevealLayout view) {
+                    if (lastSwipeLayout == null){
+                        lastSwipeLayout = holder.swipe_layout;
+                    }else {
+                        lastSwipeLayout.close(true);
+                        lastSwipeLayout = holder.swipe_layout;
+                    }
+                }
+
+                @Override
+                public void onSlide(SwipeRevealLayout view, float slideOffset) {
+                }
+            });
 
 
         }
@@ -343,7 +365,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 .setAction("UNDO", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //Toast.makeText(context, "Undo", Toast.LENGTH_SHORT).show();
                         userHide.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
