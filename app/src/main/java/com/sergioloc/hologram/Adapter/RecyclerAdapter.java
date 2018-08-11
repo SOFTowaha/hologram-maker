@@ -41,6 +41,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private static final int VIEW_TYPE_BOX = 1;
     private static final int VIEW_TYPE_LIST = 2;
     private static final int VIEW_TYPE_LIST_FAV = 3;
+    private static final int VIEW_TYPE_BOX_FAV = 4;
+
 
     public static boolean FAV_LIST = false;
 
@@ -74,7 +76,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 return VIEW_TYPE_LIST;
             }
         } else {
-            return VIEW_TYPE_BOX;
+            if (FAV_LIST){
+                return VIEW_TYPE_BOX_FAV;
+            }else{
+                return VIEW_TYPE_BOX;
+            }
         }
     }
 
@@ -87,8 +93,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video, parent, false);
         } else if(viewType == VIEW_TYPE_LIST_FAV){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video_fav, parent, false);
-        } else {
+        } else if(viewType == VIEW_TYPE_BOX){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video_box, parent, false);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video_box_fav, parent, false);
         }
         context = view.getContext();
         return new MyViewHolder(view, viewType);
@@ -120,13 +128,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
             });
 
-            if (holder.type != 3){
+            if (holder.type == 1 || holder.type == 2){
                 holder.swipe_layout.close(true);
                 colorTags(holder,position);
             }
 
         }else{
-            if(holder.type!=3)
+            if(holder.type == 1 || holder.type == 2)
                 colorTags(holder,position);
 
             initFav();
@@ -137,7 +145,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 loadInfoFav(holder,position);
             }
 
-            if(holder.type!=3)
+            if(holder.type == 1 || holder.type == 2)
                 holder.swipe_layout.close(true);
 
 
@@ -215,9 +223,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     /**Views**/
 
     private void loadInfo(final MyViewHolder holder, final int position){
-
+        holder.bFav.setChecked(false);
         userFav.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -227,7 +234,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     if(holder.text.getText().toString().equals(context.getResources().getString(name))){
                         holder.bFav.setChecked(true);
                     }
-
                 }
             }
             @Override
@@ -412,7 +418,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 tag = (ImageView) itemView.findViewById(R.id.iv_tag_fav);
                 swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout_list_fav);
                 type=2;
-            }else{
+            }else if (viewType == VIEW_TYPE_BOX){
                 image = (ImageView) itemView.findViewById(R.id.image_small);
                 text = (TextView) itemView.findViewById(R.id.title_small);
                 button = (Button) itemView.findViewById(R.id.button_small);
@@ -421,6 +427,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 shieldFav = (ImageView) itemView.findViewById(R.id.ivShieldFavBox);
                 shieldHide = (ImageView) itemView.findViewById(R.id.ivShieldHideBox);
                 type=3;
+            }else {
+                image = (ImageView) itemView.findViewById(R.id.image_small);
+                text = (TextView) itemView.findViewById(R.id.title_small);
+                button = (Button) itemView.findViewById(R.id.button_small);
+                bFav = itemView.findViewById(R.id.button_fav_small);
+                type=4;
             }
         }
     }

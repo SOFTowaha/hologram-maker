@@ -88,6 +88,8 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     private Boolean guest;
     private DividerItemDecoration divider;
 
+    private View toolbarShadow;
+
 
     @SuppressLint("ValidFragment")
     public ListFragment(Boolean guest) {
@@ -147,6 +149,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
         count = 0;
         chipUp = (ChipView) view.findViewById(R.id.chipUp);
         text = (TextView) view.findViewById(R.id.textoCont);
+        toolbarShadow = (View) view.findViewById(R.id.toolbarShadow);
         favSelected=false;
         tagSelected = false;
         tagsOpen = false;
@@ -565,6 +568,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
         arrowTag.animate().translationY(translationY).start();
         text.animate().translationY(translationY).start();
         blackSpace.animate().translationY(translationY).start();
+        toolbarShadow.animate().translationY(translationY).start();
         if (tagsOpen) tagsOpen = false;
         else tagsOpen = true;
     }
