@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -89,6 +90,9 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     private DividerItemDecoration divider;
 
     private View toolbarShadow;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
+    private int typeView;
 
 
     @SuppressLint("ValidFragment")
@@ -110,7 +114,8 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
 
         view = inflater.inflate(R.layout.fragment_list, container, false);
 
-        init();
+        initVariables();
+
         if(!guest){ // No invitado
             //Firebase user
             user = FirebaseAuth.getInstance().getCurrentUser();
@@ -134,7 +139,11 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
 
     /**Inits**/
 
-    public void init() {
+    public void initView(){
+
+    }
+
+    public void initVariables() {
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         context = activity.getApplicationContext();
@@ -157,12 +166,16 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
 
         //Firebase
         database = FirebaseDatabase.getInstance();
+        //database.setPersistenceEnabled(true);
 
         // Recycler
         videosList = new ArrayList<>();
         actualList = new ArrayList<>();
 
-        gridLayoutManager = new GridLayoutManager(context, RecyclerAdapter.SPAN_COUNT_ONE);
+        prefs = getActivity().getSharedPreferences("prefView",Context.MODE_PRIVATE);
+        editor = prefs.edit();
+        typeView = prefs.getInt("typeView", 1);
+        gridLayoutManager = new GridLayoutManager(context, typeView);
         adapter = new RecyclerAdapter(actualList, gridLayoutManager, guest);
         recyclerView.setAdapter(adapter);
 
@@ -175,11 +188,22 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
         //loadAnimList(1);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                adapter.closeLastSwipeLayout();
+            }
+        });
 
     }
 
     public void initFirebaseGuest() {
-        if (database == null) database.setPersistenceEnabled(true);
         videosList=new ArrayList<>();
         // Videos
         ref = database.getReference("videos");
@@ -207,7 +231,6 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     }
 
     public void initFirebase() {
-        if (database == null) database.setPersistenceEnabled(true);
         videosList=new ArrayList<>();
         // Videos
         ref = database.getReference("videos");
@@ -929,6 +952,9 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
             SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
             searchView.setOnQueryTextListener(this);
         } else if (item.getItemId() == R.id.action_change) {
+            if (typeView == 1) editor.putInt("typeView",3);
+            else editor.putInt("typeView",1);
+            editor.commit();
             switchLayout();
             switchIcon(item);
             //loadAnimList(2);

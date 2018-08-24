@@ -9,9 +9,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -159,11 +162,14 @@ public class GalleryFragment extends Fragment {
         });
         swType.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (guest){
+                    if (guest) { // Invitado
                         if (!firstLoad)
-                            Toast.makeText(context,"Debes iniciar sesión para subir fotos a la nube", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Debes iniciar sesión para subir fotos a la nube", Toast.LENGTH_SHORT).show();
                         swType.setChecked(true);
-                    }else {
+                    }else if(!isInternetConnection()){ // Sin conexion
+                        Toast.makeText(context, "Debes tener acceso a internet para subir fotos a la nube", Toast.LENGTH_SHORT).show();
+                        swType.setChecked(true);
+                    }else { // Usuario con conexion
                         if (cloudView){
                             switchLocal();
                         }else {
@@ -180,7 +186,7 @@ public class GalleryFragment extends Fragment {
     }
 
     private void initView(){
-        if(guest || (!guest && !cloudView)){
+        if(guest || (!guest && !cloudView || !isInternetConnection())){
             initForLocal();
             switchLocal();
             swType.setChecked(true);
@@ -343,6 +349,15 @@ public class GalleryFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public boolean isInternetConnection(){
+        ConnectivityManager cm =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
     }
 
 

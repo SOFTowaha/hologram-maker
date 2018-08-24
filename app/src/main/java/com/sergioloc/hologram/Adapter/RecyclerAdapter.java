@@ -38,8 +38,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public static final int SPAN_COUNT_ONE = 1;
     public static final int SPAN_COUNT_THREE = 3;
 
-    private static final int VIEW_TYPE_BOX = 1;
-    private static final int VIEW_TYPE_LIST = 2;
+    private static final int VIEW_TYPE_LIST = 1;
+    private static final int VIEW_TYPE_BOX = 2;
     private static final int VIEW_TYPE_LIST_FAV = 3;
     private static final int VIEW_TYPE_BOX_FAV = 4;
 
@@ -92,10 +92,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         if (viewType == VIEW_TYPE_LIST) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video, parent, false);
-        } else if(viewType == VIEW_TYPE_LIST_FAV){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video_fav, parent, false);
         } else if(viewType == VIEW_TYPE_BOX){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video_box, parent, false);
+        } else if(viewType == VIEW_TYPE_LIST_FAV){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video_fav, parent, false);
         } else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_video_box_fav, parent, false);
         }
@@ -129,48 +129,45 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
             });
 
-            if (holder.type == 1 || holder.type == 2){
+            if (holder.type == VIEW_TYPE_BOX || holder.type == VIEW_TYPE_LIST){
                 holder.swipe_layout.close(true);
                 colorTags(holder,position);
             }
 
-        }else{
-            if(holder.type == 1 || holder.type == 2)
+        }else{ // User
+
+            if(holder.type == VIEW_TYPE_LIST || holder.type == VIEW_TYPE_LIST_FAV){
                 colorTags(holder,position);
+                holder.swipe_layout.close(true);
+                holder.swipe_layout.setSwipeListener(new SwipeRevealLayout.SwipeListener() {
+                    @Override
+                    public void onClosed(SwipeRevealLayout view) {
+
+                    }
+
+                    @Override
+                    public void onOpened(SwipeRevealLayout view) {
+                        if (lastSwipeLayout == null){
+                            lastSwipeLayout = holder.swipe_layout;
+                        }else {
+                            lastSwipeLayout.close(true);
+                            lastSwipeLayout = holder.swipe_layout;
+                        }
+                    }
+
+                    @Override
+                    public void onSlide(SwipeRevealLayout view, float slideOffset) {
+                    }
+                });
+            }
 
             initFav();
 
-            if (holder.type == 1 || holder.type == 3){ // Lista general
+            if (holder.type == VIEW_TYPE_BOX || holder.type == VIEW_TYPE_LIST){ // Lista general
                 loadInfo(holder,position);
             }else { // Lista favoritos
                 loadInfoFav(holder,position);
             }
-
-            if(holder.type == 1 || holder.type == 2)
-                holder.swipe_layout.close(true);
-
-            holder.swipe_layout.setSwipeListener(new SwipeRevealLayout.SwipeListener() {
-                @Override
-                public void onClosed(SwipeRevealLayout view) {
-
-                }
-
-                @Override
-                public void onOpened(SwipeRevealLayout view) {
-                    if (lastSwipeLayout == null){
-                        lastSwipeLayout = holder.swipe_layout;
-                    }else {
-                        lastSwipeLayout.close(true);
-                        lastSwipeLayout = holder.swipe_layout;
-                    }
-                }
-
-                @Override
-                public void onSlide(SwipeRevealLayout view, float slideOffset) {
-                }
-            });
-
-
         }
 
         holder.button.setOnClickListener(new View.OnClickListener(){
@@ -184,6 +181,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
 
 
+    }
+
+    public void closeLastSwipeLayout(){
+        if (lastSwipeLayout != null){
+            lastSwipeLayout.close(true);
+            lastSwipeLayout = null;
+        }
     }
 
     /**Firebase**/
@@ -430,15 +434,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 shieldHide = (ImageView) itemView.findViewById(R.id.button_hide_big_copy);
                 tag = (ImageView) itemView.findViewById(R.id.iv_tag);
                 swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout_big);
-                type=1;
-            }else if (viewType == VIEW_TYPE_LIST_FAV){
-                image = (ImageView) itemView.findViewById(R.id.image_list_fav);
-                text = (TextView) itemView.findViewById(R.id.title_list_fav);
-                button = (Button) itemView.findViewById(R.id.button_list_fav);
-                bFav = itemView.findViewById(R.id.button_fav_list);
-                tag = (ImageView) itemView.findViewById(R.id.iv_tag_fav);
-                swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout_list_fav);
-                type=2;
+                type = 1;
             }else if (viewType == VIEW_TYPE_BOX){
                 image = (ImageView) itemView.findViewById(R.id.image_small);
                 text = (TextView) itemView.findViewById(R.id.title_small);
@@ -447,6 +443,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 bHide = itemView.findViewById(R.id.button_hide_small);
                 shieldFav = (ImageView) itemView.findViewById(R.id.ivShieldFavBox);
                 shieldHide = (ImageView) itemView.findViewById(R.id.ivShieldHideBox);
+                type=2;
+            }else if (viewType == VIEW_TYPE_LIST_FAV){
+                image = (ImageView) itemView.findViewById(R.id.image_list_fav);
+                text = (TextView) itemView.findViewById(R.id.title_list_fav);
+                button = (Button) itemView.findViewById(R.id.button_list_fav);
+                bFav = itemView.findViewById(R.id.button_fav_list);
+                tag = (ImageView) itemView.findViewById(R.id.iv_tag_fav);
+                swipe_layout = (SwipeRevealLayout) itemView.findViewById(R.id.swipe_layout_list_fav);
                 type=3;
             }else {
                 image = (ImageView) itemView.findViewById(R.id.image_small);
