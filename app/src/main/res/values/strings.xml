@@ -21,6 +21,17 @@
     <string name="list_leia">Leia</string>
     <string name="list_halloween">Halloween</string>
     <string name="list_fireball">Fireball</string>
+    <string name="list_moon">Moon</string>
+    <string name="list_candle">Candle</string>
+    <string name="list_mariobros">Mario Bros</string>
+    <string name="list_heman">He-Man</string>
+    <string name="list_supernova">Supernova</string>
+    <string name="list_dancing">People dancing</string>
+    <string name="list_cube">Cube</string>
+    <string name="list_bb8">BB-8</string>
+    <string name="list_geometry">>Morphing Geometry</string>
+
+
 
     <!-- Step Strings -->
     <string name="title_materials">Required Materials</string>

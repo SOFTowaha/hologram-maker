@@ -35,32 +35,30 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
+    // Constants
     public static final int SPAN_COUNT_ONE = 1;
     public static final int SPAN_COUNT_THREE = 3;
-
     private static final int VIEW_TYPE_LIST = 1;
     private static final int VIEW_TYPE_BOX = 2;
     private static final int VIEW_TYPE_LIST_FAV = 3;
     private static final int VIEW_TYPE_BOX_FAV = 4;
 
-
-    public static boolean FAV_LIST = false;
-
+    // Variables
     public static ArrayList<VideoModel> fav_list;
     public static ArrayList<Integer> fav_id;
-    private SwipeRevealLayout lastSwipeLayout;
-
-    //Firebase
-    private FirebaseDatabase database;
-    private DatabaseReference userFav, userHide;
-    private FirebaseUser user;
-
-
     private ArrayList<VideoModel> array;
     private GridLayoutManager mLayoutManager;
     private Context context;
     private Boolean guest;
+    private SwipeRevealLayout lastSwipeLayout;
+    public static boolean FAV_LIST = false;
 
+    // Firebase
+    private FirebaseDatabase database;
+    private DatabaseReference userFav, userHide;
+    private FirebaseUser user;
+
+    
     public RecyclerAdapter(ArrayList<VideoModel> array, GridLayoutManager layoutManager, Boolean guest){
         this.array=array;
         this.mLayoutManager=layoutManager;
@@ -129,37 +127,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
             });
 
-            if (holder.type == VIEW_TYPE_BOX || holder.type == VIEW_TYPE_LIST){
-                holder.swipe_layout.close(true);
-                colorTags(holder,position);
-            }
-
         }else{ // User
-
-            if(holder.type == VIEW_TYPE_LIST || holder.type == VIEW_TYPE_LIST_FAV){
-                colorTags(holder,position);
-                holder.swipe_layout.close(true);
-                holder.swipe_layout.setSwipeListener(new SwipeRevealLayout.SwipeListener() {
-                    @Override
-                    public void onClosed(SwipeRevealLayout view) {
-
-                    }
-
-                    @Override
-                    public void onOpened(SwipeRevealLayout view) {
-                        if (lastSwipeLayout == null){
-                            lastSwipeLayout = holder.swipe_layout;
-                        }else {
-                            lastSwipeLayout.close(true);
-                            lastSwipeLayout = holder.swipe_layout;
-                        }
-                    }
-
-                    @Override
-                    public void onSlide(SwipeRevealLayout view, float slideOffset) {
-                    }
-                });
-            }
 
             initFav();
 
@@ -170,6 +138,31 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             }
         }
 
+        if(holder.type == VIEW_TYPE_LIST || holder.type == VIEW_TYPE_LIST_FAV){
+            colorTags(holder,position);
+            holder.swipe_layout.close(true);
+            holder.swipe_layout.setSwipeListener(new SwipeRevealLayout.SwipeListener() {
+                @Override
+                public void onClosed(SwipeRevealLayout view) {
+
+                }
+
+                @Override
+                public void onOpened(SwipeRevealLayout view) {
+                    if (lastSwipeLayout == null){
+                        lastSwipeLayout = holder.swipe_layout;
+                    }else {
+                        lastSwipeLayout.close(true);
+                        lastSwipeLayout = holder.swipe_layout;
+                    }
+                }
+
+                @Override
+                public void onSlide(SwipeRevealLayout view, float slideOffset) {
+                }
+            });
+        }
+
         holder.button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -178,9 +171,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 context.startActivity(i);
             }
         });
-
-
-
     }
 
     public void closeLastSwipeLayout(){

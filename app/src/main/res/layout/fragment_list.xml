@@ -10,6 +10,26 @@
     tools:context="com.sergioloc.hologram.Fragments.ListFragment"
     android:background="@color/colorWhite">
 
+    <ImageView
+        android:id="@+id/ivNoConnection"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_cloud_off"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tvNoConnection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ivNoConnection"
+        android:layout_marginTop="10dp"
+        android:textSize="15sp"
+        android:textColor="@color/grey"
+        android:text="Internet connection is required"
+        android:visibility="gone"/>
+
     <com.google.android.flexbox.FlexboxLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -154,7 +174,7 @@
     <TextView
         android:id="@+id/black_space"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="50dp"
         android:background="@color/colorWhite"
         android:layout_marginTop="50dp"/>
 

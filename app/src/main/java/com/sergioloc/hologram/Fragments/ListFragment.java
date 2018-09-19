@@ -80,9 +80,9 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     private DatabaseReference ref, userFav, userHide;
     //Tags
     public static TextView text;
-    private TextView blackSpace;
+    private TextView blackSpace, tvNoConnection;
     private ChipView chip0,chip1,chip2,chip3,chip4,chip5,chip6,chip7,chipUp;
-    private ImageView arrowTag;
+    private ImageView arrowTag, ivNoConnection;
     private boolean tagSelected,tagsOpen,arrowDown,chip0IsChecked,chip1IsChecked,chip2IsChecked,
             chip3IsChecked,chip4IsChecked,chip5IsChecked,chip6IsChecked,chip7IsChecked;
     private FlexboxLayout flexboxLayout;
@@ -114,6 +114,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
 
         view = inflater.inflate(R.layout.fragment_list, container, false);
 
+        initView();
         initVariables();
 
         if(!guest){ // No invitado
@@ -130,7 +131,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
         initFab();
         initTags();
 
-        checkList(4000);
+        checkList(3500);
 
 
         return view;
@@ -140,7 +141,8 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     /**Inits**/
 
     public void initView(){
-
+        ivNoConnection = (ImageView) view.findViewById(R.id.ivNoConnection);
+        tvNoConnection = (TextView) view.findViewById(R.id.tvNoConnection);
     }
 
     public void initVariables() {
@@ -221,6 +223,8 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
                 text.setText(actualList.size() + " videos");
                 adapter.setFilter(actualList);
                 initTagsList();
+                ivNoConnection.setVisibility(View.GONE);
+                tvNoConnection.setVisibility(View.GONE);
             }
 
             @Override
@@ -302,6 +306,8 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
                     text.setText(count + " videos");
                     adapter.notifyDataSetChanged();
                     initTagsList();
+                    ivNoConnection.setVisibility(View.GONE);
+                    tvNoConnection.setVisibility(View.GONE);
                 }
 
             }
@@ -463,7 +469,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
         }
         for (int i = 0; i < actualList.size(); i++) {
             if (actualList.get(i).getTag().equals("Others")) {
-                tags6.add(actualList.get(i));
+                tags7.add(actualList.get(i));
             }
         }
     }
@@ -673,8 +679,12 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
             public void run() {
                 // Acciones que se ejecutan tras los milisegundos
                 if (actualList.size() == 0) {
+                    ivNoConnection.setVisibility(View.VISIBLE);
+                    tvNoConnection.setVisibility(View.VISIBLE);
+                    /*
                     Toast.makeText(context, "Internet connexion is required",
                             Toast.LENGTH_LONG).show();
+                            */
                     text.setText(videosList.size() + " videos");
                 }
             }
@@ -715,6 +725,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
             deselect(5);
             deselect(6);
             deselect(7);
+            chip0IsChecked = true;
             return true;
         }
         return false;
@@ -841,7 +852,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     @Override
     public void onClick(View view) {
         tagSelected = true;
-        boolean allSelected, allButtonSelected=false;
+        boolean allSelected, allButtonSelected = false;
         switch (view.getId()) {
             case R.id.chip0:
                 if (chip0IsChecked) {
@@ -855,7 +866,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
                     deselect(5);
                     deselect(6);
                     deselect(7);
-                    allButtonSelected=true;
+                    allButtonSelected = true;
                 }
                 break;
             case R.id.chip1:
@@ -982,7 +993,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
                     actualList.add(videoModel);
                 }
             }
-        } else if(!tagSelected) {
+        } else if(!tagSelected || chip0IsChecked) {
             for (VideoModel videoModel : videosList) {
                 String name = videoModel.getName().toLowerCase();
                 if (name.contains(newText)) {
