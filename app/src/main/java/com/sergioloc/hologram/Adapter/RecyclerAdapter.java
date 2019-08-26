@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.sergioloc.hologram.Fragments.ListFragment;
 import com.sergioloc.hologram.Models.VideoModel;
 import com.sergioloc.hologram.R;
-import com.sergioloc.hologram.Activities.PlayerActivity;
+import com.sergioloc.hologram.Views.PlayerActivity;
 import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
 
@@ -166,7 +166,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(),PlayerActivity.class);
+                Intent i = new Intent(v.getContext(), PlayerActivity.class);
                 i.putExtra("id",ListFragment.actualList.get(position).getCode());
                 context.startActivity(i);
             }
