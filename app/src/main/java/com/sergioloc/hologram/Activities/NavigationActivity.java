@@ -23,6 +23,7 @@ import com.sergioloc.hologram.Fragments.HomeFragment;
 import com.sergioloc.hologram.Fragments.HowFragment;
 import com.sergioloc.hologram.Fragments.ListFragment;
 import com.sergioloc.hologram.R;
+import com.sergioloc.hologram.Views.LoginActivity;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -74,7 +75,7 @@ public class NavigationActivity extends AppCompatActivity
             sesion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(NavigationActivity.this,AuthActivity.class));
+                    startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
                 }
             });
         }
@@ -131,7 +132,7 @@ public class NavigationActivity extends AppCompatActivity
             fragment = new HowFragment();
         }else if (id == R.id.nav_close) {
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(NavigationActivity.this,AuthActivity.class));
+            startActivity(new Intent(NavigationActivity.this, LoginActivity.class));
         }else if (id == R.id.nav_share) {
 
         }

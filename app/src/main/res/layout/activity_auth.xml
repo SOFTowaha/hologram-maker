@@ -5,12 +5,12 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sergioloc.hologram.Activities.AuthActivity"
+    tools:context="com.sergioloc.hologram.Views.LoginActivity"
     android:background="@drawable/fondo7">
 
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/titleAuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
