@@ -14,30 +14,30 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/imageHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@android:drawable/sym_def_app_icon" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/nameHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/image"
+        android:layout_below="@+id/imageHeader"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Android Studio"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/emailHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/name"
+        android:layout_below="@+id/nameHeader"
         android:text="android.studio@android.com" />
 
     <Button
-        android:id="@+id/sesion"
+        android:id="@+id/sesionHeader"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"

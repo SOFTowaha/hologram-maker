@@ -6,13 +6,9 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.sergioloc.hologram.Activities.NavigationActivity
-import com.sergioloc.hologram.Interactor.LoginInteractorImpl
 import com.sergioloc.hologram.Interfaces.LoginView
 import com.sergioloc.hologram.Presenters.LoginPresenterImpl
 import com.sergioloc.hologram.R
@@ -141,7 +137,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
     }
 
     override fun navigateToHome(guest: Boolean) {
-        val i = Intent(this, NavigationActivity::class.java)
+        val i = Intent(this, NavigateActivity::class.java)
         i.putExtra("guest", guest)
         startActivity(i)
     }

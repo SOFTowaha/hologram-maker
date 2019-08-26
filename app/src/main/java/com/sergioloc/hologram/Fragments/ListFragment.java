@@ -957,7 +957,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            //startActivity(new Intent(ListFragment.this, NavigationActivity.class));
+            //startActivity(new Intent(ListFragment.this, NavigateActivity.class));
         } else if (item.getItemId() == R.id.action_search) {
             fab_menu.setVisibility(View.INVISIBLE);
             SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);

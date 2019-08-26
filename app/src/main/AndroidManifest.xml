@@ -32,7 +32,7 @@
             android:name=".Views.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.NavigationActivity"
+            android:name=".Views.NavigateActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.PlayerActivity"
