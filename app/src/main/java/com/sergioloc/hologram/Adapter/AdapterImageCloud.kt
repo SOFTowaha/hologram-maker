@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.sergioloc.hologram.Dialogs.ImageDetailDialog
+import com.sergioloc.hologram.Dialogs.DialogImageDetail
 import com.sergioloc.hologram.Models.FirebaseImage
 import com.sergioloc.hologram.R
 import java.util.ArrayList
@@ -20,13 +20,13 @@ class AdapterImageCloud(var imageList: ArrayList<String>, var user: FirebaseUser
         RecyclerView.Adapter<AdapterImageCloud.MyViewHolder>() {
 
     private var firebaseImageList: ArrayList<FirebaseImage>? = null
-    private var dialog: ImageDetailDialog? = null
+    private var dialog: DialogImageDetail? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card_image, parent, false)
         firebaseImageList = ArrayList()
-        dialog = ImageDetailDialog(context)
+        dialog = DialogImageDetail(context)
         return MyViewHolder(view)
     }
 

@@ -15,10 +15,11 @@ import android.view.ViewGroup
 import android.widget.*
 import com.sergioloc.hologram.Adapter.AdapterImageCloud
 import com.sergioloc.hologram.Adapter.AdapterImageLocal
-import com.sergioloc.hologram.Dialogs.ImageUploadDialog
+import com.sergioloc.hologram.Dialogs.DialogImageUpload
 import com.sergioloc.hologram.Interfaces.GalleryInterface
 import com.sergioloc.hologram.Presenters.GalleryPresenterImpl
 import com.sergioloc.hologram.R
+import kotlinx.android.synthetic.main.dialog_image_upload.*
 import kotlinx.android.synthetic.main.fragment_gallery.*
 
 @SuppressLint("ValidFragment")
@@ -31,7 +32,7 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
     private var rvImg: RecyclerView? = null
     private var button: ImageButton? = null
     private var presenter: GalleryPresenterImpl? = null
-    private var dialog: ImageUploadDialog? = null
+    private var dialog: DialogImageUpload? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -106,16 +107,16 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
     }
 
     override fun showDialog(bitmap: Bitmap, cloudView: Boolean) {
-        dialog = ImageUploadDialog(context)
+        dialog = DialogImageUpload(context!!)
         dialog?.show()
         dialog?.ivImageLoaded?.setImageBitmap(bitmap)
         dialog?.bCloseDialog?.setOnClickListener {
             dialog?.dismiss()
         }
         dialog?.bUploadImage?.setOnClickListener {
-            if (dialog?.imageName!!.isNotEmpty()){
+            if (dialog?.getImageName()!!.isNotEmpty()){
                 if (cloudView)
-                    presenter?.callSaveCloudImage(dialog?.imageName!!)
+                    presenter?.callSaveCloudImage(dialog?.getImageName()!!)
                 else
                     presenter?.callSaveLocalImage(bitmap)
                 dialog?.dismiss()
