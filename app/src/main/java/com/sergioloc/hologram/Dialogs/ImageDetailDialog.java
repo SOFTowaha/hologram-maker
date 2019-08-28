@@ -7,10 +7,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.sergioloc.hologram.R;
-import com.sergioloc.hologram.Activities.ImageActivity;
+import com.sergioloc.hologram.Views.ImageActivity;
 
 public class ImageDetailDialog extends Dialog {
 
