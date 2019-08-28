@@ -31,7 +31,6 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.flexbox.FlexboxLayout;
@@ -43,12 +42,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sergioloc.hologram.Adapter.RecyclerAdapter;
-import com.sergioloc.hologram.Utils.DividerItemDecoration;
 import com.sergioloc.hologram.Models.VideoModel;
+import com.sergioloc.hologram.Utils.DividerItemDecoration;
 import com.sergioloc.hologram.R;
 import com.sergioloc.hologram.Activities.SettingsActivity;
 import com.vpaliy.chips_lover.ChipView;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
