@@ -13,7 +13,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
-import com.sergioloc.hologram.Fragments.HomeFragment
 import com.sergioloc.hologram.Fragments.ListFragment
 import com.sergioloc.hologram.Interfaces.NavigateInterface
 import kotlinx.android.synthetic.main.activity_main.*
