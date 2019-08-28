@@ -2,10 +2,9 @@ package com.sergioloc.hologram.Presenters
 
 import com.google.android.youtube.player.YouTubePlayerView
 import com.sergioloc.hologram.Interactor.PlayerInteractorImpl
-import com.sergioloc.hologram.Interfaces.PlayerPresenter
-import com.sergioloc.hologram.Interfaces.PlayerView
+import com.sergioloc.hologram.Interfaces.PlayerInterface
 
-class PlayerPresenterImpl(var view: PlayerView): PlayerPresenter {
+class PlayerPresenterImpl(var view: PlayerInterface.View): PlayerInterface.Presenter {
 
     private var interactor: PlayerInteractorImpl? = null
 

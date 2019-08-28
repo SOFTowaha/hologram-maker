@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.Toast
-import com.sergioloc.hologram.Interfaces.LoginView
+import com.sergioloc.hologram.Interfaces.LoginInterface
 import com.sergioloc.hologram.Presenters.LoginPresenterImpl
 import com.sergioloc.hologram.R
 
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_auth.*
  * Created by Sergio López Ceballos on 25/08/2019.
  */
 
-class LoginActivity : AppCompatActivity(), LoginView {
+class LoginActivity : AppCompatActivity(), LoginInterface.View {
 
     var presenter = LoginPresenterImpl(this)
     var signInActive = true

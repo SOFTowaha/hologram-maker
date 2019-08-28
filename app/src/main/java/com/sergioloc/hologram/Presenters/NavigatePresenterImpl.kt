@@ -1,10 +1,9 @@
 package com.sergioloc.hologram.Presenters
 
 import com.google.firebase.auth.FirebaseAuth
-import com.sergioloc.hologram.Interfaces.NavigatePresenter
-import com.sergioloc.hologram.Interfaces.NavigateView
+import com.sergioloc.hologram.Interfaces.NavigateInterface
 
-class NavigatePresenterImpl(var view: NavigateView): NavigatePresenter {
+class NavigatePresenterImpl(var view: NavigateInterface.View): NavigateInterface.Presenter {
 
     override fun checkUser() {
         val user = FirebaseAuth.getInstance().currentUser

@@ -13,12 +13,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
-import com.sergioloc.hologram.Fragments.GalleryFragment
 import com.sergioloc.hologram.Fragments.HomeFragment
 import com.sergioloc.hologram.Fragments.HowFragment
 import com.sergioloc.hologram.Fragments.ListFragment
+import com.sergioloc.hologram.Interfaces.NavigateInterface
 import kotlinx.android.synthetic.main.activity_main.*
-import com.sergioloc.hologram.Interfaces.NavigateView
 import com.sergioloc.hologram.Presenters.NavigatePresenterImpl
 import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -27,7 +26,7 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
  * Created by Sergio López Ceballos on 26/08/2019.
  */
 
-class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, NavigateView {
+class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, NavigateInterface.View {
 
 
     private var guest: Boolean? = null
@@ -89,7 +88,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         when (id){
             R.id.nav_home -> fragment = HomeFragment()
-            R.id.nav_gallery -> fragment = GalleryFragment(guest)
+            R.id.nav_gallery -> fragment = GalleryFragment(guest!!)
             R.id.nav_list -> fragment = ListFragment(guest)
             R.id.nav_pyramid -> fragment = HowFragment()
             R.id.nav_close -> { fragment = HomeFragment()

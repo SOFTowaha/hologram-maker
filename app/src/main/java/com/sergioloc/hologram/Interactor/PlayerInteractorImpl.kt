@@ -3,11 +3,10 @@ package com.sergioloc.hologram.Interactor
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerView
-import com.sergioloc.hologram.Interfaces.PlayerInteractor
-import com.sergioloc.hologram.Presenters.PlayerPresenterImpl
+import com.sergioloc.hologram.Interfaces.PlayerInterface
 
-class PlayerInteractorImpl(var presenter: PlayerPresenterImpl, var youtubePlayer: YouTubePlayerView, var videoID: String):
-        PlayerInteractor, YouTubePlayer.OnInitializedListener {
+class PlayerInteractorImpl(var presenter: PlayerInterface.Presenter, var youtubePlayer: YouTubePlayerView, var videoID: String):
+        PlayerInterface.Interactor, YouTubePlayer.OnInitializedListener {
 
     val API_KEY = "AIzaSyAqvVJKQOfLavz-wKTT-vkkG7e1GykFn7c"
 

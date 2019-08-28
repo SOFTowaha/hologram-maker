@@ -2,10 +2,10 @@ package com.sergioloc.hologram.Interactor
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.sergioloc.hologram.Interfaces.LoginInteractor
+import com.sergioloc.hologram.Interfaces.LoginInterface
 import com.sergioloc.hologram.Presenters.LoginPresenterImpl
 
-class LoginInteractorImpl(var presenter: LoginPresenterImpl, var mAuth: FirebaseAuth) : LoginInteractor {
+class LoginInteractorImpl(var presenter: LoginPresenterImpl, var mAuth: FirebaseAuth) : LoginInterface.Interactor {
 
     override fun signIn(email: String, password: String) {
         if (email == "" && password == "")

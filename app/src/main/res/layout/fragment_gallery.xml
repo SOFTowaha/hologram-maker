@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/fondo7"
-    tools:context="com.sergioloc.hologram.Fragments.GalleryFragment">
+    android:background="@drawable/fondo7">
 
     <TextView
         android:id="@+id/tvCloud"

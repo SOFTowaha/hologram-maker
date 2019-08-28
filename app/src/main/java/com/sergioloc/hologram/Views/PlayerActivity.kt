@@ -3,12 +3,12 @@ package com.sergioloc.hologram.Views
 import android.os.Bundle
 import android.widget.Toast
 import com.google.android.youtube.player.YouTubeBaseActivity
-import com.sergioloc.hologram.Interfaces.PlayerView
+import com.sergioloc.hologram.Interfaces.PlayerInterface
 import com.sergioloc.hologram.Presenters.PlayerPresenterImpl
 import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.activity_player.*
 
-class PlayerActivity: YouTubeBaseActivity(), PlayerView {
+class PlayerActivity: YouTubeBaseActivity(), PlayerInterface.View {
 
     private var presenter: PlayerPresenterImpl? = null
 

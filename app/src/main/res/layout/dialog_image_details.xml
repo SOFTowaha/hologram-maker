@@ -18,17 +18,18 @@
         android:layout_below="@id/ivCose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite">
+        android:background="@color/black">
 
         <ImageView
             android:id="@+id/ivImage"
-            android:layout_width="250dp"
-            android:layout_height="250dp"/>
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:padding="5dp"/>
 
         <ImageView
             android:id="@+id/ivPlay"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:background="@color/colorWhiteT"/>
 
         <ImageView
