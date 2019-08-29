@@ -13,7 +13,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
-import com.sergioloc.hologram.Fragments.ListFragment
 import com.sergioloc.hologram.Interfaces.NavigateInterface
 import kotlinx.android.synthetic.main.activity_main.*
 import com.sergioloc.hologram.Presenters.NavigatePresenterImpl
@@ -87,7 +86,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         when (id){
             R.id.nav_home -> fragment = HomeFragment()
             R.id.nav_gallery -> fragment = GalleryFragment(guest!!)
-            R.id.nav_list -> fragment = ListFragment(guest)
+            R.id.nav_list -> fragment = ListFrag(guest!!)
             R.id.nav_pyramid -> fragment = PyramidFragment()
             R.id.nav_close -> { fragment = HomeFragment()
                 FirebaseAuth.getInstance().signOut()

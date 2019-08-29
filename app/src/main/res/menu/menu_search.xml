@@ -3,13 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.sergio.hologram.Navigation">
     <item
-        android:id="@+id/action_change"
-        android:title="Search"
-        android:icon="@drawable/ic_action_view_small"
-        app:showAsAction="always|collapseActionView"
-        />
-
-    <item
         android:id="@+id/action_search"
         android:title="Search"
         android:icon="@drawable/ic_search"

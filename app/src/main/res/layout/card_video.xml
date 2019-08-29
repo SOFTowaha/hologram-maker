@@ -11,13 +11,14 @@
     <RelativeLayout
         android:id="@+id/delete_layout"
         android:layout_marginStart="10dp"
-        android:layout_width="100dp"
+        android:layout_width="70dp"
         android:layout_height="60dp">
 
         <com.varunest.sparkbutton.SparkButton
             android:id="@+id/button_fav_big"
             android:layout_width="50dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
             app:sparkbutton_activeImage="@drawable/ic_like_red"
             app:sparkbutton_inActiveImage="@drawable/ic_like_black"
             app:sparkbutton_iconSize="24dp"
@@ -25,29 +26,13 @@
             app:sparkbutton_secondaryColor="@color/colorWhite" />
 
 
-        <com.varunest.sparkbutton.SparkButton
-            android:id="@+id/button_hide_big"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/button_fav_big"
-            app:sparkbutton_activeImage="@drawable/ic_hide_black"
-            app:sparkbutton_inActiveImage="@drawable/ic_hide_black"
-            app:sparkbutton_iconSize="24dp"
-            app:sparkbutton_primaryColor="@color/red"
-            app:sparkbutton_secondaryColor="@color/colorWhite" />
-
         <ImageView
             android:id="@+id/button_fav_big_copy"
             android:layout_width="60dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
             android:visibility="invisible"/>
 
-        <ImageView
-            android:id="@+id/button_hide_big_copy"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:visibility="invisible"
-            android:layout_toRightOf="@+id/button_fav_big"/>
 
     </RelativeLayout>
 

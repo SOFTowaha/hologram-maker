@@ -34,7 +34,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/control_panel"
+        android:id="@+id/controlPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
@@ -172,14 +172,14 @@
     </com.google.android.flexbox.FlexboxLayout>
 
     <TextView
-        android:id="@+id/black_space"
+        android:id="@+id/blackSpace"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/colorWhite"
         android:layout_marginTop="50dp"/>
 
     <TextView
-        android:id="@+id/control_handle"
+        android:id="@+id/controlHandle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
@@ -191,7 +191,7 @@
         android:textSize="15dp"/>
 
     <TextView
-        android:id="@+id/textoCont"
+        android:id="@+id/tvCount"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="15dp"

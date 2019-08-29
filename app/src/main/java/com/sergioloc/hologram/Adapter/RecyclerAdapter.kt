@@ -1,0 +1,323 @@
+package com.sergioloc.hologram.Adapter
+
+import android.content.Context
+import android.content.Intent
+import android.support.design.widget.Snackbar
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
+import com.chauthai.swipereveallayout.SwipeRevealLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
+import com.sergioloc.hologram.Interfaces.ListInterface
+import com.sergioloc.hologram.Models.VideoModel
+import com.sergioloc.hologram.R
+import com.sergioloc.hologram.Views.PlayerActivity
+import com.varunest.sparkbutton.SparkButton
+import com.varunest.sparkbutton.SparkEventListener
+import java.util.ArrayList
+
+class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridLayoutManager, var guest: Boolean,
+                      var interactor: ListInterface.Interactor):
+        RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
+
+    var fav_list: ArrayList<VideoModel>? = null
+    var fav_id: ArrayList<Int>? = null
+
+    val SPAN_COUNT_ONE = 1
+    val SPAN_COUNT_THREE = 3
+    var FAV_LIST = false
+    var lastSwipeLayout: SwipeRevealLayout? = null
+
+    // Firebase
+    private var database: FirebaseDatabase? = null
+    private var userFav: DatabaseReference? = null
+    private var user: FirebaseUser? = null
+
+    // View types
+    private val VIEW_TYPE_LIST = 1
+    private val VIEW_TYPE_BOX = 2
+    private val VIEW_TYPE_LIST_FAV = 3
+    private val VIEW_TYPE_BOX_FAV = 4
+
+    private var context: Context? = null
+
+
+    override fun getItemViewType(position: Int): Int {
+        val spanCount = layoutManager.spanCount
+        return if (spanCount == SPAN_COUNT_ONE) {
+            if (FAV_LIST) {
+                VIEW_TYPE_LIST_FAV
+            } else {
+                VIEW_TYPE_LIST
+            }
+        } else {
+            if (FAV_LIST) {
+                VIEW_TYPE_BOX_FAV
+            } else {
+                VIEW_TYPE_BOX
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        if (!guest)
+            initFirebase()
+        val view: View = when (viewType) {
+            VIEW_TYPE_LIST -> LayoutInflater.from(parent.context).inflate(R.layout.card_video, parent, false)
+            VIEW_TYPE_BOX -> LayoutInflater.from(parent.context).inflate(R.layout.card_video_box, parent, false)
+            VIEW_TYPE_LIST_FAV -> LayoutInflater.from(parent.context).inflate(R.layout.card_video_fav, parent, false)
+            else -> LayoutInflater.from(parent.context).inflate(R.layout.card_video_box_fav, parent, false)
+        }
+        context = view.context
+        fav_list = ArrayList()
+        fav_id = ArrayList()
+        return MyViewHolder(view, viewType)
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val id = context?.resources?.getIdentifier(array[position].image, "drawable", context?.packageName)
+        val name = context?.resources?.getIdentifier(array[position].name, "string", context?.packageName)
+        holder.image?.setImageResource(id!!)
+        holder.text?.text = context?.resources?.getString(name!!)
+
+        if (guest){
+            holder.shieldFav?.visibility = View.VISIBLE
+            holder.shieldHide?.visibility = View.VISIBLE
+            holder.shieldFav?.setOnClickListener { Toast.makeText(context, "Debes estar registrado para añadir a favoritos", Toast.LENGTH_SHORT).show() }
+            holder.shieldHide?.setOnClickListener { Toast.makeText(context, "Debes estar registrado para ocultar", Toast.LENGTH_SHORT).show() }
+        }
+        else{ //User
+            if (holder.type == VIEW_TYPE_LIST || holder.type == VIEW_TYPE_BOX) {
+                loadList(holder, position)
+            } else {
+                loadFavList(holder, position)
+            }
+        }
+
+        if (holder.type == VIEW_TYPE_LIST || holder.type == VIEW_TYPE_LIST_FAV) {
+            setColorTags(holder, position)
+            holder.swipeLayout?.close(true)
+            holder.swipeLayout?.setSwipeListener(object : SwipeRevealLayout.SwipeListener {
+                override fun onClosed(view: SwipeRevealLayout) {}
+
+                override fun onOpened(view: SwipeRevealLayout) {
+                    if (lastSwipeLayout == null) {
+                        lastSwipeLayout = holder.swipeLayout
+                    } else {
+                        lastSwipeLayout?.close(true)
+                        lastSwipeLayout = holder.swipeLayout
+                    }
+                }
+
+                override fun onSlide(view: SwipeRevealLayout, slideOffset: Float) {}
+            })
+        }
+
+        holder.button?.setOnClickListener { v ->
+            val i = Intent(v.context, PlayerActivity::class.java)
+            i.putExtra("id", interactor.getVideo(position)?.code)
+            context?.startActivity(i)
+        }
+    }
+
+    override fun getItemCount(): Int { return array.size }
+
+
+    /** Firebase **/
+
+    private fun initFirebase(){
+        database = FirebaseDatabase.getInstance()
+        user = FirebaseAuth.getInstance().currentUser
+        userFav = database?.getReference("users")?.child(user?.uid)?.child("fav")
+    }
+
+    private fun addVideoToFav(position: Int){
+        userFav?.child(getVideoName(position))?.setValue(interactor.getVideo(position))
+    }
+
+    private fun removeVideoFromFav(position: Int){
+        userFav?.child(getVideoName(position))?.removeValue()
+        notifyDataSetChanged()
+    }
+
+    private fun getVideoName(position: Int): String{
+        val name: String
+        val id = interactor.getVideo(position)!!.id
+        name = when {
+            id < 10 -> "video00$id"
+            id < 100 -> "video0$id"
+            else -> "video$id"
+        }
+        return name
+    }
+
+    /** Views **/
+
+    private fun loadList(holder: MyViewHolder, position: Int){
+        holder.bFav?.isChecked = false
+        userFav?.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    val video = snapshot.getValue(VideoModel::class.java)
+                    val name = context?.resources?.getIdentifier(video!!.name, "string", context?.packageName)
+                    if (holder.text?.text.toString() == context?.resources?.getString(name!!)) {
+                        holder.bFav?.isChecked = true
+                    }
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                Toast.makeText(context, databaseError.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        // Fav button
+        holder.bFav?.setEventListener(object : SparkEventListener {
+            override fun onEvent(button: ImageView, buttonState: Boolean) {
+                if (buttonState) { //active
+                    Toast.makeText(context, "Añadido a favoritos", Toast.LENGTH_SHORT).show()
+                    addVideoToFav(position)
+                } else { //inactive
+                    Toast.makeText(context, "Eliminado de favoritos", Toast.LENGTH_SHORT).show()
+                    removeVideoFromFav(position)
+                }
+            }
+            override fun onEventAnimationEnd(button: ImageView, buttonState: Boolean) {}
+            override fun onEventAnimationStart(button: ImageView, buttonState: Boolean) {}
+        })
+    }
+
+    private fun loadFavList(holder: MyViewHolder, position: Int){
+        holder.bFav?.isChecked = true
+        holder.bFav?.setEventListener(object : SparkEventListener {
+            override fun onEvent(button: ImageView, buttonState: Boolean) {
+                if (buttonState) { //active
+                    Toast.makeText(context, "Añadido a favoritos", Toast.LENGTH_SHORT).show()
+                    addVideoToFav(position)
+                } else { //inactive
+                    Toast.makeText(context, "Eliminado de favoritos", Toast.LENGTH_SHORT).show()
+                    removeVideoFromFav(position)
+                }
+            }
+            override fun onEventAnimationEnd(button: ImageView, buttonState: Boolean) {}
+            override fun onEventAnimationStart(button: ImageView, buttonState: Boolean) {}
+        })
+    }
+
+
+    /** Functions **/
+
+    private fun setColorTags(holder: MyViewHolder, position: Int) {
+        when {
+            array[position].tag == "Animals" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_orange)
+            array[position].tag == "Films" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_blue)
+            array[position].tag == "Space" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_pink)
+            array[position].tag == "Natur" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_green)
+            array[position].tag == "Music" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_cyan)
+            array[position].tag == "Figures" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_yellow)
+            array[position].tag == "Others" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_purple)
+        }
+    }
+
+    fun setFilter(newList: ArrayList<VideoModel>) {
+        array = ArrayList()
+        array.addAll(newList)
+        notifyDataSetChanged()
+    }
+
+    fun closeLastSwipeLayout(){
+        lastSwipeLayout?.close(true)
+    }
+
+    /*
+    private fun animOut(holder: MyViewHolder) {
+        val translationX: Float
+        translationX = (if (holder.swipe_layout.getTranslationX() == 0f) holder.swipe_layout.getWidth() else 0).toFloat()
+        holder.swipe_layout.animate().translationX(-translationX).start()
+    }
+    */
+
+
+    /** Holder Class **/
+
+    class MyViewHolder(itemView: View, viewType: Int): RecyclerView.ViewHolder(itemView) {
+
+        // View types
+        val VIEW_TYPE_LIST = 1
+        val VIEW_TYPE_BOX = 2
+        val VIEW_TYPE_LIST_FAV = 3
+        val VIEW_TYPE_BOX_FAV = 4
+
+        var image: ImageView? = null
+        var tag: ImageView? = null
+        var shieldFav: ImageView? = null
+        var shieldHide: ImageView? = null
+        var text: TextView? = null
+        var button: Button? = null
+        var type: Int = 0
+        var swipeLayout: SwipeRevealLayout? = null
+        var bFav: SparkButton? = null
+        var bHide:SparkButton? = null
+
+        init {
+            when (viewType) {
+                VIEW_TYPE_LIST -> {
+                    showListView()
+                }
+                VIEW_TYPE_BOX -> {
+                    showBoxView()
+                }
+                VIEW_TYPE_LIST_FAV -> {
+                    showListFavView()
+                }
+                VIEW_TYPE_BOX_FAV -> {
+                    showBoxFavView()
+                }
+            }
+        }
+
+        private fun showListView(){
+            image = itemView.findViewById(R.id.image_big) as ImageView
+            text = itemView.findViewById(R.id.title_big) as TextView
+            button = itemView.findViewById(R.id.button_big) as Button
+            bFav = itemView.findViewById(R.id.button_fav_big)
+            shieldFav = itemView.findViewById(R.id.button_fav_big_copy) as ImageView
+            tag = itemView.findViewById(R.id.iv_tag) as ImageView
+            swipeLayout = itemView.findViewById(R.id.swipe_layout_big) as SwipeRevealLayout
+            type = 1
+        }
+
+        private fun showBoxView(){
+            image = itemView.findViewById(R.id.image_small) as ImageView
+            text = itemView.findViewById(R.id.title_small) as TextView
+            button = itemView.findViewById(R.id.button_small) as Button
+            bFav = itemView.findViewById(R.id.button_fav_small)
+            bHide = itemView.findViewById(R.id.button_hide_small)
+            shieldFav = itemView.findViewById(R.id.ivShieldFavBox) as ImageView
+            shieldHide = itemView.findViewById(R.id.ivShieldHideBox) as ImageView
+            type = 2
+        }
+
+        private fun showListFavView(){
+            image = itemView.findViewById(R.id.image_list_fav) as ImageView
+            text = itemView.findViewById(R.id.title_list_fav) as TextView
+            button = itemView.findViewById(R.id.button_list_fav) as Button
+            bFav = itemView.findViewById(R.id.button_fav_list)
+            tag = itemView.findViewById(R.id.iv_tag_fav) as ImageView
+            swipeLayout = itemView.findViewById(R.id.swipe_layout_list_fav) as SwipeRevealLayout
+            type = 3
+        }
+
+        private fun showBoxFavView(){
+            image = itemView.findViewById(R.id.image_small) as ImageView
+            text = itemView.findViewById(R.id.title_small) as TextView
+            button = itemView.findViewById(R.id.button_small) as Button
+            bFav = itemView.findViewById(R.id.button_fav_small)
+            type = 4
+        }
+    }
+}
