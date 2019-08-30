@@ -5,7 +5,6 @@ import android.view.View
 import com.sergioloc.hologram.Adapter.RecyclerAdapter
 import com.sergioloc.hologram.Interactor.ListInteractorImpl
 import com.sergioloc.hologram.Interfaces.ListInterface
-import com.sergioloc.hologram.Models.VideoModel
 
 class ListPresenterImpl(var view: ListInterface.View, var myView: View, var guest: Boolean, var context: Context): ListInterface.Presenter {
 
@@ -27,9 +26,26 @@ class ListPresenterImpl(var view: ListInterface.View, var myView: View, var gues
         interactor?.closeSwipe()
     }
 
+    override fun startLoadingFavList() {
+        view.showLoading()
+    }
+
+    override fun finishLoadingFavList() {
+        view.hideLoading()
+    }
+
     override fun listLoaded(size: Int) {
-        //view.stopConnectionError()
+        view.hideConnectionError()
         view.changeCountText(size)
+        view.hideLoading()
+    }
+
+    override fun errorLoadingList(message: String) {
+        view.showFirebaseError(message)
+    }
+
+    override fun errorConnection() {
+        view.showConnectionError()
     }
 
     fun callAdapter(): RecyclerAdapter{
@@ -57,15 +73,12 @@ class ListPresenterImpl(var view: ListInterface.View, var myView: View, var gues
         listLoaded(interactor?.mergeTags?.size!!)
     }
 
-    override fun callListUpdate(fav: Boolean) {
-        if (!fav){
-            interactor?.updateActualList()
-        }
+    override fun callListUpdate() {
+        interactor?.updateActualList()
     }
 
     override fun callSearchInFav(text: String) {
         interactor?.searchInFav(text)
-
     }
 
     override fun callSearchInFull(text: String) {

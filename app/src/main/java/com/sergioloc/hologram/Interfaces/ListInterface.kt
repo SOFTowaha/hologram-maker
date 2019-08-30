@@ -5,9 +5,9 @@ import com.sergioloc.hologram.Models.VideoModel
 interface ListInterface {
 
     interface View {
-        fun setTitle()
+        fun initVariables()
         fun showConnectionError()
-        fun stopConnectionError()
+        fun hideConnectionError()
         fun changeCountText(number: Int)
         fun initFb()
         fun initRecyclerView()
@@ -16,18 +16,25 @@ interface ListInterface {
         fun areAllChipsSelected(): Boolean
         fun movePanel(open: Boolean)
         fun switchArrow()
+        fun showLoading()
+        fun hideLoading()
+        fun showFirebaseError(message: String)
     }
 
     interface Presenter {
         fun callInitFirebaseList()
         fun listLoaded(size: Int)
         fun callTagList(tag1: Boolean, tag2: Boolean, tag3: Boolean, tag4: Boolean, tag5: Boolean, tag6: Boolean, tag7: Boolean)
-        fun callListUpdate(fav: Boolean)
+        fun callListUpdate()
         fun callSearchInFav(text: String)
         fun callSearchInFull(text: String)
         fun callSearchInMerge(text: String)
         fun callFavList()
         fun callCloseSwipe()
+        fun startLoadingFavList()
+        fun finishLoadingFavList()
+        fun errorLoadingList(message: String)
+        fun errorConnection()
     }
 
     interface Interactor {
@@ -41,6 +48,7 @@ interface ListInterface {
         fun loadFavList()
         fun getVideo(position: Int): VideoModel?
         fun closeSwipe()
+        fun removeItem(position: Int)
     }
 
 }

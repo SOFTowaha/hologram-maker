@@ -13,6 +13,8 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.*
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.getbase.floatingactionbutton.FloatingActionButton
@@ -33,14 +35,11 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
     private var myView: View? = null
     private var myContext: Context? = null
     private var presenter: ListPresenterImpl? = null
-
     private var fbMenu: FloatingActionsMenu? = null
     private var fbFav: FloatingActionButton? = null
     private var fbSettings: FloatingActionButton? = null
-
     private var recyclerView: RecyclerView? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
-
     private var tagSelected: Boolean = false
     private var tagsOpen:Boolean = false
     private var arrowDown:Boolean = false
@@ -63,15 +62,20 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
     private var chip7: ChipView? = null
     private var controlsHandle: View? = null
     private var blackSpace: TextView? = null
-
     private var favSelected: Boolean = false
-    //endregion
+    private var loading: ProgressBar? = null
+    private var ivNoConnection: ImageView? = null
+    private var tvNoConnection: TextView? = null
 
+    //endregion
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         myView = inflater.inflate(R.layout.fragment_list, container, false)
         setHasOptionsMenu(true)
-        setTitle()
+
+        initVariables()
+        showLoading()
+
         presenter = ListPresenterImpl(this, myView!!, guest, myContext!!)
         initRecyclerView()
 
@@ -83,23 +87,42 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
         return myView
     }
 
-    override fun setTitle() {
+    override fun initVariables(){
         val activity = activity as AppCompatActivity?
         myContext = activity?.applicationContext
         activity?.title = "Catalog"
-    }
-    override fun showConnectionError() {
-        ivNoConnection.visibility = View.VISIBLE
-        tvNoConnection.visibility = View.VISIBLE
+        loading = myView?.findViewById(R.id.loading) as ProgressBar
+        ivNoConnection = myView?.findViewById(R.id.ivNoConnection) as ImageView
+        tvNoConnection = myView?.findViewById(R.id.tvNoConnection) as TextView
     }
 
-    override fun stopConnectionError() {
-        ivNoConnection.visibility = View.GONE
-        tvNoConnection.visibility = View.GONE
+    override fun showConnectionError() {
+        loading?.visibility = View.INVISIBLE
+        ivNoConnection?.visibility = View.VISIBLE
+        tvNoConnection?.visibility = View.VISIBLE
+    }
+
+    override fun hideConnectionError() {
+        ivNoConnection?.visibility = View.GONE
+        tvNoConnection?.visibility = View.GONE
     }
 
     override fun changeCountText(number: Int) {
         tvCount.text =  "$number videos"
+    }
+
+    override fun showLoading() {
+        loading?.visibility = View.VISIBLE
+        recyclerView?.visibility = View.INVISIBLE
+    }
+
+    override fun hideLoading() {
+        loading?.visibility = View.INVISIBLE
+        recyclerView?.visibility = View.VISIBLE
+    }
+
+    override fun showFirebaseError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun initRecyclerView(){
@@ -118,7 +141,7 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
         fbMenu?.scaleY = 1f
 
 
-        /**Hide FAB on Scroll**/
+        //Hide FAB on Scroll
         recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -333,6 +356,74 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
         return false
     }
 
+    override fun onClick(v: View) {
+        tagSelected = true
+        var allButtonSelected = false
+        when (v.id) {
+            R.id.chip0 -> if (chip0IsChecked) {
+                deselectChip(0)
+            } else {
+                selectChip(0)
+                deselectChip(1)
+                deselectChip(2)
+                deselectChip(3)
+                deselectChip(4)
+                deselectChip(5)
+                deselectChip(6)
+                deselectChip(7)
+                allButtonSelected = true
+            }
+            R.id.chip1 -> if (chip1IsChecked) {
+                deselectChip(1)
+            } else {
+                selectChip(1)
+            }
+            R.id.chip2 -> if (chip2IsChecked) {
+                deselectChip(2)
+            } else {
+                selectChip(2)
+            }
+            R.id.chip3 -> if (chip3IsChecked) {
+                deselectChip(3)
+            } else {
+                selectChip(3)
+            }
+            R.id.chip4 -> if (chip4IsChecked) {
+                deselectChip(4)
+            } else {
+                selectChip(4)
+            }
+            R.id.chip5 -> if (chip5IsChecked) {
+                deselectChip(5)
+            } else {
+                selectChip(5)
+            }
+            R.id.chip6 -> if (chip6IsChecked) {
+                deselectChip(6)
+            } else {
+                selectChip(6)
+            }
+            R.id.chip7 -> if (chip7IsChecked) {
+                deselectChip(7)
+            } else {
+                selectChip(7)
+            }
+        }
+        if (chip1IsChecked || chip2IsChecked || chip3IsChecked || chip4IsChecked || chip5IsChecked
+                || chip6IsChecked || chip7IsChecked) {
+            chip0IsChecked = false
+            deselectChip(0)
+        }
+
+        if (areAllChipsSelected() || allButtonSelected) {
+            presenter?.callListUpdate()
+        }
+        else {
+            presenter?.callTagList(chip1IsChecked, chip2IsChecked, chip3IsChecked, chip4IsChecked, chip5IsChecked, chip6IsChecked, chip7IsChecked)
+        }
+
+    }
+
     //endregion
 
     override fun movePanel(open: Boolean) {
@@ -399,78 +490,6 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
         }
     }
 
-    override fun onClick(v: View) {
-        tagSelected = true
-        var allButtonSelected = false
-        when (v.id) {
-            R.id.chip0 -> if (chip0IsChecked) {
-                deselectChip(0)
-            } else {
-                selectChip(0)
-                deselectChip(1)
-                deselectChip(2)
-                deselectChip(3)
-                deselectChip(4)
-                deselectChip(5)
-                deselectChip(6)
-                deselectChip(7)
-                allButtonSelected = true
-            }
-            R.id.chip1 -> if (chip1IsChecked) {
-                deselectChip(1)
-            } else {
-                selectChip(1)
-            }
-            R.id.chip2 -> if (chip2IsChecked) {
-                deselectChip(2)
-            } else {
-                selectChip(2)
-            }
-            R.id.chip3 -> if (chip3IsChecked) {
-                deselectChip(3)
-            } else {
-                selectChip(3)
-            }
-            R.id.chip4 -> if (chip4IsChecked) {
-                deselectChip(4)
-            } else {
-                selectChip(4)
-            }
-            R.id.chip5 -> if (chip5IsChecked) {
-                deselectChip(5)
-            } else {
-                selectChip(5)
-            }
-            R.id.chip6 -> if (chip6IsChecked) {
-                deselectChip(6)
-            } else {
-                selectChip(6)
-            }
-            R.id.chip7 -> if (chip7IsChecked) {
-                deselectChip(7)
-            } else {
-                selectChip(7)
-            }
-        }
-        if (chip1IsChecked || chip2IsChecked || chip3IsChecked || chip4IsChecked || chip5IsChecked
-                || chip6IsChecked || chip7IsChecked) {
-            chip0IsChecked = false
-            deselectChip(0)
-        }
-
-        if (areAllChipsSelected() || allButtonSelected) {
-            if (favSelected){
-                presenter?.callListUpdate(true)
-            }
-            else {
-                presenter?.callListUpdate(false)
-            }
-        }
-        else {
-            presenter?.callTagList(chip1IsChecked, chip2IsChecked, chip3IsChecked, chip4IsChecked, chip5IsChecked, chip6IsChecked, chip7IsChecked)
-        }
-
-    }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         fbMenu?.visibility = View.VISIBLE

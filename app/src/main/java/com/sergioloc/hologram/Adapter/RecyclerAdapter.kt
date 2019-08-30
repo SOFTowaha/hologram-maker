@@ -2,6 +2,7 @@ package com.sergioloc.hologram.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -22,14 +23,12 @@ import com.varunest.sparkbutton.SparkEventListener
 import java.util.ArrayList
 
 class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridLayoutManager, var guest: Boolean,
-                      var interactor: ListInterface.Interactor):
+                      var interactor: ListInterface.Interactor, var presenter: ListInterface.Presenter):
         RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
     var fav_list: ArrayList<VideoModel>? = null
     var fav_id: ArrayList<Int>? = null
 
-    val SPAN_COUNT_ONE = 1
-    val SPAN_COUNT_THREE = 3
     var FAV_LIST = false
     var lastSwipeLayout: SwipeRevealLayout? = null
 
@@ -40,28 +39,18 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
 
     // View types
     private val VIEW_TYPE_LIST = 1
-    private val VIEW_TYPE_BOX = 2
     private val VIEW_TYPE_LIST_FAV = 3
-    private val VIEW_TYPE_BOX_FAV = 4
 
     private var context: Context? = null
 
 
     override fun getItemViewType(position: Int): Int {
-        val spanCount = layoutManager.spanCount
-        return if (spanCount == SPAN_COUNT_ONE) {
-            if (FAV_LIST) {
+        return if (FAV_LIST) {
                 VIEW_TYPE_LIST_FAV
             } else {
                 VIEW_TYPE_LIST
             }
-        } else {
-            if (FAV_LIST) {
-                VIEW_TYPE_BOX_FAV
-            } else {
-                VIEW_TYPE_BOX
-            }
-        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -69,9 +58,7 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
             initFirebase()
         val view: View = when (viewType) {
             VIEW_TYPE_LIST -> LayoutInflater.from(parent.context).inflate(R.layout.card_video, parent, false)
-            VIEW_TYPE_BOX -> LayoutInflater.from(parent.context).inflate(R.layout.card_video_box, parent, false)
-            VIEW_TYPE_LIST_FAV -> LayoutInflater.from(parent.context).inflate(R.layout.card_video_fav, parent, false)
-            else -> LayoutInflater.from(parent.context).inflate(R.layout.card_video_box_fav, parent, false)
+            else -> LayoutInflater.from(parent.context).inflate(R.layout.card_video_fav, parent, false)
         }
         context = view.context
         fav_list = ArrayList()
@@ -92,31 +79,29 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
             holder.shieldHide?.setOnClickListener { Toast.makeText(context, "Debes estar registrado para ocultar", Toast.LENGTH_SHORT).show() }
         }
         else{ //User
-            if (holder.type == VIEW_TYPE_LIST || holder.type == VIEW_TYPE_BOX) {
+            if (holder.type == VIEW_TYPE_LIST) {
                 loadList(holder, position)
             } else {
                 loadFavList(holder, position)
             }
         }
 
-        if (holder.type == VIEW_TYPE_LIST || holder.type == VIEW_TYPE_LIST_FAV) {
-            setColorTags(holder, position)
-            holder.swipeLayout?.close(true)
-            holder.swipeLayout?.setSwipeListener(object : SwipeRevealLayout.SwipeListener {
-                override fun onClosed(view: SwipeRevealLayout) {}
+        setColorTags(holder, position)
+        holder.swipeLayout?.close(true)
+        holder.swipeLayout?.setSwipeListener(object : SwipeRevealLayout.SwipeListener {
+            override fun onClosed(view: SwipeRevealLayout) {}
 
-                override fun onOpened(view: SwipeRevealLayout) {
-                    if (lastSwipeLayout == null) {
-                        lastSwipeLayout = holder.swipeLayout
-                    } else {
-                        lastSwipeLayout?.close(true)
-                        lastSwipeLayout = holder.swipeLayout
-                    }
+            override fun onOpened(view: SwipeRevealLayout) {
+                if (lastSwipeLayout == null) {
+                    lastSwipeLayout = holder.swipeLayout
+                } else {
+                    lastSwipeLayout?.close(true)
+                    lastSwipeLayout = holder.swipeLayout
                 }
+            }
 
-                override fun onSlide(view: SwipeRevealLayout, slideOffset: Float) {}
-            })
-        }
+            override fun onSlide(view: SwipeRevealLayout, slideOffset: Float) {}
+        })
 
         holder.button?.setOnClickListener { v ->
             val i = Intent(v.context, PlayerActivity::class.java)
@@ -141,8 +126,15 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
     }
 
     private fun removeVideoFromFav(position: Int){
+        presenter?.startLoadingFavList()
         userFav?.child(getVideoName(position))?.removeValue()
-        notifyDataSetChanged()
+        Handler().postDelayed(
+                {
+                    interactor?.loadFavList()
+                    Handler().postDelayed({ presenter?.finishLoadingFavList() }, 20)
+                },
+                20
+        )
     }
 
     private fun getVideoName(position: Int): String{
@@ -248,9 +240,7 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
 
         // View types
         val VIEW_TYPE_LIST = 1
-        val VIEW_TYPE_BOX = 2
         val VIEW_TYPE_LIST_FAV = 3
-        val VIEW_TYPE_BOX_FAV = 4
 
         var image: ImageView? = null
         var tag: ImageView? = null
@@ -261,21 +251,14 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
         var type: Int = 0
         var swipeLayout: SwipeRevealLayout? = null
         var bFav: SparkButton? = null
-        var bHide:SparkButton? = null
 
         init {
             when (viewType) {
                 VIEW_TYPE_LIST -> {
                     showListView()
                 }
-                VIEW_TYPE_BOX -> {
-                    showBoxView()
-                }
                 VIEW_TYPE_LIST_FAV -> {
                     showListFavView()
-                }
-                VIEW_TYPE_BOX_FAV -> {
-                    showBoxFavView()
                 }
             }
         }
@@ -290,18 +273,6 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
             swipeLayout = itemView.findViewById(R.id.swipe_layout_big) as SwipeRevealLayout
             type = 1
         }
-
-        private fun showBoxView(){
-            image = itemView.findViewById(R.id.image_small) as ImageView
-            text = itemView.findViewById(R.id.title_small) as TextView
-            button = itemView.findViewById(R.id.button_small) as Button
-            bFav = itemView.findViewById(R.id.button_fav_small)
-            bHide = itemView.findViewById(R.id.button_hide_small)
-            shieldFav = itemView.findViewById(R.id.ivShieldFavBox) as ImageView
-            shieldHide = itemView.findViewById(R.id.ivShieldHideBox) as ImageView
-            type = 2
-        }
-
         private fun showListFavView(){
             image = itemView.findViewById(R.id.image_list_fav) as ImageView
             text = itemView.findViewById(R.id.title_list_fav) as TextView
@@ -310,14 +281,6 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
             tag = itemView.findViewById(R.id.iv_tag_fav) as ImageView
             swipeLayout = itemView.findViewById(R.id.swipe_layout_list_fav) as SwipeRevealLayout
             type = 3
-        }
-
-        private fun showBoxFavView(){
-            image = itemView.findViewById(R.id.image_small) as ImageView
-            text = itemView.findViewById(R.id.title_small) as TextView
-            button = itemView.findViewById(R.id.button_small) as Button
-            bFav = itemView.findViewById(R.id.button_fav_small)
-            type = 4
         }
     }
 }

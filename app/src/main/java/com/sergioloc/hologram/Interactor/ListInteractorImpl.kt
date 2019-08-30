@@ -1,14 +1,9 @@
 package com.sergioloc.hologram.Interactor
 
 import android.content.Context
-import android.support.design.widget.FloatingActionButton
+import android.os.Handler
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -16,7 +11,6 @@ import com.sergioloc.hologram.Adapter.RecyclerAdapter
 import com.sergioloc.hologram.Interfaces.ListInterface
 import com.sergioloc.hologram.Models.VideoModel
 import com.sergioloc.hologram.Presenters.ListPresenterImpl
-import com.sergioloc.hologram.R
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -48,7 +42,12 @@ class ListInteractorImpl(var presenter: ListPresenterImpl, var guest: Boolean, v
         database = FirebaseDatabase.getInstance()
         actualList = ArrayList()
         gridLayoutManager = GridLayoutManager(context, 1)
-        adapter = RecyclerAdapter(actualList!!, gridLayoutManager!!, guest, this)
+        adapter = RecyclerAdapter(actualList!!, gridLayoutManager!!, guest, this, presenter)
+        Handler().postDelayed({
+            if (actualList?.size == 0)
+                presenter?.errorConnection()
+
+        }, 5000)
     }
 
     override fun initFirebaseList() {
@@ -58,21 +57,18 @@ class ListInteractorImpl(var presenter: ListPresenterImpl, var guest: Boolean, v
         ref?.keepSynced(true)
         ref?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                 for (snapshot in dataSnapshot.children) {
                     val video = snapshot.getValue(VideoModel::class.java)
                     videosList?.add(video!!)
                 }
-
                 orderListByName(videosList!!)
                 actualList?.addAll(videosList!!)
                 adapter?.setFilter(actualList!!)
                 presenter.listLoaded(actualList!!.size)
                 setTagsList()
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
-                //Toast.makeText(context, databaseError.message, Toast.LENGTH_SHORT).show()
+                presenter?.errorLoadingList(databaseError.message)
             }
         })
     }
@@ -88,18 +84,15 @@ class ListInteractorImpl(var presenter: ListPresenterImpl, var guest: Boolean, v
                     val video = snapshot.getValue(VideoModel::class.java)
                     videosList?.add(video!!)
                 }
-
                 orderListByName(videosList!!)
                 actualList?.addAll(videosList!!)
                 adapter?.setFilter(actualList!!)
                 adapter?.notifyDataSetChanged()
                 presenter.listLoaded(actualList!!.size)
                 setTagsList()
-
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
-                //Toast.makeText(context, databaseError.message, Toast.LENGTH_SHORT).show()
+                presenter?.errorLoadingList(databaseError.message)
             }
         })
     }
@@ -213,6 +206,13 @@ class ListInteractorImpl(var presenter: ListPresenterImpl, var guest: Boolean, v
 
     override fun getVideo(position: Int): VideoModel? {
         return actualList?.let { it[position] }
+    }
+
+    override fun removeItem(position: Int) {
+        adapter?.setFilter(actualList!!)
+        adapter?.notifyDataSetChanged()
+        presenter.listLoaded(actualList!!.size)
+        setTagsList()
     }
 
     fun updateMergeList(){
