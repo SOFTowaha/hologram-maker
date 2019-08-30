@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.bumptech.glide.Glide
 import com.sergioloc.hologram.Interfaces.ImageInterface
 import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.activity_show_loaded.*
@@ -43,10 +44,21 @@ class ImageActivity: AppCompatActivity(), ImageInterface.View {
         toolbarVisible = false
         mHideHandler = Handler()
 
-        iv_picture1.setImageURI(imageUri)
-        iv_picture2.setImageURI(imageUri)
-        iv_picture3.setImageURI(imageUri)
-        iv_picture4.setImageURI(imageUri)
+        Glide.with(this)
+                .load(imageUri)
+                .into(iv_picture1)
+
+        Glide.with(this)
+                .load(imageUri)
+                .into(iv_picture2)
+
+        Glide.with(this)
+                .load(imageUri)
+                .into(iv_picture3)
+
+        Glide.with(this)
+                .load(imageUri)
+                .into(iv_picture4)
 
         fullscreen_content.setOnClickListener {
             if (toolbarVisible!!) {

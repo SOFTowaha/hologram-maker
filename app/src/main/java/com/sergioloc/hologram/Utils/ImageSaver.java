@@ -57,6 +57,12 @@ public class ImageSaver {
         return null;
     }
 
+    public void delete() {
+        File directory = context.getDir(directoryName, Context.MODE_PRIVATE);
+        File f = new File(directory, fileName);
+        f.delete();
+    }
+
     @NonNull
     private File createFile() {
         File directory;

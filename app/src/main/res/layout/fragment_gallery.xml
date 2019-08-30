@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/fondo7">
 
     <TextView
@@ -64,19 +63,12 @@
 
     </RelativeLayout>
 
-    <com.tuyenmonkey.mkloader.MKLoader
-        android:id="@+id/loader"
+    <ProgressBar
+        android:id="@+id/loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/rvImages"
-        android:layout_alignBottom="@id/rvImages"
-        android:layout_alignStart="@id/rvImages"
-        android:layout_alignEnd="@id/rvImages"
-        android:scaleY="0.2"
-        android:scaleX="0.2"
-        app:mk_type="Whirlpool"
-        app:mk_color="@color/colorPrimary"
-        android:background="@color/colorWhite"
-        android:visibility="gone"/>
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:indeterminate="true" />
 
 </RelativeLayout>

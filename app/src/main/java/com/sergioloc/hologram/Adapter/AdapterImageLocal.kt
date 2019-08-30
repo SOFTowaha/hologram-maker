@@ -16,18 +16,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.sergioloc.hologram.Dialogs.DialogImageDetail
+import com.sergioloc.hologram.Interfaces.GalleryInterface
 import com.sergioloc.hologram.R
 import java.io.ByteArrayOutputStream
 import java.util.ArrayList
 
-class AdapterImageLocal(var localList: ArrayList<Bitmap>, var context: Context): RecyclerView.Adapter<AdapterImageLocal.MyViewHolder>() {
+class AdapterImageLocal(var localList: ArrayList<Bitmap>, var context: Context,
+                        var interactor: GalleryInterface.Interactor): RecyclerView.Adapter<AdapterImageLocal.MyViewHolder>() {
 
     private var dialog: DialogImageDetail? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
         var view = LayoutInflater.from(parent.context).inflate(R.layout.card_image, parent, false)
-        dialog = DialogImageDetail(context)
+        dialog = DialogImageDetail(context, false, interactor)
 
         return MyViewHolder(view)
     }
@@ -40,7 +42,8 @@ class AdapterImageLocal(var localList: ArrayList<Bitmap>, var context: Context):
         holder.image.setOnClickListener {
             var image = getImageUri(context, localList[position])
             image?.let {
-                dialog?.startDialog(it)
+                dialog?.position = position
+                dialog?.startDialog(it, "")
             }
 
         }

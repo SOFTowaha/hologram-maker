@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.ConnectivityManager
+import android.os.Handler
 import com.sergioloc.hologram.Adapter.AdapterImageCloud
 import com.sergioloc.hologram.Adapter.AdapterImageLocal
 import com.sergioloc.hologram.Interactor.GalleryInteractorImpl
@@ -58,9 +59,16 @@ class GalleryPresenterImpl(var view: GalleryInterface.View, var context: Context
     }
 
     override fun callSaveCloudImage(name: String) {
+        view?.showLoading()
         interactor.uploadImageToDatabase(name)
         interactor.uploadImageToStorage(name)
-        interactor.loadFromFirebase()
+        Handler().postDelayed({
+            interactor.loadFromFirebase()
+        }, 4000)
+    }
+
+    override fun callHideLoading() {
+        view?.hideLoading()
     }
 
     override fun callDialog(bitmap: Bitmap){

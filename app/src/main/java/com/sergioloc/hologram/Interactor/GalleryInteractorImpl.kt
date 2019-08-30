@@ -45,7 +45,6 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
         //Prefrences
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
         editor = prefs?.edit()
-        localListSize = prefs!!.getInt("localListSize", 0)
         //Firebase
         database = FirebaseDatabase.getInstance()
         user = FirebaseAuth.getInstance().currentUser
@@ -54,12 +53,13 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
     }
 
     override fun loadFromInternalStorage() {
+        localListSize = prefs!!.getInt("localListSize", 0)
         localList = ArrayList()
         for (i in 0 until localListSize) {
             val bitmap = ImageSaver(context).setFileName("$i.png").setDirectoryName("images").load()
             localList!!.add(bitmap)
         }
-        adapterImageLocal = AdapterImageLocal(localList!!, context)
+        adapterImageLocal = AdapterImageLocal(localList!!, context, this)
         presenter.localListUpdated(adapterImageLocal!!)
     }
 
@@ -74,15 +74,29 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
     }
 
     override fun uploadImageToDatabase(name: String) {
-        images?.push()?.setValue(name)
+        images?.child(name)?.setValue(name)
+    }
+
+    override fun deleteImageFromDatabase(name: String) {
+        images?.child(name)?.removeValue()
     }
 
     override fun uploadImageToStorage(name: String) {
         if (filePath != null) {
             val ref = mStorage?.child("users/" + user?.uid + "/" + name)
             ref?.putFile(filePath!!)
-                    ?.addOnSuccessListener { Toast.makeText(context, "Uploaded", Toast.LENGTH_SHORT).show() }
+                    ?.addOnSuccessListener {
+                        Toast.makeText(context, "Uploaded", Toast.LENGTH_SHORT).show()
+                        presenter?.callHideLoading()
+                    }
                     ?.addOnFailureListener { e -> Toast.makeText(context, "Failed " + e.message, Toast.LENGTH_SHORT).show() }
+        }
+    }
+
+    override fun deleteImageFromStorage(name: String) {
+        if (filePath != null){
+            val ref = mStorage?.child("users/" + user?.uid + "/" + name)
+            ref?.delete()
         }
     }
 
@@ -103,13 +117,14 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
     }
 
     override fun loadFromFirebase() {
+        var inter = this
         images?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val listImages = ArrayList<String>()
                 for (snapshot in dataSnapshot.children) {
                     listImages.add(snapshot.value!!.toString())
                 }
-                adapterImageCloud = AdapterImageCloud(listImages,user!!,mStorage!!,context)
+                adapterImageCloud = AdapterImageCloud(listImages,user!!,mStorage!!,context, inter)
                 presenter.cloudListUpdated(adapterImageCloud!!)
             }
 

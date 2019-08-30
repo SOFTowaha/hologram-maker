@@ -33,6 +33,7 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
     private var button: ImageButton? = null
     private var presenter: GalleryPresenterImpl? = null
     private var dialog: DialogImageUpload? = null
+    private var loader: ProgressBar? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +64,7 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
         tvCloud = viewFragment?.findViewById(R.id.tvCloud)
         rvImg = viewFragment?.findViewById(R.id.rvImages)
         button = viewFragment?.findViewById(R.id.bAddImage)
+        loader = viewFragment?.findViewById(R.id.loading)
     }
 
     override fun showLocalListUpdated(adapterLocal: AdapterImageLocal){
@@ -77,7 +79,7 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
         rvImg?.setHasFixedSize(true)
         rvImg?.layoutManager = gridLayoutManager
         rvImg?.adapter = adapterCloud
-        stopLoading()
+        hideLoading()
     }
 
     override fun showLocalView() {
@@ -128,11 +130,11 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
     }
 
     override fun showLoading(){
-        loader.visibility = View.VISIBLE
+        loader?.visibility = View.VISIBLE
     }
 
-    override fun stopLoading(){
-        loader.visibility = View.GONE
+    override fun hideLoading(){
+        loader?.visibility = View.INVISIBLE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -18,7 +18,7 @@ interface GalleryInterface {
         fun showCloudListUpdated(adapterImageLocal: AdapterImageCloud)
         fun showDialog(bitmap: Bitmap, cloudView: Boolean)
         fun showLoading()
-        fun stopLoading()
+        fun hideLoading()
     }
 
     interface Presenter {
@@ -31,6 +31,7 @@ interface GalleryInterface {
         fun callDialog(bitmap: Bitmap)
         fun callSaveLocalImage(bitmap: Bitmap)
         fun callSaveCloudImage(name: String)
+        fun callHideLoading()
     }
 
     interface Interactor {
@@ -42,5 +43,7 @@ interface GalleryInterface {
         fun chooseImageFromGallery(fragment: Fragment)
         fun getImageFromGallery(requestCode: Int, resultCode: Int, data: Intent?)
         fun loadFromFirebase()
+        fun deleteImageFromDatabase(name: String)
+        fun deleteImageFromStorage(name: String)
     }
 }

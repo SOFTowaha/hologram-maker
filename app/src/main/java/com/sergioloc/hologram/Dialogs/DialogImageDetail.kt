@@ -3,34 +3,52 @@ package com.sergioloc.hologram.Dialogs
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.preference.PreferenceManager
+import android.support.v7.app.AlertDialog
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.sergioloc.hologram.Adapter.AdapterImageLocal
+import com.sergioloc.hologram.Interactor.GalleryInteractorImpl
+import com.sergioloc.hologram.Interfaces.GalleryInterface
 import com.sergioloc.hologram.R
+import com.sergioloc.hologram.Utils.ImageSaver
 import com.sergioloc.hologram.Views.ImageActivity
+import kotlinx.android.synthetic.main.dialog_image_details.*
+import java.text.FieldPosition
 
-class DialogImageDetail(context: Context) : Dialog(context) {
+class DialogImageDetail(context: Context, var firebase: Boolean, var interactor: GalleryInterface.Interactor) : Dialog(context) {
 
     private val ivDetail: ImageView
     private val ivPlay: ImageView
     private val ivClose: ImageView
     private var image: Uri? = null
+    private var name: String? = null
+    var position: Int? = null
+
+    private var prefs: SharedPreferences? = null
+    private var editor: SharedPreferences.Editor? = null
+    private var localListSize = 0
 
 
     init {
         setContentView(R.layout.dialog_image_details)
-
         ivDetail = findViewById(R.id.ivImage)
         ivPlay = findViewById(R.id.ivPlay)
         ivClose = findViewById(R.id.ivCose)
-
         buttons()
         window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+        prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        editor = prefs?.edit()
+        localListSize = prefs!!.getInt("localListSize", 0)
     }
 
-    fun startDialog(uri: Uri) {
+    fun startDialog(uri: Uri, n: String) {
         image = uri
+        name = n
         Glide.with(context)
                 .load(uri)
                 .into(ivDetail)
@@ -46,5 +64,36 @@ class DialogImageDetail(context: Context) : Dialog(context) {
             context.startActivity(i)
             dismiss()
         }
+
+        ivDelete.setOnClickListener {
+            val builder = AlertDialog.Builder(context)
+            builder.setTitle("Delete")
+            builder.setMessage("Are you sure?")
+            builder.setNegativeButton(android.R.string.no) { _, _ ->
+
+            }
+            builder.setPositiveButton(android.R.string.yes) { _, _ ->
+                if (firebase)
+                    deleteInFirebase()
+                else
+                    deleteInStorage()
+            }
+            builder.show()
+            dismiss()
+        }
+    }
+
+    private fun deleteInFirebase(){
+        interactor?.deleteImageFromDatabase(name!!)
+        interactor?.deleteImageFromStorage(name!!)
+    }
+
+    private fun deleteInStorage(){
+        ImageSaver(context).setFileName("$position.png").setDirectoryName("images").delete()
+        Toast.makeText(context, "Imagen eliminada", Toast.LENGTH_LONG).show()
+        localListSize--
+        editor?.putInt("localListSize", localListSize)
+        editor?.apply()
+        interactor?.loadFromInternalStorage()
     }
 }
