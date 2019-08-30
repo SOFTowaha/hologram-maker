@@ -1,7 +1,9 @@
 package com.sergioloc.hologram.Views
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
@@ -33,6 +35,10 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     private var imageH: ImageView? = null
     private var sesionH: Button? = null
 
+    private var prefs: SharedPreferences? = null
+    private var editor: SharedPreferences.Editor? = null
+    private var lastFragment: Int? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +46,8 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         (this as AppCompatActivity).setSupportActionBar(toolbar)
 
         guest = intent.extras.getBoolean("guest")
+        prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        editor = prefs?.edit()
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -57,6 +65,15 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         presenter?.let {
             it.checkUser()
         }
+
+        lastFragment = prefs!!.getInt("lastFragment", 0)
+        when (lastFragment) {
+            1 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, GalleryFragment(guest!!)).commit()
+            2 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, ListFrag(guest!!)).commit()
+            else -> supportFragmentManager.beginTransaction().replace(R.id.content_main, HomeFragment()).commit()
+        }
+
+
 
     }
 
@@ -85,8 +102,18 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         when (id){
             R.id.nav_home -> fragment = HomeFragment()
-            R.id.nav_gallery -> fragment = GalleryFragment(guest!!)
-            R.id.nav_list -> fragment = ListFrag(guest!!)
+            R.id.nav_gallery -> {
+                lastFragment = 1
+                editor?.putInt("lastFragment", lastFragment!!)
+                editor?.apply()
+                fragment = GalleryFragment(guest!!)
+            }
+            R.id.nav_list -> {
+                lastFragment = 2
+                editor?.putInt("lastFragment", lastFragment!!)
+                editor?.apply()
+                fragment = ListFrag(guest!!)
+            }
             R.id.nav_pyramid -> fragment = PyramidFragment()
             R.id.nav_close -> { fragment = HomeFragment()
                 FirebaseAuth.getInstance().signOut()

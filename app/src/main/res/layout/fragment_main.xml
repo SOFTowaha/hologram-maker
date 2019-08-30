@@ -8,11 +8,37 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
 
+    <ImageView
+        android:id="@+id/ivBorder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/card_accent"
+        android:layout_margin="25dp" />
+
+    <ImageView
+        android:id="@+id/ivBase"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/card_accent_2"
+        android:layout_margin="30dp" />
+
+    <ImageView
+        android:id="@+id/ivPlay"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ic_play"
+        android:layout_marginBottom="5dp"/>
+
     <TextView
+        android:id="@+id/tvDemo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Main"
-        android:gravity="center"
-        android:layout_centerInParent="true"/>
+        android:textColor="@color/colorWhite"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ivPlay"
+        android:textSize="18sp"
+        android:text="PLAY DEMO" />
+
 
 </RelativeLayout>
