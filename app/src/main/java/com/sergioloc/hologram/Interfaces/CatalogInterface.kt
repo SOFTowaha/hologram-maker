@@ -2,7 +2,7 @@ package com.sergioloc.hologram.Interfaces
 
 import com.sergioloc.hologram.Models.VideoModel
 
-interface ListInterface {
+interface CatalogInterface {
 
     interface View {
         fun initVariables()
@@ -25,7 +25,7 @@ interface ListInterface {
         fun callInitFirebaseList()
         fun listLoaded(size: Int)
         fun callTagList(tag1: Boolean, tag2: Boolean, tag3: Boolean, tag4: Boolean, tag5: Boolean, tag6: Boolean, tag7: Boolean)
-        fun callListUpdate()
+        fun callFullList()
         fun callSearchInFav(text: String)
         fun callSearchInFull(text: String)
         fun callSearchInMerge(text: String)

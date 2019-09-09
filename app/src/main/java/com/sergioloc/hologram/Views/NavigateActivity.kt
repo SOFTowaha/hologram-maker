@@ -8,7 +8,6 @@ import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v4.widget.DrawerLayout.DrawerListener
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -71,7 +70,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         lastFragment = prefs!!.getInt("lastFragment", 0)
         when (lastFragment) {
             1 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, GalleryFragment(guest!!)).commit()
-            2 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, ListFrag(guest!!)).commit()
+            2 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, CatalogFragment(guest!!)).commit()
             else -> supportFragmentManager.beginTransaction().replace(R.id.content_main, HomeFragment()).commit()
         }
 
@@ -128,7 +127,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
                 lastFragment = 2
                 editor?.putInt("lastFragment", lastFragment!!)
                 editor?.apply()
-                fragmentToNavigate = ListFrag(guest!!)
+                fragmentToNavigate = CatalogFragment(guest!!)
             }
             R.id.nav_pyramid -> fragmentToNavigate = PyramidFragment()
             R.id.nav_close -> { fragmentToNavigate = HomeFragment()

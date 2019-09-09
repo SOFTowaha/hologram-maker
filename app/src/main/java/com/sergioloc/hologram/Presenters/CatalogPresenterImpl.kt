@@ -3,15 +3,15 @@ package com.sergioloc.hologram.Presenters
 import android.content.Context
 import android.view.View
 import com.sergioloc.hologram.Adapter.RecyclerAdapter
-import com.sergioloc.hologram.Interactor.ListInteractorImpl
-import com.sergioloc.hologram.Interfaces.ListInterface
+import com.sergioloc.hologram.Interactor.CatalogInteractorImpl
+import com.sergioloc.hologram.Interfaces.CatalogInterface
 
-class ListPresenterImpl(var view: ListInterface.View, var myView: View, var guest: Boolean, var context: Context): ListInterface.Presenter {
+class CatalogPresenterImpl(var view: CatalogInterface.View, var myView: View, var guest: Boolean, var context: Context): CatalogInterface.Presenter {
 
-    private var interactor: ListInteractorImpl? = null
+    private var interactor: CatalogInteractorImpl? = null
 
     init {
-        interactor = ListInteractorImpl(this, guest, myView, context)
+        interactor = CatalogInteractorImpl(this, guest, myView, context)
     }
 
     override fun callInitFirebaseList() {
@@ -73,7 +73,7 @@ class ListPresenterImpl(var view: ListInterface.View, var myView: View, var gues
         listLoaded(interactor?.mergeTags?.size!!)
     }
 
-    override fun callListUpdate() {
+    override fun callFullList() {
         interactor?.updateActualList()
     }
 

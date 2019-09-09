@@ -3,7 +3,6 @@ package com.sergioloc.hologram.Adapter
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
-import android.support.design.widget.Snackbar
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -14,7 +13,7 @@ import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.sergioloc.hologram.Interfaces.ListInterface
+import com.sergioloc.hologram.Interfaces.CatalogInterface
 import com.sergioloc.hologram.Models.VideoModel
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.Views.PlayerActivity
@@ -23,7 +22,7 @@ import com.varunest.sparkbutton.SparkEventListener
 import java.util.ArrayList
 
 class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridLayoutManager, var guest: Boolean,
-                      var interactor: ListInterface.Interactor, var presenter: ListInterface.Presenter):
+                      var interactor: CatalogInterface.Interactor, var presenter: CatalogInterface.Presenter):
         RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
     var fav_list: ArrayList<VideoModel>? = null

@@ -8,13 +8,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.sergioloc.hologram.Adapter.RecyclerAdapter
-import com.sergioloc.hologram.Interfaces.ListInterface
+import com.sergioloc.hologram.Interfaces.CatalogInterface
 import com.sergioloc.hologram.Models.VideoModel
-import com.sergioloc.hologram.Presenters.ListPresenterImpl
+import com.sergioloc.hologram.Presenters.CatalogPresenterImpl
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ListInteractorImpl(var presenter: ListPresenterImpl, var guest: Boolean, var view: View, var context: Context): ListInterface.Interactor {
+class CatalogInteractorImpl(var presenter: CatalogPresenterImpl, var guest: Boolean, var view: View, var context: Context): CatalogInterface.Interactor {
 
     //Firebase
     private var database: FirebaseDatabase? = null

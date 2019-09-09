@@ -19,20 +19,20 @@ import android.widget.Toast
 import com.getbase.floatingactionbutton.FloatingActionButton
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.google.android.flexbox.FlexboxLayout
-import com.sergioloc.hologram.Interfaces.ListInterface
-import com.sergioloc.hologram.Presenters.ListPresenterImpl
+import com.sergioloc.hologram.Interfaces.CatalogInterface
+import com.sergioloc.hologram.Presenters.CatalogPresenterImpl
 import com.sergioloc.hologram.R
 import com.vpaliy.chips_lover.ChipView
 import kotlinx.android.synthetic.main.fragment_list.*
 
 
 @SuppressLint("ValidFragment")
-class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.OnQueryTextListener, View.OnClickListener {
+class CatalogFragment(var guest: Boolean): Fragment(), CatalogInterface.View, SearchView.OnQueryTextListener, View.OnClickListener {
 
     //region Variables
     private var myView: View? = null
     private var myContext: Context? = null
-    private var presenter: ListPresenterImpl? = null
+    private var presenter: CatalogPresenterImpl? = null
     private var fbMenu: FloatingActionsMenu? = null
     private var fbFav: FloatingActionButton? = null
     private var recyclerView: RecyclerView? = null
@@ -64,6 +64,8 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
     private var ivNoConnection: ImageView? = null
     private var tvNoConnection: TextView? = null
 
+    private var searchView: SearchView? = null
+
     //endregion
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -73,11 +75,11 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
         initVariables()
         showLoading()
 
-        presenter = ListPresenterImpl(this, myView!!, guest, myContext!!)
+        presenter = CatalogPresenterImpl(this, myView!!, guest, myContext!!)
         initRecyclerView()
 
         presenter?.callInitFirebaseList()
-
+        searchView = SearchView(context)
         initFb()
         initTags()
 
@@ -408,7 +410,7 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
         }
 
         if (areAllChipsSelected() || allButtonSelected) {
-            presenter?.callListUpdate()
+            presenter?.callFullList()
         }
         else {
             presenter?.callTagList(chip1IsChecked, chip2IsChecked, chip3IsChecked, chip4IsChecked, chip5IsChecked, chip6IsChecked, chip7IsChecked)
@@ -482,7 +484,6 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
         }
     }
 
-
     override fun onQueryTextSubmit(query: String?): Boolean {
         fbMenu?.visibility = View.VISIBLE
         return false
@@ -498,8 +499,6 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
                 else -> presenter?.callSearchInMerge(it)
             }
         }
-
-
         return false
     }
 
