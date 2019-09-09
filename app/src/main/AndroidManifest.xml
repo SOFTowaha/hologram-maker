@@ -43,10 +43,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_image_viewer2"
             android:theme="@style/FullscreenTheme" />
-        <activity
-            android:name=".Activities.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

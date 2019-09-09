@@ -3,7 +3,6 @@ package com.sergioloc.hologram.Views
 import android.animation.Animator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.MenuItemCompat
@@ -20,7 +19,6 @@ import android.widget.Toast
 import com.getbase.floatingactionbutton.FloatingActionButton
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.google.android.flexbox.FlexboxLayout
-import com.sergioloc.hologram.Activities.SettingsActivity
 import com.sergioloc.hologram.Interfaces.ListInterface
 import com.sergioloc.hologram.Presenters.ListPresenterImpl
 import com.sergioloc.hologram.R
@@ -37,7 +35,6 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
     private var presenter: ListPresenterImpl? = null
     private var fbMenu: FloatingActionsMenu? = null
     private var fbFav: FloatingActionButton? = null
-    private var fbSettings: FloatingActionButton? = null
     private var recyclerView: RecyclerView? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var tagSelected: Boolean = false
@@ -136,7 +133,6 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
     override fun initFb() {
         fbMenu = myView?.findViewById(R.id.menu_fab) as FloatingActionsMenu
         fbFav = myView?.findViewById(R.id.fb_fav) as FloatingActionButton
-        fbSettings = myView?.findViewById(R.id.fb_settings) as FloatingActionButton
         fbMenu?.scaleX = 1f
         fbMenu?.scaleY = 1f
 
@@ -170,10 +166,6 @@ class ListFrag(var guest: Boolean): Fragment(), ListInterface.View, SearchView.O
             } else {
                 Toast.makeText(context, "Debes estar registrado", Toast.LENGTH_SHORT).show()
             }
-        }
-
-        fbSettings?.setOnClickListener {
-            startActivity(Intent(context, SettingsActivity::class.java))
         }
 
     }
