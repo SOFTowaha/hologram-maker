@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.support.v4.app.Fragment
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -20,7 +21,6 @@ import com.sergioloc.hologram.Interfaces.GalleryInterface
 import com.sergioloc.hologram.Presenters.GalleryPresenterImpl
 import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.dialog_image_upload.*
-import kotlinx.android.synthetic.main.fragment_gallery.*
 
 @SuppressLint("ValidFragment")
 class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
@@ -46,7 +46,7 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
         presenter = GalleryPresenterImpl(this, context!!)
         presenter?.newInstance(guest)
 
-        switchType?.setOnCheckedChangeListener { buttonView, isChecked ->
+        switchType?.setOnCheckedChangeListener { _, _ ->
             presenter?.onSwitch(guest)
         }
 
@@ -81,7 +81,9 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
         rvImg?.setHasFixedSize(true)
         rvImg?.layoutManager = gridLayoutManager
         rvImg?.adapter = adapterCloud
-        hideLoading()
+        Handler().postDelayed({
+            hideLoading()
+        }, 1000)
     }
 
     override fun showLocalView() {

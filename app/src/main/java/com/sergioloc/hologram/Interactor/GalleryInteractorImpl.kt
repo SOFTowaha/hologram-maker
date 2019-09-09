@@ -66,13 +66,31 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
     }
 
     override fun saveToInternalStorage(bitmap: Bitmap) {
-        val imageSaver = ImageSaver(context)
+        ImageSaver(context)
                 .setFileName("$localListSize.png")
                 .setDirectoryName("images").save(bitmap)
         localListSize++
         editor?.putInt("localListSize", localListSize)
         editor?.apply()
         loadFromInternalStorage()
+    }
+
+    override fun loadFromFirebase() {
+        var inter = this
+        images?.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val listImages = ArrayList<String>()
+                for (snapshot in dataSnapshot.children) {
+                    listImages.add(snapshot.value!!.toString())
+                }
+                adapterImageCloud = AdapterImageCloud(listImages,user!!,mStorage!!,context, inter)
+                presenter.cloudListUpdated(adapterImageCloud!!)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        })
     }
 
     override fun uploadImageToDatabase(name: String) {
@@ -117,24 +135,4 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
             presenter.callDialog(bitmap)
         }
     }
-
-    override fun loadFromFirebase() {
-        var inter = this
-        images?.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val listImages = ArrayList<String>()
-                for (snapshot in dataSnapshot.children) {
-                    listImages.add(snapshot.value!!.toString())
-                }
-                adapterImageCloud = AdapterImageCloud(listImages,user!!,mStorage!!,context, inter)
-                presenter.cloudListUpdated(adapterImageCloud!!)
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-
-            }
-        })
-    }
-
-
 }
