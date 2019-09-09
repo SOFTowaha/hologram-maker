@@ -16,8 +16,8 @@ class GalleryPresenterImpl(var view: GalleryInterface.View, var context: Context
     private var cloudView = false
     private var interactor = GalleryInteractorImpl(this, context)
 
-    override fun newInstance() {
-        interactor.newInstance()
+    override fun newInstance(guest: Boolean) {
+        interactor.newInstance(guest)
         interactor.loadFromInternalStorage()
     }
 

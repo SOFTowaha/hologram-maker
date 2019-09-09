@@ -40,10 +40,11 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
                               savedInstanceState: Bundle?): View? {
         viewFragment =  inflater.inflate(R.layout.fragment_gallery, container, false)
 
+
         loadView()
         showLocalView()
         presenter = GalleryPresenterImpl(this, context!!)
-        presenter?.newInstance()
+        presenter?.newInstance(guest)
 
         switchType?.setOnCheckedChangeListener { buttonView, isChecked ->
             presenter?.onSwitch(guest)
@@ -52,6 +53,7 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
         button?.setOnClickListener {
             presenter?.callButton(this)
         }
+
 
         return viewFragment
     }

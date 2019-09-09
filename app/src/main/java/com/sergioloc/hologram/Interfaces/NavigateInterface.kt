@@ -4,7 +4,7 @@ interface NavigateInterface {
 
     interface View {
         fun showAsGuest()
-        fun showAsUser(name: String, email: String)
+        fun showAsUser(email: String)
     }
 
     interface Presenter {

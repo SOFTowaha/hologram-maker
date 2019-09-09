@@ -8,7 +8,7 @@ class NavigatePresenterImpl(var view: NavigateInterface.View): NavigateInterface
     override fun checkUser() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null)
-            view.showAsUser(user.displayName.toString(), user.email.toString())
+            view.showAsUser(user.email.toString())
         else
             view.showAsGuest()
     }

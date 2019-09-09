@@ -21,6 +21,7 @@ import com.google.firebase.storage.StorageReference
 import com.sergioloc.hologram.Adapter.AdapterImageCloud
 import com.sergioloc.hologram.Adapter.AdapterImageLocal
 import com.sergioloc.hologram.Interfaces.GalleryInterface
+import kotlinx.android.synthetic.main.activity_auth.*
 
 
 class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Context): AppCompatActivity(), GalleryInterface.Interactor {
@@ -41,15 +42,16 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
     private var mStorage: StorageReference? = null
 
 
-    override fun newInstance() {
+    override fun newInstance(guest: Boolean) {
         //Prefrences
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
         editor = prefs?.edit()
-        //Firebase
-        database = FirebaseDatabase.getInstance()
-        user = FirebaseAuth.getInstance().currentUser
-        images = database?.getReference("users")?.child(user?.uid)?.child("images")
-        mStorage = FirebaseStorage.getInstance().getReference("images")
+        if (!guest){ //Firebase
+            database = FirebaseDatabase.getInstance()
+            user = FirebaseAuth.getInstance().currentUser
+            images = database?.getReference("users")?.child(user?.uid)?.child("images")
+            mStorage = FirebaseStorage.getInstance().getReference("images")
+        }
     }
 
     override fun loadFromInternalStorage() {

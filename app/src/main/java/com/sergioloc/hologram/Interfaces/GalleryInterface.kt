@@ -22,7 +22,7 @@ interface GalleryInterface {
     }
 
     interface Presenter {
-        fun newInstance()
+        fun newInstance(guest: Boolean)
         fun onSwitch(guest: Boolean)
         fun localListUpdated(adapterImageLocal: AdapterImageLocal)
         fun cloudListUpdated(adapterImageCloud: AdapterImageCloud)
@@ -35,7 +35,7 @@ interface GalleryInterface {
     }
 
     interface Interactor {
-        fun newInstance()
+        fun newInstance(guest: Boolean)
         fun loadFromInternalStorage()
         fun saveToInternalStorage(bitmap: Bitmap)
         fun uploadImageToDatabase(name: String)

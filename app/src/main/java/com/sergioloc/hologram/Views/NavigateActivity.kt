@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
+import android.support.v4.widget.DrawerLayout.DrawerListener
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -30,7 +33,6 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     private var guest: Boolean? = null
     private var presenter: NavigatePresenterImpl? = null
-    private var nameH: TextView? = null
     private var emailH: TextView? = null
     private var imageH: ImageView? = null
     private var sesionH: Button? = null
@@ -38,6 +40,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     private var prefs: SharedPreferences? = null
     private var editor: SharedPreferences.Editor? = null
     private var lastFragment: Int? = null
+    private var fragmentToNavigate: Fragment? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,13 +53,12 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         editor = prefs?.edit()
 
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.setDrawerListener(toggle)
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setNavigationItemSelectedListener(this)
         var header = nav_view.getHeaderView(0)
 
-        nameH = header.findViewById(R.id.nameHeader) as TextView
         emailH = header.findViewById(R.id.emailHeader) as TextView
         imageH = header.findViewById(R.id.imageHeader) as ImageView
         sesionH = header.findViewById(R.id.sesionHeader) as Button
@@ -73,59 +75,81 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
             else -> supportFragmentManager.beginTransaction().replace(R.id.content_main, HomeFragment()).commit()
         }
 
+        drawerLayout.addDrawerListener(object:DrawerListener{
 
+            override fun onDrawerClosed(drawerView: View) {
+                navigateToFragment()
+            }
+
+            override fun onDrawerOpened(drawerView: View) {
+
+            }
+
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+
+            }
+        })
 
     }
 
-    override fun showAsUser(name: String, email: String) {
+    override fun showAsUser(email: String) {
         sesionH!!.visibility = View.INVISIBLE
-        nameH!!.text = name
         emailH!!.text = email
     }
 
     override fun showAsGuest() {
-        nameH!!.visibility = View.INVISIBLE
         emailH!!.visibility = View.INVISIBLE
         imageH!!.visibility = View.INVISIBLE
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
     }
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        var fragment: Fragment? = null
 
-        when (id){
-            R.id.nav_home -> fragment = HomeFragment()
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId){
+            R.id.nav_home -> fragmentToNavigate = HomeFragment()
             R.id.nav_gallery -> {
                 lastFragment = 1
                 editor?.putInt("lastFragment", lastFragment!!)
                 editor?.apply()
-                fragment = GalleryFragment(guest!!)
+                fragmentToNavigate = GalleryFragment(guest!!)
             }
             R.id.nav_list -> {
                 lastFragment = 2
                 editor?.putInt("lastFragment", lastFragment!!)
                 editor?.apply()
-                fragment = ListFrag(guest!!)
+                fragmentToNavigate = ListFrag(guest!!)
             }
-            R.id.nav_pyramid -> fragment = PyramidFragment()
-            R.id.nav_close -> { fragment = HomeFragment()
+            R.id.nav_pyramid -> fragmentToNavigate = PyramidFragment()
+            R.id.nav_close -> { fragmentToNavigate = HomeFragment()
                 FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(this, LoginActivity::class.java))
             }
             R.id.nav_share -> {}
         }
 
-        drawer_layout.closeDrawer(GravityCompat.START)
-        supportFragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
+        drawerLayout.closeDrawer(GravityCompat.START)
+        //supportFragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 
         return true
+    }
+
+    private fun navigateToFragment(){
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.content_main, fragmentToNavigate)
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
 }
