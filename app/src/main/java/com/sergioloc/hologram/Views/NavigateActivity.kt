@@ -40,6 +40,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     private var editor: SharedPreferences.Editor? = null
     private var lastFragment: Int? = null
     private var fragmentToNavigate: Fragment? = null
+    private var shareLink = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,6 +94,10 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
             }
         })
 
+        presenter?.let {
+            it.getShareLink()
+        }
+
     }
 
     override fun showAsUser(email: String) {
@@ -103,6 +108,10 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     override fun showAsGuest() {
         emailH!!.visibility = View.INVISIBLE
         imageH!!.visibility = View.INVISIBLE
+    }
+
+    override fun updateShareLink(link: String) {
+        shareLink = link
     }
 
     override fun onBackPressed() {
@@ -134,7 +143,12 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
                 FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(this, LoginActivity::class.java))
             }
-            R.id.nav_share -> {}
+            R.id.nav_share -> {
+                var i = Intent(Intent.ACTION_SEND)
+                i.type = "text/plain"
+                i.putExtra(Intent.EXTRA_TEXT, shareLink)
+                startActivity(Intent.createChooser(i, "Share using"))
+            }
         }
 
         drawerLayout.closeDrawer(GravityCompat.START)
