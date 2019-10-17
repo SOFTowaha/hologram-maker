@@ -29,7 +29,26 @@
     <string name="list_dancing">People dancing</string>
     <string name="list_cube">Cube</string>
     <string name="list_bb8">BB-8</string>
-    <string name="list_geometry">>Morphing Geometry</string>
+    <string name="list_geometry">Morphing Geometry</string>
+    <string name="list_tesla">Tesla Coil</string>
+    <string name="list_particle">Particle Mix</string>
+    <string name="list_yinyang">Yin Yang</string>
+    <string name="list_superman">Superman</string>
+    <string name="list_batsignal">Bat Signal</string>
+    <string name="list_alien">Alien</string>
+    <string name="list_humanheart">Human Heart</string>
+    <string name="list_plants">Plants</string>
+    <string name="list_ufo">UFO</string>
+    <string name="list_transformer">Transformer</string>
+    <string name="list_dragons">Dragons</string>
+    <string name="list_doit">Do It!</string>
+
+
+
+
+
+
+
 
 
 
