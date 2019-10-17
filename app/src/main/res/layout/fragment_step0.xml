@@ -13,19 +13,20 @@
         android:gravity="center"
         android:textColor="#000000"
         android:textSize="30dp"
-        android:padding="20dp"
-        android:text="MAKE YOUR OWN HOLOGRAPHIC PYRAMID" />
+        android:textStyle="bold"
+        android:padding="30dp"
+        android:text="Make your own HOLOGRAPHIC PYRAMID" />
 
     <ImageView
         android:id="@+id/pyramid"
         android:adjustViewBounds="true"
-        android:padding="10dp"
+        android:padding="20dp"
         android:src="@drawable/pyramid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textMake"
-        android:layout_marginTop="70dp"/>
+        android:layout_marginTop="60dp"/>
 
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
 import com.sergioloc.hologram.R
 
 /**
@@ -24,6 +25,8 @@ class PyramidFragment : Fragment() {
         val vpPager = viewFragment?.findViewById(R.id.pager) as ViewPager
         adapterViewPager = MyPagerAdapter(fragmentManager!!)
         vpPager.adapter = adapterViewPager
+        val activity = activity as AppCompatActivity?
+        activity?.title = "Make the Pyramid"
         return viewFragment
     }
 

@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite">
@@ -16,6 +15,12 @@
         android:textStyle="italic"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvTitleMaterials"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary"/>
 
     <TextView
         android:id="@+id/tvMaterials"
@@ -24,7 +29,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:text="@string/materials"
-        android:textSize="25dp"
+        android:textSize="23dp"
         android:padding="10dp"
         android:textColor="#000000" />
 

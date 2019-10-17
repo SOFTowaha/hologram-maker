@@ -35,14 +35,14 @@
 
     <!-- Step Strings -->
     <string name="title_materials">Required Materials</string>
-    <string name="materials">CD case\n\nCutting Knives\n\nPen\n\nRuler\n\nSmartphone</string>
+    <string name="materials">CD case\n\nCutting Knives\n\nPen\n\nRuler\n\nSmartphone\n\nTape</string>
     <string name="step1">Step 1</string>
     <string name="step2">Step 2</string>
     <string name="step3">Step 3</string>
     <string name="step4">Step 4</string>
-    <string name="step1Des">Draw the template shown below on a sheet of paper.</string>
+    <string name="step1Des">Draw this template on a sheet of paper.</string>
     <string name="step2Des">Copy the template on the CD case (or 0.5mm thick transparent acrylic).</string>
-    <string name="step3Des">Use the cutting knives to cut of the marks from de CD case.</string>
+    <string name="step3Des">Use the cutting knives to cut the CD case in pieces.</string>
     <string name="step4Des">Joins the pieces in the form of a pyramid.</string>
 
     <!-- Error Strings -->
