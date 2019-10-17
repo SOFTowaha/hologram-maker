@@ -15,11 +15,13 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.sergioloc.hologram.Interfaces.CatalogInterface
 import com.sergioloc.hologram.Models.VideoModel
-import com.sergioloc.hologram.R
 import com.sergioloc.hologram.Views.PlayerActivity
 import com.varunest.sparkbutton.SparkButton
 import com.varunest.sparkbutton.SparkEventListener
 import java.util.ArrayList
+import android.view.animation.AnimationUtils
+import com.sergioloc.hologram.R
+
 
 class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridLayoutManager, var guest: Boolean,
                       var interactor: CatalogInterface.Interactor, var presenter: CatalogInterface.Presenter):
@@ -41,6 +43,7 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
     private val VIEW_TYPE_LIST_FAV = 3
 
     private var context: Context? = null
+    private var lastPosition = -1
 
 
     override fun getItemViewType(position: Int): Int {
@@ -70,6 +73,16 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
         val name = context?.resources?.getIdentifier(array[position].name, "string", context?.packageName)
         holder.image?.setImageResource(id!!)
         holder.text?.text = context?.resources?.getString(name!!)
+
+
+        val animation = AnimationUtils.loadAnimation(context,
+                if (position > lastPosition)
+                    R.anim.up_from_bottom
+                else
+                    R.anim.down_from_top)
+        holder.itemView.startAnimation(animation)
+        lastPosition = position
+
 
         if (guest){
             holder.shieldFav?.visibility = View.VISIBLE

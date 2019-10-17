@@ -128,6 +128,7 @@ class CatalogFragment(var guest: Boolean): Fragment(), CatalogInterface.View, Se
         recyclerView = myView?.findViewById(R.id.recyclerview) as RecyclerView
         layoutManager = LinearLayoutManager(context)
         recyclerView?.setHasFixedSize(true)
+        recyclerView?.isNestedScrollingEnabled = false
         recyclerView?.layoutManager = layoutManager
         recyclerView?.adapter = presenter?.callAdapter()
     }
