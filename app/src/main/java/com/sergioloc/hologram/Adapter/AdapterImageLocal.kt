@@ -40,28 +40,13 @@ class AdapterImageLocal(var localList: ArrayList<Bitmap>, var context: Context,
         }
 
         holder.image.setOnClickListener {
-            var image = getImageUri(context, localList[position])
-            image?.let {
-                dialog?.position = position
-                dialog?.startDialog(it, "")
-            }
-
+            dialog?.startDialogBitmap(localList[position], "", position)
         }
-    }
-
-    private fun getImageUri(context: Context, inImage: Bitmap): Uri? {
-        if (isWriteStoragePermissionGranted()) {
-            val bytes = ByteArrayOutputStream()
-            inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-            val path = MediaStore.Images.Media.insertImage(context.contentResolver, inImage, "Title", null)
-            return Uri.parse(path)
-        } else
-            return null
     }
 
     private fun isWriteStoragePermissionGranted(): Boolean {
         if (Build.VERSION.SDK_INT >= 23) {
-            if (context.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            if (context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 Log.v("PERM", "Permission is granted2")
                 return true
             } else {

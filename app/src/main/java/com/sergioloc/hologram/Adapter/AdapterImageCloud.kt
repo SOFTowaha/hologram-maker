@@ -50,7 +50,7 @@ class AdapterImageCloud(var imageList: ArrayList<String>, var user: FirebaseUser
             Log.i("IMG", "Buscando -> $position")
             for (i in firebaseImageList!!) {
                 if (position == i.position)
-                    dialog?.startDialog(i.image, imageList[position])
+                    dialog?.startDialogUri(i.image, imageList[position], position)
             }
         }
     }
