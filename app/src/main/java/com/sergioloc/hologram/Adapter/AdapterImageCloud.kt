@@ -39,8 +39,6 @@ class AdapterImageCloud(var imageList: ArrayList<String>, var user: FirebaseUser
         mStorage = FirebaseStorage.getInstance().getReferenceFromUrl(path)
         mStorage.downloadUrl.addOnSuccessListener { uri ->
             firebaseImageList?.add(FirebaseImage(position, uri))
-            Log.i("IMG", "Posicion -> " + position + " | Imagen: " + imageList[position])
-
             Glide.with(context)
                     .load(uri)
                     .into(holder.image)

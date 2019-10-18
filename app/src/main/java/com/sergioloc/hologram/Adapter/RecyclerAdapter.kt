@@ -20,6 +20,10 @@ import com.varunest.sparkbutton.SparkButton
 import com.varunest.sparkbutton.SparkEventListener
 import java.util.ArrayList
 import android.view.animation.AnimationUtils
+import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.sergioloc.hologram.Models.FirebaseImage
 import com.sergioloc.hologram.R
 
 
@@ -35,6 +39,7 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
 
     // Firebase
     private var database: FirebaseDatabase? = null
+    private var mStorage: StorageReference? = null
     private var userFav: DatabaseReference? = null
     private var user: FirebaseUser? = null
 
@@ -69,11 +74,17 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val id = context?.resources?.getIdentifier(array[position].image, "drawable", context?.packageName)
-        val name = context?.resources?.getIdentifier(array[position].name, "string", context?.packageName)
-        holder.image?.setImageResource(id!!)
-        holder.text?.text = context?.resources?.getString(name!!)
+        //val id = context?.resources?.getIdentifier(array[position].image, "drawable", context?.packageName)
 
+        holder.text?.text = array[position].name
+
+        var path = "gs://hologram-2.appspot.com/images/catalog/" + array[position].name + ".png"
+        mStorage = FirebaseStorage.getInstance().getReferenceFromUrl(path)
+        mStorage?.downloadUrl?.addOnSuccessListener { uri ->
+            Glide.with(context!!)
+                    .load(uri)
+                    .into(holder.image!!)
+        }
 
         val animation = AnimationUtils.loadAnimation(context,
                 if (position > lastPosition)
@@ -168,8 +179,7 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (snapshot in dataSnapshot.children) {
                     val video = snapshot.getValue(VideoModel::class.java)
-                    val name = context?.resources?.getIdentifier(video!!.name, "string", context?.packageName)
-                    if (holder.text?.text.toString() == context?.resources?.getString(name!!)) {
+                    if (holder.text?.text.toString() == video!!.name) {
                         holder.bFav?.isChecked = true
                     }
                 }
