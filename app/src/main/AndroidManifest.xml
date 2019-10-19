@@ -41,7 +41,6 @@
         <activity
             android:name=".Views.ImageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_image_viewer2"
             android:theme="@style/FullscreenTheme" />
     </application>
 

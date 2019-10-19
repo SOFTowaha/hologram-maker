@@ -70,6 +70,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         lastFragment = prefs!!.getInt("lastFragment", 0)
         when (lastFragment) {
+            0 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, HomeFragment()).commit()
             1 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, GalleryFragment(guest!!)).commit()
             2 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, CatalogFragment(guest!!)).commit()
             else -> supportFragmentManager.beginTransaction().replace(R.id.content_main, HomeFragment()).commit()
@@ -125,7 +126,12 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId){
-            R.id.nav_home -> fragmentToNavigate = HomeFragment()
+            R.id.nav_home -> {
+                lastFragment = 0
+                editor?.putInt("lastFragment", lastFragment!!)
+                editor?.apply()
+                fragmentToNavigate = HomeFragment()
+            }
             R.id.nav_gallery -> {
                 lastFragment = 1
                 editor?.putInt("lastFragment", lastFragment!!)
