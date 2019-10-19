@@ -103,7 +103,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun showAsUser(email: String) {
         sesionH!!.visibility = View.INVISIBLE
-        emailH!!.text = email
+        emailH!!.text = email.split("@")[0]
     }
 
     override fun showAsGuest() {

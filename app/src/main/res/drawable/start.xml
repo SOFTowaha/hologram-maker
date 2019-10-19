@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    // Pulsado
-    <item android:drawable="@drawable/img4" android:state_pressed="true"/>
-    // Normal
-    <item android:drawable="@drawable/img3"/>
-</selector>
