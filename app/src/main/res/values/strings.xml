@@ -1,58 +1,46 @@
 <resources>
+    
     <string name="app_name">Hologram Maker</string>
-
-    <string name="title_activity_videos">Videos</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="action_settings">Settings</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_image_viewer2">Image Viewer</string>
 
-    <!-- List Names -->
-    <string name="list_biology">Biology</string>
-    <string name="list_birds">Birds</string>
-    <string name="list_blackhole">Black Hole</string>
-    <string name="list_butterfly">Butterfly</string>
-    <string name="list_fireworks">Fireworks</string>
-    <string name="list_thunder">Thunder</string>
-    <string name="list_earth">Earth</string>
-    <string name="list_jarvis">Jarvis</string>
-    <string name="list_leia">Leia</string>
-    <string name="list_halloween">Halloween</string>
-    <string name="list_fireball">Fireball</string>
-    <string name="list_moon">Moon</string>
-    <string name="list_candle">Candle</string>
-    <string name="list_mariobros">Mario Bros</string>
-    <string name="list_heman">He-Man</string>
-    <string name="list_supernova">Supernova</string>
-    <string name="list_dancing">People dancing</string>
-    <string name="list_cube">Cube</string>
-    <string name="list_bb8">BB-8</string>
-    <string name="list_geometry">Morphing Geometry</string>
-    <string name="list_tesla">Tesla Coil</string>
-    <string name="list_particle">Particle Mix</string>
-    <string name="list_yinyang">Yin Yang</string>
-    <string name="list_superman">Superman</string>
-    <string name="list_batsignal">Bat Signal</string>
-    <string name="list_alien">Alien</string>
-    <string name="list_humanheart">Human Heart</string>
-    <string name="list_plants">Plants</string>
-    <string name="list_ufo">UFO</string>
-    <string name="list_transformer">Transformer</string>
-    <string name="list_dragons">Dragons</string>
-    <string name="list_doit">Do It!</string>
+    <!-- Requirements -->
+    <string name="registered_fav">You have to be registered to add favourites</string>
+    <string name="registered_cloud">You have to be registered to upload to the cloud</string>
+    <string name="internet_cloud">You need internet connection to upload to the cloud</string>
+    <string name="write_name">You have to write a name</string>
+    <string name="add_favourites">Added to favourites</string>
+    <string name="delete_favourites">Deleted of favourites</string>
 
+    <!-- Dialog -->
+    <string name="delete">Delete</string>
+    <string name="sure">Are you sure?</string>
+    <string name="image_delete">Image deleted</string>
+    <string name="uploaded">Uploaded</string>
 
+    <!-- Others -->
+    <string name="catalog">Catalog</string>
+    <string name="favourites">Favourites</string>
+    <string name="myholograms">My Holograms</string>
+    <string name="share_usign">Share using</string>
 
+    <!-- Login -->
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="error_fields">Debes rellenar ambos campos</string>
+    <string name="error_mail">Debes rellenar el email</string>
+    <string name="error_password">Debes rellenar la contraseña</string>
+    <string name="error_same">La contraseña no coincide</string>
 
+    <!-- Menu -->
+    <string name="title_home">Home</string>
+    <string name="title_gallery">Gallery</string>
+    <string name="title_catalog">Video Catalog</string>
+    <string name="title_pyramid">Make the pyramid</string>
+    <string name="title_sign_out">Sign out</string>
+    <string name="title_share">Share</string>
 
-
-
-
-
-
-    <!-- Step Strings -->
+    <!-- Step -->
     <string name="title_materials">Required Materials</string>
     <string name="materials">CD case\n\nCutting Knives\n\nPen\n\nRuler\n\nSmartphone\n\nTape</string>
     <string name="step1">Step 1</string>
@@ -67,7 +55,6 @@
     <!-- Error Strings -->
     <string name="errorDB">Cannot open database</string>
     <string name="errorConnexion">Internet connexion is required</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-
+    <string name="errorYT">Failured to Initialize!</string>
 
 </resources>

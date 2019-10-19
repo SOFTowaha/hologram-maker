@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity(), LoginInterface.View {
     }
 
     override fun changeToSingIn() {
-        titleAuth.text = "SIGN IN"
+        titleAuth.text = resources.getString(R.string.sign_in)
         val x = signUpLayout.right
         val y = signUpLayout.bottom
         val startRadius = Math.hypot(signInLayout.width.toDouble(), signInLayout.height.toDouble()).toInt()
@@ -92,7 +92,7 @@ class LoginActivity : AppCompatActivity(), LoginInterface.View {
     }
 
     override fun changeToSignUp() {
-        titleAuth.text = "SIGN UP"
+        titleAuth.text = resources.getString(R.string.sign_up)
         val x = signInLayout.right
         val y = signInLayout.bottom
         val startRadius = 0
@@ -112,10 +112,10 @@ class LoginActivity : AppCompatActivity(), LoginInterface.View {
 
         var message = ""
         when(type){
-            1 -> message = "Debes rellenar ambos campos"
-            2 -> message = "Debes rellenar el email"
-            3 -> message = "Debes rellenar la contraseña"
-            4 -> message = "La contraseña no coincide"
+            1 -> message = resources.getString(R.string.error_fields)
+            2 -> message = resources.getString(R.string.error_mail)
+            3 -> message = resources.getString(R.string.error_password)
+            4 -> message = resources.getString(R.string.error_same)
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }

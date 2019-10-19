@@ -60,7 +60,7 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
 
     override fun loadView() {
         val activity = activity as AppCompatActivity
-        activity.title = "My holograms"
+        activity.title = resources.getString(R.string.myholograms)
         switchType = viewFragment?.findViewById(R.id.swType)
         tvLocal = viewFragment?.findViewById(R.id.tvLocal)
         tvCloud = viewFragment?.findViewById(R.id.tvCloud)
@@ -103,12 +103,12 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
     }
 
     override fun showGuestError() {
-        toast("Debes iniciar sesión para subir fotos a la nube")
+        toast(resources.getString(R.string.registered_cloud))
         switchType?.isChecked = true
     }
 
     override fun showConnectionError() {
-        toast("Debes tener acceso a internet para subir fotos a la nube")
+        toast(resources.getString(R.string.internet_cloud))
         switchType?.isChecked = true
     }
 
@@ -128,7 +128,7 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
                 dialog?.dismiss()
             }
             else{
-                toast("Debes escribir un nombre")
+                toast(resources.getString(R.string.write_name))
             }
         }
     }

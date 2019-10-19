@@ -147,12 +147,11 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
                 var i = Intent(Intent.ACTION_SEND)
                 i.type = "text/plain"
                 i.putExtra(Intent.EXTRA_TEXT, shareLink)
-                startActivity(Intent.createChooser(i, "Share using"))
+                startActivity(Intent.createChooser(i, resources.getString(R.string.share_usign)))
             }
         }
 
         drawerLayout.closeDrawer(GravityCompat.START)
-        //supportFragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 
         return true
     }

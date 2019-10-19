@@ -89,7 +89,7 @@ class CatalogFragment(var guest: Boolean): Fragment(), CatalogInterface.View, Se
     override fun initVariables(){
         val activity = activity as AppCompatActivity?
         myContext = activity?.applicationContext
-        activity?.title = "Catalog"
+        activity?.title = resources.getString(R.string.title_catalog)
         loading = myView?.findViewById(R.id.loading) as ProgressBar
         ivNoConnection = myView?.findViewById(R.id.ivNoConnection) as ImageView
         tvNoConnection = myView?.findViewById(R.id.tvNoConnection) as TextView
@@ -167,7 +167,7 @@ class CatalogFragment(var guest: Boolean): Fragment(), CatalogInterface.View, Se
                 pressFavButton()
                 fbMenu?.collapse()
             } else {
-                Toast.makeText(context, "Debes estar registrado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.registered_fav, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -184,11 +184,11 @@ class CatalogFragment(var guest: Boolean): Fragment(), CatalogInterface.View, Se
         deselectChip(7)
 
         if (favSelected) {
-            activity?.title = "Catalog"
+            activity?.title = resources.getString(R.string.title_catalog)
             presenter?.callInitFirebaseList()
         }
         else {
-            activity?.title = "Favourites"
+            activity?.title = resources.getString(R.string.favourites)
             presenter?.callFavList()
         }
         favSelected = !favSelected

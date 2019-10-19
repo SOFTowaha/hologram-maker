@@ -22,6 +22,6 @@ class PlayerActivity: YouTubeBaseActivity(), PlayerInterface.View {
     }
 
     override fun showError() {
-        Toast.makeText(this, "Failured to Initialize!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, R.string.errorYT, Toast.LENGTH_LONG).show()
     }
 }

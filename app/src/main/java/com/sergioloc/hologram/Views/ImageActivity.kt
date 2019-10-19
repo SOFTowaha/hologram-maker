@@ -9,14 +9,11 @@ import com.bumptech.glide.Glide
 import com.sergioloc.hologram.Interfaces.ImageInterface
 import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.activity_show_loaded.*
-import android.graphics.Bitmap
 import com.sergioloc.hologram.Utils.ImageSaver
-import java.lang.Exception
 
 
 class ImageActivity: AppCompatActivity(), ImageInterface.View {
 
-    private var imageUri: Uri? = null
     private var toolbarVisible: Boolean? = null
     private var mHideHandler: Handler? = null
     private val UI_ANIMATION_DELAY = 300

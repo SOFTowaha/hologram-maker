@@ -45,7 +45,6 @@ class AdapterImageCloud(var imageList: ArrayList<String>, var user: FirebaseUser
         }
 
         holder.image.setOnClickListener {
-            Log.i("IMG", "Buscando -> $position")
             for (i in firebaseImageList!!) {
                 if (position == i.position)
                     dialog?.startDialogUri(i.image, imageList[position], position)

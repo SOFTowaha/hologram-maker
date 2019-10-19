@@ -80,8 +80,8 @@ class DialogImageDetail(context: Context, var firebase: Boolean, var interactor:
 
         ivDelete.setOnClickListener {
             val builder = AlertDialog.Builder(context)
-            builder.setTitle("Delete")
-            builder.setMessage("Are you sure?")
+            builder.setTitle(R.string.delete)
+            builder.setMessage(R.string.sure)
             builder.setNegativeButton(android.R.string.no) { _, _ ->
 
             }
@@ -103,7 +103,7 @@ class DialogImageDetail(context: Context, var firebase: Boolean, var interactor:
 
     private fun deleteInStorage(){
         ImageSaver(context).setFileName("$position.png").setDirectoryName("images").delete()
-        Toast.makeText(context, "Image deleted", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, R.string.image_delete, Toast.LENGTH_LONG).show()
         localListSize--
         editor?.putInt("localListSize", localListSize)
         editor?.apply()

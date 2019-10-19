@@ -21,6 +21,7 @@ import com.google.firebase.storage.StorageReference
 import com.sergioloc.hologram.Adapter.AdapterImageCloud
 import com.sergioloc.hologram.Adapter.AdapterImageLocal
 import com.sergioloc.hologram.Interfaces.GalleryInterface
+import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.activity_auth.*
 
 
@@ -106,7 +107,7 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
             val ref = mStorage?.child("users/" + user?.uid + "/" + name)
             ref?.putFile(filePath!!)
                     ?.addOnSuccessListener {
-                        Toast.makeText(context, "Uploaded", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, R.string.uploaded, Toast.LENGTH_SHORT).show()
                         presenter?.callHideLoading()
                     }
                     ?.addOnFailureListener { e -> Toast.makeText(context, "Failed " + e.message, Toast.LENGTH_SHORT).show() }

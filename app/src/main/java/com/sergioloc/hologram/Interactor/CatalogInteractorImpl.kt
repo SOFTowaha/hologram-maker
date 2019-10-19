@@ -124,7 +124,7 @@ class CatalogInteractorImpl(var presenter: CatalogPresenterImpl, var guest: Bool
                 }
             }
             for (i in it.indices) {
-                if (it[i].tag == "Natur") {
+                if (it[i].tag == "Nature") {
                     tags4?.add(it[i])
                 }
             }

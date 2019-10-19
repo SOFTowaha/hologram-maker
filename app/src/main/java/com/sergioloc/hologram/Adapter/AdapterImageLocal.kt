@@ -47,15 +47,15 @@ class AdapterImageLocal(var localList: ArrayList<Bitmap>, var context: Context,
     private fun isWriteStoragePermissionGranted(): Boolean {
         if (Build.VERSION.SDK_INT >= 23) {
             if (context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                Log.v("PERM", "Permission is granted2")
+                Log.v("PERM", "Permission is granted")
                 return true
             } else {
-                Log.v("PERM", "Permission is revoked2")
+                Log.v("PERM", "Permission is revoked")
                 ActivityCompat.requestPermissions(context as Activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 2)
                 return false
             }
         } else { //permission is automatically granted on sdk<23 upon installation
-            Log.v("PERM", "Permission is granted2")
+            Log.v("PERM", "Permission is granted")
             return true
         }
     }

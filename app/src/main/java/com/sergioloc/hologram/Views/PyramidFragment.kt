@@ -26,7 +26,7 @@ class PyramidFragment : Fragment() {
         adapterViewPager = MyPagerAdapter(fragmentManager!!)
         vpPager.adapter = adapterViewPager
         val activity = activity as AppCompatActivity?
-        activity?.title = "Make the Pyramid"
+        activity?.title = resources.getString(R.string.title_pyramid)
         return viewFragment
     }
 

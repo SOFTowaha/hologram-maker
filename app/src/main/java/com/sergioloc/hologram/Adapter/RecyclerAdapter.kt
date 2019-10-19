@@ -98,8 +98,7 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
         if (guest){
             holder.shieldFav?.visibility = View.VISIBLE
             holder.shieldHide?.visibility = View.VISIBLE
-            holder.shieldFav?.setOnClickListener { Toast.makeText(context, "Debes estar registrado para añadir a favoritos", Toast.LENGTH_SHORT).show() }
-            holder.shieldHide?.setOnClickListener { Toast.makeText(context, "Debes estar registrado para ocultar", Toast.LENGTH_SHORT).show() }
+            holder.shieldFav?.setOnClickListener { Toast.makeText(context, R.string.registered_fav, Toast.LENGTH_SHORT).show() }
         }
         else{ //User
             if (holder.type == VIEW_TYPE_LIST) {
@@ -193,10 +192,10 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
         holder.bFav?.setEventListener(object : SparkEventListener {
             override fun onEvent(button: ImageView, buttonState: Boolean) {
                 if (buttonState) { //active
-                    Toast.makeText(context, "Añadido a favoritos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.add_favourites, Toast.LENGTH_SHORT).show()
                     addVideoToFav(position)
                 } else { //inactive
-                    Toast.makeText(context, "Eliminado de favoritos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.delete_favourites, Toast.LENGTH_SHORT).show()
                     removeVideoFromFav(position)
                 }
             }
@@ -210,10 +209,10 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
         holder.bFav?.setEventListener(object : SparkEventListener {
             override fun onEvent(button: ImageView, buttonState: Boolean) {
                 if (buttonState) { //active
-                    Toast.makeText(context, "Añadido a favoritos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.add_favourites, Toast.LENGTH_SHORT).show()
                     addVideoToFav(position)
                 } else { //inactive
-                    Toast.makeText(context, "Eliminado de favoritos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.delete_favourites, Toast.LENGTH_SHORT).show()
                     removeVideoFromFav(position)
                 }
             }
@@ -230,7 +229,7 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
             array[position].tag == "Animals" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_orange)
             array[position].tag == "Films" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_blue)
             array[position].tag == "Space" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_pink)
-            array[position].tag == "Natur" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_green)
+            array[position].tag == "Nature" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_green)
             array[position].tag == "Music" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_cyan)
             array[position].tag == "Figures" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_yellow)
             array[position].tag == "Others" -> holder.tag?.background = context?.resources?.getDrawable(R.drawable.circle_purple)
@@ -246,15 +245,6 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
     fun closeLastSwipeLayout(){
         lastSwipeLayout?.close(true)
     }
-
-    /*
-    private fun animOut(holder: MyViewHolder) {
-        val translationX: Float
-        translationX = (if (holder.swipe_layout.getTranslationX() == 0f) holder.swipe_layout.getWidth() else 0).toFloat()
-        holder.swipe_layout.animate().translationX(-translationX).start()
-    }
-    */
-
 
     /** Holder Class **/
 
