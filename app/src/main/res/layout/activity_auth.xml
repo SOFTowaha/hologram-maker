@@ -18,7 +18,7 @@
         android:layout_marginBottom="10dp"
         android:textSize="25dp"
         android:textColor="@color/colorWhite"
-        android:text="SIGN IN" />
+        android:text="@string/sign_in" />
 
     <RelativeLayout
         android:id="@+id/signInLayout"
@@ -53,7 +53,7 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/user_name"
                 android:inputType="textEmailAddress"
                 android:background="@color/turquoise"
                 android:textColor="#333"
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/turquoise"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textColor="#333"
                 android:textSize="15sp" />
@@ -95,7 +95,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/password_box"
             android:layout_marginTop="60dp"
-            android:text="ENTER"
+            android:text="@string/enter"
             app:spinning_bar_width="4dp"
             app:spinning_bar_color="#FFF"
             app:spinning_bar_padding="6dp"/>
@@ -109,7 +109,7 @@
             android:textSize="15dp"
             android:layout_centerHorizontal="true"
             android:clickable="true"
-            android:text="Enter as guest"/>
+            android:text="@string/enter_guest"/>
 
     </RelativeLayout>
 
@@ -149,7 +149,7 @@
                 android:id="@+id/email2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/user_name"
                 android:inputType="textEmailAddress"
                 android:background="@color/turquoise"
                 android:textColor="#333"
@@ -176,7 +176,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/turquoise"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textColor="#333"
                 android:textSize="15sp" />
@@ -202,7 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/turquoise"
-                android:hint="Confirm password"
+                android:hint="@string/confirm_password"
                 android:inputType="textPassword"
                 android:textColor="#333"
                 android:textSize="15sp" />
@@ -217,23 +217,12 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/password_box_2_R"
             android:layout_marginTop="40dp"
-            android:text="ENTER"
+            android:text="@string/enter"
             app:spinning_bar_width="4dp"
             app:spinning_bar_color="#FFF"
             app:spinning_bar_padding="6dp"/>
 
-        <TextView
-            android:id="@+id/send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No te enviaremos ningún correo"
-            android:layout_alignBottom="@+id/card_white2"
-            android:layout_centerHorizontal="true"
-            android:textSize="10dp"
-            android:layout_marginBottom="20dp"/>
-
     </RelativeLayout>
-
 
 
     <ImageView
@@ -247,8 +236,5 @@
         android:layout_marginLeft="270dp"
         android:scaleType="center"
         android:background="@drawable/circle_primary"/>
-
-
-
 
 </RelativeLayout>

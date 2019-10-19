@@ -8,11 +8,11 @@ import com.sergioloc.hologram.Presenters.LoginPresenterImpl
 class LoginInteractorImpl(var presenter: LoginPresenterImpl, var mAuth: FirebaseAuth) : LoginInterface.Interactor {
 
     override fun signIn(email: String, password: String) {
-        if (email == "" && password == "")
+        if (email == "@gmail.com" && password == "")
             presenter.fieldError(1)
-        else if (email == "" && password != "")
+        else if (email == "@gmail.com" && password != "")
             presenter.fieldError(2)
-        else if (email != "" && password == "")
+        else if (email != "@gmail.com" && password == "")
             presenter.fieldError(3)
         else{
             mAuth!!.signInWithEmailAndPassword(email, password)
@@ -20,7 +20,10 @@ class LoginInteractorImpl(var presenter: LoginPresenterImpl, var mAuth: Firebase
                         Log.d("SESION", "signInWithEmail:onComplete:" + task.isSuccessful)
                         if (!task.isSuccessful) {
                             Log.d("SESION", task.exception!!.message)
-                            presenter.errorSignIn()
+                            if (task.exception!!.message == "The password is invalid or the user does not have a password.")
+                                presenter.errorSignIn(1)
+                            else
+                                presenter.errorSignIn(0)
                         }
                     }
         }
@@ -35,13 +38,18 @@ class LoginInteractorImpl(var presenter: LoginPresenterImpl, var mAuth: Firebase
             presenter.fieldError(3)
         else if (password != passwordR)
             presenter.fieldError(4)
+        else if (password.length < 6)
+            presenter.fieldError(5)
         else{
             mAuth!!.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         Log.d("SESION", "createUserWithEmail:onComplete:" + task.isSuccessful)
                         if (!task.isSuccessful) {
                             Log.d("SESION", task.exception!!.message)
-                            presenter.errorSignUp()
+                            if (task.exception!!.message == "The email address is already in use by another account.")
+                                presenter.errorSignUp(1)
+                            else
+                                presenter.errorSignUp(0)
                         }
 
                     }

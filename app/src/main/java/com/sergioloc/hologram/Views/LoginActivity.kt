@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
+import android.os.Message
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewAnimationUtils
@@ -14,6 +15,7 @@ import com.sergioloc.hologram.Presenters.LoginPresenterImpl
 import com.sergioloc.hologram.R
 
 import kotlinx.android.synthetic.main.activity_auth.*
+import kotlinx.android.synthetic.main.activity_player.*
 
 
 /**
@@ -36,12 +38,14 @@ class LoginActivity : AppCompatActivity(), LoginInterface.View {
 
         enter.setOnClickListener {
             enter.startAnimation()
-            presenter.signIn(email.text.toString().trim(), password.text.toString().trim())
+            var fullEmail = email.text.toString() + "@gmail.com"
+            presenter.signIn(fullEmail, password.text.toString().trim())
         }
 
         register.setOnClickListener {
             register.startAnimation()
-            presenter.signUp(email2.text.toString().trim(), password2.text.toString().trim(), password2R.text.toString().trim())
+            var fullEmail = email2.text.toString() + "@gmail.com"
+            presenter.signUp(fullEmail, password2.text.toString().trim(), password2R.text.toString().trim())
         }
 
         guest.setOnClickListener {
@@ -106,9 +110,9 @@ class LoginActivity : AppCompatActivity(), LoginInterface.View {
 
     override fun showFieldError(type: Int) {
         if (signInActive)
-            showSignInError()
+            showSignInError(0)
         else
-            showSignUpError()
+            showSignUpError(0)
 
         var message = ""
         when(type){
@@ -116,15 +120,20 @@ class LoginActivity : AppCompatActivity(), LoginInterface.View {
             2 -> message = resources.getString(R.string.error_mail)
             3 -> message = resources.getString(R.string.error_password)
             4 -> message = resources.getString(R.string.error_same)
+            5 -> message = resources.getString(R.string.error_pass_min)
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showSignInError() {
+    override fun showSignInError(type: Int) {
+        if (type == 1)
+            Toast.makeText(applicationContext, R.string.wrong_pass, Toast.LENGTH_LONG).show()
         failureAuth(1)
     }
 
-    override fun showSignUpError() {
+    override fun showSignUpError(type: Int) {
+        if (type == 1)
+            Toast.makeText(applicationContext, R.string.repeated_user, Toast.LENGTH_LONG).show()
         failureAuth(2)
     }
 

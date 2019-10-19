@@ -46,14 +46,14 @@ class LoginPresenterImpl(var view: LoginInterface.View) : LoginInterface.Present
         }
     }
 
-    override fun errorSignIn() {
+    override fun errorSignIn(type: Int) {
         if (view != null)
-            view.showSignInError()
+            view.showSignInError(type)
     }
 
-    override fun errorSignUp() {
+    override fun errorSignUp(type: Int) {
         if (view != null)
-            view.showSignUpError()
+            view.showSignUpError(type)
     }
 
     override fun addListener() {

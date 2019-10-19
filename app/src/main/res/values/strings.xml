@@ -25,6 +25,14 @@
     <string name="share_usign">Share using</string>
     <string name="acept">Acept</string>
     <string name="cancel">Cancel</string>
+    <string name="user_name">User name</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Password</string>
+    <string name="enter">ENTER</string>
+    <string name="enter_guest">Enter as guest</string>
+
+
+
 
     <!-- Login -->
     <string name="sign_in">SIGN IN</string>
@@ -58,5 +66,9 @@
     <string name="errorDB">Cannot open database</string>
     <string name="errorConnexion">Internet connexion is required</string>
     <string name="errorYT">Failured to Initialize!</string>
+    <string name="repeated_user">This user name is already in use</string>
+    <string name="wrong_pass">The password is invalid or the user does not have a password</string>
+    <string name="error_pass_min">Password should be at least 6 characters</string>
+
 
 </resources>
