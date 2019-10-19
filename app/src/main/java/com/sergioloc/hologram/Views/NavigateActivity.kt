@@ -163,11 +163,13 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     private fun navigateToFragment(){
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.content_main, fragmentToNavigate)
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+        try {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.content_main, fragmentToNavigate)
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }catch (e: Exception){}
     }
 
 }
