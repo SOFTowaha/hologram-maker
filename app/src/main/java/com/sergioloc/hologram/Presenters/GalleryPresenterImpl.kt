@@ -58,10 +58,10 @@ class GalleryPresenterImpl(var view: GalleryInterface.View, var context: Context
         interactor.saveToInternalStorage(bitmap)
     }
 
-    override fun callSaveCloudImage(name: String) {
+    override fun callSaveCloudImage() {
         view?.showLoading()
-        interactor.uploadImageToDatabase(name)
-        interactor.uploadImageToStorage(name)
+        interactor.uploadImageToDatabase()
+        interactor.uploadImageToStorage()
         Handler().postDelayed({
             interactor.loadFromFirebase()
         }, 4000)

@@ -30,7 +30,7 @@ interface GalleryInterface {
         fun callActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
         fun callDialog(bitmap: Bitmap)
         fun callSaveLocalImage(bitmap: Bitmap)
-        fun callSaveCloudImage(name: String)
+        fun callSaveCloudImage()
         fun callHideLoading()
     }
 
@@ -38,8 +38,8 @@ interface GalleryInterface {
         fun newInstance(guest: Boolean)
         fun loadFromInternalStorage()
         fun saveToInternalStorage(bitmap: Bitmap)
-        fun uploadImageToDatabase(name: String)
-        fun uploadImageToStorage(name: String)
+        fun uploadImageToDatabase()
+        fun uploadImageToStorage()
         fun chooseImageFromGallery(fragment: Fragment)
         fun getImageFromGallery(requestCode: Int, resultCode: Int, data: Intent?)
         fun loadFromFirebase()

@@ -23,6 +23,8 @@
     <string name="favourites">Favourites</string>
     <string name="myholograms">My Holograms</string>
     <string name="share_usign">Share using</string>
+    <string name="acept">Acept</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Login -->
     <string name="sign_in">SIGN IN</string>

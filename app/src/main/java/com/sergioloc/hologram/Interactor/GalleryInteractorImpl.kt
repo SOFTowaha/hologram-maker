@@ -30,6 +30,7 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
     private var prefs: SharedPreferences? = null
     private var editor: SharedPreferences.Editor? = null
     private var localListSize = 0
+    private var cloudListSize = 0
     private var localList: ArrayList<Bitmap>? = null
     private val PICK_IMAGE_REQUEST = 71
     private var filePath: Uri? = null
@@ -60,7 +61,8 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
         localList = ArrayList()
         for (i in 0 until localListSize) {
             val bitmap = ImageSaver(context).setFileName("$i.png").setDirectoryName("images").load()
-            localList!!.add(bitmap)
+            if (bitmap != null)
+                localList!!.add(bitmap)
         }
         adapterImageLocal = AdapterImageLocal(localList!!, context, this)
         presenter.localListUpdated(adapterImageLocal!!)
@@ -77,6 +79,7 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
     }
 
     override fun loadFromFirebase() {
+        cloudListSize = prefs!!.getInt("cloudListSize", 0)
         var inter = this
         images?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -94,17 +97,20 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
         })
     }
 
-    override fun uploadImageToDatabase(name: String) {
-        images?.child(name)?.setValue(name)
+    override fun uploadImageToDatabase() {
+        cloudListSize++
+        editor?.putInt("cloudListSize", cloudListSize)
+        editor?.apply()
+        images?.child(cloudListSize.toString())?.setValue(cloudListSize)
     }
 
     override fun deleteImageFromDatabase(name: String) {
         images?.child(name)?.removeValue()
     }
 
-    override fun uploadImageToStorage(name: String) {
+    override fun uploadImageToStorage() {
         if (filePath != null) {
-            val ref = mStorage?.child("users/" + user?.uid + "/" + name)
+            val ref = mStorage?.child("users/" + user?.uid + "/" + cloudListSize)
             ref?.putFile(filePath!!)
                     ?.addOnSuccessListener {
                         Toast.makeText(context, R.string.uploaded, Toast.LENGTH_SHORT).show()

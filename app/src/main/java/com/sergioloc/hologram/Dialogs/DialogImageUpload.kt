@@ -11,6 +11,4 @@ class DialogImageUpload(context: Context) : Dialog(context) {
         setContentView(R.layout.dialog_image_upload)
         bCloseDialog.setOnClickListener { dismiss() }
     }
-
-    fun getImageName(): String { return etImageName.text.toString() }
 }

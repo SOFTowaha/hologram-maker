@@ -120,16 +120,11 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
             dialog?.dismiss()
         }
         dialog?.bUploadImage?.setOnClickListener {
-            if (dialog?.getImageName()!!.isNotEmpty()){
-                if (cloudView)
-                    presenter?.callSaveCloudImage(dialog?.getImageName()!!)
-                else
-                    presenter?.callSaveLocalImage(bitmap)
-                dialog?.dismiss()
-            }
-            else{
-                toast(resources.getString(R.string.write_name))
-            }
+            if (cloudView)
+                presenter?.callSaveCloudImage()
+            else
+                presenter?.callSaveLocalImage(bitmap)
+            dialog?.dismiss()
         }
     }
 

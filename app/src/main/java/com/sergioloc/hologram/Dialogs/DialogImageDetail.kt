@@ -104,9 +104,6 @@ class DialogImageDetail(context: Context, var firebase: Boolean, var interactor:
     private fun deleteInStorage(){
         ImageSaver(context).setFileName("$position.png").setDirectoryName("images").delete()
         Toast.makeText(context, R.string.image_delete, Toast.LENGTH_LONG).show()
-        localListSize--
-        editor?.putInt("localListSize", localListSize)
-        editor?.apply()
         interactor?.loadFromInternalStorage()
     }
 }

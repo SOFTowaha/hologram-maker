@@ -10,29 +10,26 @@
         android:layout_width="200dp"
         android:layout_height="200dp"/>
 
-    <EditText
-        android:id="@+id/etImageName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@id/ivImageLoaded"
-        android:layout_alignEnd="@id/ivImageLoaded"
-        android:layout_below="@id/ivImageLoaded"
-        android:hint="Nombre" />
-
     <Button
         android:id="@+id/bUploadImage"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etImageName"
-        android:layout_alignStart="@id/etImageName"
+        android:layout_below="@id/ivImageLoaded"
+        android:layout_alignStart="@id/ivImageLoaded"
+        android:textColor="@color/colorAccent"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="20dp"
         android:text="Guardar"/>
 
     <Button
         android:id="@+id/bCloseDialog"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etImageName"
+        android:layout_below="@id/ivImageLoaded"
         android:layout_centerHorizontal="true"
+        android:background="@color/colorWhite"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="20dp"
         android:text="Cancelar"
         android:layout_toEndOf="@id/bUploadImage"/>
 
