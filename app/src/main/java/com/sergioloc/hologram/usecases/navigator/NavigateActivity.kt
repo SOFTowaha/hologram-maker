@@ -1,9 +1,7 @@
-package com.sergioloc.hologram.Views
+package com.sergioloc.hologram.usecases.navigator
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -17,10 +15,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
-import com.sergioloc.hologram.Interfaces.NavigateInterface
 import kotlinx.android.synthetic.main.activity_main.*
 import com.sergioloc.hologram.Presenters.NavigatePresenterImpl
 import com.sergioloc.hologram.R
+import com.sergioloc.hologram.Views.CatalogFragment
+import com.sergioloc.hologram.Views.GalleryFragment
+import com.sergioloc.hologram.Views.HomeFragment
+import com.sergioloc.hologram.Views.PyramidFragment
+import com.sergioloc.hologram.databinding.ActivityMainBinding
 import com.sergioloc.hologram.usecases.login.LoginActivity
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
@@ -31,75 +33,61 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
 class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, NavigateInterface.View {
 
 
+    private lateinit var binding: ActivityMainBinding
+
     private var guest: Boolean? = null
     private var presenter: NavigatePresenterImpl? = null
     private var emailH: TextView? = null
     private var imageH: ImageView? = null
     private var sesionH: Button? = null
-
-    private var prefs: SharedPreferences? = null
-    private var editor: SharedPreferences.Editor? = null
-    private var lastFragment: Int? = null
     private var fragmentToNavigate: Fragment? = null
     private var shareLink = ""
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         (this as AppCompatActivity).setSupportActionBar(toolbar)
 
+        fragmentToNavigate = HomeFragment()
+        navigateToFragment()
+
+        initVariables()
+
+        presenter = NavigatePresenterImpl(this)
+        presenter?.checkUser()
+        presenter?.getShareLink()
+    }
+
+    private fun initVariables() {
+        // Preferences
         guest = intent.extras?.getBoolean("guest")
-        prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        editor = prefs?.edit()
 
-        val toggle = ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-        nav_view.setNavigationItemSelectedListener(this)
-        var header = nav_view.getHeaderView(0)
-
+        // Header
+        val header = binding.navView.getHeaderView(0)
         emailH = header.findViewById(R.id.emailHeader) as TextView
         imageH = header.findViewById(R.id.imageHeader) as ImageView
         sesionH = header.findViewById(R.id.sesionHeader) as Button
 
-        presenter = NavigatePresenterImpl(this)
-        presenter?.let {
-            it.checkUser()
-        }
+        // Navigator
+        binding.navView.setNavigationItemSelectedListener(this)
+        val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
-        lastFragment = prefs!!.getInt("lastFragment", 0)
-        when (lastFragment) {
-            0 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, HomeFragment()).commit()
-            1 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, GalleryFragment(guest!!)).commit()
-            2 -> supportFragmentManager.beginTransaction().replace(R.id.content_main, CatalogFragment(guest!!)).commit()
-            else -> supportFragmentManager.beginTransaction().replace(R.id.content_main, HomeFragment()).commit()
-        }
-
-        drawerLayout.addDrawerListener(object:DrawerListener{
+        drawerLayout.addDrawerListener(object:DrawerListener {
 
             override fun onDrawerClosed(drawerView: View) {
                 navigateToFragment()
             }
 
-            override fun onDrawerOpened(drawerView: View) {
+            override fun onDrawerOpened(drawerView: View) { }
 
-            }
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) { }
 
-            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-
-            }
-
-            override fun onDrawerStateChanged(newState: Int) {
-
-            }
+            override fun onDrawerStateChanged(newState: Int) { }
         })
-
-        presenter?.let {
-            it.getShareLink()
-        }
-
     }
 
     override fun showAsUser(email: String) {
@@ -125,33 +113,17 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId){
-            R.id.nav_home -> {
-                lastFragment = 0
-                editor?.putInt("lastFragment", lastFragment!!)
-                editor?.apply()
-                fragmentToNavigate = HomeFragment()
-            }
-            R.id.nav_gallery -> {
-                lastFragment = 1
-                editor?.putInt("lastFragment", lastFragment!!)
-                editor?.apply()
-                fragmentToNavigate = GalleryFragment(guest!!)
-            }
-            R.id.nav_list -> {
-                lastFragment = 2
-                editor?.putInt("lastFragment", lastFragment!!)
-                editor?.apply()
-                fragmentToNavigate = CatalogFragment(guest!!)
-            }
+        when (item.itemId) {
+            R.id.nav_home -> fragmentToNavigate = HomeFragment()
+            R.id.nav_gallery -> fragmentToNavigate = GalleryFragment(guest!!)
+            R.id.nav_list -> fragmentToNavigate = CatalogFragment(guest!!)
             R.id.nav_pyramid -> fragmentToNavigate = PyramidFragment()
             R.id.nav_close -> { fragmentToNavigate = HomeFragment()
                 FirebaseAuth.getInstance().signOut()
                 startActivity(Intent(this, LoginActivity::class.java))
             }
             R.id.nav_share -> {
-                var i = Intent(Intent.ACTION_SEND)
+                val i = Intent(Intent.ACTION_SEND)
                 i.type = "text/plain"
                 i.putExtra(Intent.EXTRA_TEXT, shareLink)
                 startActivity(Intent.createChooser(i, resources.getString(R.string.share_usign)))
@@ -163,14 +135,16 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         return true
     }
 
-    private fun navigateToFragment(){
+    private fun navigateToFragment() {
         try {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentToNavigate?.let { fragmentTransaction.replace(R.id.content_main, it) }
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
-        }catch (e: Exception){}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 }

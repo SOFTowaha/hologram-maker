@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewAnimationUtils
 import android.widget.Toast
 import com.sergioloc.hologram.R
-import com.sergioloc.hologram.Views.NavigateActivity
+import com.sergioloc.hologram.usecases.navigator.NavigateActivity
 import com.sergioloc.hologram.databinding.ActivityAuthBinding
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlin.math.hypot

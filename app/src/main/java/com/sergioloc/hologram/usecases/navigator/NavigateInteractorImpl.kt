@@ -1,7 +1,6 @@
-package com.sergioloc.hologram.Interactor
+package com.sergioloc.hologram.usecases.navigator
 
 import com.google.firebase.database.*
-import com.sergioloc.hologram.Interfaces.NavigateInterface
 import com.sergioloc.hologram.Presenters.NavigatePresenterImpl
 
 class NavigateInteractorImpl(var presenter: NavigatePresenterImpl): NavigateInterface.Interactor {
