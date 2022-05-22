@@ -1,9 +1,7 @@
-package com.sergioloc.hologram.Presenters
+package com.sergioloc.hologram.usecases.login
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.sergioloc.hologram.Interactor.LoginInteractorImpl
-import com.sergioloc.hologram.Interfaces.LoginInterface
 
 class LoginPresenterImpl(var view: LoginInterface.View) : LoginInterface.Presenter {
 

@@ -21,6 +21,7 @@ import com.sergioloc.hologram.Interfaces.NavigateInterface
 import kotlinx.android.synthetic.main.activity_main.*
 import com.sergioloc.hologram.Presenters.NavigatePresenterImpl
 import com.sergioloc.hologram.R
+import com.sergioloc.hologram.usecases.login.LoginActivity
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
 /**
