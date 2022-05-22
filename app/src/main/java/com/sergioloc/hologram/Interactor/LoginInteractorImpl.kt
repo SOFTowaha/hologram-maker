@@ -19,7 +19,7 @@ class LoginInteractorImpl(var presenter: LoginPresenterImpl, var mAuth: Firebase
                     .addOnCompleteListener { task ->
                         Log.d("SESION", "signInWithEmail:onComplete:" + task.isSuccessful)
                         if (!task.isSuccessful) {
-                            Log.d("SESION", task.exception!!.message)
+                            task.exception!!.message?.let { Log.d("SESION", it) }
                             if (task.exception!!.message == "The password is invalid or the user does not have a password.")
                                 presenter.errorSignIn(1)
                             else
@@ -45,7 +45,7 @@ class LoginInteractorImpl(var presenter: LoginPresenterImpl, var mAuth: Firebase
                     .addOnCompleteListener { task ->
                         Log.d("SESION", "createUserWithEmail:onComplete:" + task.isSuccessful)
                         if (!task.isSuccessful) {
-                            Log.d("SESION", task.exception!!.message)
+                            task.exception!!.message?.let { Log.d("SESION", it) }
                             if (task.exception!!.message == "The email address is already in use by another account.")
                                 presenter.errorSignUp(1)
                             else

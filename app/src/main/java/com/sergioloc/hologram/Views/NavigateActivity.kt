@@ -48,7 +48,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         setContentView(R.layout.activity_main)
         (this as AppCompatActivity).setSupportActionBar(toolbar)
 
-        guest = intent.extras.getBoolean("guest")
+        guest = intent.extras?.getBoolean("guest")
         prefs = PreferenceManager.getDefaultSharedPreferences(this)
         editor = prefs?.edit()
 

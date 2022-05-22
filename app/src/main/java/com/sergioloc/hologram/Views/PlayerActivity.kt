@@ -18,7 +18,9 @@ class PlayerActivity: YouTubeBaseActivity(), PlayerInterface.View {
         var player = youtube_player
         var videoID = intent.extras!!.getString("id")
         presenter = PlayerPresenterImpl(this)
-        presenter?.callPlayer(player, videoID)
+        if (videoID != null) {
+            presenter?.callPlayer(player, videoID)
+        }
     }
 
     override fun showError() {
