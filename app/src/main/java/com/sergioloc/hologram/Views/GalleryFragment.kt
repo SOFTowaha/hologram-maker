@@ -3,13 +3,13 @@ package com.sergioloc.hologram.Views
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,14 +70,16 @@ class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
     }
 
     override fun showLocalListUpdated(adapterLocal: AdapterImageLocal){
-        var gridLayoutManager = GridLayoutManager(context, 3)
+        var gridLayoutManager =
+            GridLayoutManager(context, 3)
         rvImg?.setHasFixedSize(true)
         rvImg?.layoutManager = gridLayoutManager
         rvImg?.adapter = adapterLocal
     }
 
     override fun showCloudListUpdated(adapterCloud: AdapterImageCloud) {
-        var gridLayoutManager = GridLayoutManager(context, 3)
+        var gridLayoutManager =
+            GridLayoutManager(context, 3)
         rvImg?.setHasFixedSize(true)
         rvImg?.layoutManager = gridLayoutManager
         rvImg?.adapter = adapterCloud

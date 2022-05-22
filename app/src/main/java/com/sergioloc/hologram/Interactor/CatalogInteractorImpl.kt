@@ -2,7 +2,7 @@ package com.sergioloc.hologram.Interactor
 
 import android.content.Context
 import android.os.Handler
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -41,7 +41,8 @@ class CatalogInteractorImpl(var presenter: CatalogPresenterImpl, var guest: Bool
     init {
         database = FirebaseDatabase.getInstance()
         actualList = ArrayList()
-        gridLayoutManager = GridLayoutManager(context, 1)
+        gridLayoutManager =
+            GridLayoutManager(context, 1)
         adapter = RecyclerAdapter(actualList!!, gridLayoutManager!!, guest, this, presenter)
         Handler().postDelayed({
             if (actualList?.size == 0)
@@ -77,7 +78,7 @@ class CatalogInteractorImpl(var presenter: CatalogPresenterImpl, var guest: Bool
         videosList = ArrayList()
         actualList = ArrayList()
         user = FirebaseAuth.getInstance().currentUser
-        userFav = database?.getReference("users")?.child(user?.uid)?.child("fav")
+        userFav = user?.uid?.let { database?.getReference("users")?.child(it)?.child("fav") }
         userFav?.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (snapshot in dataSnapshot.children) {

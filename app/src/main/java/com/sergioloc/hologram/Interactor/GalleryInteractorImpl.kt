@@ -1,6 +1,6 @@
 package com.sergioloc.hologram.Interactor
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -11,7 +11,7 @@ import android.provider.MediaStore
 import com.sergioloc.hologram.Presenters.GalleryPresenterImpl
 import com.sergioloc.hologram.Utils.ImageSaver
 import java.util.ArrayList
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -51,7 +51,7 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
         if (!guest){ //Firebase
             database = FirebaseDatabase.getInstance()
             user = FirebaseAuth.getInstance().currentUser
-            images = database?.getReference("users")?.child(user?.uid)?.child("images")
+            images = user?.uid?.let { database?.getReference("users")?.child(it)?.child("images") }
             mStorage = FirebaseStorage.getInstance().getReference("images")
         }
     }

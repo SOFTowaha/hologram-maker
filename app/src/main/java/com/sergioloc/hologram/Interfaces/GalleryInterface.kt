@@ -2,7 +2,7 @@ package com.sergioloc.hologram.Interfaces
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.sergioloc.hologram.Adapter.AdapterImageCloud
 import com.sergioloc.hologram.Adapter.AdapterImageLocal
 

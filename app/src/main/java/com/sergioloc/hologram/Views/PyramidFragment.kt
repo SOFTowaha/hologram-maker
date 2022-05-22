@@ -1,14 +1,14 @@
 package com.sergioloc.hologram.Views
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
 import com.sergioloc.hologram.R
 
 /**
@@ -23,7 +23,7 @@ class PyramidFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewFragment = inflater.inflate(R.layout.fragment_how, container, false)
         val vpPager = viewFragment?.findViewById(R.id.pager) as ViewPager
-        adapterViewPager = MyPagerAdapter(fragmentManager!!)
+        adapterViewPager = MyPagerAdapter(requireFragmentManager())
         vpPager.adapter = adapterViewPager
         val activity = activity as AppCompatActivity?
         activity?.title = resources.getString(R.string.title_pyramid)
@@ -40,21 +40,21 @@ class PyramidFragment : Fragment() {
         }
 
         // Returns the fragment to display for that page
-        override fun getItem(position: Int): Fragment? {
-            when (position) {
+        override fun getItem(position: Int): Fragment {
+            return when (position) {
                 0 // Fragment # 0
-                -> return StepFragment(0)
+                -> StepFragment(0)
                 1 // Fragment # 1
-                -> return StepFragment(1)
+                -> StepFragment(1)
                 2 // Fragment # 2
-                -> return StepFragment(2)
+                -> StepFragment(2)
                 3 // Fragment # 3
-                -> return StepFragment(3)
+                -> StepFragment(3)
                 4 // Fragment # 4
-                -> return StepFragment(4)
+                -> StepFragment(4)
                 5 // Fragment # 5
-                -> return StepFragment(5)
-                else -> return null
+                -> StepFragment(5)
+                else -> Fragment()
             }
         }
 

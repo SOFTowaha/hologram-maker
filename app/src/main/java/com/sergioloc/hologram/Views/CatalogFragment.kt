@@ -4,12 +4,12 @@ import android.animation.Animator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.view.MenuItemCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.core.view.MenuItemCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.SearchView
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -79,7 +79,7 @@ class CatalogFragment(var guest: Boolean): Fragment(), CatalogInterface.View, Se
         initRecyclerView()
 
         presenter?.callInitFirebaseList()
-        searchView = SearchView(context)
+        searchView = context?.let { SearchView(it) }
         initFb()
         initTags()
 
@@ -142,7 +142,7 @@ class CatalogFragment(var guest: Boolean): Fragment(), CatalogInterface.View, Se
 
         //Hide FAB on Scroll
         recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0 && fbMenu?.visibility == View.VISIBLE) {
                     animFab(1)
@@ -505,7 +505,7 @@ class CatalogFragment(var guest: Boolean): Fragment(), CatalogInterface.View, Se
 
     /**Menu */
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_search, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }

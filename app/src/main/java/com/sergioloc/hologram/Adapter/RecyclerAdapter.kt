@@ -1,10 +1,11 @@
 package com.sergioloc.hologram.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,7 +74,7 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
         return MyViewHolder(view, viewType)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
         //val id = context?.resources?.getIdentifier(array[position].image, "drawable", context?.packageName)
 
         holder.text?.text = array[position].name
@@ -140,7 +141,7 @@ class RecyclerAdapter(var array: ArrayList<VideoModel>, var layoutManager: GridL
     private fun initFirebase(){
         database = FirebaseDatabase.getInstance()
         user = FirebaseAuth.getInstance().currentUser
-        userFav = database?.getReference("users")?.child(user?.uid)?.child("fav")
+        userFav = user?.uid?.let { database?.getReference("users")?.child(it)?.child("fav") }
     }
 
     private fun addVideoToFav(position: Int){

@@ -8,7 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.preference.PreferenceManager
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
