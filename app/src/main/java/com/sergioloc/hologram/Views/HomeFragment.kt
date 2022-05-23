@@ -27,11 +27,11 @@ class HomeFragment: HomeInterface.View, Fragment(), NewsAdapter.OnNewsClickListe
         super.onViewCreated(view, savedInstanceState)
 
         val news = arrayListOf(
-            News("Video 1", "", "Tag 1", ""),
-            News("Video 2", "", "Tag 2", ""),
-            News("Video 3", "", "Tag 3", ""),
-            News("Video 4", "", "Tag 4", ""),
-            News("Video 5", "", "Tag 5", ""),
+            News("Video 1", "https://docs.microsoft.com/es-es/windows/apps/design/controls/images/image-licorice.jpg", "Tag 1", ""),
+            News("Video 2", "https://thumbs.dreamstime.com/b/profil-de-hibou-16485620.jpg", "Tag 2", ""),
+            News("Video 3", "https://tinypng.com/images/smart-resizing/new-aspect-ratio.jpg", "Tag 3", ""),
+            News("Video 4", "https://www.dcode.fr/tools/image-randomness/images/random-dcode.png", "Tag 4", ""),
+            News("Video 5", "https://res.cloudinary.com/demo/image/upload/w_500,f_auto/sample", "Tag 5", ""),
             News("Video 6", "", "Tag 6", ""),
             News("Video 7", "", "Tag 7", ""),
             News("Video 8", "", "Tag 8", ""),

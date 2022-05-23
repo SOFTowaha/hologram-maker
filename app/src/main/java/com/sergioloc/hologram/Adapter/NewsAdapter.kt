@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.needle.app.utils.extensions.setImageFromURL
+import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.models.News
 
@@ -22,12 +24,17 @@ class NewsAdapter(private val news: ArrayList<News>, private val listener: OnNew
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val n = news[position]
 
-        // Variables
+        // Text
         holder.tvName.text = n.name
         holder.tvTag.text = n.tag
 
+        // Image
+        setImageFromURL(holder.root.context, n.image) {
+            holder.ivImage.setImageDrawable(it)
+        }
+
         // Buttons
-        holder.root.setOnClickListener {
+        holder.root.setOnSingleClickListener {
             listener.onClickNews("")
         }
     }
