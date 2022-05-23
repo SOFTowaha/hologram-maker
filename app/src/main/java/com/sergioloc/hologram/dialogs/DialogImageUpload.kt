@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Dialogs
+package com.sergioloc.hologram.dialogs
 
 import android.app.Dialog
 import android.content.Context

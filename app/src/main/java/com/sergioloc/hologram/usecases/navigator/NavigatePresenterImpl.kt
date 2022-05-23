@@ -1,8 +1,6 @@
-package com.sergioloc.hologram.Presenters
+package com.sergioloc.hologram.usecases.navigator
 
 import com.google.firebase.auth.FirebaseAuth
-import com.sergioloc.hologram.usecases.navigator.NavigateInteractorImpl
-import com.sergioloc.hologram.usecases.navigator.NavigateInterface
 
 class NavigatePresenterImpl(var view: NavigateInterface.View): NavigateInterface.Presenter {
 

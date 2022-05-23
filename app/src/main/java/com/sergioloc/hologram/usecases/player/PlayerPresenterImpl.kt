@@ -1,8 +1,6 @@
-package com.sergioloc.hologram.Presenters
+package com.sergioloc.hologram.usecases.player
 
 import com.google.android.youtube.player.YouTubePlayerView
-import com.sergioloc.hologram.Interactor.PlayerInteractorImpl
-import com.sergioloc.hologram.Interfaces.PlayerInterface
 
 class PlayerPresenterImpl(var view: PlayerInterface.View): PlayerInterface.Presenter {
 

@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Interactor
+package com.sergioloc.hologram.usecases.catalog
 
 import android.content.Context
 import android.os.Handler
@@ -8,9 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.sergioloc.hologram.Adapter.RecyclerAdapter
-import com.sergioloc.hologram.Interfaces.CatalogInterface
 import com.sergioloc.hologram.Models.VideoModel
-import com.sergioloc.hologram.Presenters.CatalogPresenterImpl
 import java.util.*
 import kotlin.collections.ArrayList
 

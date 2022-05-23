@@ -16,12 +16,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
-import com.sergioloc.hologram.Presenters.NavigatePresenterImpl
 import com.sergioloc.hologram.R
-import com.sergioloc.hologram.Views.CatalogFragment
-import com.sergioloc.hologram.Views.GalleryFragment
+import com.sergioloc.hologram.usecases.catalog.CatalogFragment
+import com.sergioloc.hologram.usecases.gallery.GalleryFragment
 import com.sergioloc.hologram.usecases.home.HomeFragment
-import com.sergioloc.hologram.Views.PyramidFragment
+import com.sergioloc.hologram.usecases.pyramid.PyramidFragment
 import com.sergioloc.hologram.databinding.ActivityMainBinding
 import com.sergioloc.hologram.usecases.login.LoginActivity
 import kotlinx.android.synthetic.main.toolbar_layout.*

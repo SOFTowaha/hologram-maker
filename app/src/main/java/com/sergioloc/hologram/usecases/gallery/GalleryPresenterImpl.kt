@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Presenters
+package com.sergioloc.hologram.usecases.gallery
 
 import androidx.fragment.app.Fragment
 import android.content.Context
@@ -8,8 +8,6 @@ import android.net.ConnectivityManager
 import android.os.Handler
 import com.sergioloc.hologram.Adapter.AdapterImageCloud
 import com.sergioloc.hologram.Adapter.AdapterImageLocal
-import com.sergioloc.hologram.Interactor.GalleryInteractorImpl
-import com.sergioloc.hologram.Interfaces.GalleryInterface
 
 class GalleryPresenterImpl(var view: GalleryInterface.View, var context: Context): GalleryInterface.Presenter {
 

@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Views
+package com.sergioloc.hologram.usecases.pyramid
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import com.sergioloc.hologram.R
+import com.sergioloc.hologram.usecases.onboarding.OnBoardingFragment
 
 /**
  * Created by Sergio López Ceballos on 28/08/2019.
@@ -43,17 +44,17 @@ class PyramidFragment : Fragment() {
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 0 // Fragment # 0
-                -> StepFragment(0)
+                -> OnBoardingFragment(0)
                 1 // Fragment # 1
-                -> StepFragment(1)
+                -> OnBoardingFragment(1)
                 2 // Fragment # 2
-                -> StepFragment(2)
+                -> OnBoardingFragment(2)
                 3 // Fragment # 3
-                -> StepFragment(3)
+                -> OnBoardingFragment(3)
                 4 // Fragment # 4
-                -> StepFragment(4)
+                -> OnBoardingFragment(4)
                 5 // Fragment # 5
-                -> StepFragment(5)
+                -> OnBoardingFragment(5)
                 else -> Fragment()
             }
         }

@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Views
+package com.sergioloc.hologram.usecases.gallery
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -16,9 +16,7 @@ import android.view.ViewGroup
 import android.widget.*
 import com.sergioloc.hologram.Adapter.AdapterImageCloud
 import com.sergioloc.hologram.Adapter.AdapterImageLocal
-import com.sergioloc.hologram.Dialogs.DialogImageUpload
-import com.sergioloc.hologram.Interfaces.GalleryInterface
-import com.sergioloc.hologram.Presenters.GalleryPresenterImpl
+import com.sergioloc.hologram.dialogs.DialogImageUpload
 import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.dialog_image_upload.*
 

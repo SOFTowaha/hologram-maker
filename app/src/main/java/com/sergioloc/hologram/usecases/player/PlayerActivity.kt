@@ -1,10 +1,8 @@
-package com.sergioloc.hologram.Views
+package com.sergioloc.hologram.usecases.player
 
 import android.os.Bundle
 import android.widget.Toast
 import com.google.android.youtube.player.YouTubeBaseActivity
-import com.sergioloc.hologram.Interfaces.PlayerInterface
-import com.sergioloc.hologram.Presenters.PlayerPresenterImpl
 import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.activity_player.*
 

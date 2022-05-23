@@ -1,10 +1,8 @@
-package com.sergioloc.hologram.Presenters
+package com.sergioloc.hologram.usecases.catalog
 
 import android.content.Context
 import android.view.View
 import com.sergioloc.hologram.Adapter.RecyclerAdapter
-import com.sergioloc.hologram.Interactor.CatalogInteractorImpl
-import com.sergioloc.hologram.Interfaces.CatalogInterface
 
 class CatalogPresenterImpl(var view: CatalogInterface.View, var myView: View, var guest: Boolean, var context: Context): CatalogInterface.Presenter {
 

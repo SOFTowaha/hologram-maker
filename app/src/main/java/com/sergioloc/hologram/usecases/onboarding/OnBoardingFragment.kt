@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Views
+package com.sergioloc.hologram.usecases.onboarding
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -13,7 +13,7 @@ import com.sergioloc.hologram.R
  */
 
 @SuppressLint("ValidFragment")
-class StepFragment(var step: Int): Fragment() {
+class OnBoardingFragment(var step: Int): Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return when (step) {

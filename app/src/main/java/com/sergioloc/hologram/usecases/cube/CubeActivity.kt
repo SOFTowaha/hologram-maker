@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Views
+package com.sergioloc.hologram.usecases.cube
 
 import android.net.Uri
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.activity_show_loaded.*
 
 
-class ImageActivity: AppCompatActivity(), ImageInterface.View {
+class CubeActivity: AppCompatActivity(), ImageInterface.View {
 
     private var toolbarVisible: Boolean? = null
     private var mHideHandler: Handler? = null

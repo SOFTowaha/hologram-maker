@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Views
+package com.sergioloc.hologram.usecases.catalog
 
 import android.animation.Animator
 import android.annotation.SuppressLint
@@ -19,8 +19,6 @@ import android.widget.Toast
 import com.getbase.floatingactionbutton.FloatingActionButton
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.google.android.flexbox.FlexboxLayout
-import com.sergioloc.hologram.Interfaces.CatalogInterface
-import com.sergioloc.hologram.Presenters.CatalogPresenterImpl
 import com.sergioloc.hologram.R
 import com.vpaliy.chips_lover.ChipView
 import kotlinx.android.synthetic.main.fragment_list.*

@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Interfaces
+package com.sergioloc.hologram.usecases.player
 
 import com.google.android.youtube.player.YouTubePlayerView
 

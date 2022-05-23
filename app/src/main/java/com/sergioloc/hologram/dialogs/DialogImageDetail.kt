@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Dialogs
+package com.sergioloc.hologram.dialogs
 
 import android.app.Dialog
 import android.content.Context
@@ -12,15 +12,10 @@ import androidx.appcompat.app.AlertDialog
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.sergioloc.hologram.Adapter.AdapterImageLocal
-import com.sergioloc.hologram.Interactor.GalleryInteractorImpl
-import com.sergioloc.hologram.Interfaces.GalleryInterface
+import com.sergioloc.hologram.usecases.gallery.GalleryInterface
 import com.sergioloc.hologram.R
-import com.sergioloc.hologram.Views.ImageActivity
+import com.sergioloc.hologram.usecases.cube.CubeActivity
 import kotlinx.android.synthetic.main.dialog_image_details.*
-import java.io.ByteArrayOutputStream
-
-
 
 
 class DialogImageDetail(context: Context, var firebase: Boolean, var interactor: GalleryInterface.Interactor) : Dialog(context) {
@@ -70,7 +65,7 @@ class DialogImageDetail(context: Context, var firebase: Boolean, var interactor:
         ivClose.setOnClickListener { dismiss() }
 
         ivPlay.setOnClickListener {
-            val i = Intent(context, ImageActivity::class.java)
+            val i = Intent(context, CubeActivity::class.java)
             i.putExtra("imagePosition", position)
             image?.let { i.putExtra("imageUri", it.toString()) }
             context.startActivity(i)

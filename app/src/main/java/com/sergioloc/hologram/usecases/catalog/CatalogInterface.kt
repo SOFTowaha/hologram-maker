@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Interfaces
+package com.sergioloc.hologram.usecases.catalog
 
 import com.sergioloc.hologram.Models.VideoModel
 

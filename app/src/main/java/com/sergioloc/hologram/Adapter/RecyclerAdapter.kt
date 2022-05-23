@@ -14,9 +14,9 @@ import com.chauthai.swipereveallayout.SwipeRevealLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.sergioloc.hologram.Interfaces.CatalogInterface
+import com.sergioloc.hologram.usecases.catalog.CatalogInterface
 import com.sergioloc.hologram.Models.VideoModel
-import com.sergioloc.hologram.Views.PlayerActivity
+import com.sergioloc.hologram.usecases.player.PlayerActivity
 import com.varunest.sparkbutton.SparkButton
 import com.varunest.sparkbutton.SparkEventListener
 import java.util.ArrayList
@@ -24,7 +24,6 @@ import android.view.animation.AnimationUtils
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.sergioloc.hologram.Models.FirebaseImage
 import com.sergioloc.hologram.R
 
 

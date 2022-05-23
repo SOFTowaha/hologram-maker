@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Interactor
+package com.sergioloc.hologram.usecases.gallery
 
 import androidx.fragment.app.Fragment
 import android.content.Context
@@ -8,7 +8,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.preference.PreferenceManager
 import android.provider.MediaStore
-import com.sergioloc.hologram.Presenters.GalleryPresenterImpl
 import java.util.ArrayList
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
@@ -19,9 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.sergioloc.hologram.Adapter.AdapterImageCloud
 import com.sergioloc.hologram.Adapter.AdapterImageLocal
-import com.sergioloc.hologram.Interfaces.GalleryInterface
 import com.sergioloc.hologram.R
-import kotlinx.android.synthetic.main.activity_auth.*
 
 
 class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Context): AppCompatActivity(), GalleryInterface.Interactor {

@@ -5,9 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Build
-import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
@@ -15,10 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.sergioloc.hologram.Dialogs.DialogImageDetail
-import com.sergioloc.hologram.Interfaces.GalleryInterface
+import com.sergioloc.hologram.dialogs.DialogImageDetail
+import com.sergioloc.hologram.usecases.gallery.GalleryInterface
 import com.sergioloc.hologram.R
-import java.io.ByteArrayOutputStream
 import java.util.ArrayList
 
 class AdapterImageLocal(var localList: ArrayList<Bitmap>, var context: Context,

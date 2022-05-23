@@ -33,10 +33,10 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".Views.PlayerActivity"
+            android:name=".usecases.player.PlayerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Views.ImageActivity"
+            android:name=".usecases.cube.CubeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme" />
     </application>

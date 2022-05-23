@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sergioloc.hologram.Views.PlayerActivity
+import com.sergioloc.hologram.usecases.player.PlayerActivity
 import com.sergioloc.hologram.adapter.NewsAdapter
 import com.sergioloc.hologram.databinding.FragmentHomeBinding
 import com.sergioloc.hologram.models.News

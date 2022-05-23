@@ -1,9 +1,9 @@
-package com.sergioloc.hologram.Interactor
+package com.sergioloc.hologram.usecases.player
 
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerView
-import com.sergioloc.hologram.Interfaces.PlayerInterface
+import com.sergioloc.hologram.usecases.player.PlayerInterface
 
 class PlayerInteractorImpl(var presenter: PlayerInterface.Presenter, var youtubePlayer: YouTubePlayerView, var videoID: String):
         PlayerInterface.Interactor, YouTubePlayer.OnInitializedListener {

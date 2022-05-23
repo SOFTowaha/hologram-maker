@@ -2,7 +2,6 @@ package com.sergioloc.hologram.Adapter
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,8 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.sergioloc.hologram.Dialogs.DialogImageDetail
-import com.sergioloc.hologram.Interfaces.GalleryInterface
+import com.sergioloc.hologram.dialogs.DialogImageDetail
+import com.sergioloc.hologram.usecases.gallery.GalleryInterface
 import com.sergioloc.hologram.Models.FirebaseImage
 import com.sergioloc.hologram.R
 import java.util.ArrayList
