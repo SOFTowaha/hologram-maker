@@ -17,10 +17,14 @@
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
+        
         <activity
-            android:name=".usecases.login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".usecases.login.LoginActivity"/>
+
+        <activity
+            android:name=".usecases.navigator.NavigateActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,17 +32,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".usecases.navigator.NavigateActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity
-            android:name=".usecases.player.PlayerActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".usecases.player.PlayerActivity" />
+
         <activity
             android:name=".usecases.cube.CubeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme" />
+
     </application>
 
 </manifest>
