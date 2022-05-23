@@ -20,7 +20,7 @@ import com.sergioloc.hologram.Presenters.NavigatePresenterImpl
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.Views.CatalogFragment
 import com.sergioloc.hologram.Views.GalleryFragment
-import com.sergioloc.hologram.views.HomeFragment
+import com.sergioloc.hologram.usecases.home.HomeFragment
 import com.sergioloc.hologram.Views.PyramidFragment
 import com.sergioloc.hologram.databinding.ActivityMainBinding
 import com.sergioloc.hologram.usecases.login.LoginActivity

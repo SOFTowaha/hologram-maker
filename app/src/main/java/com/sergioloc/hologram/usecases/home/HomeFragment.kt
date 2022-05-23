@@ -1,20 +1,18 @@
-package com.sergioloc.hologram.views
+package com.sergioloc.hologram.usecases.home
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sergioloc.hologram.Interfaces.HomeInterface
 import com.sergioloc.hologram.Views.PlayerActivity
 import com.sergioloc.hologram.adapter.NewsAdapter
 import com.sergioloc.hologram.databinding.FragmentHomeBinding
 import com.sergioloc.hologram.models.News
 
-class HomeFragment: HomeInterface.View, Fragment(), NewsAdapter.OnNewsClickListener {
+class HomeFragment: Fragment(), NewsAdapter.OnNewsClickListener {
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -43,18 +41,10 @@ class HomeFragment: HomeInterface.View, Fragment(), NewsAdapter.OnNewsClickListe
         binding.rvNews.adapter = NewsAdapter(news, this)
     }
 
-    override fun navigateToActivity(code: String) {
-        val i = Intent(context, PlayerActivity::class.java)
-        i.putExtra("id", code)
-        startActivity(i)
-    }
-
-    override fun showNew(image: Uri, name: String, tag: String, position: Int) {
-
-    }
-
     override fun onClickNews(url: String) {
-
+        val i = Intent(context, PlayerActivity::class.java)
+        i.putExtra("id", url)
+        startActivity(i)
     }
 
     /*
