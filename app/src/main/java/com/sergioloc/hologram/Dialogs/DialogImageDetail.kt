@@ -16,7 +16,6 @@ import com.sergioloc.hologram.Adapter.AdapterImageLocal
 import com.sergioloc.hologram.Interactor.GalleryInteractorImpl
 import com.sergioloc.hologram.Interfaces.GalleryInterface
 import com.sergioloc.hologram.R
-import com.sergioloc.hologram.Utils.ImageSaver
 import com.sergioloc.hologram.Views.ImageActivity
 import kotlinx.android.synthetic.main.dialog_image_details.*
 import java.io.ByteArrayOutputStream
@@ -102,7 +101,7 @@ class DialogImageDetail(context: Context, var firebase: Boolean, var interactor:
     }
 
     private fun deleteInStorage(){
-        ImageSaver(context).setFileName("$position.png").setDirectoryName("images").delete()
+        //ImageSaver(context).setFileName("$position.png").setDirectoryName("images").delete()
         Toast.makeText(context, R.string.image_delete, Toast.LENGTH_LONG).show()
         interactor?.loadFromInternalStorage()
     }

@@ -9,7 +9,6 @@ import android.net.Uri
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import com.sergioloc.hologram.Presenters.GalleryPresenterImpl
-import com.sergioloc.hologram.Utils.ImageSaver
 import java.util.ArrayList
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
@@ -60,18 +59,16 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
         localListSize = prefs!!.getInt("localListSize", 0)
         localList = ArrayList()
         for (i in 0 until localListSize) {
-            val bitmap = ImageSaver(context).setFileName("$i.png").setDirectoryName("images").load()
-            if (bitmap != null)
-                localList!!.add(bitmap)
+            //val bitmap = ImageSaver(context).setFileName("$i.png").setDirectoryName("images").load()
+            //if (bitmap != null)
+              //  localList!!.add(bitmap)
         }
         adapterImageLocal = AdapterImageLocal(localList!!, context, this)
         presenter.localListUpdated(adapterImageLocal!!)
     }
 
     override fun saveToInternalStorage(bitmap: Bitmap) {
-        ImageSaver(context)
-                .setFileName("$localListSize.png")
-                .setDirectoryName("images").save(bitmap)
+        //ImageSaver(context).setFileName("$localListSize.png").setDirectoryName("images").save(bitmap)
         localListSize++
         editor?.putInt("localListSize", localListSize)
         editor?.apply()

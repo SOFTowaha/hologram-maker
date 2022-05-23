@@ -18,7 +18,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/fragment_main" />
+    <include layout="@layout/fragment_home" />
 
 
 

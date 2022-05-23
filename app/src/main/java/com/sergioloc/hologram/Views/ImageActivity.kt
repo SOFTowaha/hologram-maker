@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.sergioloc.hologram.Interfaces.ImageInterface
 import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.activity_show_loaded.*
-import com.sergioloc.hologram.Utils.ImageSaver
 
 
 class ImageActivity: AppCompatActivity(), ImageInterface.View {
@@ -60,11 +59,13 @@ class ImageActivity: AppCompatActivity(), ImageInterface.View {
                     .into(iv_picture4)
         }catch (e: NullPointerException){
             var pos = intent.extras!!.getInt("imagePosition")
-            val bitmap = ImageSaver(this).setFileName("$pos.png").setDirectoryName("images").load()
+            /*val bitmap = ImageSaver(this).setFileName("$pos.png").setDirectoryName("images").load()
             iv_picture1.setImageBitmap(bitmap)
             iv_picture2.setImageBitmap(bitmap)
             iv_picture3.setImageBitmap(bitmap)
             iv_picture4.setImageBitmap(bitmap)
+
+             */
         }
 
         fullscreen_content.setOnClickListener {
