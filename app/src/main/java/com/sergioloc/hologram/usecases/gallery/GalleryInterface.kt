@@ -3,8 +3,8 @@ package com.sergioloc.hologram.usecases.gallery
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.fragment.app.Fragment
-import com.sergioloc.hologram.Adapter.AdapterImageCloud
-import com.sergioloc.hologram.Adapter.AdapterImageLocal
+import com.sergioloc.hologram.adapter.AdapterImageCloud
+import com.sergioloc.hologram.adapter.GalleryAdapter
 
 interface GalleryInterface {
 
@@ -14,7 +14,7 @@ interface GalleryInterface {
         fun showCloudView()
         fun showGuestError()
         fun showConnectionError()
-        fun showLocalListUpdated(adapterImageLocal: AdapterImageLocal)
+        fun showLocalListUpdated(galleryAdapter: GalleryAdapter)
         fun showCloudListUpdated(adapterImageLocal: AdapterImageCloud)
         fun showDialog(bitmap: Bitmap, cloudView: Boolean)
         fun showLoading()
@@ -24,7 +24,7 @@ interface GalleryInterface {
     interface Presenter {
         fun newInstance(guest: Boolean)
         fun onSwitch(guest: Boolean)
-        fun localListUpdated(adapterImageLocal: AdapterImageLocal)
+        fun localListUpdated(galleryAdapter: GalleryAdapter)
         fun cloudListUpdated(adapterImageCloud: AdapterImageCloud)
         fun callButton(activity: Fragment)
         fun callActivityResult(requestCode: Int, resultCode: Int, data: Intent?)

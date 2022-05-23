@@ -6,7 +6,6 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import com.bumptech.glide.Glide
-import com.sergioloc.hologram.Interfaces.ImageInterface
 import com.sergioloc.hologram.R
 import kotlinx.android.synthetic.main.activity_show_loaded.*
 

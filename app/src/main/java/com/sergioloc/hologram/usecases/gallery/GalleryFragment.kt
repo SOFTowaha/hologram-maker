@@ -1,147 +1,109 @@
 package com.sergioloc.hologram.usecases.gallery
 
-import android.annotation.SuppressLint
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.os.Build
 import androidx.fragment.app.Fragment
-import android.graphics.Typeface
 import android.os.Bundle
-import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import com.sergioloc.hologram.Adapter.AdapterImageCloud
-import com.sergioloc.hologram.Adapter.AdapterImageLocal
+import androidx.core.app.ActivityCompat
+import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.sergioloc.hologram.dialogs.DialogImageUpload
 import com.sergioloc.hologram.R
+import com.sergioloc.hologram.adapter.GalleryAdapter
+import com.sergioloc.hologram.databinding.FragmentGalleryBinding
 import kotlinx.android.synthetic.main.dialog_image_upload.*
 
-@SuppressLint("ValidFragment")
-class GalleryFragment(var guest: Boolean): Fragment(), GalleryInterface.View {
+class GalleryFragment: Fragment() {
 
-    private var viewFragment: View? = null
-    private var switchType: Switch? = null
-    private var tvLocal: TextView? = null
-    private var tvCloud: TextView? = null
-    private var rvImg: RecyclerView? = null
-    private var button: ImageButton? = null
-    private var presenter: GalleryPresenterImpl? = null
-    private var dialog: DialogImageUpload? = null
-    private var loader: ProgressBar? = null
+    private lateinit var binding: FragmentGalleryBinding
+    private lateinit var viewModel: GalleryViewModel
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        viewFragment =  inflater.inflate(R.layout.fragment_gallery, container, false)
-
-
-        loadView()
-        showLocalView()
-        presenter = GalleryPresenterImpl(this, context!!)
-        presenter?.newInstance(guest)
-
-        switchType?.setOnCheckedChangeListener { _, _ ->
-            presenter?.onSwitch(guest)
-        }
-
-        button?.setOnClickListener {
-            presenter?.callButton(this)
-        }
-
-
-        return viewFragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentGalleryBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun loadView() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initView()
+        initVariables()
+        initObservers()
+        initButtons()
+
+        viewModel.getMyHolograms()
+    }
+
+    private fun initView() {
+        // Toolbar
         val activity = activity as AppCompatActivity
         activity.title = resources.getString(R.string.myholograms)
-        switchType = viewFragment?.findViewById(R.id.swType)
-        tvLocal = viewFragment?.findViewById(R.id.tvLocal)
-        tvCloud = viewFragment?.findViewById(R.id.tvCloud)
-        rvImg = viewFragment?.findViewById(R.id.rvImages)
-        button = viewFragment?.findViewById(R.id.bAddImage)
-        loader = viewFragment?.findViewById(R.id.loading)
+
+        // RecyclerView
+        binding.rvImages.setHasFixedSize(true)
+        binding.rvImages.layoutManager = GridLayoutManager(context, 3)
+        binding.rvImages.adapter = GalleryAdapter(ArrayList())
     }
 
-    override fun showLocalListUpdated(adapterLocal: AdapterImageLocal){
-        var gridLayoutManager =
-            GridLayoutManager(context, 3)
-        rvImg?.setHasFixedSize(true)
-        rvImg?.layoutManager = gridLayoutManager
-        rvImg?.adapter = adapterLocal
+    private fun initVariables() {
+        viewModel = GalleryViewModel()
     }
 
-    override fun showCloudListUpdated(adapterCloud: AdapterImageCloud) {
-        var gridLayoutManager =
-            GridLayoutManager(context, 3)
-        rvImg?.setHasFixedSize(true)
-        rvImg?.layoutManager = gridLayoutManager
-        rvImg?.adapter = adapterCloud
-        Handler().postDelayed({
-            hideLoading()
-        }, 1000)
-    }
-
-    override fun showLocalView() {
-        switchType?.isChecked = true
-        tvLocal?.setTypeface(null, Typeface.BOLD)
-        tvCloud?.setTypeface(null, Typeface.NORMAL)
-        tvLocal?.setTextColor(resources.getColor(R.color.colorWhite))
-        tvCloud?.setTextColor(resources.getColor(R.color.colorGrayT))
-    }
-
-    override fun showCloudView() {
-        switchType?.isChecked = false
-        tvCloud?.setTypeface(null, Typeface.BOLD)
-        tvLocal?.setTypeface(null, Typeface.NORMAL)
-        tvCloud?.setTextColor(resources.getColor(R.color.colorWhite))
-        tvLocal?.setTextColor(resources.getColor(R.color.colorGrayT))
-    }
-
-    override fun showGuestError() {
-        toast(resources.getString(R.string.registered_cloud))
-        switchType?.isChecked = true
-    }
-
-    override fun showConnectionError() {
-        toast(resources.getString(R.string.internet_cloud))
-        switchType?.isChecked = true
-    }
-
-    override fun showDialog(bitmap: Bitmap, cloudView: Boolean) {
-        dialog = DialogImageUpload(context!!)
-        dialog?.show()
-        dialog?.ivImageLoaded?.setImageBitmap(bitmap)
-        dialog?.bCloseDialog?.setOnClickListener {
-            dialog?.dismiss()
-        }
-        dialog?.bUploadImage?.setOnClickListener {
-            if (cloudView)
-                presenter?.callSaveCloudImage()
-            else
-                presenter?.callSaveLocalImage(bitmap)
-            dialog?.dismiss()
+    private fun initObservers() {
+        viewModel.list.observe(this) {
+            it.onSuccess { list ->
+                binding.rvImages.adapter = GalleryAdapter(list)
+            }
         }
     }
 
-    override fun showLoading(){
-        loader?.visibility = View.VISIBLE
+    private fun initButtons() {
+        binding.btnAdd.setOnSingleClickListener {
+
+        }
     }
 
-    override fun hideLoading(){
-        loader?.visibility = View.INVISIBLE
+    private fun showDialog(bitmap: Bitmap, cloudView: Boolean) {
+        val dialog = DialogImageUpload(requireContext())
+        dialog.show()
+        dialog.ivImageLoaded?.setImageBitmap(bitmap)
+        dialog.bCloseDialog?.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.bUploadImage?.setOnClickListener {
+            //presenter?.callSaveLocalImage(bitmap)
+            dialog.dismiss()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        presenter?.callActivityResult(requestCode, resultCode, data)
+        //presenter?.callActivityResult(requestCode, resultCode, data)
     }
 
-    private fun toast(text: String){
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+    private fun isWriteStoragePermissionGranted(): Boolean {
+        return if (Build.VERSION.SDK_INT >= 23) {
+            if (context?.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Log.v("PERM", "Permission is granted")
+                true
+            } else {
+                Log.v("PERM", "Permission is revoked")
+                ActivityCompat.requestPermissions(context as Activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 2)
+                false
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            Log.v("PERM", "Permission is granted")
+            true
+        }
     }
+
 }

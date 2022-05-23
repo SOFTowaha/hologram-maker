@@ -10,16 +10,8 @@ import android.preference.PreferenceManager
 import android.provider.MediaStore
 import java.util.ArrayList
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.sergioloc.hologram.Adapter.AdapterImageCloud
-import com.sergioloc.hologram.Adapter.AdapterImageLocal
-import com.sergioloc.hologram.R
-
+import com.sergioloc.hologram.adapter.AdapterImageCloud
+import com.sergioloc.hologram.adapter.GalleryAdapter
 
 class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Context): AppCompatActivity(), GalleryInterface.Interactor {
 
@@ -30,26 +22,13 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
     private var localList: ArrayList<Bitmap>? = null
     private val PICK_IMAGE_REQUEST = 71
     private var filePath: Uri? = null
-    private var adapterImageLocal: AdapterImageLocal? = null
+    private var galleryAdapter: GalleryAdapter? = null
     private var adapterImageCloud: AdapterImageCloud? = null
-
-    //Firebase
-    private var database: FirebaseDatabase? = null
-    private var user: FirebaseUser? = null
-    private var images: DatabaseReference? = null
-    private var mStorage: StorageReference? = null
-
 
     override fun newInstance(guest: Boolean) {
         //Prefrences
         prefs = PreferenceManager.getDefaultSharedPreferences(context)
         editor = prefs?.edit()
-        if (!guest){ //Firebase
-            database = FirebaseDatabase.getInstance()
-            user = FirebaseAuth.getInstance().currentUser
-            images = user?.uid?.let { database?.getReference("users")?.child(it)?.child("images") }
-            mStorage = FirebaseStorage.getInstance().getReference("images")
-        }
     }
 
     override fun loadFromInternalStorage() {
@@ -60,8 +39,8 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
             //if (bitmap != null)
               //  localList!!.add(bitmap)
         }
-        adapterImageLocal = AdapterImageLocal(localList!!, context, this)
-        presenter.localListUpdated(adapterImageLocal!!)
+        galleryAdapter = GalleryAdapter(localList!!)
+        presenter.localListUpdated(galleryAdapter!!)
     }
 
     override fun saveToInternalStorage(bitmap: Bitmap) {
@@ -73,52 +52,25 @@ class GalleryInteractorImpl(var presenter: GalleryPresenterImpl, var context: Co
     }
 
     override fun loadFromFirebase() {
-        cloudListSize = prefs!!.getInt("cloudListSize", 0)
-        var inter = this
-        images?.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val listImages = ArrayList<String>()
-                for (snapshot in dataSnapshot.children) {
-                    listImages.add(snapshot.value!!.toString())
-                }
-                adapterImageCloud = AdapterImageCloud(listImages,user!!,mStorage!!,context, inter)
-                presenter.cloudListUpdated(adapterImageCloud!!)
-            }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-
-            }
-        })
     }
 
     override fun uploadImageToDatabase() {
         cloudListSize++
         editor?.putInt("cloudListSize", cloudListSize)
         editor?.apply()
-        images?.child(cloudListSize.toString())?.setValue(cloudListSize)
     }
 
     override fun deleteImageFromDatabase(name: String) {
-        images?.child(name)?.removeValue()
+
     }
 
     override fun uploadImageToStorage() {
-        if (filePath != null) {
-            val ref = mStorage?.child("users/" + user?.uid + "/" + cloudListSize)
-            ref?.putFile(filePath!!)
-                    ?.addOnSuccessListener {
-                        Toast.makeText(context, R.string.uploaded, Toast.LENGTH_SHORT).show()
-                        presenter?.callHideLoading()
-                    }
-                    ?.addOnFailureListener { e -> Toast.makeText(context, "Failed " + e.message, Toast.LENGTH_SHORT).show() }
-        }
+
     }
 
     override fun deleteImageFromStorage(name: String) {
-        if (filePath != null){
-            val ref = mStorage?.child("users/" + user?.uid + "/" + name)
-            ref?.delete()
-        }
+
     }
 
     override fun chooseImageFromGallery(fragment: Fragment) {

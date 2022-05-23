@@ -18,7 +18,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        
+
         <activity
             android:name=".usecases.login.LoginActivity"/>
 

@@ -10,19 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.needle.app.utils.extensions.setImageFromURL
 import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.sergioloc.hologram.R
-import com.sergioloc.hologram.models.News
+import com.sergioloc.hologram.models.Hologram
 
-class NewsAdapter(private val news: ArrayList<News>, private val listener: OnNewsClickListener): RecyclerView.Adapter<NewsAdapter.UserViewHolder>() {
+class NewsAdapter(private val holograms: ArrayList<Hologram>, private val listener: OnNewsClickListener): RecyclerView.Adapter<NewsAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(LayoutInflater.from(parent.context), parent)
     }
 
-    override fun getItemCount(): Int = news.size
+    override fun getItemCount(): Int = holograms.size
 
     @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val n = news[position]
+        val n = holograms[position]
 
         // Text
         holder.tvName.text = n.name

@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Adapter
+package com.sergioloc.hologram.adapter
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +27,7 @@ class AdapterImageCloud(var imageList: ArrayList<String>, var user: FirebaseUser
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card_image, parent, false)
         firebaseImageList = ArrayList()
-        dialog = DialogImageDetail(context, true, interactor)
+        dialog = DialogImageDetail(context)
         return MyViewHolder(view)
     }
 

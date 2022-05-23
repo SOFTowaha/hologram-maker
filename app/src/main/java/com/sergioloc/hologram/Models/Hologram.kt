@@ -1,6 +1,6 @@
 package com.sergioloc.hologram.models
 
-data class News(
+data class Hologram(
     val name: String = "",
     val image: String = "",
     val tag: String = "",

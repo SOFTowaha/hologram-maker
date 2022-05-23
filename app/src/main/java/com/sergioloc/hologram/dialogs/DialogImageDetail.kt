@@ -17,8 +17,7 @@ import com.sergioloc.hologram.R
 import com.sergioloc.hologram.usecases.cube.CubeActivity
 import kotlinx.android.synthetic.main.dialog_image_details.*
 
-
-class DialogImageDetail(context: Context, var firebase: Boolean, var interactor: GalleryInterface.Interactor) : Dialog(context) {
+class DialogImageDetail(context: Context) : Dialog(context) {
 
     private val ivDetail: ImageView
     private val ivPlay: ImageView
@@ -29,7 +28,6 @@ class DialogImageDetail(context: Context, var firebase: Boolean, var interactor:
     private var prefs: SharedPreferences? = null
     private var editor: SharedPreferences.Editor? = null
     private var localListSize = 0
-
 
     init {
         setContentView(R.layout.dialog_image_details)
@@ -47,9 +45,7 @@ class DialogImageDetail(context: Context, var firebase: Boolean, var interactor:
         name = n
         position = p
         image = uri
-        Glide.with(context)
-                .load(uri)
-                .into(ivDetail)
+        Glide.with(context).load(uri).into(ivDetail)
         show()
     }
 
@@ -80,24 +76,16 @@ class DialogImageDetail(context: Context, var firebase: Boolean, var interactor:
 
             }
             builder.setPositiveButton(android.R.string.yes) { _, _ ->
-                if (firebase)
-                    deleteInFirebase()
-                else
-                    deleteInStorage()
+                deleteInStorage()
             }
             builder.show()
             dismiss()
         }
     }
 
-    private fun deleteInFirebase(){
-        interactor?.deleteImageFromDatabase(name!!)
-        interactor?.deleteImageFromStorage(name!!)
-    }
-
     private fun deleteInStorage(){
         //ImageSaver(context).setFileName("$position.png").setDirectoryName("images").delete()
         Toast.makeText(context, R.string.image_delete, Toast.LENGTH_LONG).show()
-        interactor?.loadFromInternalStorage()
+        //interactor?.loadFromInternalStorage()
     }
 }

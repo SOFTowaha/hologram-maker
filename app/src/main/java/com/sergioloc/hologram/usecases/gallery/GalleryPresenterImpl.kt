@@ -6,8 +6,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.os.Handler
-import com.sergioloc.hologram.Adapter.AdapterImageCloud
-import com.sergioloc.hologram.Adapter.AdapterImageLocal
+import com.sergioloc.hologram.adapter.AdapterImageCloud
+import com.sergioloc.hologram.adapter.GalleryAdapter
 
 class GalleryPresenterImpl(var view: GalleryInterface.View, var context: Context): GalleryInterface.Presenter {
 
@@ -40,8 +40,8 @@ class GalleryPresenterImpl(var view: GalleryInterface.View, var context: Context
         }
     }
 
-    override fun localListUpdated(adapterImageLocal: AdapterImageLocal) {
-        view.showLocalListUpdated(adapterImageLocal)
+    override fun localListUpdated(galleryAdapter: GalleryAdapter) {
+        view.showLocalListUpdated(galleryAdapter)
     }
 
     override fun callButton(activity: Fragment) {
