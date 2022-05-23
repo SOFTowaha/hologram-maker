@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable/card_white.xml" value="0.252" />
         <entry key="..\:/Projects/Android/Hologram/app/src/main/res/layout/activity_auth.xml" value="0.3625" />
         <entry key="..\:/Projects/Android/Hologram/app/src/main/res/layout/activity_image_viewer.xml" value="0.3625" />
         <entry key="..\:/Projects/Android/Hologram/app/src/main/res/layout/activity_main.xml" value="0.3625" />

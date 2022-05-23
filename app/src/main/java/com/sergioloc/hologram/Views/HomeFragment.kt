@@ -27,10 +27,16 @@ class HomeFragment: HomeInterface.View, Fragment(), NewsAdapter.OnNewsClickListe
         super.onViewCreated(view, savedInstanceState)
 
         val news = arrayListOf(
-            News("1", "", "", ""),
-            News("2", "", "", ""),
-            News("3", "", "", ""),
-            News("4", "", "", "")
+            News("Video 1", "", "Tag 1", ""),
+            News("Video 2", "", "Tag 2", ""),
+            News("Video 3", "", "Tag 3", ""),
+            News("Video 4", "", "Tag 4", ""),
+            News("Video 5", "", "Tag 5", ""),
+            News("Video 6", "", "Tag 6", ""),
+            News("Video 7", "", "Tag 7", ""),
+            News("Video 8", "", "Tag 8", ""),
+            News("Video 9", "", "Tag 9", ""),
+            News("Video 10", "", "Tag10", "")
         )
 
         binding.rvNews.layoutManager = LinearLayoutManager(context)
