@@ -35,8 +35,4 @@ class GalleryDialog(context: Context): CustomDialog() {
         }
     }
 
-    private fun deleteInStorage() {
-        //ImageSaver(context).setFileName("$position.png").setDirectoryName("images").delete()
-    }
-
 }
