@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.needle.app.utils.extensions.gone
+import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.usecases.player.PlayerActivity
 import com.sergioloc.hologram.adapter.NewsAdapter
@@ -31,6 +33,7 @@ class HomeFragment: Fragment(), NewsAdapter.OnNewsClickListener {
         initVariables()
         initObservers()
 
+        binding.loader.visible()
         viewModel.getNews()
     }
 
@@ -54,6 +57,7 @@ class HomeFragment: Fragment(), NewsAdapter.OnNewsClickListener {
             it.onSuccess { list ->
                 adapter.updateList(list)
             }
+            binding.loader.gone()
         }
     }
 

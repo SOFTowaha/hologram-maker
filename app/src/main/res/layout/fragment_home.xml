@@ -20,4 +20,14 @@
         android:background="@drawable/card_white"
         android:contentDescription="@null"/>
 
+    <ProgressBar
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/rvNews"
+        app:layout_constraintBottom_toBottomOf="@id/rvNews"
+        app:layout_constraintStart_toStartOf="@id/rvNews"
+        app:layout_constraintEnd_toEndOf="@id/rvNews"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

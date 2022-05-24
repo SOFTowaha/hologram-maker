@@ -28,7 +28,7 @@ class HomeViewModel: ViewModel() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             _news.postValue(Result.success(holograms))
-        }, 3000)
+        }, 1500)
     }
 
 
