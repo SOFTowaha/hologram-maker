@@ -7,6 +7,9 @@
     <!-- Home -->
     <string name="news">News</string>
 
+    <!-- Gallery -->
+    <string name="error_loading_image">Error loading image from gallery</string>
+
     <!-- Requirements -->
     <string name="registered_fav">You have to be registered to add favourites</string>
     <string name="registered_cloud">You have to be registered to upload to the cloud</string>

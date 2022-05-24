@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Utils;
+package com.sergioloc.hologram.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
