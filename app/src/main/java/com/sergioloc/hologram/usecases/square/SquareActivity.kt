@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
+import android.view.ViewGroup
 import android.view.WindowInsets
 import androidx.appcompat.app.AppCompatActivity
 import com.needle.app.utils.extensions.gone
@@ -61,7 +62,7 @@ class SquareActivity: AppCompatActivity() {
             }
         }
         binding.ivMoreSize.setOnClickListener {
-            if (size < width) {
+            if (3 * size + 2 * distance < width) {
                 size += 10
                 updateSize()
             }
@@ -69,11 +70,16 @@ class SquareActivity: AppCompatActivity() {
 
         // Distance
         binding.ivLessDistance.setOnClickListener {
-            if (distance > 0)
+            if (distance > 0) {
                 distance -= 10
+                updateDistance()
+            }
         }
         binding.ivMoreDistance.setOnClickListener {
-            distance += 10
+            if (3 * size + 2 * distance < width) {
+                distance += 10
+                updateDistance()
+            }
         }
     }
 
@@ -109,6 +115,28 @@ class SquareActivity: AppCompatActivity() {
         binding.ivCross.layoutParams.height = Converter.dpToPx(this, size.toFloat())
         binding.ivCross.layoutParams.width = Converter.dpToPx(this, size.toFloat())
         binding.ivCross.requestLayout()
+    }
+
+    private fun updateDistance() {
+        // Top
+        var param = binding.ivTop.layoutParams as ViewGroup.MarginLayoutParams
+        param.setMargins(0,0,0, Converter.dpToPx(this, distance.toFloat()))
+        binding.ivTop.layoutParams = param
+
+        // Bottom
+        param = binding.ivBottom.layoutParams as ViewGroup.MarginLayoutParams
+        param.setMargins(0, Converter.dpToPx(this, distance.toFloat()),0,0)
+        binding.ivBottom.layoutParams = param
+
+        // Left
+        param = binding.ivLeft.layoutParams as ViewGroup.MarginLayoutParams
+        param.setMargins(0,0, Converter.dpToPx(this, distance.toFloat()),0)
+        binding.ivLeft.layoutParams = param
+
+        // Right
+        param = binding.ivRight.layoutParams as ViewGroup.MarginLayoutParams
+        param.setMargins(Converter.dpToPx(this, distance.toFloat()),0,0,0)
+        binding.ivRight.layoutParams = param
     }
 
     private fun getScreenWidth(): Int {
