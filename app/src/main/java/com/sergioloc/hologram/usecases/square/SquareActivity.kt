@@ -9,6 +9,7 @@ import android.util.DisplayMetrics
 import android.view.ViewGroup
 import android.view.WindowInsets
 import androidx.appcompat.app.AppCompatActivity
+import com.needle.app.components.dialogs.ConfirmationDialog
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.databinding.ActivitySquareBinding
@@ -30,10 +31,25 @@ class SquareActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         initView()
+        initVariables()
         initButtons()
 
         hideButtonsAfter(1.5f)
-        width = Converter.pxToDp(this, getScreenWidth().toFloat())
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (true) {
+            val dialog = ConfirmationDialog(this)
+            dialog.apply {
+                setTitle("Aviso")
+                setMessage("Deseas guardar la configuración?")
+                setOnConfirmationClickListener {
+
+                }
+                show()
+            }
+        }
     }
 
     private fun initView() {
@@ -43,6 +59,10 @@ class SquareActivity: AppCompatActivity() {
             binding.ivLeft.setImageBitmap(it)
             binding.ivRight.setImageBitmap(it)
         }
+    }
+
+    private fun initVariables() {
+        width = Converter.pxToDp(this, getScreenWidth().toFloat())
     }
 
     private fun initButtons() {

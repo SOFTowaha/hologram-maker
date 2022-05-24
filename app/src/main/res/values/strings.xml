@@ -4,6 +4,10 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- General -->
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+
     <!-- Home -->
     <string name="news">News</string>
 
@@ -33,8 +37,6 @@
     <string name="favourites">Favourites</string>
     <string name="myholograms">My Holograms</string>
     <string name="share_usign">Share using</string>
-    <string name="acept">Acept</string>
-    <string name="cancel">Cancel</string>
     <string name="user_name">User name</string>
     <string name="password">Password</string>
     <string name="confirm_password">Password</string>
