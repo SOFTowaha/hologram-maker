@@ -1,19 +1,27 @@
 package com.sergioloc.hologram.usecases.square
 
+import android.graphics.Insets
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.DisplayMetrics
+import android.view.WindowInsets
 import androidx.appcompat.app.AppCompatActivity
 import com.needle.app.utils.extensions.gone
-import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.databinding.ActivitySquareBinding
+import com.sergioloc.hologram.utils.Converter
 import com.sergioloc.hologram.utils.Session
+
 
 class SquareActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivitySquareBinding
     private var buttonsVisible = true
+    private var size = 100
+    private var distance = 0
+    private var width = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +32,7 @@ class SquareActivity: AppCompatActivity() {
         initButtons()
 
         hideButtonsAfter(1.5f)
+        width = Converter.pxToDp(this, getScreenWidth().toFloat())
     }
 
     private fun initView() {
@@ -46,18 +55,25 @@ class SquareActivity: AppCompatActivity() {
 
         // Size
         binding.ivLessSize.setOnClickListener {
-
+            if (size > 10) {
+                size -= 10
+                updateSize()
+            }
         }
         binding.ivMoreSize.setOnClickListener {
-
+            if (size < width) {
+                size += 10
+                updateSize()
+            }
         }
 
         // Distance
         binding.ivLessDistance.setOnClickListener {
-
+            if (distance > 0)
+                distance -= 10
         }
         binding.ivMoreDistance.setOnClickListener {
-
+            distance += 10
         }
     }
 
@@ -87,6 +103,24 @@ class SquareActivity: AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             hideButtons()
         }, (seconds * 1000).toLong())
+    }
+
+    private fun updateSize() {
+        binding.ivCross.layoutParams.height = Converter.dpToPx(this, size.toFloat())
+        binding.ivCross.layoutParams.width = Converter.dpToPx(this, size.toFloat())
+        binding.ivCross.requestLayout()
+    }
+
+    private fun getScreenWidth(): Int {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val windowMetrics = windowManager.currentWindowMetrics
+            val insets: Insets = windowMetrics.windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+            windowMetrics.bounds.width() - insets.left - insets.right
+        } else {
+            val displayMetrics = DisplayMetrics()
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+            displayMetrics.widthPixels
+        }
     }
 
 }

@@ -17,5 +17,9 @@ class Converter {
             ).toInt()
         }
 
+        fun pxToDp(context: Context, px: Float): Float {
+            return px / context.resources.displayMetrics.density
+        }
+
     }
 }
