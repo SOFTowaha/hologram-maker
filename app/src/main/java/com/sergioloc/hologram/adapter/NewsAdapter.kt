@@ -12,7 +12,7 @@ import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.models.Hologram
 
-class NewsAdapter(private val holograms: ArrayList<Hologram>, private val listener: OnNewsClickListener): RecyclerView.Adapter<NewsAdapter.UserViewHolder>() {
+class NewsAdapter(private var holograms: ArrayList<Hologram>, private val listener: OnNewsClickListener): RecyclerView.Adapter<NewsAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(LayoutInflater.from(parent.context), parent)
@@ -37,6 +37,12 @@ class NewsAdapter(private val holograms: ArrayList<Hologram>, private val listen
         holder.root.setOnSingleClickListener {
             listener.onClickNews("")
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list: ArrayList<Hologram>) {
+        holograms = list
+        notifyDataSetChanged()
     }
 
     class UserViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
