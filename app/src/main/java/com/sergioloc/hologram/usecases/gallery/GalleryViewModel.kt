@@ -31,8 +31,8 @@ class GalleryViewModel: ViewModel() {
                 val b = BitmapFactory.decodeStream(i)
                 bitmaps.add(b)
                 imageNames.add("$position.jpg")
-                position++
             } catch (e: Exception) { }
+            position++
             if (bitmaps.size == size)
                 hasNext = false
         }
@@ -45,6 +45,7 @@ class GalleryViewModel: ViewModel() {
             val fos: FileOutputStream = context.openFileOutput(imageName, Context.MODE_PRIVATE)
             bitmap.compress(Bitmap.CompressFormat.PNG, 50, fos)
             fos.close()
+            imageNames.add("$position.jpg")
             _newImage.postValue(Result.success(bitmap))
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
@@ -55,8 +56,10 @@ class GalleryViewModel: ViewModel() {
 
     fun deleteHologram(context: Context, position: Int) {
         val file = File(context.filesDir, imageNames[position])
-        if (file.delete())
+        if (file.delete()) {
+            imageNames.removeAt(position)
             _deleteImage.postValue(Result.success(position))
+        }
         else
             _deleteImage.postValue(Result.failure(Throwable()))
     }

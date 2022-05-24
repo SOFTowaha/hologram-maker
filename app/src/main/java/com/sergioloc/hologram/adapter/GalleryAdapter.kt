@@ -37,9 +37,18 @@ class GalleryAdapter(var bitmaps: ArrayList<Bitmap>, var listener: OnHologramCli
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addItem(bitmap: Bitmap) {
         bitmaps.add(bitmap)
-        notifyItemInserted(bitmaps.size-1)
+        notifyDataSetChanged()
+        //notifyItemInserted(bitmaps.size-1)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun removeItem(position: Int) {
+        bitmaps.removeAt(position)
+        notifyDataSetChanged()
+        //notifyItemRemoved(position)
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

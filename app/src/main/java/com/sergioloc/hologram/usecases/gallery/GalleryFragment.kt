@@ -26,12 +26,9 @@ import com.sergioloc.hologram.R
 import com.sergioloc.hologram.adapter.GalleryAdapter
 import com.sergioloc.hologram.databinding.FragmentGalleryBinding
 import com.sergioloc.hologram.dialogs.GalleryDialog
-import com.sergioloc.hologram.dialogs.DialogImageUpload
 import com.sergioloc.hologram.usecases.cube.SquareActivity
 import com.sergioloc.hologram.utils.Constants
 import com.sergioloc.hologram.utils.Session
-import com.sergioloc.hologram.utils.extensions.toByteArray
-import kotlinx.android.synthetic.main.dialog_image_upload.*
 import java.io.*
 import kotlin.collections.ArrayList
 
@@ -42,6 +39,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
     private lateinit var adapter: GalleryAdapter
     private lateinit var prefs: SharedPreferences
     private var size = 0
+    private var nextId = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentGalleryBinding.inflate(inflater, container, false)
@@ -76,6 +74,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
 
         prefs = requireActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE)
         size = prefs.getInt("size", 0)
+        nextId = prefs.getInt("nextId", 1)
     }
 
     private fun initObservers() {
@@ -90,6 +89,19 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
                 adapter.addItem(bitmap)
                 with (prefs.edit()) {
                     size++
+                    nextId++
+                    putInt("size", size)
+                    putInt("nextId", nextId)
+                    apply()
+                }
+            }
+        }
+
+        viewModel.deleteImage.observe(this) {
+            it.onSuccess { position ->
+                adapter.removeItem(position)
+                with (prefs.edit()) {
+                    size--
                     putInt("size", size)
                     apply()
                 }
@@ -102,19 +114,6 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
             val photoPickerIntent = Intent(Intent.ACTION_PICK)
             photoPickerIntent.type = "image/*"
             startForResult.launch(photoPickerIntent)
-        }
-    }
-
-    private fun showDialog(bitmap: Bitmap, cloudView: Boolean) {
-        val dialog = DialogImageUpload(requireContext())
-        dialog.show()
-        dialog.ivImageLoaded?.setImageBitmap(bitmap)
-        dialog.bCloseDialog?.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.bUploadImage?.setOnClickListener {
-            //presenter?.callSaveLocalImage(bitmap)
-            dialog.dismiss()
         }
     }
 
@@ -142,7 +141,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
                     val inputStream: InputStream? = context?.contentResolver?.openInputStream(it)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
                     Thread {
-                        viewModel.saveNewHologram(requireContext(), bitmap, adapter.itemCount+1)
+                        viewModel.saveNewHologram(requireContext(), bitmap, nextId)
                     }.start()
                 }
             } catch (e: Exception) {
