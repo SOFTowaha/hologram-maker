@@ -2,8 +2,9 @@ package com.sergioloc.hologram.usecases.gallery
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context.MODE_PRIVATE
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -27,20 +28,16 @@ import com.sergioloc.hologram.databinding.FragmentGalleryBinding
 import com.sergioloc.hologram.dialogs.DialogImageUpload
 import com.sergioloc.hologram.utils.Constants
 import kotlinx.android.synthetic.main.dialog_image_upload.*
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.InputStream
-import java.text.SimpleDateFormat
-import java.util.*
+import java.io.*
 import kotlin.collections.ArrayList
-
 
 class GalleryFragment: Fragment() {
 
     private lateinit var binding: FragmentGalleryBinding
     private lateinit var viewModel: GalleryViewModel
     private lateinit var adapter: GalleryAdapter
+    private lateinit var prefs: SharedPreferences
+    private var size = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentGalleryBinding.inflate(inflater, container, false)
@@ -55,7 +52,7 @@ class GalleryFragment: Fragment() {
         initObservers()
         initButtons()
 
-        viewModel.getMyHolograms()
+        viewModel.getMyHolograms(requireContext(), size)
     }
 
     private fun initView() {
@@ -72,12 +69,26 @@ class GalleryFragment: Fragment() {
 
     private fun initVariables() {
         viewModel = GalleryViewModel()
+
+        prefs = requireActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE)
+        size = prefs.getInt("size", 0)
     }
 
     private fun initObservers() {
         viewModel.list.observe(this) {
             it.onSuccess { list ->
                 adapter.updateList(list)
+            }
+        }
+
+        viewModel.newImage.observe(this) {
+            it.onSuccess { bitmap ->
+                adapter.addItem(bitmap)
+                with (prefs.edit()) {
+                    size++
+                    putInt("size", size)
+                    apply()
+                }
             }
         }
     }
@@ -126,28 +137,14 @@ class GalleryFragment: Fragment() {
                 uri?.let {
                     val inputStream: InputStream? = context?.contentResolver?.openInputStream(it)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
-                    adapter.addItem(bitmap)
                     Thread {
-                        storeImage(bitmap)
+                        viewModel.saveNewHologram(requireContext(), bitmap, adapter.itemCount+1)
                     }.start()
                 }
             } catch (e: Exception) {
                 Log.e(Constants.TAG_GALLERY, "Error loading image from gallery")
                 Toast.makeText(context, getString(R.string.error_loading_image), Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-    private fun storeImage(image: Bitmap) {
-        try {
-            val mImageName = "${adapter.itemCount}.jpg"
-            val fos: FileOutputStream = requireContext().openFileOutput(mImageName, MODE_PRIVATE)
-            image.compress(Bitmap.CompressFormat.PNG, 90, fos)
-            fos.close()
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
         }
     }
 
