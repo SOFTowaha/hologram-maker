@@ -33,7 +33,7 @@ class PyramidFragment : Fragment() {
 
     /** Internal class  */
 
-    class MyPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+    class MyPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
         // Returns total number of pages
         override fun getCount(): Int {
@@ -65,7 +65,7 @@ class PyramidFragment : Fragment() {
         }
 
         companion object {
-            private val NUM_ITEMS = 6
+            const val NUM_ITEMS = 6
         }
 
     }

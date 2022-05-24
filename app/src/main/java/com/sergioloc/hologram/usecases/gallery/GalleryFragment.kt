@@ -26,7 +26,7 @@ import com.sergioloc.hologram.R
 import com.sergioloc.hologram.adapter.GalleryAdapter
 import com.sergioloc.hologram.databinding.FragmentGalleryBinding
 import com.sergioloc.hologram.dialogs.GalleryDialog
-import com.sergioloc.hologram.usecases.cube.SquareActivity
+import com.sergioloc.hologram.usecases.square.SquareActivity
 import com.sergioloc.hologram.utils.Constants
 import com.sergioloc.hologram.utils.Session
 import java.io.*

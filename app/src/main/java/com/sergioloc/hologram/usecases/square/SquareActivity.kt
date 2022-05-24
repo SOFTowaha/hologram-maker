@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.usecases.cube
+package com.sergioloc.hologram.usecases.square
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

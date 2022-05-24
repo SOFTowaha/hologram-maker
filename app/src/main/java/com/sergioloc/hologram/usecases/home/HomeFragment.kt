@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sergioloc.hologram.R
 import com.sergioloc.hologram.usecases.player.PlayerActivity
 import com.sergioloc.hologram.adapter.NewsAdapter
 import com.sergioloc.hologram.databinding.FragmentHomeBinding
@@ -24,6 +26,8 @@ class HomeFragment: Fragment(), NewsAdapter.OnNewsClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
+        initVariables()
         val holograms = arrayListOf(
             Hologram("Video 1", "https://docs.microsoft.com/es-es/windows/apps/design/controls/images/image-licorice.jpg", "Tag 1", ""),
             Hologram("Video 2", "https://thumbs.dreamstime.com/b/profil-de-hibou-16485620.jpg", "Tag 2", ""),
@@ -36,9 +40,20 @@ class HomeFragment: Fragment(), NewsAdapter.OnNewsClickListener {
             Hologram("Video 9", "", "Tag 9", ""),
             Hologram("Video 10", "", "Tag10", "")
         )
+    }
 
+    private fun initView() {
+        // Toolbar
+        val activity = activity as AppCompatActivity
+        activity.title = resources.getString(R.string.news)
+
+        // RecyclerView
         binding.rvNews.layoutManager = LinearLayoutManager(context)
-        binding.rvNews.adapter = NewsAdapter(holograms, this)
+        binding.rvNews.adapter = NewsAdapter(ArrayList(), this)
+    }
+
+    private fun initVariables() {
+
     }
 
     override fun onClickNews(url: String) {

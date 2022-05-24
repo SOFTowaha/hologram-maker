@@ -37,7 +37,7 @@
             android:name=".usecases.player.PlayerActivity" />
 
         <activity
-            android:name=".usecases.cube.SquareActivity"
+            android:name=".usecases.square.SquareActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme" />
 
