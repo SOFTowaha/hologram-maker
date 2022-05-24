@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Models
+package com.sergioloc.hologram.models
 
 import android.net.Uri
 

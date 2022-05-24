@@ -25,13 +25,14 @@ import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.adapter.GalleryAdapter
 import com.sergioloc.hologram.databinding.FragmentGalleryBinding
+import com.sergioloc.hologram.dialogs.GalleryDialog
 import com.sergioloc.hologram.dialogs.DialogImageUpload
 import com.sergioloc.hologram.utils.Constants
 import kotlinx.android.synthetic.main.dialog_image_upload.*
 import java.io.*
 import kotlin.collections.ArrayList
 
-class GalleryFragment: Fragment() {
+class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
 
     private lateinit var binding: FragmentGalleryBinding
     private lateinit var viewModel: GalleryViewModel
@@ -61,7 +62,7 @@ class GalleryFragment: Fragment() {
         activity.title = resources.getString(R.string.myholograms)
 
         // RecyclerView
-        adapter = GalleryAdapter(ArrayList())
+        adapter = GalleryAdapter(ArrayList(), this)
         binding.rvImages.setHasFixedSize(true)
         binding.rvImages.layoutManager = GridLayoutManager(context, 3)
         binding.rvImages.adapter = adapter
@@ -145,6 +146,18 @@ class GalleryFragment: Fragment() {
                 Log.e(Constants.TAG_GALLERY, "Error loading image from gallery")
                 Toast.makeText(context, getString(R.string.error_loading_image), Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    /** ADAPTER LISTENER **/
+
+    override fun onHologramClick(bitmap: Bitmap, position: Int) {
+        val dialog = GalleryDialog(requireContext())
+        dialog.apply {
+            setBitmap(bitmap)
+            setOnDeleteClickListener {  }
+            setOnHologramClickListener {  }
+            show()
         }
     }
 

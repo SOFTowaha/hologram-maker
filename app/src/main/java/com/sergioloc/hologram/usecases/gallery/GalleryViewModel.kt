@@ -6,10 +6,7 @@ import android.graphics.BitmapFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.InputStream
+import java.io.*
 
 class GalleryViewModel: ViewModel() {
 
@@ -18,6 +15,11 @@ class GalleryViewModel: ViewModel() {
 
     private val _newImage: MutableLiveData<Result<Bitmap>> = MutableLiveData()
     val newImage: LiveData<Result<Bitmap>> get() = _newImage
+
+    private val _deleteImage: MutableLiveData<Result<Int>> = MutableLiveData()
+    val deleteImage: LiveData<Result<Int>> get() = _deleteImage
+
+    private val imageNames = ArrayList<String>()
 
     fun getMyHolograms(context: Context, size: Int) {
         var hasNext = true
@@ -28,6 +30,7 @@ class GalleryViewModel: ViewModel() {
                 val i: InputStream = context.openFileInput("$position.jpg")
                 val b = BitmapFactory.decodeStream(i)
                 bitmaps.add(b)
+                imageNames.add("$position.jpg")
                 position++
             } catch (e: Exception) { }
             if (bitmaps.size == size)
@@ -48,6 +51,14 @@ class GalleryViewModel: ViewModel() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    fun deleteHologram(context: Context, position: Int) {
+        val file = File(context.filesDir, imageNames[position])
+        if (file.delete())
+            _deleteImage.postValue(Result.success(position))
+        else
+            _deleteImage.postValue(Result.failure(Throwable()))
     }
 
 }

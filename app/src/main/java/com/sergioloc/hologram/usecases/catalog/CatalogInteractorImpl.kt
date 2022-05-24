@@ -7,8 +7,8 @@ import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.sergioloc.hologram.Adapter.RecyclerAdapter
-import com.sergioloc.hologram.Models.VideoModel
+import com.sergioloc.hologram.adapter.RecyclerAdapter
+import com.sergioloc.hologram.models.VideoModel
 import java.util.*
 import kotlin.collections.ArrayList
 

@@ -1,6 +1,6 @@
 package com.sergioloc.hologram.usecases.catalog
 
-import com.sergioloc.hologram.Models.VideoModel
+import com.sergioloc.hologram.models.VideoModel
 
 interface CatalogInterface {
 

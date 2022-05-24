@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.Adapter
+package com.sergioloc.hologram.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.sergioloc.hologram.usecases.catalog.CatalogInterface
-import com.sergioloc.hologram.Models.VideoModel
+import com.sergioloc.hologram.models.VideoModel
 import com.sergioloc.hologram.usecases.player.PlayerActivity
 import com.varunest.sparkbutton.SparkButton
 import com.varunest.sparkbutton.SparkEventListener
