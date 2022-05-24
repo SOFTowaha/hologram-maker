@@ -2,31 +2,39 @@ package com.sergioloc.hologram.usecases.gallery
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.needle.app.utils.extensions.setOnSingleClickListener
-import com.sergioloc.hologram.dialogs.DialogImageUpload
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.adapter.GalleryAdapter
 import com.sergioloc.hologram.databinding.FragmentGalleryBinding
+import com.sergioloc.hologram.dialogs.DialogImageUpload
 import com.sergioloc.hologram.utils.Constants
 import kotlinx.android.synthetic.main.dialog_image_upload.*
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 import java.io.InputStream
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class GalleryFragment: Fragment() {
 
@@ -119,11 +127,27 @@ class GalleryFragment: Fragment() {
                     val inputStream: InputStream? = context?.contentResolver?.openInputStream(it)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
                     adapter.addItem(bitmap)
+                    Thread {
+                        storeImage(bitmap)
+                    }.start()
                 }
             } catch (e: Exception) {
                 Log.e(Constants.TAG_GALLERY, "Error loading image from gallery")
                 Toast.makeText(context, getString(R.string.error_loading_image), Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun storeImage(image: Bitmap) {
+        try {
+            val mImageName = "${adapter.itemCount}.jpg"
+            val fos: FileOutputStream = requireContext().openFileOutput(mImageName, MODE_PRIVATE)
+            image.compress(Bitmap.CompressFormat.PNG, 90, fos)
+            fos.close()
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 
