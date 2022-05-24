@@ -27,7 +27,10 @@ import com.sergioloc.hologram.adapter.GalleryAdapter
 import com.sergioloc.hologram.databinding.FragmentGalleryBinding
 import com.sergioloc.hologram.dialogs.GalleryDialog
 import com.sergioloc.hologram.dialogs.DialogImageUpload
+import com.sergioloc.hologram.usecases.cube.SquareActivity
 import com.sergioloc.hologram.utils.Constants
+import com.sergioloc.hologram.utils.Session
+import com.sergioloc.hologram.utils.extensions.toByteArray
 import kotlinx.android.synthetic.main.dialog_image_upload.*
 import java.io.*
 import kotlin.collections.ArrayList
@@ -155,8 +158,13 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         val dialog = GalleryDialog(requireContext())
         dialog.apply {
             setBitmap(bitmap)
-            setOnDeleteClickListener {  }
-            setOnHologramClickListener {  }
+            setOnDeleteClickListener {
+                viewModel.deleteHologram(requireContext(), position)
+            }
+            setOnHologramClickListener {
+                Session.bitmap = bitmap
+                startActivity(Intent(requireActivity(), SquareActivity::class.java))
+            }
             show()
         }
     }
