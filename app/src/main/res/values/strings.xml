@@ -10,6 +10,10 @@
     <!-- Gallery -->
     <string name="error_loading_image">Error loading image from gallery</string>
 
+    <!-- Square -->
+    <string name="size">Size</string>
+    <string name="distance">Distance</string>
+
     <!-- Requirements -->
     <string name="registered_fav">You have to be registered to add favourites</string>
     <string name="registered_cloud">You have to be registered to upload to the cloud</string>
