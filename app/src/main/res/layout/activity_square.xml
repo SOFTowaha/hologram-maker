@@ -26,6 +26,7 @@
         app:layout_constraintStart_toStartOf="@id/ivCross"
         app:layout_constraintEnd_toEndOf="@id/ivCross"
         app:layout_constraintDimensionRatio="1:1"
+        android:scaleType="centerCrop"
         android:background="@drawable/ic_delete"
         android:contentDescription="@null"/>
 
@@ -38,6 +39,7 @@
         app:layout_constraintEnd_toEndOf="@id/ivCross"
         app:layout_constraintDimensionRatio="1:1"
         android:rotation="180"
+        android:scaleType="centerCrop"
         android:background="@drawable/ic_delete"
         android:contentDescription="@null"/>
 
@@ -50,6 +52,7 @@
         app:layout_constraintEnd_toStartOf="@id/ivCross"
         app:layout_constraintDimensionRatio="1:1"
         android:rotation="-90"
+        android:scaleType="centerCrop"
         android:background="@drawable/ic_delete"
         android:contentDescription="@null"/>
 
@@ -62,6 +65,7 @@
         app:layout_constraintStart_toEndOf="@id/ivCross"
         app:layout_constraintDimensionRatio="1:1"
         android:rotation="90"
+        android:scaleType="centerCrop"
         android:background="@drawable/ic_delete"
         android:contentDescription="@null"/>
 
