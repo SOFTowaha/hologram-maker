@@ -1,5 +1,7 @@
 package com.sergioloc.hologram.usecases.square
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Insets
 import android.os.Build
 import android.os.Bundle
@@ -9,10 +11,11 @@ import android.util.DisplayMetrics
 import android.view.ViewGroup
 import android.view.WindowInsets
 import androidx.appcompat.app.AppCompatActivity
-import com.needle.app.components.dialogs.ConfirmationDialog
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.visible
+import com.sergioloc.hologram.R
 import com.sergioloc.hologram.databinding.ActivitySquareBinding
+import com.sergioloc.hologram.dialogs.ConfirmationDialog
 import com.sergioloc.hologram.utils.Converter
 import com.sergioloc.hologram.utils.Session
 
@@ -20,10 +23,13 @@ import com.sergioloc.hologram.utils.Session
 class SquareActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivitySquareBinding
+    private lateinit var prefs: SharedPreferences
     private var buttonsVisible = true
+    private var width = 0f
     private var size = 100
     private var distance = 0
-    private var width = 0f
+    private var initSize = 100
+    private var initDistance = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,21 +40,33 @@ class SquareActivity: AppCompatActivity() {
         initVariables()
         initButtons()
 
+        updateSize()
+        updateDistance()
         hideButtonsAfter(1.5f)
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        if (true) {
+        if (initSize != size || initDistance != distance) {
             val dialog = ConfirmationDialog(this)
             dialog.apply {
-                setTitle("Aviso")
-                setMessage("Deseas guardar la configuración?")
-                setOnConfirmationClickListener {
-
+                setTitle(getString(R.string.warning))
+                setMessage(getString(R.string.save_config))
+                setOnAcceptClickListener {
+                    with (prefs.edit()) {
+                        putInt("size", size)
+                        putInt("distance", distance)
+                        apply()
+                    }
+                    super.onBackPressed()
+                }
+                setOnCancelClickListener {
+                    super.onBackPressed()
                 }
                 show()
             }
+        }
+        else {
+            super.onBackPressed()
         }
     }
 
@@ -62,7 +80,15 @@ class SquareActivity: AppCompatActivity() {
     }
 
     private fun initVariables() {
+        // Screen width
         width = Converter.pxToDp(this, getScreenWidth().toFloat())
+
+        // Shared Preferences
+        prefs = getSharedPreferences("preferences", Context.MODE_PRIVATE)
+        size = prefs.getInt("size", 100)
+        initSize = prefs.getInt("size", 100)
+        distance = prefs.getInt("distance", 0)
+        initDistance = prefs.getInt("distance", 0)
     }
 
     private fun initButtons() {

@@ -1,12 +1,8 @@
-package com.needle.app.components.dialogs
+package com.sergioloc.hologram.dialogs
 
 import android.content.Context
 import android.view.LayoutInflater
-import com.needle.app.R
-import com.needle.app.databinding.DialogConfirmationBinding
-import com.sergioloc.hologram.R
 import com.sergioloc.hologram.databinding.DialogConfirmationBinding
-import com.sergioloc.hologram.dialogs.CustomDialog
 
 /** Shows a simple dialog with Yes/No buttons **/
 
@@ -39,8 +35,15 @@ class ConfirmationDialog constructor(val context: Context): CustomDialog() {
         binding.btnNo.text = text
     }
 
-    fun setOnConfirmationClickListener(onClickListener: () -> Unit) {
+    fun setOnAcceptClickListener(onClickListener: () -> Unit) {
         binding.btnYes.setOnClickListener {
+            onClickListener()
+            dialog.dismiss()
+        }
+    }
+
+    fun setOnCancelClickListener(onClickListener: () -> Unit) {
+        binding.btnNo.setOnClickListener {
             onClickListener()
             dialog.dismiss()
         }

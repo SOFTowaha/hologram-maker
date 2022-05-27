@@ -17,6 +17,8 @@
     <!-- Square -->
     <string name="size">Size</string>
     <string name="distance">Distance</string>
+    <string name="warning">Warning</string>
+    <string name="save_config">Do you want to save the configuration?</string>
 
     <!-- Requirements -->
     <string name="registered_fav">You have to be registered to add favourites</string>

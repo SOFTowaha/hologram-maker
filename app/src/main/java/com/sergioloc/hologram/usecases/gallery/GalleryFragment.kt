@@ -38,7 +38,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
     private lateinit var viewModel: GalleryViewModel
     private lateinit var adapter: GalleryAdapter
     private lateinit var prefs: SharedPreferences
-    private var size = 0
+    private var length = 0
     private var nextId = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -54,7 +54,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         initObservers()
         initButtons()
 
-        viewModel.getMyHolograms(requireContext(), size)
+        viewModel.getMyHolograms(requireContext(), length)
     }
 
     private fun initView() {
@@ -73,7 +73,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         viewModel = GalleryViewModel()
 
         prefs = requireActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE)
-        size = prefs.getInt("size", 0)
+        length = prefs.getInt("length", 0)
         nextId = prefs.getInt("nextId", 1)
     }
 
@@ -88,9 +88,9 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
             it.onSuccess { bitmap ->
                 adapter.addItem(bitmap)
                 with (prefs.edit()) {
-                    size++
+                    length++
                     nextId++
-                    putInt("size", size)
+                    putInt("length", length)
                     putInt("nextId", nextId)
                     apply()
                 }
@@ -101,8 +101,8 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
             it.onSuccess { position ->
                 adapter.removeItem(position)
                 with (prefs.edit()) {
-                    size--
-                    putInt("size", size)
+                    length--
+                    putInt("length", length)
                     apply()
                 }
             }
