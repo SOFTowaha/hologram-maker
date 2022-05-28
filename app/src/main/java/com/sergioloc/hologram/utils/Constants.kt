@@ -2,6 +2,9 @@ package com.sergioloc.hologram.utils
 
 object Constants {
 
+    // Play Store
+    const val PLAY_STORE = "https://play.google.com/store/apps/details?id=com.sergioloc.hologram"
+
     // Logs
     const val TAG_GALLERY = "HM-GALLERY"
     const val TAG_CATALOG = "HM-CATALOG"

@@ -14,7 +14,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.usecases.catalog.CatalogFragment
@@ -22,7 +21,7 @@ import com.sergioloc.hologram.usecases.gallery.GalleryFragment
 import com.sergioloc.hologram.usecases.home.HomeFragment
 import com.sergioloc.hologram.usecases.pyramid.PyramidFragment
 import com.sergioloc.hologram.databinding.ActivityMainBinding
-import com.sergioloc.hologram.usecases.login.LoginActivity
+import com.sergioloc.hologram.utils.Constants
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
 /**
@@ -40,7 +39,6 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     private var imageH: ImageView? = null
     private var sesionH: Button? = null
     private var fragmentToNavigate: Fragment? = null
-    private var shareLink = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,7 +98,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun updateShareLink(link: String) {
-        shareLink = link
+
     }
 
     override fun onBackPressed() {
@@ -117,14 +115,10 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
             R.id.nav_gallery -> fragmentToNavigate = GalleryFragment()
             R.id.nav_catalog -> fragmentToNavigate = CatalogFragment()
             R.id.nav_pyramid -> fragmentToNavigate = PyramidFragment()
-            R.id.nav_close -> { fragmentToNavigate = HomeFragment()
-                FirebaseAuth.getInstance().signOut()
-                startActivity(Intent(this, LoginActivity::class.java))
-            }
             R.id.nav_share -> {
                 val i = Intent(Intent.ACTION_SEND)
                 i.type = "text/plain"
-                i.putExtra(Intent.EXTRA_TEXT, shareLink)
+                i.putExtra(Intent.EXTRA_TEXT, Constants.PLAY_STORE)
                 startActivity(Intent.createChooser(i, resources.getString(R.string.share_usign)))
             }
         }
