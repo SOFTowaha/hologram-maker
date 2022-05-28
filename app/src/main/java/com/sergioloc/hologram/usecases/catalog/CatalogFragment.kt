@@ -1,12 +1,12 @@
 package com.sergioloc.hologram.usecases.catalog
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.view.*
-import androidx.core.content.ContextCompat
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
@@ -30,7 +30,6 @@ class CatalogFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initButtons()
-        //showLoading()
     }
 
     private fun initView() {
@@ -105,23 +104,31 @@ class CatalogFragment: Fragment() {
         }
 
         binding.clBar.setOnClickListener {
-            if (tagsOpen) {
-                movePanel(false)
-            } else {
-                movePanel(true)
-            }
-            //switchArrow()
+            showTags(!tagsOpen)
+            tagsOpen = !tagsOpen
         }
     }
 
-    private fun showLoading() {
-        binding.loading.visible()
-        binding.rvVideos.gone()
+    private fun showLoader(visible: Boolean) {
+        if (visible) {
+            binding.loading.visible()
+            binding.rvVideos.gone()
+        }
+        else {
+            binding.loading.gone()
+            binding.rvVideos.visible()
+        }
     }
 
-    private fun hideLoading() {
-        binding.loading.gone()
-        binding.rvVideos.visible()
+    private fun showTags(visible: Boolean) {
+       if (visible) {
+           binding.chipsLayout.visible()
+           binding.ivArrow.setImageResource(R.drawable.ic_arrow_up)
+       }
+       else {
+           binding.chipsLayout.gone()
+           binding.ivArrow.setImageResource(R.drawable.ic_arrow_bottom)
+       }
     }
 
     private fun selectChip(chip: ChipView?, color: Int) {
@@ -132,22 +139,6 @@ class CatalogFragment: Fragment() {
     private fun deselectChip(chip: ChipView?) {
         chip?.backgroundColor = ContextCompat.getColor(requireContext(), R.color.colorWhite)
         chip?.textColor = ContextCompat.getColor(requireContext(), R.color.black)
-    }
-
-    private fun movePanel(open: Boolean) {
-
-    }
-
-    private fun switchArrow() {
-        /*
-        arrowDown = if (arrowDown) {
-            arrowTag.setImageResource(R.drawable.ic_action_arrow_up)
-            false
-        } else {
-            arrowTag.setImageResource(R.drawable.ic_action_arrow_down)
-            true
-        }
-         */
     }
 
 }

@@ -33,6 +33,7 @@
     <string name="music">Music</string>
     <string name="figures">Figures</string>
     <string name="others">Others</string>
+    <string name="up">Up</string>
 
     <!-- Requirements -->
     <string name="registered_fav">You have to be registered to add favourites</string>
