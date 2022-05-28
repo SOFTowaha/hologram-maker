@@ -15,7 +15,7 @@ class CatalogViewModel: ViewModel() {
     val catalog: MutableLiveData<Result<ArrayList<Hologram>>> = MutableLiveData()
 
     fun getVideos() {
-        db.collection("catalog").orderBy("name").addSnapshotListener { value, error ->
+        db.collection(Constants.CATALOG).orderBy("name").addSnapshotListener { value, error ->
             if (error != null)
                 Log.e(Constants.TAG_CATALOG, "Error listening to catalog")
 
