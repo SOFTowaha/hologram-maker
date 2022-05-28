@@ -22,7 +22,7 @@
         android:layout_alignBottom="@id/pageIndicatorView"
         android:layout_alignStart="@id/pager"
         android:layout_alignEnd="@id/pager"
-        android:background="@color/colorWhite"/>
+        android:background="@color/white"/>
 
     <com.rd.PageIndicatorView
         android:id="@+id/pageIndicatorView"

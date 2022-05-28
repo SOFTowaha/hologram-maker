@@ -23,7 +23,7 @@
             app:sparkbutton_inActiveImage="@drawable/ic_fav"
             app:sparkbutton_iconSize="40dp"
             app:sparkbutton_primaryColor="@color/yellow"
-            app:sparkbutton_secondaryColor="@color/colorWhite" />
+            app:sparkbutton_secondaryColor="@color/white" />
 
         <ImageView
             android:id="@+id/button_fav_list_copy"

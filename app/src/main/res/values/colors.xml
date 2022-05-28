@@ -9,7 +9,7 @@
     <color name="colorSteps">#8de3ff</color>
 
     <color name="black_overlay">#66000000</color>
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
     <color name="colorGrayDark">#252525</color>
     <color name="colorGrayT">#ab787878</color>
     <color name="grey">#9b9b9b</color>
@@ -18,7 +18,7 @@
 
     <color name="red">#d12d2d</color>
     <color name="blue">#3187d2</color>
-    <color name="green">#4bd743</color>
+    <color name="green">#27B11F</color>
     <color name="yellow">#d2cd2e</color>
     <color name="orange">#f99727</color>
     <color name="pink">#c448c0</color>

@@ -1,5 +1,6 @@
 package com.sergioloc.hologram.usecases.catalog
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.adapter.NewsAdapter
 import com.sergioloc.hologram.databinding.FragmentCatalogBinding
+import com.sergioloc.hologram.usecases.player.PlayerActivity
 import com.vpaliy.chips_lover.ChipView
 
 class CatalogFragment: Fragment(), NewsAdapter.OnNewsClickListener {
@@ -119,6 +121,7 @@ class CatalogFragment: Fragment(), NewsAdapter.OnNewsClickListener {
         viewModel.catalog.observe(this) {
             it.onSuccess { holograms ->
                 binding.rvVideos.adapter = NewsAdapter(holograms, this)
+                binding.tvCount.text = getString(R.string.num_videos, holograms.size)
             }
         }
     }
@@ -147,18 +150,20 @@ class CatalogFragment: Fragment(), NewsAdapter.OnNewsClickListener {
 
     private fun selectChip(chip: ChipView?, color: Int) {
         chip?.backgroundColor = ContextCompat.getColor(requireContext(), color)
-        chip?.textColor = ContextCompat.getColor(requireContext(), R.color.colorWhite)
+        chip?.textColor = ContextCompat.getColor(requireContext(), R.color.white)
     }
 
     private fun deselectChip(chip: ChipView?) {
-        chip?.backgroundColor = ContextCompat.getColor(requireContext(), R.color.colorWhite)
+        chip?.backgroundColor = ContextCompat.getColor(requireContext(), R.color.white)
         chip?.textColor = ContextCompat.getColor(requireContext(), R.color.black)
     }
 
     /** ADAPTER LISTENER **/
 
     override fun onClickNews(url: String) {
-
+        val i = Intent(context, PlayerActivity::class.java)
+        i.putExtra("id", url)
+        startActivity(i)
     }
 
 }

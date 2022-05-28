@@ -11,6 +11,7 @@ import com.needle.app.utils.extensions.setImageFromURL
 import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.models.Hologram
+import com.sergioloc.hologram.utils.Converter
 
 class NewsAdapter(private var holograms: ArrayList<Hologram>, private val listener: OnNewsClickListener): RecyclerView.Adapter<NewsAdapter.UserViewHolder>() {
 
@@ -27,6 +28,7 @@ class NewsAdapter(private var holograms: ArrayList<Hologram>, private val listen
         // Text
         holder.tvName.text = n.name
         holder.tvTag.text = n.tag
+        holder.tvTag.setTextColor(Converter.getTagColor(holder.root.context, n.tag))
 
         // Image
         setImageFromURL(holder.root.context, n.image) {

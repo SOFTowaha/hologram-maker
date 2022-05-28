@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="20dp"
         android:src="@drawable/ic_less"
-        app:tint="@color/colorWhite"
+        app:tint="@color/white"
         android:contentDescription="@null"/>
 
     <ImageView
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="20dp"
         android:src="@drawable/ic_more"
-        app:tint="@color/colorWhite"
+        app:tint="@color/white"
         android:contentDescription="@null"/>
 
     <TextView
@@ -102,7 +102,7 @@
         app:layout_constraintEnd_toStartOf="@id/ivMoreSize"
         android:text="@string/size"
         android:textSize="16sp"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/white"/>
 
     <ImageView
         android:id="@+id/ivLessDistance"
@@ -112,7 +112,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="20dp"
         android:src="@drawable/ic_less"
-        app:tint="@color/colorWhite"
+        app:tint="@color/white"
         android:contentDescription="@null"/>
 
     <ImageView
@@ -123,7 +123,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="20dp"
         android:src="@drawable/ic_more"
-        app:tint="@color/colorWhite"
+        app:tint="@color/white"
         android:contentDescription="@null"/>
 
     <TextView
@@ -136,6 +136,6 @@
         app:layout_constraintEnd_toStartOf="@id/ivMoreDistance"
         android:text="@string/distance"
         android:textSize="16sp"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

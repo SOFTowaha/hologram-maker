@@ -67,13 +67,4 @@ class HomeFragment: Fragment(), NewsAdapter.OnNewsClickListener {
         startActivity(i)
     }
 
-    /*
-    "Animals" -> tvTag1.setTextColor(resources.getColor(R.color.orange))
-                    "Films" -> tvTag1.setTextColor(resources.getColor(R.color.blue))
-                    "Space" -> tvTag1.setTextColor(resources.getColor(R.color.pink))
-                    "Nature" -> tvTag1.setTextColor(resources.getColor(R.color.green))
-                    "Music" -> tvTag1.setTextColor(resources.getColor(R.color.cyan))
-                    "Figures" -> tvTag1.setTextColor(resources.getColor(R.color.yellow))
-                    "Others" -> tvTag1.setTextColor(resources.getColor(R.color.purple))
-     */
 }

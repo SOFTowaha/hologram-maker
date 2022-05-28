@@ -24,7 +24,7 @@
     <string name="catalog">Catalog</string>
     <string name="categories">Categories</string>
     <string name="one_video">1 video</string>
-    <string name="num_videos">%1s videos</string>
+    <string name="num_videos">%1d videos</string>
     <string name="all">All</string>
     <string name="animals">Animals</string>
     <string name="movies">Movies</string>
