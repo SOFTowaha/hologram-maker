@@ -20,6 +20,20 @@
     <string name="warning">Warning</string>
     <string name="save_config">Do you want to save the configuration?</string>
 
+    <!-- Catalog -->
+    <string name="catalog">Catalog</string>
+    <string name="categories">Categories</string>
+    <string name="one_video">1 video</string>
+    <string name="num_videos">%1s videos</string>
+    <string name="all">All</string>
+    <string name="animals">Animals</string>
+    <string name="movies">Movies</string>
+    <string name="space">Space</string>
+    <string name="nature">Nature</string>
+    <string name="music">Music</string>
+    <string name="figures">Figures</string>
+    <string name="others">Others</string>
+
     <!-- Requirements -->
     <string name="registered_fav">You have to be registered to add favourites</string>
     <string name="registered_cloud">You have to be registered to upload to the cloud</string>
@@ -35,7 +49,6 @@
     <string name="uploaded">Uploaded</string>
 
     <!-- Others -->
-    <string name="catalog">Catalog</string>
     <string name="favourites">Favourites</string>
     <string name="myholograms">My Holograms</string>
     <string name="share_usign">Share using</string>
