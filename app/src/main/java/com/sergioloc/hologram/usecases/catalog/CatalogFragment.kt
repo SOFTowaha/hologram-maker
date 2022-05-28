@@ -6,19 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
+import com.sergioloc.hologram.adapter.NewsAdapter
 import com.sergioloc.hologram.databinding.FragmentCatalogBinding
 import com.vpaliy.chips_lover.ChipView
 
-class CatalogFragment: Fragment() {
+class CatalogFragment: Fragment(), NewsAdapter.OnNewsClickListener {
 
     private lateinit var binding: FragmentCatalogBinding
+    private lateinit var viewModel: CatalogViewModel
 
-    private var recyclerView: RecyclerView? = null
-    private var layoutManager: RecyclerView.LayoutManager? = null
     private var tagsOpen = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -28,8 +27,16 @@ class CatalogFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initVariables()
         initView()
         initButtons()
+        initObservers()
+
+        viewModel.getVideos()
+    }
+
+    private fun initVariables() {
+        viewModel = CatalogViewModel()
     }
 
     private fun initView() {
@@ -38,11 +45,10 @@ class CatalogFragment: Fragment() {
         activity?.title = resources.getString(R.string.title_catalog)
 
         // RecyclerView
-        layoutManager = LinearLayoutManager(context)
-        recyclerView?.setHasFixedSize(true)
-        recyclerView?.isNestedScrollingEnabled = false
-        recyclerView?.layoutManager = layoutManager
-        //recyclerView?.adapter = presenter?.callAdapter()
+        val layoutManager = LinearLayoutManager(context)
+        binding.rvVideos.setHasFixedSize(true)
+        binding.rvVideos.isNestedScrollingEnabled = false
+        binding.rvVideos.layoutManager = layoutManager
     }
 
     private fun initButtons() {
@@ -109,6 +115,14 @@ class CatalogFragment: Fragment() {
         }
     }
 
+    private fun initObservers() {
+        viewModel.catalog.observe(this) {
+            it.onSuccess { holograms ->
+                binding.rvVideos.adapter = NewsAdapter(holograms, this)
+            }
+        }
+    }
+
     private fun showLoader(visible: Boolean) {
         if (visible) {
             binding.loading.visible()
@@ -139,6 +153,12 @@ class CatalogFragment: Fragment() {
     private fun deselectChip(chip: ChipView?) {
         chip?.backgroundColor = ContextCompat.getColor(requireContext(), R.color.colorWhite)
         chip?.textColor = ContextCompat.getColor(requireContext(), R.color.black)
+    }
+
+    /** ADAPTER LISTENER **/
+
+    override fun onClickNews(url: String) {
+
     }
 
 }
