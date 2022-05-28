@@ -72,9 +72,9 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
     private fun initVariables() {
         viewModel = GalleryViewModel()
 
-        prefs = requireActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE)
-        length = prefs.getInt("length", 0)
-        nextId = prefs.getInt("nextId", 1)
+        prefs = requireActivity().getSharedPreferences(Constants.PREFERENCES, Context.MODE_PRIVATE)
+        length = prefs.getInt(Constants.PREF_LENGTH, 0)
+        nextId = prefs.getInt(Constants.PREF_NEXT_ID, 1)
     }
 
     private fun initObservers() {
@@ -90,8 +90,8 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
                 with (prefs.edit()) {
                     length++
                     nextId++
-                    putInt("length", length)
-                    putInt("nextId", nextId)
+                    putInt(Constants.PREF_LENGTH, length)
+                    putInt(Constants.PREF_NEXT_ID, nextId)
                     apply()
                 }
             }
@@ -102,7 +102,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
                 adapter.removeItem(position)
                 with (prefs.edit()) {
                     length--
-                    putInt("length", length)
+                    putInt(Constants.PREF_LENGTH, length)
                     apply()
                 }
             }

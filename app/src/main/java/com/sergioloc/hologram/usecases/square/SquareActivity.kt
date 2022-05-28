@@ -16,6 +16,7 @@ import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.databinding.ActivitySquareBinding
 import com.sergioloc.hologram.dialogs.ConfirmationDialog
+import com.sergioloc.hologram.utils.Constants
 import com.sergioloc.hologram.utils.Converter
 import com.sergioloc.hologram.utils.Session
 
@@ -53,8 +54,8 @@ class SquareActivity: AppCompatActivity() {
                 setMessage(getString(R.string.save_config))
                 setOnAcceptClickListener {
                     with (prefs.edit()) {
-                        putInt("size", size)
-                        putInt("distance", distance)
+                        putInt(Constants.PREF_SIZE, size)
+                        putInt(Constants.PREF_DISTANCE, distance)
                         apply()
                     }
                     super.onBackPressed()
@@ -84,11 +85,11 @@ class SquareActivity: AppCompatActivity() {
         width = Converter.pxToDp(this, getScreenWidth().toFloat())
 
         // Shared Preferences
-        prefs = getSharedPreferences("preferences", Context.MODE_PRIVATE)
-        size = prefs.getInt("size", 100)
-        initSize = prefs.getInt("size", 100)
-        distance = prefs.getInt("distance", 0)
-        initDistance = prefs.getInt("distance", 0)
+        prefs = getSharedPreferences(Constants.PREFERENCES, Context.MODE_PRIVATE)
+        size = prefs.getInt(Constants.PREF_SIZE, 100)
+        initSize = prefs.getInt(Constants.PREF_SIZE, 100)
+        distance = prefs.getInt(Constants.PREF_DISTANCE, 0)
+        initDistance = prefs.getInt(Constants.PREF_DISTANCE, 0)
     }
 
     private fun initButtons() {
