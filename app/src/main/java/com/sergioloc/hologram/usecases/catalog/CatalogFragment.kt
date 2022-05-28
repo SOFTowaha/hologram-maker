@@ -92,7 +92,7 @@ class CatalogFragment: Fragment() {
         flexboxLayout = myView?.findViewById(R.id.controlPanel) as FlexboxLayout
         //text = myView?.findViewById(R.id.tvCount) as TextView
         blackSpace = myView?.findViewById(R.id.blackSpace) as TextView
-        controlsHandle = myView?.findViewById(R.id.controlHandle)
+        //controlsHandle = myView?.findViewById(R.id.controlHandle)
         //arrowTag = myView?.findViewById(R.id.arrowTag) as ImageView
         arrowDown = true
         tagsOpen = false

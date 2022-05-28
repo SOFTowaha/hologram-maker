@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
@@ -10,6 +10,7 @@
         android:id="@+id/controlPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorWhite"
         app:flexWrap="wrap"
         app:alignItems="baseline"
@@ -129,51 +130,69 @@
             android:layout_marginTop="15dp"
             android:layout_marginStart="10dp"/>
 
-        <TextView
+        <View
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </com.google.android.flexbox.FlexboxLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/ivArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="@id/tvCategories"
+            app:layout_constraintBottom_toBottomOf="@id/tvCategories"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingHorizontal="10dp"
+            android:src="@drawable/ic_arrow_bottom"
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:id="@+id/tvCategories"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivArrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite"
+            android:text="Caterories"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:id="@+id/tvCount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="@id/tvCategories"
+            app:layout_constraintBottom_toBottomOf="@id/tvCategories"
+            android:layout_marginEnd="10dp"
+            android:textSize="15dp"
+            android:text="videos"
+            android:gravity="end|center" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/blackSpace"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorWhite"
         android:layout_marginTop="50dp"/>
-
-    <TextView
-        android:id="@+id/controlHandle"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:background="@color/colorWhite"
-        android:text="Caterories"
-        android:textSize="15dp"/>
-
-    <TextView
-        android:id="@+id/tvCount"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="15dp"
-        android:text="videos"
-        android:gravity="right|center"
-        android:paddingEnd="10dp" />
-
-    <ImageView
-        android:id="@+id/arrowTag"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:src="@drawable/ic_action_arrow_down"/>
 
     <View
         android:id="@+id/toolbarShadow"
         android:layout_width="match_parent"
         android:layout_height="3dp"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="50dp"
         android:background="@drawable/toolbar_dropshadow"/>
 
@@ -185,32 +204,30 @@
         android:background="@color/colorPrimary"
         android:id="@+id/recyclerview" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible" />
 
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="invisible"
-            android:indeterminate="true" />
+    <com.vpaliy.chips_lover.ChipView
+        android:id="@+id/chipUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="10dp"
+        app:chip_text="Subir"
+        app:chip_backgroundColor="@color/colorPrimary"
+        app:chipTextColor="@color/colorWhite"
+        app:chip_elevation="2dp"
+        app:chipSelectable="false"
+        android:visibility="invisible" />
 
-        <com.vpaliy.chips_lover.ChipView
-            android:id="@+id/chipUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:chip_text="Subir"
-            app:chip_backgroundColor="@color/colorPrimary"
-            app:chipTextColor="@color/colorWhite"
-            app:chip_elevation="2dp"
-            app:chipSelectable="false"
-            android:visibility="invisible"
-            android:layout_marginTop="70dp"
-            android:layout_marginStart="10dp"
-            android:layout_centerHorizontal="true"/>
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
