@@ -24,11 +24,6 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="Etiquetas">
-        <item name="android:background">@drawable/fab_background_label</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
     <style name="NavigationViewTheme" parent="AppTheme">
         <item name="textAppearanceListItem">@style/TextAppearance.AppCompat.Body2</item>
     </style>
@@ -40,7 +35,4 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
-    </style>
 </resources>

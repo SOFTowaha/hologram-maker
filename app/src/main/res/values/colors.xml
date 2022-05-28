@@ -2,18 +2,11 @@
 <resources>
     <color name="colorPrimary">#0D99B1</color>
     <color name="colorPrimaryDark">#0C8297</color>
-    <color name="colorPrimary2">#3f78b5</color>
-    <color name="colorPrimaryDark2">#30649f</color>
     <color name="colorAccent">#5FE5FF</color>
-    <color name="colorAccent2">#E95B47</color>
     <color name="colorSteps">#8de3ff</color>
 
-    <color name="black_overlay">#66000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="colorGrayDark">#252525</color>
-    <color name="colorGrayT">#ab787878</color>
     <color name="grey">#9b9b9b</color>
-    <color name="colorWhiteT">#32FFFFFF</color>
     <color name="black">#000000</color>
 
     <color name="red">#d12d2d</color>
@@ -27,15 +20,5 @@
     <color name="turquoise">#03c1ae</color>
     <color name="turquoise_light">#49dacc</color>
 
-    <color name="black_semi">#B2000000</color>
     <color name="transparent">#00ffffff</color>
-
-
-    <color name="colorChipBackground">#e0e0e0</color>
-    <color name="colorChipBackgroundClicked">#424242</color>
-    <color name="colorChipText">#424242</color>
-    <color name="colorChipTextClicked">#F5F5F5</color>
-    <color name="colorChipCloseInactive">#757575</color>
-    <color name="colorChipCloseClicked">#F5F5F5</color>
-
 </resources>

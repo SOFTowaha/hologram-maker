@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="20dp"
         android:src="@drawable/ic_action_plus"
-        android:backgroundTint="@color/colorAccent2"
+        app:backgroundTint="@color/colorAccent"
         android:contentDescription="@null"/>
 
     <ProgressBar
