@@ -115,7 +115,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         when (item.itemId) {
             R.id.nav_home -> fragmentToNavigate = HomeFragment()
             R.id.nav_gallery -> fragmentToNavigate = GalleryFragment()
-            R.id.nav_list -> fragmentToNavigate = CatalogFragment(guest!!)
+            R.id.nav_catalog -> fragmentToNavigate = CatalogFragment()
             R.id.nav_pyramid -> fragmentToNavigate = PyramidFragment()
             R.id.nav_close -> { fragmentToNavigate = HomeFragment()
                 FirebaseAuth.getInstance().signOut()
