@@ -15,7 +15,7 @@
             android:title="@string/title_catalog" />
         <item
             android:id="@+id/nav_pyramid"
-            android:icon="@drawable/ic_action_pyramid"
+            android:icon="@drawable/ic_pyramid"
             android:title="@string/title_pyramid" />
     </group>
 
