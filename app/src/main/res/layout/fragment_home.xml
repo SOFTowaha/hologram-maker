@@ -6,6 +6,7 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/greyDark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/nav_bar">
 
@@ -16,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="20dp"
-        android:background="@drawable/card_white"
+        android:background="@drawable/card_background"
         android:contentDescription="@null"/>
 
     <ProgressBar

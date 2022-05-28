@@ -36,7 +36,7 @@
         android:layout_marginEnd="5dp"
         android:text="Delete"
         android:textAllCaps="false"
-        android:background="@drawable/chip_white"/>
+        android:background="@drawable/chip_background"/>
 
     <Button
         android:id="@+id/btnCreate"
@@ -48,6 +48,6 @@
         android:layout_marginStart="5dp"
         android:text="Hologram"
         android:textAllCaps="false"
-        android:background="@drawable/chip_white"/>
+        android:background="@drawable/chip_background"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:padding="10dp"
     android:layout_margin="20dp"
-    android:background="@drawable/card_white">
+    android:background="@drawable/card_background">
 
     <TextView
         android:id="@+id/tvTitle"
