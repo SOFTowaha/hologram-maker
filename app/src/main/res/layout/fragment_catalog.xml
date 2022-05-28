@@ -15,7 +15,7 @@
         app:flexWrap="wrap"
         app:alignItems="baseline"
         app:alignContent="flex_start"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <com.vpaliy.chips_lover.ChipView
             android:id="@+id/chip0"
@@ -179,7 +179,6 @@
             app:layout_constraintTop_toTopOf="@id/tvCategories"
             app:layout_constraintBottom_toBottomOf="@id/tvCategories"
             android:layout_marginEnd="10dp"
-            android:text="@string/one_video"
             android:gravity="end|center" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
