@@ -20,10 +20,10 @@
         android:theme="@style/AppTheme.NoActionBar">
 
         <activity
-            android:name=".usecases.login.LoginActivity"/>
+            android:name="com.sergioloc.hologram.ui.login.LoginActivity"/>
 
         <activity
-            android:name=".usecases.navigator.NavigateActivity"
+            android:name="com.sergioloc.hologram.ui.navigator.NavigateActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
@@ -34,10 +34,10 @@
         </activity>
 
         <activity
-            android:name=".usecases.player.PlayerActivity" />
+            android:name="com.sergioloc.hologram.ui.player.PlayerActivity" />
 
         <activity
-            android:name=".usecases.square.SquareActivity"
+            android:name="com.sergioloc.hologram.ui.square.SquareActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme" />
 

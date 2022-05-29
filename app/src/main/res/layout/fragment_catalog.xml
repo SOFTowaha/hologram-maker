@@ -192,14 +192,14 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ProgressBar
-        android:id="@+id/loading"
+        android:id="@+id/loader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <com.vpaliy.chips_lover.ChipView
         android:id="@+id/chipUp"
