@@ -8,6 +8,16 @@ class AppRepository {
 
     private val api = FirebaseService()
 
+    suspend fun getNewsIds(): ArrayList<String> {
+        val response = api.getNewsIds()
+        return response
+    }
+
+    suspend fun getHologram(id: String): Hologram? {
+        val response = api.getHologram(id)
+        return response
+    }
+
     suspend fun getCatalog(): ArrayList<Hologram>? {
         if (Session.catalog != null)
             return Session.catalog

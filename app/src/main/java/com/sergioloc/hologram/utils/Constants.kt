@@ -17,6 +17,8 @@ object Constants {
     const val PREF_DISTANCE = "distance"
 
     // Firestore
+    const val HOME = "home"
+    const val NEWS = "news"
     const val CATALOG = "catalog"
 
 }
