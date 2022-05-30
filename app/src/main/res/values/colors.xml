@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6dbfee</color>
-    <color name="colorPrimaryDark">#40b3ea</color>
-    <color name="colorAccent">#54e4e9</color>
+    <color name="primary">#6dbfee</color>
+    <color name="primaryDark">#40b3ea</color>
+    <color name="accent">#54e4e9</color>
 
     <color name="brownLight">#e5d2cc</color>
     <color name="brown">#d59278</color>
@@ -14,16 +14,15 @@
     <color name="greyDark">#1f1f1f</color>
     <color name="black">#000000</color>
 
-    <color name="red">#d12d2d</color>
-    <color name="blue">#3187d2</color>
-    <color name="green">#27B11F</color>
-    <color name="yellow">#d2cd2e</color>
-    <color name="orange">#f99727</color>
-    <color name="pink">#c448c0</color>
-    <color name="cyan">#4ec2b6</color>
-    <color name="purple">#7a54bc</color>
-    <color name="turquoise">#03c1ae</color>
-    <color name="turquoise_light">#49dacc</color>
+    <color name="tag_red">#d12d2d</color>
+    <color name="tag_blue">#3187d2</color>
+    <color name="tag_green">#27B11F</color>
+    <color name="tag_yellow">#d2cd2e</color>
+    <color name="tag_orange">#f99727</color>
+    <color name="tag_pink">#c448c0</color>
+    <color name="tag_cyan">#4ec2b6</color>
+    <color name="tag_purple">#7a54bc</color>
+    <color name="tag_turquoise">#03c1ae</color>
 
     <color name="transparent">#00ffffff</color>
 </resources>

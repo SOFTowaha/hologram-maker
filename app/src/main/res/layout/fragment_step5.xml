@@ -20,7 +20,7 @@
         android:layout_height="1dp"
         android:layout_below="@id/titleStep4"
         android:layout_margin="10dp"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/primary"/>
 
     <ImageView
         android:id="@+id/imgStep4"

@@ -40,7 +40,7 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
     private fun initView() {
         // Toolbar
         val activity = activity as AppCompatActivity
-        activity.title = resources.getString(R.string.news)
+        activity.title = resources.getString(R.string.home)
 
         // RecyclerView
         adapter = HologramAdapter(ArrayList(), this)

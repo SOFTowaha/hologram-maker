@@ -25,13 +25,13 @@ class Converter {
 
         fun getTagColor(context: Context, tag: String): Int {
             when (tag) {
-                "Animals" -> return ContextCompat.getColor(context, R.color.orange)
-                "Movies" -> return ContextCompat.getColor(context, R.color.blue)
-                "Space" -> return ContextCompat.getColor(context, R.color.pink)
-                "Nature" -> return ContextCompat.getColor(context, R.color.green)
-                "Music" -> return ContextCompat.getColor(context, R.color.cyan)
-                "Figures" -> return ContextCompat.getColor(context, R.color.yellow)
-                "Others" -> return ContextCompat.getColor(context, R.color.purple)
+                "Animals" -> return ContextCompat.getColor(context, R.color.tag_orange)
+                "Movies" -> return ContextCompat.getColor(context, R.color.tag_blue)
+                "Space" -> return ContextCompat.getColor(context, R.color.tag_pink)
+                "Nature" -> return ContextCompat.getColor(context, R.color.tag_green)
+                "Music" -> return ContextCompat.getColor(context, R.color.tag_cyan)
+                "Figures" -> return ContextCompat.getColor(context, R.color.tag_yellow)
+                "Others" -> return ContextCompat.getColor(context, R.color.tag_purple)
             }
             return ContextCompat.getColor(context, R.color.white)
         }

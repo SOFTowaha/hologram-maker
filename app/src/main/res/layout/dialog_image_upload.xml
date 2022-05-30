@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ivImageLoaded"
         android:layout_alignStart="@id/ivImageLoaded"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/accent"
         android:background="@color/white"
         android:layout_marginTop="20dp"
         android:text="Guardar"/>
@@ -28,7 +28,7 @@
         android:layout_below="@id/ivImageLoaded"
         android:layout_centerHorizontal="true"
         android:background="@color/white"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/accent"
         android:layout_marginTop="20dp"
         android:text="Cancelar"
         android:layout_toEndOf="@id/bUploadImage"/>

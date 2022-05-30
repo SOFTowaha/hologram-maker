@@ -59,7 +59,7 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
             if (binding.chip0.isActivated) {
                 deselectChip(binding.chip0)
             } else {
-                selectChip(binding.chip0, R.color.red)
+                selectChip(binding.chip0, R.color.tag_red)
                 deselectChip(binding.chip1)
                 deselectChip(binding.chip2)
                 deselectChip(binding.chip3)
@@ -73,43 +73,43 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
             if (binding.chip1.isActivated)
                 deselectChip(binding.chip1)
             else
-                selectChip(binding.chip1, R.color.orange)
+                selectChip(binding.chip1, R.color.tag_orange)
         }
         binding.chip2.setOnClickListener {
             if (binding.chip2.isActivated)
                 deselectChip(binding.chip2)
             else
-                selectChip(binding.chip2, R.color.blue)
+                selectChip(binding.chip2, R.color.tag_blue)
         }
         binding.chip3.setOnClickListener {
             if (binding.chip3.isActivated)
                 deselectChip(binding.chip3)
             else
-                selectChip(binding.chip3, R.color.pink)
+                selectChip(binding.chip3, R.color.tag_pink)
         }
         binding.chip4.setOnClickListener {
             if (binding.chip4.isActivated)
                 deselectChip(binding.chip4)
             else
-                selectChip(binding.chip4, R.color.green)
+                selectChip(binding.chip4, R.color.tag_green)
         }
         binding.chip5.setOnClickListener {
             if (binding.chip5.isActivated)
                 deselectChip(binding.chip5)
             else
-                selectChip(binding.chip5, R.color.cyan)
+                selectChip(binding.chip5, R.color.tag_cyan)
         }
         binding.chip6.setOnClickListener {
             if (binding.chip6.isActivated)
                 deselectChip(binding.chip6)
             else
-                selectChip(binding.chip6, R.color.yellow)
+                selectChip(binding.chip6, R.color.tag_yellow)
         }
         binding.chip7.setOnClickListener {
             if (binding.chip7.isActivated)
                 deselectChip(binding.chip7)
             else
-                selectChip(binding.chip7, R.color.purple)
+                selectChip(binding.chip7, R.color.tag_purple)
         }
 
         binding.clBar.setOnClickListener {

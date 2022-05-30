@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/user_name"
             android:inputType="textEmailAddress"
-            android:background="@color/turquoise"
+            android:background="@color/tag_turquoise"
             android:textColor="#333"
             android:textSize="15sp" />
 
@@ -45,7 +45,7 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/turquoise"
+            android:background="@color/tag_turquoise"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:textColor="#333"
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/user_name"
             android:inputType="textEmailAddress"
-            android:background="@color/turquoise"
+            android:background="@color/tag_turquoise"
             android:textColor="#333"
             android:textSize="15sp" />
 
@@ -106,7 +106,7 @@
             android:id="@+id/password2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/turquoise"
+            android:background="@color/tag_turquoise"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:textColor="#333"
@@ -116,7 +116,7 @@
             android:id="@+id/password2R"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/turquoise"
+            android:background="@color/tag_turquoise"
             android:hint="@string/confirm_password"
             android:inputType="textPassword"
             android:textColor="#333"
