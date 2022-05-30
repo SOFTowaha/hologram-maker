@@ -4,10 +4,6 @@
     <color name="primaryDark">#bd6c57</color>
     <color name="accent">#bd6c57</color>
 
-    <color name="brownLight">#e5d2cc</color>
-    <color name="brown">#d59278</color>
-    <color name="brownDark">#bd6c57</color>
-
     <color name="background">#FAFAFA</color>
     <color name="white">#FFFFFF</color>
     <color name="textDefault">#808080</color>

@@ -2,9 +2,11 @@ package com.sergioloc.hologram.ui.components
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -14,7 +16,7 @@ class Chip @JvmOverloads constructor(
     context: Context, attributeSet: AttributeSet? = null, defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attributeSet, defStyleAttr) {
 
-    private val root: ConstraintLayout
+    private val ivBackground: ImageView
     private val tvTitle: TextView
 
     private var isChipSelected = false
@@ -23,14 +25,17 @@ class Chip @JvmOverloads constructor(
     init {
         View.inflate(this.context, R.layout.chip, this) as ConstraintLayout
 
-        root = findViewById(R.id.root)
+        ivBackground = findViewById(R.id.ivBackground)
         tvTitle = findViewById(R.id.tvTitle)
 
         attributeSet?.let {
             val typedArray = getTypedArray(it)
-            val title = typedArray.getString(R.styleable.MyChip_text).toString()
-            color = typedArray.getColor(R.styleable.MyChip_color, ContextCompat.getColor(context, R.color.background))
+            val title = typedArray.getString(R.styleable.MyChip_chipTitle).toString()
+            color = typedArray.getColor(R.styleable.MyChip_chipColor, ContextCompat.getColor(context, R.color.background))
+            isChipSelected = typedArray.getBoolean(R.styleable.MyChip_chipSelected, false)
             tvTitle.text = title
+            if (isChipSelected)
+                select()
         }
     }
 
@@ -40,22 +45,29 @@ class Chip @JvmOverloads constructor(
     }
 
     fun setOnClickListener(onClickListener: () -> Unit) {
-        root.setOnClickListener {
+        ivBackground.setOnClickListener {
             if (isChipSelected)
                 unselect()
             else
                 select()
-            isChipSelected = !isChipSelected
             onClickListener()
         }
     }
 
-    private fun unselect() {
-        root.backgroundTintList = ContextCompat.getColorStateList(context, R.color.background)
+    fun unselect() {
+        isChipSelected = false
+        tvTitle.setTextColor(ContextCompat.getColor(context, R.color.black))
+        ivBackground.backgroundTintList = ContextCompat.getColorStateList(context, R.color.background)
     }
 
     private fun select() {
-        root.backgroundTintList = ContextCompat.getColorStateList(context, color)
+        isChipSelected = true
+        tvTitle.setTextColor(ContextCompat.getColor(context, R.color.white))
+        ivBackground.backgroundTintList = ColorStateList.valueOf(color)
+    }
+
+    fun isChipSelected(): Boolean {
+        return isChipSelected
     }
 
 }

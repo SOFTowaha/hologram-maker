@@ -12,136 +12,69 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"
         android:elevation="3dp"
         app:flexWrap="wrap"
         app:alignItems="baseline"
         app:alignContent="flex_start"
-        android:visibility="gone">
+        android:visibility="visible">
 
-        <com.vpaliy.chips_lover.ChipView
+        <com.sergioloc.hologram.ui.components.Chip
             android:id="@+id/chip0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:paddingHorizontal="5dp"
-            app:chip_text="@string/all"
-            app:chip_backgroundColor="@color/white"
-            app:chip_selectedBackgroundColor="@color/tag_red"
-            app:chip_selectedTextColor="@color/white"
-            app:chipTextColor="@color/black"
-            app:chip_elevation="2dp"
-            app:chipSelectable="false" />
+            app:chipTitle="@string/all"
+            app:chipColor="@color/tag_red"
+            app:chipSelected="true"/>
 
-        <com.vpaliy.chips_lover.ChipView
+        <com.sergioloc.hologram.ui.components.Chip
             android:id="@+id/chip1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:paddingHorizontal="5dp"
-            app:chip_text="@string/animals"
-            app:chip_backgroundColor="@color/white"
-            app:chip_selectedBackgroundColor="@color/tag_orange"
-            app:chip_selectedTextColor="@color/white"
-            app:chipTextColor="@color/black"
-            app:chip_elevation="2dp"
-            app:chipSelectable="false" />
+            app:chipTitle="@string/animals"
+            app:chipColor="@color/tag_orange"/>
 
-
-        <com.vpaliy.chips_lover.ChipView
+        <com.sergioloc.hologram.ui.components.Chip
             android:id="@+id/chip2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:paddingHorizontal="5dp"
-            app:chip_text="@string/movies"
-            app:chip_backgroundColor="@color/white"
-            app:chip_selectedBackgroundColor="@color/tag_blue"
-            app:chip_selectedTextColor="@color/white"
-            app:chipTextColor="@color/black"
-            app:chip_elevation="2dp"
-            app:chipSelectable="false" />
+            app:chipTitle="@string/movies"
+            app:chipColor="@color/tag_blue"/>
 
-        <com.vpaliy.chips_lover.ChipView
+        <com.sergioloc.hologram.ui.components.Chip
             android:id="@+id/chip3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:paddingHorizontal="5dp"
-            app:chip_text="@string/space"
-            app:chip_backgroundColor="@color/white"
-            app:chip_selectedBackgroundColor="@color/tag_pink"
-            app:chip_selectedTextColor="@color/white"
-            app:chipTextColor="@color/black"
-            app:chip_elevation="2dp"
-            app:chipSelectable="false" />
+            app:chipTitle="@string/space"
+            app:chipColor="@color/tag_pink"/>
 
-        <com.vpaliy.chips_lover.ChipView
+        <com.sergioloc.hologram.ui.components.Chip
             android:id="@+id/chip4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:paddingHorizontal="5dp"
-            app:chip_text="@string/nature"
-            app:chip_backgroundColor="@color/white"
-            app:chip_selectedBackgroundColor="@color/tag_green"
-            app:chip_selectedTextColor="@color/white"
-            app:chipTextColor="@color/black"
-            app:chip_elevation="2dp"
-            app:chipSelectable="false" />
+            app:chipTitle="@string/nature"
+            app:chipColor="@color/tag_green"/>
 
-        <com.vpaliy.chips_lover.ChipView
+        <com.sergioloc.hologram.ui.components.Chip
             android:id="@+id/chip5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:paddingHorizontal="5dp"
-            app:chip_text="@string/music"
-            app:chip_backgroundColor="@color/white"
-            app:chip_selectedBackgroundColor="@color/tag_cyan"
-            app:chip_selectedTextColor="@color/white"
-            app:chipTextColor="@color/black"
-            app:chip_elevation="2dp"
-            app:chipSelectable="false" />
+            app:chipTitle="@string/music"
+            app:chipColor="@color/tag_cyan"/>
 
-        <com.vpaliy.chips_lover.ChipView
+        <com.sergioloc.hologram.ui.components.Chip
             android:id="@+id/chip6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:paddingHorizontal="5dp"
-            app:chip_text="@string/figures"
-            app:chip_backgroundColor="@color/white"
-            app:chip_selectedBackgroundColor="@color/tag_yellow"
-            app:chip_selectedTextColor="@color/white"
-            app:chipTextColor="@color/black"
-            app:chip_elevation="2dp"
-            app:chipSelectable="false" />
+            app:chipTitle="@string/figures"
+            app:chipColor="@color/tag_yellow"/>
 
-        <com.vpaliy.chips_lover.ChipView
+        <com.sergioloc.hologram.ui.components.Chip
             android:id="@+id/chip7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="10dp"
-            android:paddingHorizontal="5dp"
-            app:chip_text="@string/others"
-            app:chip_backgroundColor="@color/white"
-            app:chip_selectedBackgroundColor="@color/tag_purple"
-            app:chip_selectedTextColor="@color/white"
-            app:chipTextColor="@color/black"
-            app:chip_elevation="2dp"
-            app:chipSelectable="false" />
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
+            app:chipTitle="@string/others"
+            app:chipColor="@color/tag_purple"/>
 
     </com.google.android.flexbox.FlexboxLayout>
 
@@ -200,21 +133,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone" />
-
-    <com.vpaliy.chips_lover.ChipView
-        android:id="@+id/chipUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/rvVideos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="10dp"
-        app:chip_text="@string/up"
-        app:chip_backgroundColor="@color/primary"
-        app:chipTextColor="@color/white"
-        app:chip_elevation="2dp"
-        app:chipSelectable="false"
-        android:visibility="invisible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,9 +10,9 @@
     </declare-styleable>
 
     <declare-styleable name="MyChip">
-        <attr name="text" format="string" />
-        <attr name="color" format="color" />
-        <attr name="selected" format="boolean" />
+        <attr name="chipTitle" format="string" />
+        <attr name="chipColor" format="color" />
+        <attr name="chipSelected" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="Chip">
