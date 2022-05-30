@@ -18,7 +18,7 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
     private lateinit var binding: FragmentCatalogBinding
     private lateinit var viewModel: CatalogViewModel
 
-    private var tagsOpen = false
+    private var tagsOpen = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentCatalogBinding.inflate(layoutInflater, container, false)
