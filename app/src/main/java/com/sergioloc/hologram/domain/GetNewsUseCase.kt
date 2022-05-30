@@ -9,12 +9,11 @@ class GetNewsUseCase {
 
     suspend operator fun invoke(): ArrayList<Hologram> {
         val ids = repository.getNewsIds()
-        val holograms = ArrayList<Hologram>()
+        var holograms = ArrayList<Hologram>()
 
-        for (id in ids) {
-            val hologram = repository.getHologram(id)
-            hologram?.let {
-                holograms.add(hologram)
+        ids?.let {
+            repository.getHolograms(it)?.let { h ->
+                holograms = h
             }
         }
 
