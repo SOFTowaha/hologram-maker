@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.sergioloc.hologram.R
+import com.sergioloc.hologram.data.model.Step
 import com.sergioloc.hologram.databinding.FragmentPyramidBinding
+import com.sergioloc.hologram.ui.adapters.StepsAdapter
 
 /**
  * Created by Sergio López Ceballos on 28/08/2019.
@@ -28,8 +30,27 @@ class PyramidFragment : Fragment() {
     }
 
     private fun initView() {
+        // Toolbar
         val activity = activity as AppCompatActivity?
         activity?.title = resources.getString(R.string.title_pyramid)
+
+
+        // View Pager
+        val steps = listOf(
+            Step(R.drawable.img_pyramid_0, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_1, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_2, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_3, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_4, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_5, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_6, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_7, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_8, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_9, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+        )
+
+        binding.vpSteps.adapter = StepsAdapter(requireContext(), steps)
+        binding.tabIndicator.setupWithViewPager(binding.vpSteps)
     }
 
 }

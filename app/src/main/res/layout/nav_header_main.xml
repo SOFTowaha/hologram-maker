@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/img_pyramid"
         android:scaleType="centerCrop"
-        app:shapeAppearanceOverlay="@style/RoundBottom20"
+        app:shapeAppearanceOverlay="@style/RoundedBottom"
         android:contentDescription="@null"/>
 
 </RelativeLayout>
