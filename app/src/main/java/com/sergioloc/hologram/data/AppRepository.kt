@@ -28,6 +28,7 @@ class AppRepository {
                 holograms.add(it)
             }
         }
+        Session.news = holograms
         return holograms
     }
 
