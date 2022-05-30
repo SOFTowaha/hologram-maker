@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="20dp"
     android:clipToPadding="false"
     android:paddingTop="10dp"
     android:paddingBottom="10dp">
@@ -17,14 +18,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="20dp"
-        app:cardCornerRadius="30dp"
-        android:elevation="5dp">
+        app:cardCornerRadius="30dp">
 
         <ImageView
             android:id="@+id/ivImage"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:contentDescription="@null"
+            android:background="@color/background"
             android:scaleType="centerCrop"/>
 
     </androidx.cardview.widget.CardView>

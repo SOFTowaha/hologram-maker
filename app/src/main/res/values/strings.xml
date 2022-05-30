@@ -11,7 +11,8 @@
 
     <!-- Home -->
     <string name="home">Home</string>
-    <string name="news">News</string>
+    <string name="new_holograms">New holograms</string>
+    <string name="play_demo">Play Demo</string>
 
     <!-- Gallery -->
     <string name="error_loading_image">Error loading image from gallery</string>

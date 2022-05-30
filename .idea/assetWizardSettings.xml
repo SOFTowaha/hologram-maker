@@ -344,7 +344,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/chat/baseline_chat_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/play_circle/baseline_play_circle_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -354,7 +354,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_suggestion" />
+                            <entry key="outputName" value="ic_play" />
                             <entry key="sourceFile" value="C:\Users\slc" />
                           </map>
                         </option>

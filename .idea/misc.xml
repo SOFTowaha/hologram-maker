@@ -3,10 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable-v21/card_primary.xml" value="0.252" />
         <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable-v21/ic_menu_gallery.xml" value="0.252" />
         <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable-v21/ic_menu_share.xml" value="0.252" />
         <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable/button_shape_default.xml" value="0.252" />
         <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable/card_accent.xml" value="0.1935" />
+        <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable/card_background.xml" value="0.252" />
+        <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable/card_primary.xml" value="0.252" />
+        <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable/card_stroke_gray.xml" value="0.252" />
         <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable/card_white.xml" value="0.252" />
         <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable/chip_accent.xml" value="0.252" />
         <entry key="..\:/Projects/Android/Hologram/app/src/main/res/drawable/chip_white.xml" value="0.252" />
