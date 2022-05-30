@@ -55,7 +55,6 @@
             android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_shape_default"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:text="@string/enter"/>
@@ -127,7 +126,6 @@
             android:id="@+id/btnSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_shape_default"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
             android:text="@string/enter"/>
