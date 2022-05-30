@@ -44,26 +44,26 @@ class Chip @JvmOverloads constructor(
         return context.obtainStyledAttributes(attributeSet, R.styleable.MyChip,0,0)
     }
 
-    fun setOnClickListener(onClickListener: () -> Unit) {
+    fun setOnClickListener(onClickListener: (isSelected: Boolean) -> Unit) {
         ivBackground.setOnClickListener {
             if (isChipSelected)
                 unselect()
             else
                 select()
-            onClickListener()
+            onClickListener(isChipSelected)
         }
+    }
+
+    fun select() {
+        isChipSelected = true
+        tvTitle.setTextColor(ContextCompat.getColor(context, R.color.white))
+        ivBackground.backgroundTintList = ColorStateList.valueOf(color)
     }
 
     fun unselect() {
         isChipSelected = false
         tvTitle.setTextColor(ContextCompat.getColor(context, R.color.black))
         ivBackground.backgroundTintList = ContextCompat.getColorStateList(context, R.color.background)
-    }
-
-    private fun select() {
-        isChipSelected = true
-        tvTitle.setTextColor(ContextCompat.getColor(context, R.color.white))
-        ivBackground.backgroundTintList = ColorStateList.valueOf(color)
     }
 
     fun isChipSelected(): Boolean {

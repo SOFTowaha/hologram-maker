@@ -53,8 +53,8 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
     }
 
     private fun initButtons() {
-        binding.chip0.setOnClickListener {
-            if (binding.chip0.isChipSelected()) {
+        binding.chip0.setOnClickListener { isSelected ->
+            if (isSelected) {
                 binding.chip1.unselect()
                 binding.chip2.unselect()
                 binding.chip3.unselect()
@@ -64,26 +64,40 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
                 binding.chip7.unselect()
             }
         }
-        binding.chip1.setOnClickListener {
+        binding.chip1.setOnClickListener { isSelected ->
+            viewModel.getFilteredCatalog("Animals", isSelected)
             binding.chip0.unselect()
+            checkChips()
         }
-        binding.chip2.setOnClickListener {
+        binding.chip2.setOnClickListener { isSelected ->
+            viewModel.getFilteredCatalog("Movies", isSelected)
             binding.chip0.unselect()
+            checkChips()
         }
-        binding.chip3.setOnClickListener {
+        binding.chip3.setOnClickListener { isSelected ->
+            viewModel.getFilteredCatalog("Space", isSelected)
             binding.chip0.unselect()
+            checkChips()
         }
-        binding.chip4.setOnClickListener {
+        binding.chip4.setOnClickListener { isSelected ->
+            viewModel.getFilteredCatalog("Nature", isSelected)
             binding.chip0.unselect()
+            checkChips()
         }
-        binding.chip5.setOnClickListener {
+        binding.chip5.setOnClickListener { isSelected ->
+            viewModel.getFilteredCatalog("Music", isSelected)
             binding.chip0.unselect()
+            checkChips()
         }
-        binding.chip6.setOnClickListener {
+        binding.chip6.setOnClickListener { isSelected ->
+            viewModel.getFilteredCatalog("Figures", isSelected)
             binding.chip0.unselect()
+            checkChips()
         }
-        binding.chip7.setOnClickListener {
+        binding.chip7.setOnClickListener { isSelected ->
+            viewModel.getFilteredCatalog("Others", isSelected)
             binding.chip0.unselect()
+            checkChips()
         }
 
         binding.clBar.setOnClickListener {
@@ -99,6 +113,15 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
                 binding.tvCount.text = getString(R.string.num_videos, holograms.size)
             }
             showLoader(false)
+        }
+    }
+
+    private fun checkChips() {
+        if (!binding.chip1.isChipSelected() && !binding.chip2.isChipSelected() && !binding.chip3.isChipSelected() &&
+                !binding.chip4.isChipSelected() &&!binding.chip5.isChipSelected() &&!binding.chip6.isChipSelected() &&
+                !binding.chip7.isChipSelected()) {
+            binding.chip0.select()
+            viewModel.getCatalog()
         }
     }
 

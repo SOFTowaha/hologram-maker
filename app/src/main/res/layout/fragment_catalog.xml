@@ -17,7 +17,7 @@
         app:flexWrap="wrap"
         app:alignItems="baseline"
         app:alignContent="flex_start"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <com.sergioloc.hologram.ui.components.Chip
             android:id="@+id/chip0"
