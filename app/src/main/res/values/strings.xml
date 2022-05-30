@@ -77,6 +77,7 @@
     <string name="title_pyramid">Make the pyramid</string>
     <string name="title_sign_out">Sign out</string>
     <string name="title_share">Share</string>
+    <string name="title_suggest">Suggest</string>
 
     <!-- Pyramid -->
     <string name="title_materials">Required Materials</string>

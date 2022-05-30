@@ -25,6 +25,11 @@
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_share"
                 android:title="@string/title_share" />
+
+            <item
+                android:id="@+id/nav_suggest"
+                android:icon="@drawable/ic_suggest"
+                android:title="@string/title_suggest" />
         </menu>
     </item>
 
