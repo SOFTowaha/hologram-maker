@@ -6,6 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.6"
+        android:orientation="horizontal"/>
+
     <ImageView
         android:id="@+id/ivCard"
         android:layout_width="match_parent"
@@ -31,8 +38,7 @@
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/gl"
         app:layout_constraintStart_toStartOf="@id/ivCard"
         app:layout_constraintEnd_toEndOf="@id/ivCard"
         android:paddingStart="20dp"
@@ -41,7 +47,7 @@
         android:maxLines="2"
         android:textAllCaps="true"
         android:textStyle="bold"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textColor="@color/background"
         tools:text="Title"/>
 
@@ -58,7 +64,7 @@
         android:paddingEnd="40dp"
         android:gravity="center"
         android:lineSpacingExtra="10dp"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:textColor="@color/background"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit sed, libero nascetur erat." />
 

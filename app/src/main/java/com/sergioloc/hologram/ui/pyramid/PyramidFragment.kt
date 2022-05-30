@@ -37,16 +37,16 @@ class PyramidFragment : Fragment() {
 
         // View Pager
         val steps = listOf(
-            Step(R.drawable.img_pyramid_0, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_0, resources.getString(R.string.step0), resources.getString(R.string.step0Des)),
             Step(R.drawable.img_pyramid_1, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
-            Step(R.drawable.img_pyramid_2, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
-            Step(R.drawable.img_pyramid_3, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
-            Step(R.drawable.img_pyramid_4, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
-            Step(R.drawable.img_pyramid_5, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
-            Step(R.drawable.img_pyramid_6, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
-            Step(R.drawable.img_pyramid_7, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
-            Step(R.drawable.img_pyramid_8, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
-            Step(R.drawable.img_pyramid_9, resources.getString(R.string.step1), resources.getString(R.string.step1Des)),
+            Step(R.drawable.img_pyramid_2, resources.getString(R.string.step2), resources.getString(R.string.step2Des)),
+            Step(R.drawable.img_pyramid_3, resources.getString(R.string.step3), resources.getString(R.string.step3Des)),
+            Step(R.drawable.img_pyramid_4, resources.getString(R.string.step4), resources.getString(R.string.step4Des)),
+            Step(R.drawable.img_pyramid_5, resources.getString(R.string.step5), resources.getString(R.string.step5Des)),
+            Step(R.drawable.img_pyramid_6, resources.getString(R.string.step6), resources.getString(R.string.step6Des)),
+            Step(R.drawable.img_pyramid_7, resources.getString(R.string.step7), resources.getString(R.string.step7Des)),
+            Step(R.drawable.img_pyramid_8, resources.getString(R.string.step8), resources.getString(R.string.step8Des)),
+            Step(R.drawable.img_pyramid_9, resources.getString(R.string.step9), resources.getString(R.string.step9Des)),
         )
 
         binding.vpSteps.adapter = StepsAdapter(requireContext(), steps)

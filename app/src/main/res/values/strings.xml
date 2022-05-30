@@ -81,16 +81,35 @@
     <string name="title_suggest">Suggest</string>
 
     <!-- Pyramid -->
-    <string name="title_materials">Required Materials</string>
-    <string name="materials">CD case\n\nCutting Knives\n\nPen\n\nRuler\n\nSmartphone\n\nTape</string>
-    <string name="step1">Step 1</string>
-    <string name="step2">Step 2</string>
-    <string name="step3">Step 3</string>
-    <string name="step4">Step 4</string>
-    <string name="step1Des">Draw this template on a sheet of paper.</string>
-    <string name="step2Des">Copy the template on the CD case (or 0.5mm thick transparent acrylic).</string>
-    <string name="step3Des">Use the cutting knives to cut the CD case in pieces.</string>
-    <string name="step4Des">Joins the pieces in the form of a pyramid.</string>
+    <string name="step0">Materials</string>
+    <string name="step0Des">CD case, tape, pen, cutting knives, ruler, smartphone.</string>
+
+    <string name="step1">Template</string>
+    <string name="step1Des">Draw the template of the pyramid following the dimensions on a sheet of paper.</string>
+
+    <string name="step2">Cut paper</string>
+    <string name="step2Des">Cut out the shape from the sheet of paper.</string>
+
+    <string name="step3">Prepare</string>
+    <string name="step3Des">Prepare the CD case by removing unnecessary material.</string>
+
+    <string name="step4">Copy template</string>
+    <string name="step4Des">Trace the template on the plastic CD case.</string>
+
+    <string name="step5">Cut CD</string>
+    <string name="step5Des">Cut out the templates from the plastic CD case.</string>
+
+    <string name="step6">Join parts</string>
+    <string name="step6Des">Tape the parts together in the form of a pyramid.</string>
+
+    <string name="step7">Result</string>
+    <string name="step7Des">The result should look like this.</string>
+
+    <string name="step8">Player</string>
+    <string name="step8Des">Display a video from the catalog or a picture from your gallery</string>
+
+    <string name="step9">Enjoy!</string>
+    <string name="step9Des">Put the pyramid in the center of the smartphone to see the hologram.</string>
 
     <!-- Error Strings -->
     <string name="errorDB">Cannot open database</string>
