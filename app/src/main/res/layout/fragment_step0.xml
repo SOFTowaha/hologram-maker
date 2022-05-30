@@ -21,7 +21,7 @@
         android:id="@+id/pyramid"
         android:adjustViewBounds="true"
         android:padding="20dp"
-        android:src="@drawable/pyramid"
+        android:src="@drawable/img_pyramid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

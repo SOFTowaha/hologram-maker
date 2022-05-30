@@ -35,4 +35,12 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="RoundBottom20" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeBottomLeft">20dp</item>
+        <item name="cornerSizeBottomRight">20dp</item>
+    </style>
+
 </resources>

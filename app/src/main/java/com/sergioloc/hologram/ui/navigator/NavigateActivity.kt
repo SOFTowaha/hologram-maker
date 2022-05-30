@@ -11,9 +11,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.ui.catalog.CatalogFragment
@@ -28,16 +25,9 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
  * Created by Sergio López Ceballos on 26/08/2019.
  */
 
-class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, NavigateInterface.View {
-
+class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
-
-    private var guest: Boolean? = null
-    private var presenter: NavigatePresenterImpl? = null
-    private var emailH: TextView? = null
-    private var imageH: ImageView? = null
-    private var sesionH: Button? = null
     private var fragmentToNavigate: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,21 +41,19 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
         navigateToFragment()
 
         initVariables()
+    }
 
-        presenter = NavigatePresenterImpl(this)
-        presenter?.checkUser()
-        presenter?.getShareLink()
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun initVariables() {
-        // Preferences
-        guest = intent.extras?.getBoolean("guest")
-
         // Header
-        val header = binding.navView.getHeaderView(0)
-        emailH = header.findViewById(R.id.emailHeader) as TextView
-        imageH = header.findViewById(R.id.imageHeader) as ImageView
-        sesionH = header.findViewById(R.id.sesionHeader) as Button
+        //val header = binding.navView.getHeaderView(0)
 
         // Navigator
         binding.navView.setNavigationItemSelectedListener(this)
@@ -85,28 +73,6 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
 
             override fun onDrawerStateChanged(newState: Int) { }
         })
-    }
-
-    override fun showAsUser(email: String) {
-        sesionH!!.visibility = View.INVISIBLE
-        emailH!!.text = email.split("@")[0]
-    }
-
-    override fun showAsGuest() {
-        emailH!!.visibility = View.INVISIBLE
-        imageH!!.visibility = View.INVISIBLE
-    }
-
-    override fun updateShareLink(link: String) {
-
-    }
-
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
