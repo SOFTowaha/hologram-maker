@@ -15,8 +15,7 @@
     <ImageView
         android:id="@+id/imageHeader"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/hologram_logo" />
+        android:layout_height="50dp" />
 
     <TextView
         android:id="@+id/emailHeader"
