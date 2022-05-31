@@ -1,27 +1,15 @@
 package com.sergioloc.hologram.ui.player
 
 import android.os.Bundle
-import android.widget.Toast
-import com.google.android.youtube.player.YouTubeBaseActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.sergioloc.hologram.R
-import kotlinx.android.synthetic.main.activity_player.*
 
-class PlayerActivity: YouTubeBaseActivity(), PlayerInterface.View {
-
-    private var presenter: PlayerPresenterImpl? = null
+class PlayerActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
-        var player = youtube_player
-        var videoID = intent.extras!!.getString("id")
-        presenter = PlayerPresenterImpl(this)
-        if (videoID != null) {
-            presenter?.callPlayer(player, videoID)
-        }
+
     }
 
-    override fun showError() {
-        Toast.makeText(this, R.string.errorYT, Toast.LENGTH_LONG).show()
-    }
 }

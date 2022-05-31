@@ -21,4 +21,7 @@ object Constants {
     const val NEWS = "news"
     const val CATALOG = "catalog"
 
+    // Youtube
+    const val YOUTUBE_API_KEY = "AIzaSyAqvVJKQOfLavz-wKTT-vkkG7e1GykFn7c"
+
 }
