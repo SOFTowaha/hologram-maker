@@ -9,11 +9,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.needle.app.utils.extensions.gone
+import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.ui.player.PlayerActivity
 import com.sergioloc.hologram.ui.adapters.HologramAdapter
 import com.sergioloc.hologram.databinding.FragmentHomeBinding
+import com.sergioloc.hologram.utils.Constants
 
 class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
 
@@ -31,6 +33,7 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
 
         initView()
         initVariables()
+        initButtons()
         initObservers()
 
         binding.loader.visible()
@@ -50,6 +53,14 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
 
     private fun initVariables() {
         viewModel = HomeViewModel()
+    }
+
+    private fun initButtons() {
+        binding.clDemo.setOnSingleClickListener {
+            val i = Intent(context, PlayerActivity::class.java)
+            i.putExtra("videoId", Constants.DEMO_URL)
+            startActivity(i)
+        }
     }
 
     private fun initObservers() {
