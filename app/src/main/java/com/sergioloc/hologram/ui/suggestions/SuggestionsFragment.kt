@@ -50,6 +50,7 @@ class SuggestionsFragment: Fragment() {
             it.onSuccess {
                 showLoader(false)
                 binding.etField.text.clear()
+                Toast.makeText(requireContext(), getString(R.string.suggestion_sent), Toast.LENGTH_SHORT).show()
             }
             it.onFailure {
                 showLoader(false)

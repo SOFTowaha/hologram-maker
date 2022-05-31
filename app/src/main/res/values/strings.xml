@@ -49,6 +49,7 @@
     <string name="comment_des">Write a message of a feature you would like to see or a bug you found so we could work in that.</string>
     <string name="send">Send</string>
     <string name="type_message">Type a message</string>
+    <string name="suggestion_sent">Suggestion sent</string>
     <string name="error_suggestion">Error sending suggestion</string>
 
     <!-- Requirements -->
