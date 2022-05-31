@@ -18,6 +18,7 @@ import com.sergioloc.hologram.ui.catalog.CatalogFragment
 import com.sergioloc.hologram.ui.gallery.GalleryFragment
 import com.sergioloc.hologram.ui.home.HomeFragment
 import com.sergioloc.hologram.ui.pyramid.PyramidFragment
+import com.sergioloc.hologram.ui.suggestions.SuggestionsFragment
 import com.sergioloc.hologram.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
@@ -89,6 +90,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
                 startActivity(Intent.createChooser(i, resources.getString(R.string.share_usign)))
             }
             R.id.nav_rate -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Constants.PLAY_STORE)))
+            R.id.nav_suggestions -> fragmentToNavigate = SuggestionsFragment()
         }
 
         drawerLayout.closeDrawer(GravityCompat.START)

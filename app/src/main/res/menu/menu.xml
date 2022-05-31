@@ -32,8 +32,8 @@
                 android:title="@string/title_rate" />
 
             <item
-                android:id="@+id/nav_suggest"
-                android:icon="@drawable/ic_suggest"
+                android:id="@+id/nav_suggestions"
+                android:icon="@drawable/ic_suggestions"
                 android:title="@string/title_suggest" />
         </menu>
     </item>

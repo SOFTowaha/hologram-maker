@@ -40,6 +40,15 @@
     <string name="others">Others</string>
     <string name="up">Up</string>
 
+    <!-- Suggestions -->
+    <string name="suggestions">Suggestions</string>
+    <string name="youtube_video">YouTube Video</string>
+    <string name="comment">Comment</string>
+    <string name="youtube_link">https://www.youtube.com/…</string>
+    <string name="youtube_link_des">Paste a youtube link of an hologram video so our team can check it and add it to the catalog.</string>
+    <string name="comment_des">Write a message of a feature you would like to see or a bug you found so we could work in that.</string>
+    <string name="send">Send</string>
+
     <!-- Requirements -->
     <string name="registered_fav">You have to be registered to add favourites</string>
     <string name="registered_cloud">You have to be registered to upload to the cloud</string>
@@ -80,7 +89,7 @@
     <string name="title_sign_out">Sign out</string>
     <string name="title_share">Share</string>
     <string name="title_rate">Rate</string>
-    <string name="title_suggest">Suggest</string>
+    <string name="title_suggest">Suggestions</string>
 
     <!-- Pyramid -->
     <string name="step0">Materials</string>
