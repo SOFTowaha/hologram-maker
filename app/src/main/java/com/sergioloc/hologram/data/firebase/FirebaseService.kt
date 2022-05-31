@@ -2,6 +2,7 @@ package com.sergioloc.hologram.data.firebase
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sergioloc.hologram.data.model.Hologram
+import com.sergioloc.hologram.data.model.Suggestion
 import com.sergioloc.hologram.utils.Constants
 import com.sergioloc.hologram.utils.Safe
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +47,13 @@ class FirebaseService {
                 }
             }
             holograms
+        }
+    }
+
+    suspend fun putSuggestion(suggestion: Suggestion): Boolean {
+        return withContext(Dispatchers.IO) {
+            db.collection(Constants.SUGGESTIONS).document().set(suggestion)
+            true
         }
     }
 

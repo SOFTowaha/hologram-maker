@@ -66,6 +66,7 @@
             android:paddingHorizontal="20dp"
             android:background="@drawable/card_stroke_gray"
             android:inputType="text"
+            android:maxLength="140"
             android:hint="@string/youtube_link"
             tools:ignore="Autofill,LabelFor" />
 
