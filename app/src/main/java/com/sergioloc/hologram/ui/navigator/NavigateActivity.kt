@@ -1,24 +1,25 @@
 package com.sergioloc.hologram.ui.navigator
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.navigation.NavigationView
 import com.sergioloc.hologram.R
+import com.sergioloc.hologram.databinding.ActivityMainBinding
 import com.sergioloc.hologram.ui.catalog.CatalogFragment
 import com.sergioloc.hologram.ui.gallery.GalleryFragment
 import com.sergioloc.hologram.ui.home.HomeFragment
 import com.sergioloc.hologram.ui.pyramid.PyramidFragment
-import com.sergioloc.hologram.databinding.ActivityMainBinding
 import com.sergioloc.hologram.utils.Constants
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
 /**
@@ -87,6 +88,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
                 i.putExtra(Intent.EXTRA_TEXT, Constants.PLAY_STORE)
                 startActivity(Intent.createChooser(i, resources.getString(R.string.share_usign)))
             }
+            R.id.nav_rate -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Constants.PLAY_STORE)))
         }
 
         drawerLayout.closeDrawer(GravityCompat.START)

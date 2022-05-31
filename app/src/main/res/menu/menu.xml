@@ -27,6 +27,11 @@
                 android:title="@string/title_share" />
 
             <item
+                android:id="@+id/nav_rate"
+                android:icon="@drawable/ic_rate"
+                android:title="@string/title_rate" />
+
+            <item
                 android:id="@+id/nav_suggest"
                 android:icon="@drawable/ic_suggest"
                 android:title="@string/title_suggest" />
