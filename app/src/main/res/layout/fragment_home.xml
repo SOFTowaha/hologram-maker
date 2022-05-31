@@ -41,6 +41,8 @@
         app:layout_constraintBottom_toTopOf="@id/clDemo"
         android:background="@drawable/card_stroke_gray"
         android:layout_margin="20dp"
+        android:paddingVertical="1dp"
+        android:overScrollMode="never"
         tools:listitem="@layout/cell_news"
         android:contentDescription="@null"/>
 
