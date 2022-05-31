@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.needle.app.utils.extensions.gone
+import com.needle.app.utils.extensions.setOnSingleClickListener
+import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
-import com.sergioloc.hologram.databinding.FragmentSuggestBinding
-
+import com.sergioloc.hologram.databinding.FragmentSuggestionsBinding
 
 class SuggestionsFragment: Fragment() {
 
-    private lateinit var binding: FragmentSuggestBinding
-    val courses = arrayOf("YouTube video", "Comment")
+    private lateinit var binding: FragmentSuggestionsBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentSuggestBinding.inflate(inflater, container, false)
+        binding = FragmentSuggestionsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -25,8 +26,6 @@ class SuggestionsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        initVariables()
-        initListeners()
         initObservers()
         initButtons()
     }
@@ -38,15 +37,6 @@ class SuggestionsFragment: Fragment() {
 
     }
 
-    private fun initVariables() {
-
-    }
-
-    private fun initListeners() {
-
-
-    }
-
     private fun initObservers() {
 
     }
@@ -55,13 +45,29 @@ class SuggestionsFragment: Fragment() {
         binding.tvYoutube.setOnClickListener {
             showYoutube()
         }
+
         binding.tvComment.setOnClickListener {
             showComment()
+        }
+
+        binding.btnSend.setOnSingleClickListener {
+
         }
     }
 
     private fun showLoader(visible: Boolean) {
-
+        if (visible) {
+            binding.loader.visible()
+            binding.etField.gone()
+            binding.tvDescription.gone()
+            binding.btnSend.gone()
+        }
+        else {
+            binding.loader.gone()
+            binding.etField.visible()
+            binding.tvDescription.visible()
+            binding.btnSend.visible()
+        }
     }
     
     private fun showYoutube() {
