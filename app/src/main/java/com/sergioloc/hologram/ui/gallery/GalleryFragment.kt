@@ -1,15 +1,12 @@
 package com.sergioloc.hologram.ui.gallery
 
-import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,10 +15,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.setOnSingleClickListener
+import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.ui.adapters.GalleryAdapter
 import com.sergioloc.hologram.databinding.FragmentGalleryBinding
@@ -54,6 +52,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         initObservers()
         initButtons()
 
+        binding.loader.visible()
         viewModel.getMyHolograms(requireContext(), length)
     }
 
@@ -80,12 +79,17 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
     private fun initObservers() {
         viewModel.list.observe(this) {
             it.onSuccess { list ->
+                showLoader(false)
+                if (list.isEmpty())
+                    binding.tvEmpty.visible()
+
                 adapter.updateList(list)
             }
         }
 
         viewModel.newImage.observe(this) {
             it.onSuccess { bitmap ->
+                showLoader(false)
                 adapter.addItem(bitmap)
                 with (prefs.edit()) {
                     length++
@@ -99,12 +103,15 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
 
         viewModel.deleteImage.observe(this) {
             it.onSuccess { position ->
+                showLoader(false)
                 adapter.removeItem(position)
                 with (prefs.edit()) {
                     length--
                     putInt(Constants.PREF_LENGTH, length)
                     apply()
                 }
+                if (length < 1)
+                    binding.tvEmpty.visible()
             }
         }
     }
@@ -117,27 +124,12 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         }
     }
 
-    private fun isWriteStoragePermissionGranted(): Boolean {
-        return if (Build.VERSION.SDK_INT >= 23) {
-            if (context?.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                Log.v("PERM", "Permission is granted")
-                true
-            } else {
-                Log.v("PERM", "Permission is revoked")
-                ActivityCompat.requestPermissions(context as Activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 2)
-                false
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            Log.v("PERM", "Permission is granted")
-            true
-        }
-    }
-
     private var startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             try {
                 val uri: Uri? = result?.data?.data
                 uri?.let {
+                    showLoader(true)
                     val inputStream: InputStream? = context?.contentResolver?.openInputStream(it)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
                     Thread {
@@ -151,6 +143,18 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         }
     }
 
+    private fun showLoader(visible: Boolean) {
+        if (visible) {
+            binding.loader.visible()
+            binding.ivWhite.visible()
+            binding.tvEmpty.gone()
+        }
+        else {
+            binding.loader.gone()
+            binding.ivWhite.gone()
+        }
+    }
+
     /** ADAPTER LISTENER **/
 
     override fun onHologramClick(bitmap: Bitmap, position: Int) {
@@ -158,6 +162,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         dialog.apply {
             setBitmap(bitmap)
             setOnDeleteClickListener {
+                showLoader(true)
                 viewModel.deleteHologram(requireContext(), position)
             }
             setOnHologramClickListener {

@@ -3,6 +3,7 @@ package com.sergioloc.hologram.ui.dialogs
 import android.content.Context
 import android.graphics.Bitmap
 import android.view.LayoutInflater
+import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.sergioloc.hologram.databinding.DialogGalleryBinding
 
 class GalleryDialog(context: Context): CustomDialog() {
@@ -22,14 +23,14 @@ class GalleryDialog(context: Context): CustomDialog() {
     }
 
     fun setOnDeleteClickListener(onClickListener: () -> Unit) {
-        binding.btnDelete.setOnClickListener {
+        binding.btnDelete.setOnSingleClickListener {
             onClickListener()
             dialog.dismiss()
         }
     }
 
     fun setOnHologramClickListener(onClickListener: () -> Unit) {
-        binding.btnCreate.setOnClickListener {
+        binding.btnCreate.setOnSingleClickListener {
             onClickListener()
             dialog.dismiss()
         }

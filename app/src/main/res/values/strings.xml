@@ -15,6 +15,7 @@
     <string name="play_demo">Play Demo</string>
 
     <!-- Gallery -->
+    <string name="empty_gallery">You don\'t have any images yet.\n\nAdd one to create your first hologram!</string>
     <string name="error_loading_image">Error loading image from gallery</string>
 
     <!-- Square -->
@@ -61,7 +62,6 @@
     <string name="confirm_password">Password</string>
     <string name="enter">ENTER</string>
     <string name="enter_guest">Enter as guest</string>
-
 
     <!-- Login -->
     <string name="sign_in">SIGN IN</string>
