@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.sergioloc.hologram.utils.Constants
 import java.io.*
 
 class GalleryViewModel: ViewModel() {
@@ -43,10 +44,14 @@ class GalleryViewModel: ViewModel() {
         try {
             val imageName = "$position.jpg"
             val fos: FileOutputStream = context.openFileOutput(imageName, Context.MODE_PRIVATE)
-            bitmap.compress(Bitmap.CompressFormat.PNG, 50, fos)
+
+            var b = bitmap
+            if (bitmap.width > Constants.MAX_WIDTH)
+                b = getResizedBitmap(b)
+            b.compress(Bitmap.CompressFormat.JPEG, 50, fos)
             fos.close()
             imageNames.add("$position.jpg")
-            _newImage.postValue(Result.success(bitmap))
+            _newImage.postValue(Result.success(b))
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
         } catch (e: IOException) {
@@ -62,6 +67,26 @@ class GalleryViewModel: ViewModel() {
         }
         else
             _deleteImage.postValue(Result.failure(Throwable()))
+    }
+
+    private fun getResizedBitmap(image: Bitmap): Bitmap {
+        val ratioBitmap = image.width.toFloat() / image.height.toFloat()
+
+        val finalWidth: Float
+        val finalHeight: Float
+
+        if (ratioBitmap < 1)  {
+            // Vertical
+            finalWidth = Constants.MAX_WIDTH * ratioBitmap
+            finalHeight = Constants.MAX_WIDTH
+        }
+        else {
+            // Horizontal
+            finalWidth = Constants.MAX_WIDTH
+            finalHeight = Constants.MAX_WIDTH / ratioBitmap
+        }
+
+        return Bitmap.createScaledBitmap(image, finalWidth.toInt(), finalHeight.toInt(), true)
     }
 
 }

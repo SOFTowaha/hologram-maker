@@ -64,7 +64,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         // RecyclerView
         adapter = GalleryAdapter(ArrayList(), this)
         binding.rvImages.setHasFixedSize(true)
-        binding.rvImages.layoutManager = GridLayoutManager(context, 3)
+        binding.rvImages.layoutManager = GridLayoutManager(context, 2)
         binding.rvImages.adapter = adapter
     }
 
