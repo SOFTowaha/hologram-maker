@@ -151,7 +151,7 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
 
     override fun onClickNews(url: String) {
         val i = Intent(context, PlayerActivity::class.java)
-        i.putExtra("id", url)
+        i.putExtra("videoId", url)
         startActivity(i)
     }
 

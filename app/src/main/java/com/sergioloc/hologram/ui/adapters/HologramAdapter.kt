@@ -37,7 +37,7 @@ class HologramAdapter(private var holograms: ArrayList<Hologram>, private val li
 
         // Buttons
         holder.root.setOnSingleClickListener {
-            listener.onClickNews("")
+            listener.onClickNews(n.url)
         }
     }
 

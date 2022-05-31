@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
+import com.sergioloc.hologram.R
 import com.sergioloc.hologram.databinding.ActivityPlayerBinding
 import com.sergioloc.hologram.utils.Constants
 
@@ -23,7 +24,9 @@ class PlayerActivity: YouTubeBaseActivity() {
     }
 
     private fun initVariables() {
-        videoId = "HzeK7g8cD0Y"
+        intent.extras?.getString("videoId")?.let {
+            videoId = it
+        }
     }
 
     private fun initView() {
@@ -37,7 +40,7 @@ class PlayerActivity: YouTubeBaseActivity() {
                 }
 
                 override fun onInitializationFailure(provider: YouTubePlayer.Provider, youTubeInitializationResult: YouTubeInitializationResult) {
-                    Toast.makeText(applicationContext, "Video player Failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, getString(R.string.errorYT), Toast.LENGTH_SHORT).show()
                 }
             })
     }
