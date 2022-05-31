@@ -146,11 +146,13 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
     private fun showLoader(visible: Boolean) {
         if (visible) {
             binding.loader.visible()
+            binding.tvCreating.visible()
             binding.ivWhite.visible()
             binding.tvEmpty.gone()
         }
         else {
             binding.loader.gone()
+            binding.tvCreating.gone()
             binding.ivWhite.gone()
         }
     }

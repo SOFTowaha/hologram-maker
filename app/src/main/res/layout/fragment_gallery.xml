@@ -30,7 +30,7 @@
         android:id="@+id/ivWhite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white50"
+        android:background="@color/white75"
         android:elevation="6dp"
         android:clickable="true"
         android:focusable="true"
@@ -45,6 +45,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:elevation="6dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvCreating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/loader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:textColor="@color/primaryDark"
+        android:text="@string/creating_hologram"
         android:visibility="gone" />
 
     <TextView

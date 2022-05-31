@@ -15,6 +15,7 @@
     <string name="play_demo">Play Demo</string>
 
     <!-- Gallery -->
+    <string name="creating_hologram">Creating hologram…</string>
     <string name="empty_gallery">You don\'t have any images yet.\n\nAdd one to create your first hologram!</string>
     <string name="error_loading_image">Error loading image from gallery</string>
 
