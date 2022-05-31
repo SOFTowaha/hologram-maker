@@ -10,6 +10,7 @@ import android.os.Looper
 import android.util.DisplayMetrics
 import android.view.ViewGroup
 import android.view.WindowInsets
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.visible
@@ -132,6 +133,15 @@ class SquareActivity: AppCompatActivity() {
 
     private fun showButtons() {
         buttonsVisible = true
+
+        binding.ivLessSize.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+        binding.ivMoreSize.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+        binding.tvSize.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+
+        binding.ivLessDistance.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+        binding.ivMoreDistance.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+        binding.tvDistance.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_in))
+
         binding.ivLessSize.visible()
         binding.ivMoreSize.visible()
         binding.tvSize.visible()
@@ -139,10 +149,20 @@ class SquareActivity: AppCompatActivity() {
         binding.ivLessDistance.visible()
         binding.ivMoreDistance.visible()
         binding.tvDistance.visible()
+
     }
 
     private fun hideButtons() {
         buttonsVisible = false
+
+        binding.ivLessSize.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out))
+        binding.ivMoreSize.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out))
+        binding.tvSize.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out))
+
+        binding.ivLessDistance.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out))
+        binding.ivMoreDistance.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out))
+        binding.tvDistance.startAnimation(AnimationUtils.loadAnimation(this, R.anim.fade_out))
+
         binding.ivLessSize.gone()
         binding.ivMoreSize.gone()
         binding.tvSize.gone()
