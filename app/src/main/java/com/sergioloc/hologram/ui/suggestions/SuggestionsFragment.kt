@@ -14,6 +14,7 @@ import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.data.model.Suggestion
 import com.sergioloc.hologram.databinding.FragmentSuggestionsBinding
+import com.sergioloc.hologram.utils.Constants
 
 class SuggestionsFragment: Fragment() {
 
@@ -47,14 +48,23 @@ class SuggestionsFragment: Fragment() {
 
     private fun initObservers() {
         viewModel.response.observe(viewLifecycleOwner) {
-            it.onSuccess {
+            it.onSuccess { code ->
                 showLoader(false)
-                binding.etField.text.clear()
-                Toast.makeText(requireContext(), getString(R.string.suggestion_sent), Toast.LENGTH_SHORT).show()
-            }
-            it.onFailure {
-                showLoader(false)
-                Toast.makeText(requireContext(), getString(R.string.error_suggestion), Toast.LENGTH_SHORT).show()
+                when (code) {
+                    Constants.SUCCESS -> {
+                        binding.etField.text.clear()
+                        Toast.makeText(requireContext(), getString(R.string.suggestion_sent), Toast.LENGTH_SHORT).show()
+                    }
+                    Constants.ERROR -> {
+                        Toast.makeText(requireContext(), getString(R.string.error_suggestion), Toast.LENGTH_SHORT).show()
+                    }
+                    Constants.EMPTY_FIELD -> {
+                        Toast.makeText(requireContext(), getString(R.string.type_message), Toast.LENGTH_SHORT).show()
+                    }
+                    Constants.FORMAT_ERROR -> {
+                        Toast.makeText(requireContext(), getString(R.string.invalid_youtube_url), Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }
@@ -69,15 +79,11 @@ class SuggestionsFragment: Fragment() {
         }
 
         binding.btnSend.setOnSingleClickListener {
-            if (binding.etField.text.toString().isEmpty())
-                Toast.makeText(requireContext(), getString(R.string.type_message), Toast.LENGTH_SHORT).show()
-            else {
-                showLoader(true)
-                var type = 1
-                if (commentSelected)
-                    type = 2
-                viewModel.saveSuggestion(Suggestion(type, binding.etField.text.toString()))
-            }
+            showLoader(true)
+            var type = 1
+            if (commentSelected)
+                type = 2
+            viewModel.saveSuggestion(Suggestion(type, binding.etField.text.toString()))
         }
     }
 

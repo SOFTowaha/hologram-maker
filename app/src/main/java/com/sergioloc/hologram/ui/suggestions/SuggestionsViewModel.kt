@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 class SuggestionsViewModel: ViewModel() {
 
-    val response: MutableLiveData<Result<Boolean>> = MutableLiveData()
+    val response: MutableLiveData<Result<Int>> = MutableLiveData()
     private val saveSuggestionUseCase = SaveSuggestionUseCase()
 
     fun saveSuggestion(suggestion: Suggestion) {

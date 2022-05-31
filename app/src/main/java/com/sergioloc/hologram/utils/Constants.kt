@@ -29,4 +29,10 @@ object Constants {
     // Gallery
     const val MAX_WIDTH = 1080f
 
+    // Error
+    const val SUCCESS = 0
+    const val ERROR = 1
+    const val EMPTY_FIELD = 2
+    const val FORMAT_ERROR = 3
+
 }

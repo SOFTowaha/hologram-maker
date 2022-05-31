@@ -42,7 +42,7 @@ class AppRepository {
         return response
     }
 
-    suspend fun putSuggestion(suggestion: Suggestion): Boolean {
+    suspend fun putSuggestion(suggestion: Suggestion): Int {
         return api.putSuggestion(suggestion)
     }
 

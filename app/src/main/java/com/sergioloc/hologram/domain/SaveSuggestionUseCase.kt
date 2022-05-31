@@ -1,13 +1,39 @@
 package com.sergioloc.hologram.domain
 
 import com.sergioloc.hologram.data.AppRepository
-import com.sergioloc.hologram.data.model.Hologram
 import com.sergioloc.hologram.data.model.Suggestion
+import com.sergioloc.hologram.utils.Constants
 
 class SaveSuggestionUseCase {
 
     private val repository = AppRepository()
 
-    suspend operator fun invoke(suggestion: Suggestion): Boolean = repository.putSuggestion(suggestion)
+    private val prefix = arrayListOf(
+        "https://www.youtube.",
+        "http://www.youtube",
+        "www.youtube.",
+        "youtube.",
+        "www.youtube.",
+        "https://www.youtu.be/",
+        "http://www.youtu.be/",
+        "https://youtu.be/",
+        "http://youtu.be/",
+    )
+
+    suspend operator fun invoke(suggestion: Suggestion): Int {
+        return if (suggestion.text.isEmpty())
+            Constants.EMPTY_FIELD
+        else if (suggestion.type == 1 && !isYouTubeURL(suggestion.text))
+            Constants.FORMAT_ERROR
+        else
+            repository.putSuggestion(suggestion)
+    }
+
+    private fun isYouTubeURL(url: String): Boolean {
+        for (p in prefix)
+            if (url.startsWith(p))
+                return true
+        return false
+    }
 
 }

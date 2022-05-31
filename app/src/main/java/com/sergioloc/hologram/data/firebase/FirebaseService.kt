@@ -50,13 +50,13 @@ class FirebaseService {
         }
     }
 
-    suspend fun putSuggestion(suggestion: Suggestion): Boolean {
+    suspend fun putSuggestion(suggestion: Suggestion): Int {
         return withContext(Dispatchers.IO) {
             try {
                 db.collection(Constants.SUGGESTIONS).document().set(suggestion).await()
-                true
+                Constants.SUCCESS
             } catch (e: Exception) {
-                false
+                Constants.ERROR
             }
         }
     }
