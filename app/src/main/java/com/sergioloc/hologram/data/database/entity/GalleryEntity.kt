@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 data class GalleryEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id") val id: Int,
-    @ColumnInfo(name = "data") val name: String
+    @ColumnInfo(name = "data") val data: String
 )

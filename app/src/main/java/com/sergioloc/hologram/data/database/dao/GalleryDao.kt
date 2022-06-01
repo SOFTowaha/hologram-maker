@@ -13,6 +13,9 @@ interface GalleryDao {
     suspend fun getImages(): List<GalleryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertImages(images: List<GalleryEntity>)
+    suspend fun insertImage(image: GalleryEntity)
+
+    @Query("DELETE FROM gallery WHERE gallery.id == :id")
+    suspend fun deleteImage(id: Int)
 
 }
