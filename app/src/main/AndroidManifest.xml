@@ -11,10 +11,11 @@
         android:name=".HologramApp"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
 
         <activity
             android:name="com.sergioloc.hologram.ui.navigator.NavigateActivity"
+            android:theme="@style/AppTheme.Splash"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
@@ -25,7 +26,8 @@
         </activity>
 
         <activity
-            android:name="com.sergioloc.hologram.ui.player.PlayerActivity" />
+            android:name="com.sergioloc.hologram.ui.player.PlayerActivity"
+            android:theme="@style/AppTheme.Fullscreen"/>
 
         <activity
             android:name="com.sergioloc.hologram.ui.square.SquareActivity"

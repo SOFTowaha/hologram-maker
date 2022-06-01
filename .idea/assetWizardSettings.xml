@@ -155,7 +155,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\sergi\Desktop\Icon\IconCircle.png" />
+                                                <entry key="imagePath" value="C:\Users\sergi\Desktop\Icon\Icon.png" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -189,7 +189,7 @@
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="iconShape" value="CIRCLE" />
-                                      <entry key="imageAsset" value="C:\Users\sergi\Desktop\Icon\IconCircle.png" />
+                                      <entry key="imageAsset" value="C:\Users\sergi\Desktop\Icon\Icon.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -344,7 +344,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../../Android/Sdk/icons/material/materialicons/star_rate/baseline_star_rate_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../Sdk/icons/material/materialicons/star_rate/baseline_star_rate_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>

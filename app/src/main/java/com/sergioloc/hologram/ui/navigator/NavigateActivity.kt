@@ -35,6 +35,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
     private var fragmentToNavigate: Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme_NoActionBar)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
