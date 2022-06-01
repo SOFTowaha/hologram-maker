@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.gms.ads.AdRequest
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.needle.app.utils.extensions.visible
@@ -42,6 +43,9 @@ class SuggestionsFragment: Fragment() {
         // Toolbar
         val activity = activity as AppCompatActivity
         activity.title = resources.getString(R.string.suggestions)
+
+        // Ad
+        binding.adBanner.loadAd(AdRequest.Builder().build())
     }
 
     private fun initObservers() {
