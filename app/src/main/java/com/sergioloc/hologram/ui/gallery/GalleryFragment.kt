@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.gms.ads.AdRequest
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.needle.app.utils.extensions.visible
@@ -63,6 +64,9 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         binding.rvImages.setHasFixedSize(true)
         binding.rvImages.layoutManager = GridLayoutManager(context, 3)
         binding.rvImages.adapter = adapter
+
+        // Ad
+        binding.adBanner.loadAd(AdRequest.Builder().build())
     }
 
     private fun initObservers() {
