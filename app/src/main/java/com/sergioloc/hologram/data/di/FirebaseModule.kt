@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.data
+package com.sergioloc.hologram.data.di
 
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object FirebaseModule {
 
     @Singleton
     @Provides
