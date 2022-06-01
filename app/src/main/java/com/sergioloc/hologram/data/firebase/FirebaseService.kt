@@ -17,7 +17,7 @@ class FirebaseService @Inject constructor(
     suspend fun getNews(): ArrayList<HologramModel> {
         return withContext(Dispatchers.IO) {
             val holograms = ArrayList<HologramModel>()
-            db.collection(Constants.HOME).document(Constants.NEWS).collection(Constants.HOLOGRAMS).get().await().documents.mapNotNull { response ->
+            db.collection(Constants.HOME).document(Constants.NEWS).collection(Constants.HOLOGRAMS).orderBy("name").get().await().documents.mapNotNull { response ->
                 response.data?.let {
                     holograms.add(
                         HologramModel(
