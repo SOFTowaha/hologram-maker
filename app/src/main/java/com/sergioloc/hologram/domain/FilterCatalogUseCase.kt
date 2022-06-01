@@ -1,11 +1,11 @@
 package com.sergioloc.hologram.domain
 
-import com.sergioloc.hologram.data.AppRepository
-import com.sergioloc.hologram.data.model.Hologram
+import com.sergioloc.hologram.data.CatalogRepository
+import com.sergioloc.hologram.domain.model.Hologram
 import javax.inject.Inject
 
 class FilterCatalogUseCase @Inject constructor(
-    private val repository: AppRepository
+    private val repository: CatalogRepository
 ) {
 
     suspend operator fun invoke(tags: ArrayList<String>): ArrayList<Hologram> {

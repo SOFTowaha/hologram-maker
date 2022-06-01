@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.needle.app.utils.extensions.setImageFromURL
 import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.sergioloc.hologram.R
-import com.sergioloc.hologram.data.model.Hologram
+import com.sergioloc.hologram.domain.model.Hologram
 import com.sergioloc.hologram.utils.Converter
 
-class HologramAdapter(private var holograms: ArrayList<Hologram>, private val listener: OnNewsClickListener): RecyclerView.Adapter<HologramAdapter.UserViewHolder>() {
+class HologramAdapter(private var holograms: List<Hologram>, private val listener: OnNewsClickListener): RecyclerView.Adapter<HologramAdapter.UserViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(LayoutInflater.from(parent.context), parent)
@@ -42,7 +42,7 @@ class HologramAdapter(private var holograms: ArrayList<Hologram>, private val li
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(list: ArrayList<Hologram>) {
+    fun updateList(list: List<Hologram>) {
         holograms = list
         notifyDataSetChanged()
     }

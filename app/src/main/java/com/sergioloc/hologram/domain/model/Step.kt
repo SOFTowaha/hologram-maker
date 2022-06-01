@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.data.model
+package com.sergioloc.hologram.domain.model
 
 data class Step (
     val image: Int,

@@ -3,8 +3,8 @@ package com.sergioloc.hologram.ui.suggestions
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sergioloc.hologram.data.model.Suggestion
 import com.sergioloc.hologram.domain.SaveSuggestionUseCase
+import com.sergioloc.hologram.domain.model.Suggestion
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

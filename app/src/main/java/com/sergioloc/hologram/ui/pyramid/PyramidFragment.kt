@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.sergioloc.hologram.R
-import com.sergioloc.hologram.data.model.Step
+import com.sergioloc.hologram.domain.model.Step
 import com.sergioloc.hologram.databinding.FragmentPyramidBinding
 import com.sergioloc.hologram.ui.adapters.StepsAdapter
 import dagger.hilt.android.AndroidEntryPoint

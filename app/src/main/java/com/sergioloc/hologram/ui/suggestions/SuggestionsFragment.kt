@@ -13,8 +13,8 @@ import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
-import com.sergioloc.hologram.data.model.Suggestion
 import com.sergioloc.hologram.databinding.FragmentSuggestionsBinding
+import com.sergioloc.hologram.domain.model.Suggestion
 import com.sergioloc.hologram.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 

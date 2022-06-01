@@ -1,24 +1,26 @@
 package com.sergioloc.hologram.domain
 
-import com.sergioloc.hologram.data.AppRepository
-import com.sergioloc.hologram.data.model.Hologram
+import com.sergioloc.hologram.data.NewsRepository
+import com.sergioloc.hologram.domain.model.Hologram
+import com.sergioloc.hologram.domain.model.toData
 import javax.inject.Inject
 
 class GetNewsUseCase @Inject constructor(
-    private val repository: AppRepository
+    private val repository: NewsRepository
 ) {
 
-    suspend operator fun invoke(): ArrayList<Hologram> {
-        val ids = repository.getNewsIds()
-        var holograms = ArrayList<Hologram>()
+    suspend operator fun invoke(): List<Hologram> {
+        var news: List<Hologram>
 
-        ids?.let {
-            repository.getHolograms(it)?.let { h ->
-                holograms = h
-            }
+        news = repository.getNewsFromFirebase()
+        if (news.isEmpty())
+            news = repository.getNewsFromDatabase()
+        else {
+            repository.deleteNewsFromDatabase()
+            repository.insertNewsInDatabase(news.map { it.toData() })
         }
 
-        return holograms
+        return news
     }
 
 }

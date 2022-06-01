@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.sergioloc.hologram.R
-import com.sergioloc.hologram.data.model.Step
+import com.sergioloc.hologram.domain.model.Step
 
 class StepsAdapter(val context: Context, private val tips: List<Step>): PagerAdapter() {
 

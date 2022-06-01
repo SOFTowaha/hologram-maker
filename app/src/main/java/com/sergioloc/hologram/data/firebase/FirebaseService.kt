@@ -1,8 +1,8 @@
 package com.sergioloc.hologram.data.firebase
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.sergioloc.hologram.data.model.Hologram
-import com.sergioloc.hologram.data.model.Suggestion
+import com.sergioloc.hologram.data.model.HologramModel
+import com.sergioloc.hologram.data.model.SuggestionModel
 import com.sergioloc.hologram.utils.Constants
 import com.sergioloc.hologram.utils.Safe
 import kotlinx.coroutines.Dispatchers
@@ -14,21 +14,32 @@ class FirebaseService @Inject constructor(
     private val db: FirebaseFirestore
 ) {
 
-    suspend fun getNewsIds(): ArrayList<String> {
+    suspend fun getNews(): ArrayList<HologramModel> {
         return withContext(Dispatchers.IO) {
-            var ids = ArrayList<String>()
-            db.collection(Constants.HOME).document(Constants.NEWS).get().await().data?.let { response ->
-                ids = response["list"] as ArrayList<String>
+            val holograms = ArrayList<HologramModel>()
+            db.collection(Constants.HOME).document(Constants.NEWS).collection(Constants.HOLOGRAMS).get().await().documents.mapNotNull { response ->
+                response.data?.let {
+                    holograms.add(
+                        HologramModel(
+                            id = response.id,
+                            name = Safe.getString(it, "name"),
+                            image = Safe.getString(it, "image"),
+                            tag = Safe.getString(it, "tag"),
+                            url = Safe.getString(it, "url")
+                        )
+                    )
+                }
             }
-            ids
+            holograms
         }
     }
 
-    suspend fun getHologram(id: String): Hologram? {
+    suspend fun getHologram(id: String): HologramModel? {
         return withContext(Dispatchers.IO) {
-            var hologram: Hologram? = null
+            var hologram: HologramModel? = null
             db.collection(Constants.CATALOG).document(id).get().await().data?.let { response ->
-                hologram = Hologram(
+                hologram = HologramModel(
+                    id = id,
                     name = Safe.getString(response, "name"),
                     image = Safe.getString(response, "image"),
                     tag = Safe.getString(response, "tag"),
@@ -39,11 +50,11 @@ class FirebaseService @Inject constructor(
         }
     }
 
-    suspend fun getCatalog(): ArrayList<Hologram> {
+    suspend fun getCatalog(): ArrayList<HologramModel> {
         return withContext(Dispatchers.IO) {
-            val holograms = ArrayList<Hologram>()
+            val holograms = ArrayList<HologramModel>()
             db.collection(Constants.CATALOG).orderBy("name").get().await().documents.mapNotNull { response ->
-                response.toObject(Hologram::class.java)?.let { hologram ->
+                response.toObject(HologramModel::class.java)?.let { hologram ->
                     holograms.add(hologram)
                 }
             }
@@ -51,7 +62,7 @@ class FirebaseService @Inject constructor(
         }
     }
 
-    suspend fun putSuggestion(suggestion: Suggestion): Int {
+    suspend fun putSuggestion(suggestion: SuggestionModel): Int {
         return withContext(Dispatchers.IO) {
             try {
                 db.collection(Constants.SUGGESTIONS).document().set(suggestion).await()

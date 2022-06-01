@@ -19,6 +19,7 @@ object Constants {
     // Firestore
     const val HOME = "home"
     const val NEWS = "news"
+    const val HOLOGRAMS = "holograms"
     const val CATALOG = "catalog"
     const val SUGGESTIONS = "suggestions"
 

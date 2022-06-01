@@ -1,5 +1,5 @@
 package com.sergioloc.hologram.data.model
 
-data class Suggestion (
+data class SuggestionModel (
     val type: Int,
     val text: String)
