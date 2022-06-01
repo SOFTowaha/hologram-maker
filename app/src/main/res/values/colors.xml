@@ -12,15 +12,14 @@
     <color name="greyDark">#1f1f1f</color>
     <color name="black">#000000</color>
 
-    <color name="tag_red">#d12d2d</color>
-    <color name="tag_blue">#3187d2</color>
-    <color name="tag_green">#27B11F</color>
-    <color name="tag_yellow">#d2cd2e</color>
-    <color name="tag_orange">#f99727</color>
+    <color name="tag_red">#D32F2F</color>
+    <color name="tag_blue">#1976D2</color>
+    <color name="tag_green">#388E3C</color>
+    <color name="tag_yellow">#FBC02D</color>
+    <color name="tag_orange">#F57C00</color>
     <color name="tag_pink">#c448c0</color>
-    <color name="tag_cyan">#4ec2b6</color>
-    <color name="tag_purple">#7a54bc</color>
-    <color name="tag_turquoise">#03c1ae</color>
+    <color name="tag_cyan">#00BCD4</color>
+    <color name="tag_purple">#673AB7</color>
 
     <color name="transparent">#00ffffff</color>
 </resources>
