@@ -10,9 +10,9 @@ import com.sergioloc.hologram.data.database.entity.CatalogEntity
 interface CatalogDao {
 
     @Query("SELECT * FROM catalog ORDER BY name DESC")
-    suspend fun getCatalog(): ArrayList<CatalogEntity>
+    suspend fun getCatalog(): List<CatalogEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCatalog(catalog: ArrayList<CatalogEntity>)
+    suspend fun insertCatalog(catalog: List<CatalogEntity>)
 
 }

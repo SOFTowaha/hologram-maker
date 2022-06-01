@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "catalog")
 data class CatalogEntity(
     @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name = "id") val id: String = "",
-    @ColumnInfo(name = "name") val name: String = "",
-    @ColumnInfo(name = "image") val image: String = "",
-    @ColumnInfo(name = "tag") val tag: String = "",
-    @ColumnInfo(name = "url") val url: String = ""
+    @ColumnInfo(name = "id") val id: String,
+    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "image") val image: String,
+    @ColumnInfo(name = "tag") val tag: String,
+    @ColumnInfo(name = "url") val url: String
 )

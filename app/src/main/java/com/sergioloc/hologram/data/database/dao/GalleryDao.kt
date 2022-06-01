@@ -10,9 +10,9 @@ import com.sergioloc.hologram.data.database.entity.GalleryEntity
 interface GalleryDao {
 
     @Query("SELECT * FROM gallery")
-    suspend fun getImages(): ArrayList<GalleryEntity>
+    suspend fun getImages(): List<GalleryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertImages(images: ArrayList<GalleryEntity>)
+    suspend fun insertImages(images: List<GalleryEntity>)
 
 }
