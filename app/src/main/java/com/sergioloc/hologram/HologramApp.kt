@@ -1,4 +1,7 @@
 package com.sergioloc.hologram
 
-class HologramApp {
-}
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class HologramApp: Application()
