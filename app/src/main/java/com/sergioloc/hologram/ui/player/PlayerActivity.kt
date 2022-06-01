@@ -40,7 +40,7 @@ class PlayerActivity: YouTubeBaseActivity() {
                 }
 
                 override fun onInitializationFailure(provider: YouTubePlayer.Provider, youTubeInitializationResult: YouTubeInitializationResult) {
-                    Toast.makeText(applicationContext, getString(R.string.errorYT), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, getString(R.string.error_youtube), Toast.LENGTH_SHORT).show()
                 }
             })
     }

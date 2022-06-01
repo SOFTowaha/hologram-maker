@@ -89,7 +89,7 @@ class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSele
                 val i = Intent(Intent.ACTION_SEND)
                 i.type = "text/plain"
                 i.putExtra(Intent.EXTRA_TEXT, Constants.PLAY_STORE)
-                startActivity(Intent.createChooser(i, resources.getString(R.string.share_usign)))
+                startActivity(Intent.createChooser(i, resources.getString(R.string.share_app)))
             }
             R.id.nav_rate -> startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(Constants.PLAY_STORE)))
             R.id.nav_suggestions -> fragmentToNavigate = SuggestionsFragment()

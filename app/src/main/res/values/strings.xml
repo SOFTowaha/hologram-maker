@@ -7,10 +7,23 @@
     <!-- General -->
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
+
+    <!-- Dialog -->
+    <string name="hologram">Hologram</string>
+    <string name="delete">Delete</string>
+    <string name="warning">Warning</string>
+
+    <!-- Menu -->
+    <string name="home">Home</string>
+    <string name="gallery">My Holograms</string>
+    <string name="video_catalog">Video Catalog</string>
+    <string name="pyramid">Make the pyramid</string>
+    <string name="share">Share</string>
+    <string name="rate">Rate</string>
+    <string name="suggestions">Suggestions</string>
     <string name="communication">Communication</string>
 
     <!-- Home -->
-    <string name="home">Home</string>
     <string name="new_holograms">New holograms</string>
     <string name="play_demo">Play Demo</string>
 
@@ -22,11 +35,12 @@
     <!-- Square -->
     <string name="size">Size</string>
     <string name="distance">Distance</string>
-    <string name="warning">Warning</string>
     <string name="save_config">Do you want to save the configuration?</string>
 
+    <!-- Player -->
+    <string name="error_youtube">Error initializing the hologram</string>
+
     <!-- Catalog -->
-    <string name="catalog">Catalog</string>
     <string name="categories">Categories</string>
     <string name="one_video">1 video</string>
     <string name="num_videos">%1d videos</string>
@@ -38,62 +52,6 @@
     <string name="music">Music</string>
     <string name="figures">Figures</string>
     <string name="others">Others</string>
-    <string name="up">Up</string>
-
-    <!-- Suggestions -->
-    <string name="suggestions">Suggestions</string>
-    <string name="youtube_video">YouTube Video</string>
-    <string name="comment">Comment</string>
-    <string name="youtube_link">https://www.youtube.com/…</string>
-    <string name="youtube_link_des">Paste a youtube link of an hologram video so our team can check it and add it to the catalog.</string>
-    <string name="comment_des">Write a message of a feature you would like to see or a bug you found so we could work in that.</string>
-    <string name="send">Send</string>
-    <string name="type_message">Type a message</string>
-    <string name="suggestion_sent">Suggestion sent</string>
-    <string name="invalid_youtube_url">Invalid YouTube url</string>
-    <string name="error_suggestion">Error sending suggestion</string>
-
-    <!-- Requirements -->
-    <string name="registered_fav">You have to be registered to add favourites</string>
-    <string name="registered_cloud">You have to be registered to upload to the cloud</string>
-    <string name="internet_cloud">You need internet connection to upload to the cloud</string>
-    <string name="write_name">You have to write a name</string>
-    <string name="add_favourites">Added to favourites</string>
-    <string name="delete_favourites">Deleted of favourites</string>
-
-    <!-- Dialog -->
-    <string name="delete">Delete</string>
-    <string name="sure">Are you sure?</string>
-    <string name="image_delete">Image deleted</string>
-    <string name="uploaded">Uploaded</string>
-
-    <!-- Others -->
-    <string name="favourites">Favourites</string>
-    <string name="myholograms">My Holograms</string>
-    <string name="share_usign">Share using</string>
-    <string name="user_name">User name</string>
-    <string name="password">Password</string>
-    <string name="confirm_password">Password</string>
-    <string name="enter">ENTER</string>
-    <string name="enter_guest">Enter as guest</string>
-
-    <!-- Login -->
-    <string name="sign_in">SIGN IN</string>
-    <string name="sign_up">SIGN UP</string>
-    <string name="error_fields">Debes rellenar ambos campos</string>
-    <string name="error_mail">Debes rellenar el email</string>
-    <string name="error_password">Debes rellenar la contraseña</string>
-    <string name="error_same">La contraseña no coincide</string>
-
-    <!-- Menu -->
-    <string name="title_home">Home</string>
-    <string name="title_gallery">Gallery</string>
-    <string name="title_catalog">Video Catalog</string>
-    <string name="title_pyramid">Make the pyramid</string>
-    <string name="title_sign_out">Sign out</string>
-    <string name="title_share">Share</string>
-    <string name="title_rate">Rate</string>
-    <string name="title_suggest">Suggestions</string>
 
     <!-- Pyramid -->
     <string name="step0">Materials</string>
@@ -126,22 +84,19 @@
     <string name="step9">Enjoy!</string>
     <string name="step9Des">Put the pyramid in the center of the smartphone to see the hologram.</string>
 
-    <!-- Error Strings -->
-    <string name="errorDB">Cannot open database</string>
-    <string name="errorConnexion">Internet connexion is required</string>
-    <string name="errorYT">Failured to Initialize!</string>
-    <string name="repeated_user">This user name is already in use</string>
-    <string name="wrong_pass">The password is invalid or the user does not have a password</string>
-    <string name="error_pass_min">Password should be at least 6 characters</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <!-- Share -->
+    <string name="share_app">Share app using…</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-
+    <!-- Suggestions -->
+    <string name="youtube_video">YouTube Video</string>
+    <string name="comment">Comment</string>
+    <string name="youtube_link">https://www.youtube.com/…</string>
+    <string name="youtube_link_des">Paste a youtube link of an hologram video so our team can check it and add it to the catalog.</string>
+    <string name="comment_des">Write a message of a feature you would like to see or a bug you found so we could work in that.</string>
+    <string name="send">Send</string>
+    <string name="type_message">Type a message</string>
+    <string name="suggestion_sent">Suggestion sent</string>
+    <string name="invalid_youtube_url">Invalid YouTube url</string>
+    <string name="error_suggestion">Error sending suggestion</string>
 
 </resources>

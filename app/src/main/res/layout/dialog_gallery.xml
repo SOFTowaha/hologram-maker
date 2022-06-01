@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toStartOf="@id/btnCreate"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
-        android:text="Delete"
+        android:text="@string/delete"
         android:textAllCaps="false"
         android:background="@drawable/chip_background"/>
 
@@ -46,7 +46,7 @@
         app:layout_constraintStart_toEndOf="@id/btnDelete"
         app:layout_constraintEnd_toEndOf="@id/cvImage"
         android:layout_marginStart="5dp"
-        android:text="Hologram"
+        android:text="@string/hologram"
         android:textAllCaps="false"
         android:background="@drawable/chip_background"/>
 

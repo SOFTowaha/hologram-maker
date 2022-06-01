@@ -34,7 +34,7 @@ class PyramidFragment : Fragment() {
     private fun initView() {
         // Toolbar
         val activity = activity as AppCompatActivity?
-        activity?.title = resources.getString(R.string.title_pyramid)
+        activity?.title = resources.getString(R.string.pyramid)
 
 
         // View Pager

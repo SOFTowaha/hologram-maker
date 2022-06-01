@@ -57,7 +57,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
     private fun initView() {
         // Toolbar
         val activity = activity as AppCompatActivity
-        activity.title = resources.getString(R.string.myholograms)
+        activity.title = resources.getString(R.string.gallery)
 
         // RecyclerView
         adapter = GalleryAdapter(ArrayList(), this)

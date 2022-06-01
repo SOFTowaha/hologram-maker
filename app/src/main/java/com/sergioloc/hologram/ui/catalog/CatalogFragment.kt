@@ -43,7 +43,7 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
     private fun initView() {
         // Toolbar
         val activity = activity as AppCompatActivity?
-        activity?.title = resources.getString(R.string.title_catalog)
+        activity?.title = resources.getString(R.string.video_catalog)
 
         // RecyclerView
         val layoutManager = LinearLayoutManager(context)
