@@ -5,6 +5,6 @@ import java.io.ByteArrayOutputStream
 
 fun Bitmap.toByteArray(): ByteArray {
     val bStream = ByteArrayOutputStream()
-    compress(Bitmap.CompressFormat.PNG, 100, bStream)
+    compress(Bitmap.CompressFormat.JPEG, 50, bStream)
     return bStream.toByteArray()
 }

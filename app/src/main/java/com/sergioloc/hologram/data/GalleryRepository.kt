@@ -1,7 +1,6 @@
 package com.sergioloc.hologram.data
 
 import com.sergioloc.hologram.data.database.dao.GalleryDao
-import com.sergioloc.hologram.data.database.entity.GalleryEntity
 import com.sergioloc.hologram.domain.model.Gallery
 import com.sergioloc.hologram.domain.model.toData
 import com.sergioloc.hologram.domain.model.toDomain
@@ -20,8 +19,8 @@ class GalleryRepository @Inject constructor(
         galleryDao.insertImage(image.toData())
     }
 
-    suspend fun deleteImageFromGallery(id: Int) {
-        galleryDao.deleteImage(id)
+    suspend fun deleteImageFromGallery(image: Gallery) {
+        galleryDao.deleteImage(image.id)
     }
 
 }

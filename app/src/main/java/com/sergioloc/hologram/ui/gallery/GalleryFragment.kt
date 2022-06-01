@@ -1,10 +1,7 @@
 package com.sergioloc.hologram.ui.gallery
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -24,6 +21,7 @@ import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.ui.adapters.GalleryAdapter
 import com.sergioloc.hologram.databinding.FragmentGalleryBinding
+import com.sergioloc.hologram.domain.model.Gallery
 import com.sergioloc.hologram.ui.dialogs.GalleryDialog
 import com.sergioloc.hologram.ui.square.SquareActivity
 import com.sergioloc.hologram.utils.Constants
@@ -38,9 +36,6 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
     private lateinit var binding: FragmentGalleryBinding
     private val viewModel: GalleryViewModel by viewModels()
     private lateinit var adapter: GalleryAdapter
-    private lateinit var prefs: SharedPreferences
-    private var length = 0
-    private var nextId = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentGalleryBinding.inflate(inflater, container, false)
@@ -51,12 +46,11 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        initVariables()
         initObservers()
         initButtons()
 
         binding.loader.visible()
-        viewModel.getMyHolograms(requireContext(), length)
+        viewModel.getMyImages()
     }
 
     private fun initView() {
@@ -67,18 +61,12 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         // RecyclerView
         adapter = GalleryAdapter(ArrayList(), this)
         binding.rvImages.setHasFixedSize(true)
-        binding.rvImages.layoutManager = GridLayoutManager(context, 2)
+        binding.rvImages.layoutManager = GridLayoutManager(context, 3)
         binding.rvImages.adapter = adapter
     }
 
-    private fun initVariables() {
-        prefs = requireActivity().getSharedPreferences(Constants.PREFERENCES, Context.MODE_PRIVATE)
-        length = prefs.getInt(Constants.PREF_LENGTH, 0)
-        nextId = prefs.getInt(Constants.PREF_NEXT_ID, 1)
-    }
-
     private fun initObservers() {
-        viewModel.list.observe(viewLifecycleOwner) {
+        viewModel.images.observe(viewLifecycleOwner) {
             it.onSuccess { list ->
                 showLoader(false)
                 if (list.isEmpty())
@@ -89,32 +77,19 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
         }
 
         viewModel.newImage.observe(viewLifecycleOwner) {
-            it.onSuccess { bitmap ->
+            it.onSuccess {
                 showLoader(false)
-                adapter.addItem(bitmap)
-                with (prefs.edit()) {
-                    length++
-                    nextId++
-                    putInt(Constants.PREF_LENGTH, length)
-                    putInt(Constants.PREF_NEXT_ID, nextId)
-                    apply()
-                }
+                viewModel.getMyImages()
             }
         }
 
         viewModel.deleteImage.observe(viewLifecycleOwner) {
-            it.onSuccess { position ->
+            it.onSuccess {
                 showLoader(false)
-                adapter.removeItem(position)
-                with (prefs.edit()) {
-                    length--
-                    putInt(Constants.PREF_LENGTH, length)
-                    apply()
-                }
-                if (length < 1)
-                    binding.tvEmpty.visible()
+                viewModel.getMyImages()
             }
         }
+
     }
 
     private fun initButtons() {
@@ -134,7 +109,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
                     val inputStream: InputStream? = context?.contentResolver?.openInputStream(it)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
                     Thread {
-                        viewModel.saveNewHologram(requireContext(), bitmap, nextId)
+                        viewModel.saveNewImage(bitmap)
                     }.start()
                 }
             } catch (e: Exception) {
@@ -160,16 +135,16 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
 
     /** ADAPTER LISTENER **/
 
-    override fun onHologramClick(bitmap: Bitmap, position: Int) {
+    override fun onHologramClick(image: Gallery) {
         val dialog = GalleryDialog(requireContext())
         dialog.apply {
-            setBitmap(bitmap)
+            image.bitmap?.let { setBitmap(it) }
             setOnDeleteClickListener {
                 showLoader(true)
-                viewModel.deleteHologram(requireContext(), position)
+                viewModel.deleteImage(image)
             }
             setOnHologramClickListener {
-                Session.bitmap = bitmap
+                Session.bitmap = image.bitmap
                 startActivity(Intent(requireActivity(), SquareActivity::class.java))
             }
             show()

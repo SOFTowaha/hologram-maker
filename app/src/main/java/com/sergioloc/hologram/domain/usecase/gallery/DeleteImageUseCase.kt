@@ -9,7 +9,7 @@ class DeleteImageUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(image: Gallery) {
-        repository.deleteImageFromGallery(image.id)
+        repository.deleteImageFromGallery(image)
     }
 
 }
