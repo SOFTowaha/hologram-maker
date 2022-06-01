@@ -135,12 +135,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone" />
 
-    <View
-        android:id="@+id/viewBanner"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
     <com.google.android.gms.ads.AdView
         android:id="@+id/adBanner"
         android:layout_width="wrap_content"
@@ -149,6 +143,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+        ads:adUnitId="@string/banner_catalog"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -83,6 +83,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:elevation="6dp"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
+        ads:adUnitId="@string/banner_gallery"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

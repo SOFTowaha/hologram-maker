@@ -99,4 +99,12 @@
     <string name="invalid_youtube_url">Invalid YouTube url</string>
     <string name="error_suggestion">Error sending suggestion</string>
 
+    <!-- Ads -->
+    <string name="banner_home" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_gallery" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_catalog" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_suggestions" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+
+    <!-- Dev: ca-app-pub-3940256099942544/6300978111 -->
+
 </resources>
