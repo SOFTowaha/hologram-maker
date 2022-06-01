@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sergioloc.hologram.utils.Constants
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.*
 
 class GalleryViewModel: ViewModel() {

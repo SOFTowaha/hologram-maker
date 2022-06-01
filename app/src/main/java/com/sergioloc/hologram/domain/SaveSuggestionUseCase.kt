@@ -3,10 +3,11 @@ package com.sergioloc.hologram.domain
 import com.sergioloc.hologram.data.AppRepository
 import com.sergioloc.hologram.data.model.Suggestion
 import com.sergioloc.hologram.utils.Constants
+import javax.inject.Inject
 
-class SaveSuggestionUseCase {
-
-    private val repository = AppRepository()
+class SaveSuggestionUseCase @Inject constructor(
+    private val repository: AppRepository
+) {
 
     private val prefix = arrayListOf(
         "https://www.youtube.",

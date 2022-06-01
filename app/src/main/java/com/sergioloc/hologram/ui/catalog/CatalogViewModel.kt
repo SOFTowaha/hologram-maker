@@ -6,15 +6,18 @@ import androidx.lifecycle.viewModelScope
 import com.sergioloc.hologram.data.model.Hologram
 import com.sergioloc.hologram.domain.FilterCatalogUseCase
 import com.sergioloc.hologram.domain.GetCatalogUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CatalogViewModel: ViewModel() {
+@HiltViewModel
+class CatalogViewModel @Inject constructor(
+    val getCatalogUseCase: GetCatalogUseCase,
+    val filterCatalogUseCase: FilterCatalogUseCase
+): ViewModel() {
 
     val catalog: MutableLiveData<Result<ArrayList<Hologram>>> = MutableLiveData()
     private val tags = ArrayList<String>()
-
-    val filterCatalogUseCase = FilterCatalogUseCase()
-    val getCatalogUseCase = GetCatalogUseCase()
 
     fun getCatalog() {
         viewModelScope.launch {

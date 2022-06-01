@@ -8,10 +8,11 @@ import com.sergioloc.hologram.utils.Safe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class FirebaseService {
-
-    private val db = FirebaseFirestore.getInstance()
+class FirebaseService @Inject constructor(
+    private val db: FirebaseFirestore
+) {
 
     suspend fun getNewsIds(): ArrayList<String> {
         return withContext(Dispatchers.IO) {

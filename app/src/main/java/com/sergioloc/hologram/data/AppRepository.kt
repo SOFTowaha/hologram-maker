@@ -6,10 +6,11 @@ import com.sergioloc.hologram.data.model.Hologram
 import com.sergioloc.hologram.data.model.Suggestion
 import com.sergioloc.hologram.utils.Connection
 import com.sergioloc.hologram.utils.Session
+import javax.inject.Inject
 
-class AppRepository {
-
-    private val api = FirebaseService()
+class AppRepository @Inject constructor(
+    private val api: FirebaseService
+) {
 
     suspend fun getNewsIds(): ArrayList<String>? {
         if (Session.newsIds != null)

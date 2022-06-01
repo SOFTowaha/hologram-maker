@@ -24,6 +24,7 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
+
     private lateinit var adapter: HologramAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

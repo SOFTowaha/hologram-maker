@@ -5,12 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sergioloc.hologram.data.model.Hologram
 import com.sergioloc.hologram.domain.GetNewsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel: ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val getNewsUseCase: GetNewsUseCase
+): ViewModel() {
 
     val news: MutableLiveData<Result<ArrayList<Hologram>>> = MutableLiveData()
-    private val getNewsUseCase = GetNewsUseCase()
 
     fun getNews() {
         viewModelScope.launch {

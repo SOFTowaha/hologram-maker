@@ -2,10 +2,11 @@ package com.sergioloc.hologram.domain
 
 import com.sergioloc.hologram.data.AppRepository
 import com.sergioloc.hologram.data.model.Hologram
+import javax.inject.Inject
 
-class GetNewsUseCase {
-
-    private val repository = AppRepository()
+class GetNewsUseCase @Inject constructor(
+    private val repository: AppRepository
+) {
 
     suspend operator fun invoke(): ArrayList<Hologram> {
         val ids = repository.getNewsIds()
