@@ -9,14 +9,12 @@ class FilterCatalogUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(tags: ArrayList<String>): ArrayList<Hologram> {
-        val catalog = repository.getCatalog()
+        val catalog = repository.getCatalogFromDatabase()
         val result = ArrayList<Hologram>()
 
-        catalog?.let {
-            for (hologram in it)
-                if (tags.contains(hologram.tag))
-                    result.add(hologram)
-        }
+        for (hologram in catalog)
+            if (tags.contains(hologram.tag))
+                result.add(hologram)
 
         return result
     }

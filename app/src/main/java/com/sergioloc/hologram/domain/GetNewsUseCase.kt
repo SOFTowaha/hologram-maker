@@ -3,6 +3,7 @@ package com.sergioloc.hologram.domain
 import com.sergioloc.hologram.data.NewsRepository
 import com.sergioloc.hologram.domain.model.Hologram
 import com.sergioloc.hologram.domain.model.toData
+import com.sergioloc.hologram.domain.model.toNewsData
 import javax.inject.Inject
 
 class GetNewsUseCase @Inject constructor(
@@ -17,7 +18,7 @@ class GetNewsUseCase @Inject constructor(
             news = repository.getNewsFromDatabase()
         else {
             repository.deleteNewsFromDatabase()
-            repository.insertNewsInDatabase(news.map { it.toData() })
+            repository.insertNewsInDatabase(news.map { it.toNewsData() })
         }
 
         return news

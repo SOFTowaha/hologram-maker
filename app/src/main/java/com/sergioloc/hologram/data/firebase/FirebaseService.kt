@@ -34,28 +34,20 @@ class FirebaseService @Inject constructor(
         }
     }
 
-    suspend fun getHologram(id: String): HologramModel? {
-        return withContext(Dispatchers.IO) {
-            var hologram: HologramModel? = null
-            db.collection(Constants.CATALOG).document(id).get().await().data?.let { response ->
-                hologram = HologramModel(
-                    id = id,
-                    name = Safe.getString(response, "name"),
-                    image = Safe.getString(response, "image"),
-                    tag = Safe.getString(response, "tag"),
-                    url = Safe.getString(response, "url")
-                )
-            }
-            hologram
-        }
-    }
-
-    suspend fun getCatalog(): ArrayList<HologramModel> {
+    suspend fun getCatalog(): List<HologramModel> {
         return withContext(Dispatchers.IO) {
             val holograms = ArrayList<HologramModel>()
             db.collection(Constants.CATALOG).orderBy("name").get().await().documents.mapNotNull { response ->
-                response.toObject(HologramModel::class.java)?.let { hologram ->
-                    holograms.add(hologram)
+                response.data?.let {
+                    holograms.add(
+                        HologramModel(
+                            id = response.id,
+                            name = Safe.getString(it, "name"),
+                            image = Safe.getString(it, "image"),
+                            tag = Safe.getString(it, "tag"),
+                            url = Safe.getString(it, "url")
+                        )
+                    )
                 }
             }
             holograms

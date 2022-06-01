@@ -12,10 +12,12 @@ data class Hologram(
     val url: String = ""
 )
 
-fun Hologram.toData() = NewsEntity(id, name, image, tag, url)
+fun Hologram.toNewsData() = NewsEntity(id, name, image, tag, url)
 
-fun HologramModel.toDomain() = Hologram(name, image, tag, url)
+fun Hologram.toCatalogData() = CatalogEntity(id, name, image, tag, url)
 
-fun NewsEntity.toDomain() = Hologram(name, image, tag, url)
+fun HologramModel.toDomain() = Hologram(id, name, image, tag, url)
 
-fun CatalogEntity.toDomain() = Hologram(name, image, tag, url)
+fun NewsEntity.toDomain() = Hologram(id, name, image, tag, url)
+
+fun CatalogEntity.toDomain() = Hologram(id, name, image, tag, url)

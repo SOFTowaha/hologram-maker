@@ -1,12 +1,12 @@
 package com.sergioloc.hologram.domain
 
-import com.sergioloc.hologram.data.CatalogRepository
+import com.sergioloc.hologram.data.SuggestionRepository
 import com.sergioloc.hologram.domain.model.Suggestion
 import com.sergioloc.hologram.utils.Constants
 import javax.inject.Inject
 
 class SaveSuggestionUseCase @Inject constructor(
-    private val repository: CatalogRepository
+    private val repository: SuggestionRepository
 ) {
 
     private val prefix = arrayListOf(
