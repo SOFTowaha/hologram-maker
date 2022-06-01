@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.needle.app.utils.extensions.visible
@@ -15,11 +16,13 @@ import com.sergioloc.hologram.R
 import com.sergioloc.hologram.data.model.Suggestion
 import com.sergioloc.hologram.databinding.FragmentSuggestionsBinding
 import com.sergioloc.hologram.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SuggestionsFragment: Fragment() {
 
     private lateinit var binding: FragmentSuggestionsBinding
-    private lateinit var viewModel: SuggestionsViewModel
+    private val viewModel: SuggestionsViewModel by viewModels()
     private var commentSelected = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -30,14 +33,9 @@ class SuggestionsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initVariables()
         initView()
         initObservers()
         initButtons()
-    }
-
-    private fun initVariables() {
-        viewModel = SuggestionsViewModel()
     }
 
     private fun initView() {

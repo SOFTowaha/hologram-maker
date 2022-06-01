@@ -10,11 +10,13 @@ import com.sergioloc.hologram.R
 import com.sergioloc.hologram.data.model.Step
 import com.sergioloc.hologram.databinding.FragmentPyramidBinding
 import com.sergioloc.hologram.ui.adapters.StepsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by Sergio López Ceballos on 28/08/2019.
  */
 
+@AndroidEntryPoint
 class PyramidFragment : Fragment() {
 
     private lateinit var binding: FragmentPyramidBinding

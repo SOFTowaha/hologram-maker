@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.setOnSingleClickListener
@@ -27,13 +28,15 @@ import com.sergioloc.hologram.ui.dialogs.GalleryDialog
 import com.sergioloc.hologram.ui.square.SquareActivity
 import com.sergioloc.hologram.utils.Constants
 import com.sergioloc.hologram.utils.Session
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.*
 import kotlin.collections.ArrayList
 
+@AndroidEntryPoint
 class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
 
     private lateinit var binding: FragmentGalleryBinding
-    private lateinit var viewModel: GalleryViewModel
+    private val viewModel: GalleryViewModel by viewModels()
     private lateinit var adapter: GalleryAdapter
     private lateinit var prefs: SharedPreferences
     private var length = 0
@@ -69,15 +72,13 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
     }
 
     private fun initVariables() {
-        viewModel = GalleryViewModel()
-
         prefs = requireActivity().getSharedPreferences(Constants.PREFERENCES, Context.MODE_PRIVATE)
         length = prefs.getInt(Constants.PREF_LENGTH, 0)
         nextId = prefs.getInt(Constants.PREF_NEXT_ID, 1)
     }
 
     private fun initObservers() {
-        viewModel.list.observe(this) {
+        viewModel.list.observe(viewLifecycleOwner) {
             it.onSuccess { list ->
                 showLoader(false)
                 if (list.isEmpty())
@@ -87,7 +88,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
             }
         }
 
-        viewModel.newImage.observe(this) {
+        viewModel.newImage.observe(viewLifecycleOwner) {
             it.onSuccess { bitmap ->
                 showLoader(false)
                 adapter.addItem(bitmap)
@@ -101,7 +102,7 @@ class GalleryFragment: Fragment(), GalleryAdapter.OnHologramClickListener {
             }
         }
 
-        viewModel.deleteImage.observe(this) {
+        viewModel.deleteImage.observe(viewLifecycleOwner) {
             it.onSuccess { position ->
                 showLoader(false)
                 adapter.removeItem(position)

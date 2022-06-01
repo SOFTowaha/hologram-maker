@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.setOnSingleClickListener
@@ -16,11 +17,13 @@ import com.sergioloc.hologram.ui.player.PlayerActivity
 import com.sergioloc.hologram.ui.adapters.HologramAdapter
 import com.sergioloc.hologram.databinding.FragmentHomeBinding
 import com.sergioloc.hologram.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var adapter: HologramAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -32,7 +35,6 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-        initVariables()
         initButtons()
         initObservers()
 
@@ -51,10 +53,6 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
         binding.rvNews.adapter = adapter
     }
 
-    private fun initVariables() {
-        viewModel = HomeViewModel()
-    }
-
     private fun initButtons() {
         binding.clDemo.setOnSingleClickListener {
             val i = Intent(context, PlayerActivity::class.java)
@@ -64,7 +62,7 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
     }
 
     private fun initObservers() {
-        viewModel.news.observe(this) {
+        viewModel.news.observe(viewLifecycleOwner) {
             it.onSuccess { list ->
                 adapter.updateList(list)
             }

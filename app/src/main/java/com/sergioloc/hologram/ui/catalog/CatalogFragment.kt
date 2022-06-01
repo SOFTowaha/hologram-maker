@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.visible
@@ -12,11 +13,13 @@ import com.sergioloc.hologram.R
 import com.sergioloc.hologram.ui.adapters.HologramAdapter
 import com.sergioloc.hologram.databinding.FragmentCatalogBinding
 import com.sergioloc.hologram.ui.player.PlayerActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
 
     private lateinit var binding: FragmentCatalogBinding
-    private lateinit var viewModel: CatalogViewModel
+    private val viewModel: CatalogViewModel by viewModels()
 
     private var tagsOpen = true
 
@@ -27,17 +30,13 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initVariables()
+
         initView()
         initButtons()
         initObservers()
 
         showLoader(true)
         viewModel.getCatalog()
-    }
-
-    private fun initVariables() {
-        viewModel = CatalogViewModel()
     }
 
     private fun initView() {
@@ -107,7 +106,7 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
     }
 
     private fun initObservers() {
-        viewModel.catalog.observe(this) {
+        viewModel.catalog.observe(viewLifecycleOwner) {
             it.onSuccess { holograms ->
                 binding.rvVideos.adapter = HologramAdapter(holograms, this)
                 binding.tvCount.text = getString(R.string.num_videos, holograms.size)

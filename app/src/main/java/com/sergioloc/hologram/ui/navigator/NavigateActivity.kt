@@ -20,6 +20,7 @@ import com.sergioloc.hologram.ui.home.HomeFragment
 import com.sergioloc.hologram.ui.pyramid.PyramidFragment
 import com.sergioloc.hologram.ui.suggestions.SuggestionsFragment
 import com.sergioloc.hologram.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_layout.*
 
@@ -27,6 +28,7 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
  * Created by Sergio López Ceballos on 26/08/2019.
  */
 
+@AndroidEntryPoint
 class NavigateActivity: AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding

@@ -20,8 +20,9 @@ import com.sergioloc.hologram.ui.dialogs.ConfirmationDialog
 import com.sergioloc.hologram.utils.Constants
 import com.sergioloc.hologram.utils.Converter
 import com.sergioloc.hologram.utils.Session
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SquareActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivitySquareBinding
