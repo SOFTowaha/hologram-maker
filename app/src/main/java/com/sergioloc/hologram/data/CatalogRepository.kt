@@ -2,7 +2,6 @@ package com.sergioloc.hologram.data
 
 import com.sergioloc.hologram.data.database.dao.CatalogDao
 import com.sergioloc.hologram.data.database.entity.CatalogEntity
-import com.sergioloc.hologram.data.database.entity.NewsEntity
 import com.sergioloc.hologram.data.firebase.FirebaseService
 import com.sergioloc.hologram.data.model.HologramModel
 import com.sergioloc.hologram.domain.model.Hologram
@@ -29,7 +28,7 @@ class CatalogRepository @Inject constructor(
     }
 
     suspend fun deleteCatalogFromDatabase() {
-        catalogDao.deleteNews()
+        catalogDao.deleteCatalog()
     }
 
 }

@@ -15,7 +15,7 @@ interface CatalogDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCatalog(catalog: List<CatalogEntity>)
 
-    @Query("DELETE FROM news")
-    suspend fun deleteNews()
+    @Query("DELETE FROM catalog")
+    suspend fun deleteCatalog()
 
 }

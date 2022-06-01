@@ -2,8 +2,8 @@ package com.sergioloc.hologram.domain
 
 import com.sergioloc.hologram.data.NewsRepository
 import com.sergioloc.hologram.domain.model.Hologram
-import com.sergioloc.hologram.domain.model.toData
 import com.sergioloc.hologram.domain.model.toNewsData
+import com.sergioloc.hologram.utils.Session
 import javax.inject.Inject
 
 class GetNewsUseCase @Inject constructor(
@@ -11,12 +11,14 @@ class GetNewsUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(): List<Hologram> {
-        var news: List<Hologram>
+        if (Session.newsLoaded)
+            return repository.getNewsFromDatabase()
 
-        news = repository.getNewsFromFirebase()
+        var news = repository.getNewsFromFirebase()
         if (news.isEmpty())
             news = repository.getNewsFromDatabase()
         else {
+            Session.newsLoaded = true
             repository.deleteNewsFromDatabase()
             repository.insertNewsInDatabase(news.map { it.toNewsData() })
         }
