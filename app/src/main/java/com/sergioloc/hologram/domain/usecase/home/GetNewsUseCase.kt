@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.domain
+package com.sergioloc.hologram.domain.usecase.home
 
 import com.sergioloc.hologram.data.NewsRepository
 import com.sergioloc.hologram.domain.model.Hologram

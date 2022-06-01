@@ -3,8 +3,8 @@ package com.sergioloc.hologram.ui.catalog
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sergioloc.hologram.domain.FilterCatalogUseCase
-import com.sergioloc.hologram.domain.GetCatalogUseCase
+import com.sergioloc.hologram.domain.usecase.catalog.FilterCatalogUseCase
+import com.sergioloc.hologram.domain.usecase.catalog.GetCatalogUseCase
 import com.sergioloc.hologram.domain.model.Hologram
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

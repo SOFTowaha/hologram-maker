@@ -1,4 +1,4 @@
-package com.sergioloc.hologram.domain
+package com.sergioloc.hologram.domain.usecase.suggestions
 
 import com.sergioloc.hologram.data.SuggestionRepository
 import com.sergioloc.hologram.domain.model.Suggestion
