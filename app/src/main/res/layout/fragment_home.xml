@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_main"
     android:layout_width="match_parent"
@@ -60,7 +61,7 @@
         android:id="@+id/clDemo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/viewBanner"
         android:background="@drawable/card_stroke_gray"
         android:layout_margin="20dp">
 
@@ -72,7 +73,7 @@
             app:layout_constraintStart_toStartOf="@id/tvDemo"
             app:layout_constraintEnd_toEndOf="@id/tvDemo"
             android:layout_marginBottom="5dp"
-            android:paddingTop="20dp"
+            android:paddingTop="10dp"
             android:src="@drawable/ic_play"
             app:tint="@color/textDefault"
             android:contentDescription="@null"/>
@@ -84,13 +85,27 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:paddingBottom="20dp"
+            android:paddingBottom="10dp"
             android:gravity="center"
-            android:textSize="18sp"
             android:textStyle="bold"
             android:text="@string/play_demo"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <View
+        android:id="@+id/viewBanner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adBanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

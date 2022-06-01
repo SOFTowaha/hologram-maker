@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.needle.app.utils.extensions.visible
@@ -52,6 +53,10 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
         adapter = HologramAdapter(ArrayList(), this)
         binding.rvNews.layoutManager = LinearLayoutManager(context)
         binding.rvNews.adapter = adapter
+
+        // Ad
+        val adRequest = AdRequest.Builder().build()
+        binding.adBanner.loadAd(adRequest)
     }
 
     private fun initButtons() {
