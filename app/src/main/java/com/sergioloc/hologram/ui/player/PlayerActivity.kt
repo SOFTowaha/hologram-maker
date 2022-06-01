@@ -1,10 +1,13 @@
 package com.sergioloc.hologram.ui.player
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
+import com.needle.app.utils.extensions.gone
 import com.sergioloc.hologram.R
 import com.sergioloc.hologram.databinding.ActivityPlayerBinding
 import com.sergioloc.hologram.utils.Constants
@@ -43,6 +46,11 @@ class PlayerActivity: YouTubeBaseActivity() {
                     Toast.makeText(applicationContext, getString(R.string.error_youtube), Toast.LENGTH_SHORT).show()
                 }
             })
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.ivBlack.gone()
+            binding.loader.gone()
+        }, 4000)
     }
 
 }
