@@ -121,9 +121,22 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
 
     private fun checkChips() {
         if (!binding.chip1.isChipSelected() && !binding.chip2.isChipSelected() && !binding.chip3.isChipSelected() &&
-                !binding.chip4.isChipSelected() &&!binding.chip5.isChipSelected() &&!binding.chip6.isChipSelected() &&
+                !binding.chip4.isChipSelected() && !binding.chip5.isChipSelected() && !binding.chip6.isChipSelected() &&
                 !binding.chip7.isChipSelected()) {
             binding.chip0.select()
+            viewModel.getCatalog()
+        }
+        else if (binding.chip1.isChipSelected() && binding.chip2.isChipSelected() && binding.chip3.isChipSelected() &&
+                binding.chip4.isChipSelected() && binding.chip5.isChipSelected() && binding.chip6.isChipSelected() &&
+                binding.chip7.isChipSelected()) {
+            binding.chip0.select()
+            binding.chip1.unselect()
+            binding.chip2.unselect()
+            binding.chip3.unselect()
+            binding.chip4.unselect()
+            binding.chip5.unselect()
+            binding.chip6.unselect()
+            binding.chip7.unselect()
             viewModel.getCatalog()
         }
     }
