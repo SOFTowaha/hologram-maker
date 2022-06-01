@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.needle.app.utils.extensions.setImageFromURL
 import com.needle.app.utils.extensions.setOnSingleClickListener
@@ -31,6 +32,7 @@ class HologramAdapter(private var holograms: List<Hologram>, private val listene
         holder.tvTag.setTextColor(Converter.getTagColor(holder.root.context, n.tag))
 
         // Image
+        holder.ivImage.setImageDrawable(ContextCompat.getDrawable(holder.root.context, R.drawable.card_grey))
         setImageFromURL(holder.root.context, n.image) {
             holder.ivImage.setImageDrawable(it)
         }
