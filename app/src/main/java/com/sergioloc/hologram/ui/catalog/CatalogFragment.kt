@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.visible
 import com.sergioloc.hologram.R
@@ -49,6 +50,9 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
         binding.rvVideos.setHasFixedSize(true)
         binding.rvVideos.isNestedScrollingEnabled = false
         binding.rvVideos.layoutManager = layoutManager
+
+        // Ad
+        binding.adBanner.loadAd(AdRequest.Builder().build())
     }
 
     private fun initButtons() {

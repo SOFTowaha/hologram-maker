@@ -55,8 +55,7 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
         binding.rvNews.adapter = adapter
 
         // Ad
-        val adRequest = AdRequest.Builder().build()
-        binding.adBanner.loadAd(adRequest)
+        binding.adBanner.loadAd(AdRequest.Builder().build())
     }
 
     private fun initButtons() {
