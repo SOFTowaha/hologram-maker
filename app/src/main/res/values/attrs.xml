@@ -9,6 +9,11 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="MyChip">
+        <attr name="chipTitle" format="string" />
+        <attr name="chipColor" format="color" />
+        <attr name="chipSelected" format="boolean" />
+    </declare-styleable>
 
     <declare-styleable name="Chip">
         <attr name="mcv_chipText" format="string" />

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/chipsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"
+        android:elevation="3dp"
+        app:flexWrap="wrap"
+        app:alignItems="baseline"
+        app:alignContent="flex_start"
+        android:visibility="visible">
+
+        <com.sergioloc.hologram.ui.components.Chip
+            android:id="@+id/chip0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipTitle="@string/all"
+            app:chipColor="@color/tag_red"
+            app:chipSelected="true"/>
+
+        <com.sergioloc.hologram.ui.components.Chip
+            android:id="@+id/chip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipTitle="@string/animals"
+            app:chipColor="@color/tag_orange"/>
+
+        <com.sergioloc.hologram.ui.components.Chip
+            android:id="@+id/chip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipTitle="@string/movies"
+            app:chipColor="@color/tag_blue"/>
+
+        <com.sergioloc.hologram.ui.components.Chip
+            android:id="@+id/chip3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipTitle="@string/space"
+            app:chipColor="@color/tag_pink"/>
+
+        <com.sergioloc.hologram.ui.components.Chip
+            android:id="@+id/chip4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipTitle="@string/nature"
+            app:chipColor="@color/tag_green"/>
+
+        <com.sergioloc.hologram.ui.components.Chip
+            android:id="@+id/chip5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipTitle="@string/music"
+            app:chipColor="@color/tag_cyan"/>
+
+        <com.sergioloc.hologram.ui.components.Chip
+            android:id="@+id/chip6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipTitle="@string/figures"
+            app:chipColor="@color/tag_yellow"/>
+
+        <com.sergioloc.hologram.ui.components.Chip
+            android:id="@+id/chip7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:chipTitle="@string/others"
+            app:chipColor="@color/tag_purple"/>
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/chipsLayout"
+        android:elevation="3dp">
+
+        <ImageView
+            android:id="@+id/ivArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="@id/tvCategories"
+            app:layout_constraintBottom_toBottomOf="@id/tvCategories"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingHorizontal="10dp"
+            android:src="@drawable/ic_arrow_up"
+            android:contentDescription="@null"/>
+
+        <TextView
+            android:id="@+id/tvCategories"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivArrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center_vertical"
+            android:text="@string/categories" />
+
+        <TextView
+            android:id="@+id/tvCount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toTopOf="@id/tvCategories"
+            app:layout_constraintBottom_toBottomOf="@id/tvCategories"
+            android:layout_marginEnd="10dp"
+            android:gravity="end|center" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvVideos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/clBar"
+        app:layout_constraintBottom_toTopOf="@id/adBanner"
+        android:elevation="1dp"/>
+
+    <TextView
+        android:id="@+id/tvConnection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/rvVideos"
+        app:layout_constraintBottom_toBottomOf="@id/rvVideos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingHorizontal="20dp"
+        android:gravity="center"
+        android:elevation="2dp"
+        android:text="@string/check_connection"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/rvVideos"
+        app:layout_constraintBottom_toBottomOf="@id/rvVideos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adBanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_catalog"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,71 +4,107 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!-- Requirements -->
-    <string name="registered_fav">You have to be registered to add favourites</string>
-    <string name="registered_cloud">You have to be registered to upload to the cloud</string>
-    <string name="internet_cloud">You need internet connection to upload to the cloud</string>
-    <string name="write_name">You have to write a name</string>
-    <string name="add_favourites">Added to favourites</string>
-    <string name="delete_favourites">Deleted of favourites</string>
+    <!-- General -->
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="check_connection">Check your internet connection</string>
 
     <!-- Dialog -->
+    <string name="hologram">Hologram</string>
     <string name="delete">Delete</string>
-    <string name="sure">Are you sure?</string>
-    <string name="image_delete">Image deleted</string>
-    <string name="uploaded">Uploaded</string>
-
-    <!-- Others -->
-    <string name="catalog">Catalog</string>
-    <string name="favourites">Favourites</string>
-    <string name="myholograms">My Holograms</string>
-    <string name="share_usign">Share using</string>
-    <string name="acept">Acept</string>
-    <string name="cancel">Cancel</string>
-    <string name="user_name">User name</string>
-    <string name="password">Password</string>
-    <string name="confirm_password">Password</string>
-    <string name="enter">ENTER</string>
-    <string name="enter_guest">Enter as guest</string>
-
-
-
-
-    <!-- Login -->
-    <string name="sign_in">SIGN IN</string>
-    <string name="sign_up">SIGN UP</string>
-    <string name="error_fields">Debes rellenar ambos campos</string>
-    <string name="error_mail">Debes rellenar el email</string>
-    <string name="error_password">Debes rellenar la contraseña</string>
-    <string name="error_same">La contraseña no coincide</string>
 
     <!-- Menu -->
-    <string name="title_home">Home</string>
-    <string name="title_gallery">Gallery</string>
-    <string name="title_catalog">Video Catalog</string>
-    <string name="title_pyramid">Make the pyramid</string>
-    <string name="title_sign_out">Sign out</string>
-    <string name="title_share">Share</string>
+    <string name="home">Home</string>
+    <string name="gallery">My Holograms</string>
+    <string name="video_catalog">Video Catalog</string>
+    <string name="pyramid">Make the pyramid</string>
+    <string name="share">Share</string>
+    <string name="rate">Rate</string>
+    <string name="suggestions">Suggestions</string>
+    <string name="communication">Communication</string>
 
-    <!-- Step -->
-    <string name="title_materials">Required Materials</string>
-    <string name="materials">CD case\n\nCutting Knives\n\nPen\n\nRuler\n\nSmartphone\n\nTape</string>
-    <string name="step1">Step 1</string>
-    <string name="step2">Step 2</string>
-    <string name="step3">Step 3</string>
-    <string name="step4">Step 4</string>
-    <string name="step1Des">Draw this template on a sheet of paper.</string>
-    <string name="step2Des">Copy the template on the CD case (or 0.5mm thick transparent acrylic).</string>
-    <string name="step3Des">Use the cutting knives to cut the CD case in pieces.</string>
-    <string name="step4Des">Joins the pieces in the form of a pyramid.</string>
+    <!-- Home -->
+    <string name="new_holograms">New holograms</string>
+    <string name="play_demo">Play Demo</string>
 
-    <!-- Error Strings -->
-    <string name="errorDB">Cannot open database</string>
-    <string name="errorConnexion">Internet connexion is required</string>
-    <string name="errorYT">Failured to Initialize!</string>
-    <string name="repeated_user">This user name is already in use</string>
-    <string name="wrong_pass">The password is invalid or the user does not have a password</string>
-    <string name="error_pass_min">Password should be at least 6 characters</string>
+    <!-- Gallery -->
+    <string name="creating_hologram">Creating hologram…</string>
+    <string name="empty_gallery">You don\'t have any images yet.\n\nAdd one to create your first hologram!</string>
+    <string name="error_loading_image">Error loading image from gallery</string>
 
+    <!-- Square -->
+    <string name="size">Size</string>
+    <string name="distance">Distance</string>
+    <string name="save_config">Do you want to save the configuration?</string>
+
+    <!-- Player -->
+    <string name="error_youtube">Error initializing the hologram</string>
+
+    <!-- Catalog -->
+    <string name="categories">Categories</string>
+    <string name="one_video">1 video</string>
+    <string name="num_videos">%1d videos</string>
+    <string name="all">All</string>
+    <string name="animals">Animals</string>
+    <string name="movies">Movies</string>
+    <string name="space">Space</string>
+    <string name="nature">Nature</string>
+    <string name="music">Music</string>
+    <string name="figures">Figures</string>
+    <string name="others">Others</string>
+
+    <!-- Pyramid -->
+    <string name="step0">Materials</string>
+    <string name="step0Des">CD case, tape, pen, cutting knives, ruler, smartphone.</string>
+
+    <string name="step1">Template</string>
+    <string name="step1Des">Draw the template of the pyramid following the dimensions on a sheet of paper.</string>
+
+    <string name="step2">Cut paper</string>
+    <string name="step2Des">Cut out the shape from the sheet of paper.</string>
+
+    <string name="step3">Prepare</string>
+    <string name="step3Des">Prepare the CD case by removing unnecessary material.</string>
+
+    <string name="step4">Copy template</string>
+    <string name="step4Des">Trace the template on the plastic CD case.</string>
+
+    <string name="step5">Cut CD</string>
+    <string name="step5Des">Cut out the templates from the plastic CD case.</string>
+
+    <string name="step6">Join parts</string>
+    <string name="step6Des">Tape the parts together in the form of a pyramid.</string>
+
+    <string name="step7">Result</string>
+    <string name="step7Des">The result should look like this.</string>
+
+    <string name="step8">Player</string>
+    <string name="step8Des">Display a video from the catalog or a picture from your gallery</string>
+
+    <string name="step9">Enjoy!</string>
+    <string name="step9Des">Put the pyramid in the center of the smartphone to see the hologram.</string>
+
+    <!-- Share -->
+    <string name="share_app">Share app using…</string>
+
+    <!-- Suggestions -->
+    <string name="youtube_video">YouTube Video</string>
+    <string name="comment">Comment</string>
+    <string name="youtube_link">https://www.youtube.com/…</string>
+    <string name="youtube_link_des">Paste a youtube link of an hologram video so our team can check it and add it to the catalog.</string>
+    <string name="comment_des">Write a message of a feature you would like to see or a bug you found so we could work in that.</string>
+    <string name="send">Send</string>
+    <string name="type_message">Type a message</string>
+    <string name="suggestion_sent">Suggestion sent</string>
+    <string name="invalid_youtube_url">Invalid YouTube url</string>
+    <string name="error_suggestion">Error sending suggestion</string>
+
+    <!-- Ads -->
+    <string name="banner_home" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_gallery" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_catalog" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_suggestions" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+
+    <!-- Dev: ca-app-pub-3940256099942544/6300978111 -->
 
 </resources>

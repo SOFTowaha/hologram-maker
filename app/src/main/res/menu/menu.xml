@@ -4,31 +4,37 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            android:title="@string/title_home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/title_gallery" />
+            android:icon="@drawable/ic_gallery"
+            android:title="@string/gallery" />
         <item
-            android:id="@+id/nav_list"
-            android:icon="@drawable/ic_action_video"
-            android:title="@string/title_catalog" />
+            android:id="@+id/nav_catalog"
+            android:icon="@drawable/ic_catalog"
+            android:title="@string/video_catalog" />
         <item
             android:id="@+id/nav_pyramid"
-            android:icon="@drawable/ic_action_pyramid"
-            android:title="@string/title_pyramid" />
+            android:icon="@drawable/ic_pyramid"
+            android:title="@string/pyramid" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communication">
         <menu>
             <item
-                android:id="@+id/nav_close"
-                android:icon="@drawable/ic_close"
-                android:title="@string/title_sign_out" />
-            <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/title_share" />
+                android:icon="@drawable/ic_share"
+                android:title="@string/share" />
+
+            <item
+                android:id="@+id/nav_rate"
+                android:icon="@drawable/ic_rate"
+                android:title="@string/rate" />
+
+            <item
+                android:id="@+id/nav_suggestions"
+                android:icon="@drawable/ic_suggestions"
+                android:title="@string/suggestions" />
         </menu>
     </item>
 
