@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="20dp"
         android:src="@drawable/ic_rocket"
-        app:tint="@color/textDefault"
+        app:tint="@color/primaryDark"
         android:contentDescription="@null"/>
 
     <TextView
@@ -30,6 +30,7 @@
         android:layout_margin="20dp"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/primaryDark"
         android:text="@string/new_holograms"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -41,7 +42,7 @@
         android:background="@drawable/card_background"
         android:layout_margin="20dp"
         android:paddingVertical="1dp"
-        android:elevation="2dp"
+        android:elevation="3dp"
         android:overScrollMode="never"
         tools:listitem="@layout/cell_news"
         android:contentDescription="@null"/>
@@ -64,7 +65,7 @@
         app:layout_constraintBottom_toTopOf="@id/adBanner"
         android:background="@drawable/card_background"
         android:layout_margin="20dp"
-        android:elevation="2dp">
+        android:elevation="3dp">
 
         <ImageView
             android:id="@+id/ivDemo"
@@ -76,7 +77,7 @@
             android:layout_marginBottom="5dp"
             android:paddingTop="10dp"
             android:src="@drawable/ic_play"
-            app:tint="@color/textDefault"
+            app:tint="@color/primaryDark"
             android:contentDescription="@null"/>
 
         <TextView
@@ -89,6 +90,7 @@
             android:paddingBottom="10dp"
             android:gravity="center"
             android:textStyle="bold"
+            android:textColor="@color/primaryDark"
             android:text="@string/play_demo"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
