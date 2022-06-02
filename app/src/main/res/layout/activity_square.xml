@@ -70,72 +70,13 @@
         android:background="@drawable/ic_delete"
         android:contentDescription="@null"/>
 
-    <ImageView
-        android:id="@+id/ivLessSize"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="20dp"
-        android:src="@drawable/ic_less"
-        app:tint="@color/white"
-        android:contentDescription="@null"/>
-
-    <ImageView
-        android:id="@+id/ivMoreSize"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="20dp"
-        android:src="@drawable/ic_more"
-        app:tint="@color/white"
-        android:contentDescription="@null"/>
-
-    <TextView
-        android:id="@+id/tvSize"
-        android:layout_width="wrap_content"
+    <SeekBar
+        android:id="@+id/seekBarSize"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/ivLessSize"
-        app:layout_constraintBottom_toBottomOf="@id/ivLessSize"
-        app:layout_constraintStart_toEndOf="@id/ivLessSize"
-        app:layout_constraintEnd_toStartOf="@id/ivMoreSize"
-        android:text="@string/size"
-        android:textSize="16sp"
-        android:textColor="@color/white"/>
-
-    <ImageView
-        android:id="@+id/ivLessDistance"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="20dp"
-        android:src="@drawable/ic_less"
-        app:tint="@color/white"
-        android:contentDescription="@null"/>
-
-    <ImageView
-        android:id="@+id/ivMoreDistance"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="20dp"
-        android:src="@drawable/ic_more"
-        app:tint="@color/white"
-        android:contentDescription="@null"/>
-
-    <TextView
-        android:id="@+id/tvDistance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/ivLessDistance"
-        app:layout_constraintBottom_toBottomOf="@id/ivLessDistance"
-        app:layout_constraintStart_toEndOf="@id/ivLessDistance"
-        app:layout_constraintEnd_toStartOf="@id/ivMoreDistance"
-        android:text="@string/distance"
-        android:textSize="16sp"
-        android:textColor="@color/white"/>
+        android:layout_margin="40dp"
+        android:max="100"
+        android:theme="@style/WhiteSeekBar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
