@@ -90,7 +90,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="20dp"
             android:paddingHorizontal="40dp"
-            android:background="@drawable/chip_accent"
+            android:background="@drawable/chip_ripple_accent"
             android:textColor="@color/white"
             android:text="@string/send"/>
 

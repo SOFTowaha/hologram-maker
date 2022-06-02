@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/adBanner"
-        android:background="@drawable/card_background"
+        android:background="@drawable/card_ripple_background"
         android:layout_margin="20dp"
         android:elevation="3dp">
 
