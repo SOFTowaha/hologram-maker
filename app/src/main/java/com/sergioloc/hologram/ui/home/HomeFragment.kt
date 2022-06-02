@@ -69,7 +69,12 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
     private fun initObservers() {
         viewModel.news.observe(viewLifecycleOwner) {
             it.onSuccess { list ->
-                adapter.updateList(list)
+                if (list.isEmpty())
+                    binding.tvConnection.visible()
+                else {
+                    binding.tvConnection.gone()
+                    adapter.updateList(list)
+                }
             }
             binding.loader.gone()
         }

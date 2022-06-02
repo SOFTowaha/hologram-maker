@@ -112,7 +112,12 @@ class CatalogFragment: Fragment(), HologramAdapter.OnNewsClickListener {
     private fun initObservers() {
         viewModel.catalog.observe(viewLifecycleOwner) {
             it.onSuccess { holograms ->
-                binding.rvVideos.adapter = HologramAdapter(holograms, this)
+                if (holograms.isEmpty())
+                    binding.tvConnection.visible()
+                else {
+                    binding.tvConnection.gone()
+                    binding.rvVideos.adapter = HologramAdapter(holograms, this)
+                }
                 binding.tvCount.text = getString(R.string.num_videos, holograms.size)
             }
             showLoader(false)

@@ -7,6 +7,7 @@
     <!-- General -->
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
+    <string name="check_connection">Check your internet connection</string>
 
     <!-- Dialog -->
     <string name="hologram">Hologram</string>

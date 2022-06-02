@@ -47,6 +47,20 @@
         tools:listitem="@layout/cell_news"
         android:contentDescription="@null"/>
 
+    <TextView
+        android:id="@+id/tvConnection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/rvNews"
+        app:layout_constraintBottom_toBottomOf="@id/rvNews"
+        app:layout_constraintStart_toStartOf="@id/rvNews"
+        app:layout_constraintEnd_toEndOf="@id/rvNews"
+        android:paddingHorizontal="20dp"
+        android:gravity="center"
+        android:elevation="3dp"
+        android:text="@string/check_connection"
+        android:visibility="gone"/>
+
     <ProgressBar
         android:id="@+id/loader"
         android:layout_width="wrap_content"
