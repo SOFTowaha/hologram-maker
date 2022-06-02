@@ -4,12 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_main"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/nav_bar">
+    android:background="@color/background">
 
     <ImageView
         android:id="@+id/ivNews"
@@ -40,9 +38,10 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/tvNews"
         app:layout_constraintBottom_toTopOf="@id/clDemo"
-        android:background="@drawable/card_stroke_gray"
+        android:background="@drawable/card_background"
         android:layout_margin="20dp"
         android:paddingVertical="1dp"
+        android:elevation="2dp"
         android:overScrollMode="never"
         tools:listitem="@layout/cell_news"
         android:contentDescription="@null"/>
@@ -55,15 +54,17 @@
         app:layout_constraintBottom_toBottomOf="@id/rvNews"
         app:layout_constraintStart_toStartOf="@id/rvNews"
         app:layout_constraintEnd_toEndOf="@id/rvNews"
+        android:elevation="3dp"
         android:visibility="gone"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clDemo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/viewBanner"
-        android:background="@drawable/card_stroke_gray"
-        android:layout_margin="20dp">
+        app:layout_constraintBottom_toTopOf="@id/adBanner"
+        android:background="@drawable/card_background"
+        android:layout_margin="20dp"
+        android:elevation="2dp">
 
         <ImageView
             android:id="@+id/ivDemo"
@@ -91,12 +92,6 @@
             android:text="@string/play_demo"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:id="@+id/viewBanner"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adBanner"

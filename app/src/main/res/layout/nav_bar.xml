@@ -19,6 +19,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/fragment_home" />
+    <include layout="@layout/fragment_empty" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
