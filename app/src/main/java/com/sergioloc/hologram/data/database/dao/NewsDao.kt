@@ -8,7 +8,7 @@ import com.sergioloc.hologram.data.database.entity.NewsEntity
 @Dao
 interface NewsDao {
 
-    @Query("SELECT * FROM news ORDER BY name DESC")
+    @Query("SELECT * FROM news")
     suspend fun getNews(): List<NewsEntity>
 
     @Insert
