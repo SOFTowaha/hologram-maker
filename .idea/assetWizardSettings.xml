@@ -98,8 +98,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\sergi\Desktop\Icon\IconCircle.png" />
-                                                <entry key="scalingPercent" value="90" />
+                                                <entry key="imagePath" value="E:\Android\Hologram Maker\Logo\Icon.png" />
+                                                <entry key="scalingPercent" value="68" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -129,6 +129,13 @@
                                       </entry>
                                     </map>
                                   </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="generatePlayStoreIcon" value="false" />
+                                    </map>
+                                  </option>
                                 </PersistentState>
                               </value>
                             </entry>
@@ -155,7 +162,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\sergi\Desktop\Icon\Icon.png" />
+                                                <entry key="imagePath" value="E:\Android\Hologram Maker\Logo\Icon.png" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -188,8 +195,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="iconShape" value="CIRCLE" />
-                                      <entry key="imageAsset" value="C:\Users\sergi\Desktop\Icon\Icon.png" />
+                                      <entry key="cropped" value="true" />
+                                      <entry key="iconShape" value="NONE" />
+                                      <entry key="imageAsset" value="E:\Android\Hologram Maker\Logo\Icon.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -314,11 +322,6 @@
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>
