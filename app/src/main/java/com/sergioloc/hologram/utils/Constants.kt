@@ -24,7 +24,7 @@ object Constants {
     const val SUGGESTIONS = "suggestions"
 
     // Youtube
-    const val YOUTUBE_API_KEY = "AIzaSyAqvVJKQOfLavz-wKTT-vkkG7e1GykFn7c"
+    const val YOUTUBE_API_KEY = "AIzaSyAcVKetl9eEguAyji30RmVMUiXG0OJ0ozk"
     const val DEMO_URL = "9d_oJP0FaAE"
 
     // Gallery
