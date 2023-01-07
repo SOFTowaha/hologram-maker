@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdRequest
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.needle.app.utils.extensions.gone
 import com.needle.app.utils.extensions.setOnSingleClickListener
 import com.needle.app.utils.extensions.visible
@@ -36,12 +39,28 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initVariables()
         initView()
         initButtons()
         initObservers()
 
         binding.loader.visible()
         viewModel.getNews()
+    }
+
+    private fun initVariables() {
+        // Init remote config from Firebase
+        val remoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 60
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.setDefaultsAsync(mapOf(
+            "youtube_api_key" to "AIzaSyAcVKetl9eEguAyji30RmVMUiXG0OJ0ozk"
+        ))
+        remoteConfig.fetchAndActivate().addOnSuccessListener { _ ->
+            Constants.YOUTUBE_API_KEY = remoteConfig.getString("youtube_api_key")
+        }
     }
 
     private fun initView() {
