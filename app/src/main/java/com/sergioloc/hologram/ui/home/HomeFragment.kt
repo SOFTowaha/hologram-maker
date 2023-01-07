@@ -21,6 +21,7 @@ import com.sergioloc.hologram.ui.player.PlayerActivity
 import com.sergioloc.hologram.ui.adapters.HologramAdapter
 import com.sergioloc.hologram.databinding.FragmentHomeBinding
 import com.sergioloc.hologram.utils.Constants
+import com.sergioloc.hologram.utils.Local
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -56,7 +57,7 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
         }
         remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.setDefaultsAsync(mapOf(
-            "youtube_api_key" to "AIzaSyAcVKetl9eEguAyji30RmVMUiXG0OJ0ozk"
+            "youtube_api_key" to Local.DEFAULT_YOUTUBE_API_KEY
         ))
         remoteConfig.fetchAndActivate().addOnSuccessListener { _ ->
             Constants.YOUTUBE_API_KEY = remoteConfig.getString("youtube_api_key")
