@@ -100,11 +100,9 @@
     <string name="error_suggestion">Error sending suggestion</string>
 
     <!-- Ads -->
-    <string name="banner_home" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="banner_gallery" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="banner_catalog" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="banner_suggestions" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-
-    <!-- Dev: ca-app-pub-3940256099942544/6300978111 -->
+    <string name="banner_home" translatable="false">ca-app-pub-8901700829116269/7405473809</string>
+    <string name="banner_gallery" translatable="false">ca-app-pub-8901700829116269/1410679580</string>
+    <string name="banner_catalog" translatable="false">ca-app-pub-8901700829116269/4806999113</string>
+    <string name="banner_suggestions" translatable="false">ca-app-pub-8901700829116269/2449510658</string>
 
 </resources>
