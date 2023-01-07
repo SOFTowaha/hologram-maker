@@ -59,7 +59,7 @@ class HomeFragment: Fragment(), HologramAdapter.OnNewsClickListener {
         remoteConfig.setDefaultsAsync(mapOf(
             "youtube_api_key" to Local.DEFAULT_YOUTUBE_API_KEY
         ))
-        remoteConfig.fetchAndActivate().addOnSuccessListener { _ ->
+        remoteConfig.fetchAndActivate().addOnSuccessListener {
             Constants.YOUTUBE_API_KEY = remoteConfig.getString("youtube_api_key")
         }
     }
