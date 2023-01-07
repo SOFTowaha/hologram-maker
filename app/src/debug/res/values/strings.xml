@@ -1,0 +1,9 @@
+<resources>
+
+    <!-- Ads -->
+    <string name="banner_home" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_gallery" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_catalog" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_suggestions" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+
+</resources>
